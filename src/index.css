@@ -9,4 +9,6 @@
 
 .dark {
   --primary-color: #a855f7;
+  background-color: #121212; /* Dark background for the entire app */
+  color: #ffffff; /* Light text color */
 }

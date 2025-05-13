@@ -2,9 +2,29 @@
 body {
     background-color: #121212; /* Dark background */
     color: #ffffff; /* Light text color */
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+}
+
+/* Hero section */
+.hero-section {
+    background-color: #2e2e3e; /* Dark background for hero section */
+    color: #ffffff; /* Ensure text is readable */
+    padding: 20px;
+}
+
+/* Apply dark theme to all sections */
+section {
+    background-color: #2e2e3e; /* Dark background */
+    color: #ffffff; /* Light text */
+    border: none; /* Remove any borders that may appear white */
+    padding: 20px;
+}
+
+/* Apply dark theme to other containers */
+div, header, footer {
+    background-color: #2e2e3e; /* Dark background */
+    color: #ffffff; /* Light text */
 }
 
 /* Links */
@@ -22,40 +42,45 @@ button {
     background-color: #333333; /* Dark button background */
     color: #ffffff; /* Light text */
     border: 1px solid #444444;
-    padding: 10px 15px;
-    cursor: pointer;
 }
 
 button:hover {
     background-color: #444444; /* Slightly lighter on hover */
 }
 
-/* Sections */
-section {
-    background-color: #1e1e1e; /* Darker section background */
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-/* Headers */
-h1, h2, h3, h4, h5, h6 {
-    color: #ffffff; /* Ensure all headers are light-colored */
-}
-
 /* Inputs */
 input, textarea {
-    background-color: #333333;
-    color: #ffffff;
+    background-color: #333333; /* Dark input background */
+    color: #ffffff; /* Light text */
     border: 1px solid #444444;
-    padding: 10px;
 }
 
 input::placeholder, textarea::placeholder {
     color: #aaaaaa; /* Light gray for placeholders */
 }
 
-/* Remove any light theme overrides */
+/* Remove any white theme remnants */
 .light-theme {
     display: none !important;
+}
+
+/* Responsive layout */
+@media (min-width: 768px) {
+    .hero-section {
+        padding: 40px;
+    }
+
+    section {
+        padding: 40px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-section {
+        padding: 60px;
+    }
+
+    section {
+        padding: 60px;
+    }
 }

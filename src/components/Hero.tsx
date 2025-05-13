@@ -27,13 +27,13 @@ const Hero = ({ scrollToContact }: HeroProps) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="relative z-10 text-center"
+        className="relative z-10 text-center px-4 sm:px-6 lg:px-8"
       >
         {/* Profile Image */}
         <motion.img
           src="/viswa.jpeg"
           alt="Profile"
-          className="mx-auto mb-6 w-32 h-32 rounded-full border-4 border-purple-500 object-cover shadow-lg"
+          className="mx-auto mb-6 w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-purple-500 object-cover shadow-lg"
           whileHover={{ scale: 1.1 }}
           transition={{ type: 'spring', stiffness: 300 }}
         />

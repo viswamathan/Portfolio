@@ -1,11 +1,23 @@
 /* Project Section */
 .project-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr;
     gap: 20px;
     padding: 40px;
     background-color: #1e1e1e; /* Dark background */
     color: #ffffff; /* Light text */
+}
+
+@media (min-width: 768px) {
+    .project-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .project-section {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 /* Project Card */
@@ -15,6 +27,13 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Adjusted shadow for dark theme */
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 10px;
+}
+
+@media (min-width: 768px) {
+    .project-card {
+        padding: 20px;
+    }
 }
 
 .project-card:hover {

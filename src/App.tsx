@@ -49,10 +49,10 @@ export default function App() {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    <div className="bg-gray-900 text-white transition-colors duration-300">
       
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-sm">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <motion.div
@@ -88,7 +88,7 @@ export default function App() {
             sections.current[0] = el;
             sectionRefs[0](el);
           }}
-          className="min-h-screen"
+          className="min-h-screen bg-gray-900 text-white"
         >
           <Hero scrollToContact={() => scrollToSection(5)} />
         </section>
@@ -98,7 +98,7 @@ export default function App() {
             sections.current[1] = el;
             sectionRefs[1](el);
           }}
-          className="min-h-screen py-20"
+          className="min-h-screen py-20 bg-gray-900 text-white"
         >
           <About />
         </section>
@@ -108,7 +108,7 @@ export default function App() {
             sections.current[2] = el;
             sectionRefs[2](el);
           }}
-          className="min-h-screen py-20"
+          className="min-h-screen py-20 bg-gray-900 text-white"
         >
           <Experience />
         </section>
@@ -118,7 +118,7 @@ export default function App() {
             sections.current[3] = el;
             sectionRefs[3](el);
           }}
-          className="min-h-screen py-20"
+          className="min-h-screen py-20 bg-gray-900 text-white"
         >
           <Skills />
         </section>
@@ -128,7 +128,7 @@ export default function App() {
             sections.current[4] = el;
             sectionRefs[4](el);
           }}
-          className="min-h-screen py-20"
+          className="min-h-screen py-20 bg-gray-900 text-white"
         >
           <Projects />
         </section>
@@ -138,7 +138,7 @@ export default function App() {
             sections.current[5] = el;
             sectionRefs[5](el);
           }}
-          className="min-h-screen py-20"
+          className="min-h-screen py-20 bg-gray-900 text-white"
         >
           <Contact />
         </section>

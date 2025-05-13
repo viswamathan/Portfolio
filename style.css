@@ -4,6 +4,7 @@ body {
     color: #ffffff; /* Light text color */
     margin: 0;
     padding: 0;
+    font-size: 16px; /* Base font size for scaling */
 }
 
 /* Hero section */
@@ -11,6 +12,7 @@ body {
     background-color: #2e2e3e; /* Dark background for hero section */
     color: #ffffff; /* Ensure text is readable */
     padding: 20px;
+    text-align: center; /* Center-align content for better responsiveness */
 }
 
 /* Apply dark theme to all sections */
@@ -19,6 +21,8 @@ section {
     color: #ffffff; /* Light text */
     border: none; /* Remove any borders that may appear white */
     padding: 20px;
+    max-width: 1200px; /* Limit section width for larger screens */
+    margin: 0 auto; /* Center sections */
 }
 
 /* Apply dark theme to other containers */
@@ -64,6 +68,11 @@ input::placeholder, textarea::placeholder {
     display: none !important;
 }
 
+/* Responsive typography */
+h1, h2, h3 {
+    font-size: 1.25rem; /* Default for mobile */
+}
+
 /* Responsive layout */
 @media (min-width: 768px) {
     .hero-section {
@@ -72,6 +81,10 @@ input::placeholder, textarea::placeholder {
 
     section {
         padding: 40px;
+    }
+
+    h1, h2, h3 {
+        font-size: 1.5rem; /* Adjust for tablets */
     }
 }
 
@@ -82,5 +95,9 @@ input::placeholder, textarea::placeholder {
 
     section {
         padding: 60px;
+    }
+
+    h1, h2, h3 {
+        font-size: 2rem; /* Larger font for laptops */
     }
 }

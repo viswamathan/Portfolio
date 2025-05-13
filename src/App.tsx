@@ -88,7 +88,7 @@ export default function App() {
             sections.current[0] = el;
             sectionRefs[0](el);
           }}
-          className="min-h-screen px-4 sm:px-6 lg:px-8"
+          className="min-h-screen px-4 sm:px-6 lg:px-8 py-10"
         >
           <Hero scrollToContact={() => scrollToSection(5)} />
         </section>
@@ -98,7 +98,7 @@ export default function App() {
             sections.current[1] = el;
             sectionRefs[1](el);
           }}
-          className="min-h-screen py-20 px-4 sm:px-6 lg:px-8"
+          className="min-h-screen px-4 sm:px-6 lg:px-8 py-10"
         >
           <About />
         </section>
@@ -146,21 +146,6 @@ export default function App() {
         {/* Engineering Calculator Modal */}
         <EngineeringCalculator />
       </main>
-
-      {/* Scroll Progress Indicator */}
-      <div className="fixed right-4 top-1/2 -translate-y-1/2 space-y-2 z-50">
-        {[0, 1, 2, 3, 4, 5].map((index) => (
-          <button
-            key={index}
-            onClick={() => scrollToSection(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              activeSection === index
-                ? 'bg-primary-500 dark:bg-purple-500 scale-125'
-                : 'bg-gray-300 dark:bg-gray-500 hover:bg-primary-400 dark:hover:bg-purple-400'
-            }`}
-          />
-        ))}
-      </div>
     </div>
   );
 }

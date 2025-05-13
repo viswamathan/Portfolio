@@ -1,0 +1,61 @@
+/* Global dark theme styles */
+body {
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* Light text color */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Links */
+a {
+    color: #1e90ff; /* Bright blue for links */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #63a4ff; /* Lighter blue on hover */
+}
+
+/* Buttons */
+button {
+    background-color: #333333; /* Dark button background */
+    color: #ffffff; /* Light text */
+    border: 1px solid #444444;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #444444; /* Slightly lighter on hover */
+}
+
+/* Sections */
+section {
+    background-color: #1e1e1e; /* Darker section background */
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff; /* Ensure all headers are light-colored */
+}
+
+/* Inputs */
+input, textarea {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #444444;
+    padding: 10px;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #aaaaaa; /* Light gray for placeholders */
+}
+
+/* Remove any light theme overrides */
+.light-theme {
+    display: none !important;
+}

@@ -145,8 +145,8 @@ const Experience = () => {
             {/* Right Side: Photos */}
             <div className="relative flex flex-col items-end mt-4 md:mt-0 md:ml-6">
               <img
-                src="/UPCOMING_LOGO.png"
-                alt="Upcoming Internship Logo"
+                src="/SUPERAUTOFORGE_LOGO.png"
+                alt="SUPER AUTO FORGE Logo"
                 className="w-12 h-12 rounded-full border-2 border-white shadow-md mb-4"
               />
               <div className="flex flex-col gap-3">

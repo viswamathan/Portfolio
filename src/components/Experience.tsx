@@ -151,12 +151,12 @@ const Experience = () => {
               />
               <div className="flex flex-col gap-3">
                 <img 
-                  src="SAF 1/.jpg" 
+                  src="/SAF 1.jpg" 
                   alt="Upcoming Internship Photo 1" 
                   className="w-full h-36 object-cover rounded-lg border-2 border-purple-500 hover:shadow-lg transition-shadow"
                 />
                 <img 
-                  src="SAF 2/.jpg" 
+                  src="SAF 2.jpg" 
                   alt="Upcoming Internship Photo 2" 
                   className="w-full h-36 object-cover rounded-lg border-2 border-purple-500 hover:shadow-lg transition-shadow"
                 />

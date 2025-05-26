@@ -252,11 +252,11 @@ const About = () => {
                   className="w-6 h-6"
                 />
                 <div>
-                  <strong>Title:</strong> "Optimization of Heat Transfer in Solar Thermal Systems"
+                  <strong>Title:</strong> "Modified Solar Dryer With Energy Storage System"
                   <br />
                   <strong>Journal:</strong> International Journal of Renewable Energy
                   <br />
-                  <strong>Year:</strong> 2023
+                  <strong>Year:</strong> The study is presently in the validation phase ahead of submission/publication.
                 </div>
               </motion.li>
             </ul>

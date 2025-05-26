@@ -19,9 +19,16 @@ export default function App() {
   const [activeSection, setActiveSection] = React.useState(0);
   const [isMenuOpen, setMenuOpen] = React.useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Simulate loading assets
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -33,13 +40,15 @@ export default function App() {
       root.classList.remove('dark');
     }
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
-  // Intersection observer for each section
   const createSectionObserver = (index: number) => {
     const { ref, inView } = useInView({
-      threshold: 0.5,
+      threshold: isMobile ? 0.3 : 0.5,
     });
 
     React.useEffect(() => {
@@ -77,7 +86,7 @@ export default function App() {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full"
+              className="w-12 h-12 sm:w-16 sm:h-16 border-4 border-purple-500 border-t-transparent rounded-full"
             />
           </motion.div>
         ) : (
@@ -89,15 +98,15 @@ export default function App() {
             {/* Navigation */}
             <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-sm">
               <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-                <div className="text-primary-500 dark:text-purple-500 font-bold text-lg sm:text-xl">
+                <div className="text-primary-500 dark:text-purple-500 font-bold text-base sm:text-lg md:text-xl">
                   Portfolio
                 </div>
                 <button
                   onClick={() => setMenuOpen(!isMenuOpen)}
-                  className="text-gray-300 hover:text-white focus:outline-none"
+                  className="text-gray-300 hover:text-white focus:outline-none md:hidden"
                 >
                   <svg
-                    className="w-8 h-8"
+                    className="w-6 h-6 sm:w-8 sm:h-8"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -111,15 +120,8 @@ export default function App() {
                     />
                   </svg>
                 </button>
-              </div>
-              {/* Horizontal Menu with Symbols and Animation */}
-              {isMenuOpen && (
-                <motion.div
-                  initial={{ y: -100 }}
-                  animate={{ y: 0 }}
-                  exit={{ y: -100 }}
-                  className="absolute top-16 left-0 right-0 bg-gray-800/90 backdrop-blur-sm flex justify-center py-4 space-x-8"
-                >
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex space-x-6">
                   {[
                     { name: 'Home', icon: '🏠' },
                     { name: 'About', icon: 'ℹ️' },
@@ -128,101 +130,89 @@ export default function App() {
                     { name: 'Projects', icon: '📂' },
                     { name: 'Contact', icon: '📞' },
                   ].map((item, index) => (
-                    <motion.button
+                    <button
                       key={item.name}
                       onClick={() => scrollToSection(index)}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`text-lg font-semibold flex items-center space-x-2 transition-colors ${
+                      className={`text-sm lg:text-base font-semibold transition-colors ${
                         activeSection === index
-                          ? 'text-primary-500 dark:text-purple-500'
-                          : 'text-gray-300 hover:text-primary-500 dark:hover:text-purple-500'
+                          ? 'text-purple-500'
+                          : 'text-gray-300 hover:text-purple-500'
                       }`}
                     >
-                      <span>{item.icon}</span>
-                      <span>{item.name}</span>
-                    </motion.button>
+                      {item.name}
+                    </button>
                   ))}
+                </div>
+              </div>
+              {/* Mobile Menu */}
+              {isMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="absolute top-16 left-0 right-0 bg-gray-800/90 backdrop-blur-sm md:hidden"
+                >
+                  <div className="py-2">
+                    {[
+                      { name: 'Home', icon: '🏠' },
+                      { name: 'About', icon: 'ℹ️' },
+                      { name: 'Experience', icon: '💼' },
+                      { name: 'Skills', icon: '🛠️' },
+                      { name: 'Projects', icon: '📂' },
+                      { name: 'Contact', icon: '📞' },
+                    ].map((item, index) => (
+                      <motion.button
+                        key={item.name}
+                        onClick={() => scrollToSection(index)}
+                        whileTap={{ scale: 0.95 }}
+                        className={`w-full py-3 px-4 flex items-center space-x-3 ${
+                          activeSection === index
+                            ? 'bg-purple-500/20 text-purple-500'
+                            : 'text-gray-300'
+                        }`}
+                      >
+                        <span>{item.icon}</span>
+                        <span>{item.name}</span>
+                      </motion.button>
+                    ))}
+                  </div>
                 </motion.div>
               )}
             </nav>
 
             {/* Main Content */}
-            <main className="relative">
-              <section 
-                ref={el => {
-                  sections.current[0] = el;
-                  sectionRefs[0](el);
-                }}
-                className="min-h-screen px-4 sm:px-6 lg:px-8"
-              >
-                <Hero scrollToContact={() => scrollToSection(5)} />
-              </section>
-
-              <section 
-                ref={el => {
-                  sections.current[1] = el;
-                  sectionRefs[1](el);
-                }}
-                className="min-h-screen py-20 px-4 sm:px-6 lg:px-8"
-              >
-                <About />
-              </section>
-
-              <section 
-                ref={el => {
-                  sections.current[2] = el;
-                  sectionRefs[2](el);
-                }}
-                className="min-h-screen py-20 px-4 sm:px-6 lg:px-8"
-              >
-                <Experience />
-              </section>
-
-              <section 
-                ref={el => {
-                  sections.current[3] = el;
-                  sectionRefs[3](el);
-                }}
-                className="min-h-screen py-20 px-4 sm:px-6 lg:px-8"
-              >
-                <Skills />
-              </section>
-
-              <section 
-                ref={el => {
-                  sections.current[4] = el;
-                  sectionRefs[4](el);
-                }}
-                className="min-h-screen py-20 px-4 sm:px-6 lg:px-8"
-              >
-                <Projects />
-              </section>
-
-              <section 
-                ref={el => {
-                  sections.current[5] = el;
-                  sectionRefs[5](el);
-                }}
-                className="min-h-screen py-20 px-4 sm:px-6 lg:px-8"
-              >
-                <Contact />
-              </section>
+            <main className="relative pt-16 md:pt-20">
+              {[Hero, About, Experience, Skills, Projects, Contact].map((Component, index) => (
+                <section
+                  key={index}
+                  ref={el => {
+                    sections.current[index] = el;
+                    sectionRefs[index](el);
+                  }}
+                  className={`min-h-screen px-4 sm:px-6 lg:px-8 ${
+                    index === 0 ? '' : 'py-16 sm:py-20 lg:py-24'
+                  }`}
+                >
+                  <Component
+                    scrollToContact={index === 0 ? () => scrollToSection(5) : undefined}
+                  />
+                </section>
+              ))}
 
               {/* Engineering Calculator Modal */}
               <EngineeringCalculator />
             </main>
 
             {/* Scroll Progress Indicator */}
-            <div className="fixed right-4 top-1/2 -translate-y-1/2 space-y-2 z-50">
+            <div className="fixed right-2 sm:right-4 top-1/2 -translate-y-1/2 space-y-1 sm:space-y-2 z-50">
               {[0, 1, 2, 3, 4, 5].map((index) => (
                 <button
                   key={index}
                   onClick={() => scrollToSection(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                     activeSection === index
-                      ? 'bg-primary-500 dark:bg-purple-500 scale-125'
-                      : 'bg-gray-300 dark:bg-gray-500 hover:bg-primary-400 dark:hover:bg-purple-400'
+                      ? 'bg-purple-500 scale-125'
+                      : 'bg-gray-500 hover:bg-purple-400'
                   }`}
                 />
               ))}

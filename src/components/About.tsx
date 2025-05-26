@@ -252,19 +252,15 @@ const About = () => {
                   className="w-6 h-6"
                 />
                 <div>
-                  <strong>Title:</strong> " Modified Solar Dryer Integrated with Thermal
-Energy Storage"
+                  <strong>Title:</strong> "Optimization of Heat Transfer in Solar Thermal Systems"
                   <br />
                   <strong>Journal:</strong> International Journal of Renewable Energy
                   <br />
-                  <strong>Year:</strong> "We're validating the results and finalizing the paper for release soon"
+                  <strong>Year:</strong> 2023
                 </div>
               </motion.li>
-              <motion.li 
-                whileHover={{ x: 10 }}
-                className="flex items-start gap-3"
-              >
-                
+            </ul>
+          </motion.div>
 
           {/* Patents */}
           <motion.div 

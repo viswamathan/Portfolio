@@ -134,7 +134,7 @@ export default function Contact() {
             <h3 className="text-2xl font-semibold mb-4 text-purple-500">Follow Me</h3>
             <div className="flex space-x-4">
               <a
-                href="https://github.com/johndoe"
+                href="https://github.com/viswamathan"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-700 p-3 rounded-full hover:bg-gray-600 transition-colors hover:ring-2 hover:ring-purple-400"

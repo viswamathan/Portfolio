@@ -8,12 +8,24 @@ body {
     color: #222;
 }
 
-.container {
+html, body {
     width: 100%;
-    max-width: 100vw;
-    margin: 0 auto;
-    padding: 8px;
+    overflow-x: hidden;
     box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+.container, .main-section, .card, .profile-section {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 img, video {
@@ -43,6 +55,7 @@ h1, .main-title {
 
 button, .btn {
     width: 100%;
+    box-sizing: border-box;
     margin-bottom: 10px;
     font-size: 1rem;
     padding: 12px;
@@ -50,9 +63,10 @@ button, .btn {
 
 /* Tablet styles */
 @media (min-width: 600px) {
-    .container {
+    .container, .main-section, .card, .profile-section {
         max-width: 90vw;
-        padding: 24px;
+        padding-left: 24px;
+        padding-right: 24px;
     }
     button, .btn {
         width: auto;
@@ -63,9 +77,10 @@ button, .btn {
 
 /* Desktop styles */
 @media (min-width: 1024px) {
-    .container {
+    .container, .main-section, .card, .profile-section {
         max-width: 1200px;
-        padding: 32px;
+        padding-left: 32px;
+        padding-right: 32px;
     }
     /* ...add desktop-specific styles as needed... */
 }

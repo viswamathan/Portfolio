@@ -120,7 +120,7 @@ const Hero = ({ scrollToContact }: HeroProps) => {
           className="flex justify-center items-center space-x-4 mb-8"
         >
           <a
-            href="https://github.com/johndoe"
+            href="https://github.com/viswamathan"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-gray-800/50 backdrop-blur-sm p-3 rounded-full hover:bg-gray-700 transition-colors group"

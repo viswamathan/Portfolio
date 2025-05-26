@@ -120,9 +120,9 @@ const Experience = () => {
               <h3 className="text-lg font-bold mb-2">Design Engineer Intern</h3>
               <h4 className="text-purple-400 mb-3">Super Auto Forge</h4>
               <ul className="space-y-1 text-gray-300">
-                <li>• Expected to work on advanced thermal energy systems</li>
-                <li>• Role will involve CFD/FEA analysis and optimization</li>
-                <li>• Focus on sustainable energy solutions</li>
+                <li>• Assisted in Forging Stage Design & CAD Modeling</li>
+                <li>• Analyzed Material Flow & Defect Prediction via Simulation</li>
+                <li>• Optimized Process Parameters & Documented Process Sheets</li>
               </ul>
               <div className="mt-4 flex gap-3">
                 <button
@@ -151,12 +151,12 @@ const Experience = () => {
               />
               <div className="flex flex-col gap-3">
                 <img 
-                  src="/.jpg" 
+                  src="SAF 1/.jpg" 
                   alt="Upcoming Internship Photo 1" 
                   className="w-full h-36 object-cover rounded-lg border-2 border-purple-500 hover:shadow-lg transition-shadow"
                 />
                 <img 
-                  src="/.jpg" 
+                  src="SAF 2/.jpg" 
                   alt="Upcoming Internship Photo 2" 
                   className="w-full h-36 object-cover rounded-lg border-2 border-purple-500 hover:shadow-lg transition-shadow"
                 />

@@ -252,32 +252,19 @@ const About = () => {
                   className="w-6 h-6"
                 />
                 <div>
-                  <strong>Title:</strong> "Optimization of Heat Transfer in Solar Thermal Systems"
+                  <strong>Title:</strong> " Modified Solar Dryer Integrated with Thermal
+Energy Storage"
                   <br />
                   <strong>Journal:</strong> International Journal of Renewable Energy
                   <br />
-                  <strong>Year:</strong> 2023
+                  <strong>Year:</strong> "We're validating the results and finalizing the paper for release soon"
                 </div>
               </motion.li>
               <motion.li 
                 whileHover={{ x: 10 }}
                 className="flex items-start gap-3"
               >
-                <img 
-                  src="https://img.icons8.com/color/48/open-book.png" 
-                  alt="Publication Icon" 
-                  className="w-6 h-6"
-                />
-                <div>
-                  <strong>Title:</strong> "CFD Analysis of Turbulent Flow in Heat Exchangers"
-                  <br />
-                  <strong>Journal:</strong> Journal of Mechanical Engineering Research
-                  <br />
-                  <strong>Year:</strong> 2022
-                </div>
-              </motion.li>
-            </ul>
-          </motion.div>
+                
 
           {/* Patents */}
           <motion.div 

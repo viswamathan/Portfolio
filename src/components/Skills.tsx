@@ -23,26 +23,26 @@ const Skills = () => {
       skills: [
         { 
           name: "SolidWorks", 
-          percentage: 95, 
-          highlight: "CSWP Certified",
+          percentage: 50, 
+          highlight: "Basic Knowledge",
           logo: "https://img.icons8.com/color/96/solidworks.png"
         },
         { 
           name: "AutoCAD", 
-          percentage: 90, 
-          highlight: "10+ Years Experience",
+          percentage: 75, 
+          highlight: "Intermediate",
           logo: "https://img.icons8.com/color/96/autodesk-autocad.png"
         },
         { 
           name: "Fusion 360", 
-          percentage: 85, 
-          highlight: "Advanced User",
+          percentage: 25, 
+          highlight: "Beginnerr",
           logo: "https://img.icons8.com/color/96/autodesk-fusion-360.png"
         },
         { 
           name: "CATIA", 
-          percentage: 80, 
-          highlight: "Professional Level",
+          percentage: 20, 
+          highlight: "Beginner",
           logo: "https://img.icons8.com/color/96/catia.png"
         }
       ]
@@ -53,26 +53,26 @@ const Skills = () => {
       skills: [
         { 
           name: "ANSYS", 
-          percentage: 92, 
-          highlight: "Certified Professional",
+          percentage: 70, 
+          highlight: "Intermediate",
           logo: "https://media.glassdoor.com/sqll/6135/ansys-squarelogo-1582553427796.png"
         },
         { 
           name: "FEA", 
-          percentage: 88, 
+          percentage: 25, 
           highlight: "Static & Dynamic Analysis",
           logo: "https://www.particleincell.com/wp-content/uploads/2012/06/femcode-400x320.jpg"
         },
         { 
           name: "CFD", 
-          percentage: 85, 
+          percentage: 10, 
           highlight: "Flow & Thermal Analysis",
           logo: "https://tse2.mm.bing.net/th?id=OIP.I00XkuBCM-ceZBBk0k8_qgAAAA&pid=Api&P=0&h=180"
         },
         { 
           name: "Thermal Analysis", 
-          percentage: 90, 
-          highlight: "Expert Level",
+          percentage: 30, 
+          highlight: "Beginner",
           logo: "https://www.researchgate.net/publication/356178942/figure/fig4/AS:1089511765360640@1636771255804/Thermal-analysis-of-plain-rectangular-fin.png"
         }
       ]
@@ -83,25 +83,25 @@ const Skills = () => {
       skills: [
         { 
           name: "Python", 
-          percentage: 90, 
+          percentage: 50, 
           highlight: "Engineering Automation & Data Analysis",
           logo: "https://img.icons8.com/color/96/python.png"
         },
         { 
           name: "C++", 
-          percentage: 85, 
+          percentage: 50, 
           highlight: "High-Performance Simulations",
           logo: "https://img.icons8.com/color/96/c-plus-plus-logo.png"
         },
         { 
           name: "MATLAB", 
-          percentage: 80, 
+          percentage: 20, 
           highlight: "Numerical Computing & Thermal Analysis",
           logo: "https://upload.wikimedia.org/wikipedia/commons/2/21/Matlab_Logo.png"
         },
         { 
           name: "Java", 
-          percentage: 75, 
+          percentage: 30, 
           highlight: "Object-Oriented Design for Engineering Tools",
           logo: "https://img.icons8.com/color/96/java-coffee-cup-logo.png"
         }

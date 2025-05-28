@@ -18,7 +18,7 @@ const Experience = () => {
   };
 
   const handleUpcomingReport = () => {
-    window.open('/UPCOMING_INTERNSHIP_REPORT.pdf', '_blank');
+    window.open('/SAF INTERNSHIP REPORT.pdf', '_blank');
   };
 
   return (

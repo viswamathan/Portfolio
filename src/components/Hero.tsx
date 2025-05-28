@@ -29,9 +29,9 @@ const Hero = ({ scrollToContact }: HeroProps) => {
         transition={{ duration: 1 }}
         className="relative z-10 text-center px-4 sm:px-6 lg:px-8"
       >
-        {/* Profile Image - Increased size */}
+        {/* Profile Image - Reduced size */}
         <motion.div
-          className="relative mx-auto mb-8 w-40 h-40 sm:w-48 sm:h-48 rounded-full border-4 border-purple-500 overflow-hidden shadow-xl"
+          className="relative mx-auto mb-8 w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-purple-500 overflow-hidden shadow-xl"
           whileHover={{ scale: 1.1 }}
           transition={{ type: 'spring', stiffness: 300 }}
         >
@@ -47,7 +47,7 @@ const Hero = ({ scrollToContact }: HeroProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-6xl font-bold mb-4"
+          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4"
         >
           Hi, I'm{' '}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500">
@@ -59,7 +59,7 @@ const Hero = ({ scrollToContact }: HeroProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-2xl text-gray-300 mb-8 h-[60px]"
+          className="text-xl sm:text-2xl text-gray-300 mb-8 h-[60px]"
         >
           <TypeAnimation
             sequence={[
@@ -78,43 +78,43 @@ const Hero = ({ scrollToContact }: HeroProps) => {
           />
         </motion.div>
 
-        {/* Key Expertise Areas - Enhanced with animations */}
+        {/* Key Expertise Areas - Enhanced with larger icons and hover effects */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-4xl mx-auto"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 max-w-4xl mx-auto"
         >
           <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="bg-gray-800/30 backdrop-blur-sm p-4 rounded-lg transform transition-all duration-300"
+            whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
+            className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300"
           >
-            <Award className="w-8 h-8 text-purple-400 mb-2 mx-auto" />
-            <h3 className="font-semibold mb-1">Design</h3>
+            <Award className="w-12 h-12 text-purple-400 mb-4 mx-auto" />
+            <h3 className="font-semibold mb-2">Design</h3>
             <p className="text-sm text-gray-400">SOLIDWORKS, CATIA, AutoCAD</p>
           </motion.div>
           <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="bg-gray-800/30 backdrop-blur-sm p-4 rounded-lg transform transition-all duration-300"
+            whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
+            className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300"
           >
-            <Code className="w-8 h-8 text-purple-400 mb-2 mx-auto" />
-            <h3 className="font-semibold mb-1">Analysis</h3>
+            <Code className="w-12 h-12 text-purple-400 mb-4 mx-auto" />
+            <h3 className="font-semibold mb-2">Analysis</h3>
             <p className="text-sm text-gray-400">ANSYS, FEA, CFD</p>
           </motion.div>
           <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="bg-gray-800/30 backdrop-blur-sm p-4 rounded-lg transform transition-all duration-300"
+            whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
+            className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300"
           >
-            <Database className="w-8 h-8 text-purple-400 mb-2 mx-auto" />
-            <h3 className="font-semibold mb-1">Automation</h3>
+            <Database className="w-12 h-12 text-purple-400 mb-4 mx-auto" />
+            <h3 className="font-semibold mb-2">Automation</h3>
             <p className="text-sm text-gray-400">Python, MATLAB, APIs</p>
           </motion.div>
           <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="bg-gray-800/30 backdrop-blur-sm p-4 rounded-lg transform transition-all duration-300"
+            whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
+            className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300"
           >
-            <Cpu className="w-8 h-8 text-purple-400 mb-2 mx-auto" />
-            <h3 className="font-semibold mb-1">Innovation</h3>
+            <Cpu className="w-12 h-12 text-purple-400 mb-4 mx-auto" />
+            <h3 className="font-semibold mb-2">Innovation</h3>
             <p className="text-sm text-gray-400">R&D, Optimization</p>
           </motion.div>
         </motion.div>
@@ -129,7 +129,7 @@ const Hero = ({ scrollToContact }: HeroProps) => {
           Passionate about developing innovative solutions that bridge mechanical engineering with modern technology.
         </motion.p>
 
-        {/* Professional Links - Enhanced with animations */}
+        {/* Professional Links - Enhanced with hover effects */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -140,19 +140,19 @@ const Hero = ({ scrollToContact }: HeroProps) => {
             href="https://github.com/viswamathan"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.1 }}
-            className="bg-gray-800/50 backdrop-blur-sm p-4 rounded-full hover:bg-gray-700 transition-colors group"
+            whileHover={{ scale: 1.1, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
+            className="bg-gray-800/50 backdrop-blur-sm p-4 rounded-full transition-colors group"
           >
-            <Github className="w-7 h-7 text-white group-hover:text-purple-400 transition-colors" />
+            <Github className="w-8 h-8 text-white group-hover:text-purple-400 transition-colors" />
           </motion.a>
           <motion.a
             href="https://www.linkedin.com/in/viswa-m-91b544258/"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.1 }}
-            className="bg-gray-800/50 backdrop-blur-sm p-4 rounded-full hover:bg-gray-700 transition-colors group"
+            whileHover={{ scale: 1.1, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
+            className="bg-gray-800/50 backdrop-blur-sm p-4 rounded-full transition-colors group"
           >
-            <Linkedin className="w-7 h-7 text-white group-hover:text-purple-400 transition-colors" />
+            <Linkedin className="w-8 h-8 text-white group-hover:text-purple-400 transition-colors" />
           </motion.a>
         </motion.div>
 
@@ -167,7 +167,7 @@ const Hero = ({ scrollToContact }: HeroProps) => {
             href="/VISWA M.pdf"
             target="_blank"
             className="bg-purple-600/80 backdrop-blur-sm hover:bg-purple-700 text-white px-8 py-4 rounded-full transition-colors flex items-center gap-3 text-lg"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.8)' }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
             <FileText className="w-6 h-6" />
@@ -176,7 +176,7 @@ const Hero = ({ scrollToContact }: HeroProps) => {
           <motion.button
             onClick={scrollToContact}
             className="border-2 border-purple-600/80 backdrop-blur-sm text-purple-400 hover:bg-purple-600/80 hover:text-white px-8 py-4 rounded-full transition-colors text-lg"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
             Contact Me

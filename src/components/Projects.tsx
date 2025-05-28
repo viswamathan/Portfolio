@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Rocket, Code, Layers, TrendingUp, X } from 'lucide-react';
+import { Rocket, Code, Layers, TrendingUp, X, Cog, Cpu } from 'lucide-react';
 import ProjectCard from './ProjectCard';
 
 const SimulationModal = ({ isOpen, onClose, simulations }) => {
@@ -41,9 +41,9 @@ const SimulationModal = ({ isOpen, onClose, simulations }) => {
 
 const projectCategories = {
   mechanical: {
-    title: "Next-Gen Mechanical Solutions",
-    icon: Rocket,
-    intro: "Explore cutting-edge mechanical engineering projects designed to solve real-world challenges with innovation and precision.",
+    icon: Cog,
+    title: "Mechanical Engineering",
+    intro: "Pure mechanical engineering projects focusing on design, analysis, and optimization.",
     projects: [
       {
         title: "Flat Sprocket Analysis",
@@ -51,7 +51,7 @@ const projectCategories = {
         problem: "Traditional sprocket designs showing premature wear and structural weaknesses under high loads.",
         solution: "Implemented optimized geometry and material distribution through FEA-driven design iterations.",
         impact: "40% increase in durability and 25% reduction in material usage while maintaining performance.",
-        technologies: ["SolidWorks", "ANSYS", "Python", "CAE"],
+        technologies: ["SolidWorks", "ANSYS", "FEA", "Material Science"],
         image1: "/images/SPROCKET STRESS.jpg",
         image2: "/images/SPROCKET DEFORM.jpg",
         report: "/reports/Structural Failure Analysis and Optimization of a Flat Sprocket Using Finite Element Analysis.pdf",
@@ -59,14 +59,39 @@ const projectCategories = {
           "/simulations/deform.gif",
           "/simulations/stress.gif"
         ]
-      },
+      }
+    ]
+  },
+  software: {
+    icon: Code,
+    title: "Software Engineering",
+    intro: "Projects combining programming and automation with engineering principles.",
+    projects: [
+      {
+        title: "Engineering Calculation Automation",
+        description: "Python-based automation tool for mechanical engineering calculations and analysis.",
+        problem: "Time-consuming manual calculations in engineering design process.",
+        solution: "Developed automated calculation tools with Python and engineering libraries.",
+        impact: "Reduced calculation time by 75% and improved accuracy by eliminating human error.",
+        technologies: ["Python", "NumPy", "SciPy", "Matplotlib"],
+        image1: "/calculator-1.jpg",
+        image2: "/calculator-2.jpg",
+        report: "/reports/automation-report.pdf"
+      }
+    ]
+  },
+  hybrid: {
+    icon: Cpu,
+    title: "Mechatronics & Automation",
+    intro: "Projects combining mechanical systems with electronic control and automation.",
+    projects: [
       {
         title: "Solar Dryer with PCM",
         description: "Advanced solar dryer incorporating Phase Change Materials (PCM) for enhanced efficiency.",
         problem: "Inconsistent drying performance and energy wastage in traditional solar dryers.",
         solution: "Integrated PCM technology with forced convection and optimized fin design.",
         impact: "60% improvement in drying efficiency and 8-hour extended operation after sunset.",
-        technologies: ["MATLAB", "CFD", "Thermal Analysis", "CAD"],
+        technologies: ["MATLAB", "CFD", "Thermal Analysis", "Arduino"],
         image1: "/SOLAR DRYER MODAL.jpeg",
         image2: "/SOLAR DRYER PROTOTYPE.jpeg",
         report: "/reports/Modified Solar Dryer Report.pdf"
@@ -88,7 +113,7 @@ const Projects = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto px-6">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -98,6 +123,39 @@ const Projects = () => {
         Featured <span className="text-purple-500">Projects</span>
       </motion.h2>
 
+      {/* Category Navigation */}
+      <div className="flex justify-center mb-12 space-x-4">
+        {Object.entries(projectCategories).map(([key, category]) => {
+          const Icon = category.icon;
+          return (
+            <motion.button
+              key={key}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveCategory(key)}
+              className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all ${
+                activeCategory === key
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700'
+              }`}
+            >
+              <Icon className="w-5 h-5" />
+              <span>{category.title}</span>
+            </motion.button>
+          );
+        })}
+      </div>
+
+      {/* Category Intro */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="text-center text-gray-300 mb-12 max-w-3xl mx-auto"
+      >
+        {projectCategories[activeCategory].intro}
+      </motion.p>
+
+      {/* Projects Grid */}
       <div className="grid gap-8 md:grid-cols-2">
         {projectCategories[activeCategory].projects.map((project, index) => (
           <ProjectCard

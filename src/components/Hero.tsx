@@ -31,7 +31,7 @@ const Hero = ({ scrollToContact }: HeroProps) => {
       >
         {/* Profile Image - Reduced size */}
         <motion.div
-          className="relative mx-auto mb-8 w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-purple-500 overflow-hidden shadow-xl"
+          className="relative mx-auto mb-8 w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 border-purple-500 overflow-hidden shadow-xl"
           whileHover={{ scale: 1.1 }}
           transition={{ type: 'spring', stiffness: 300 }}
         >
@@ -78,44 +78,44 @@ const Hero = ({ scrollToContact }: HeroProps) => {
           />
         </motion.div>
 
-        {/* Key Expertise Areas - Enhanced with larger icons and hover effects */}
+        {/* Key Expertise Areas - Reduced size cards with larger icons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 max-w-4xl mx-auto"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-3xl mx-auto"
         >
           <motion.div 
             whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
-            className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300"
+            className="bg-gray-800/30 backdrop-blur-sm p-4 rounded-lg transform transition-all duration-300"
           >
-            <Award className="w-12 h-12 text-purple-400 mb-4 mx-auto" />
-            <h3 className="font-semibold mb-2">Design</h3>
-            <p className="text-sm text-gray-400">SOLIDWORKS, CATIA, AutoCAD</p>
+            <Award className="w-10 h-10 text-purple-400 mb-3 mx-auto" />
+            <h3 className="font-semibold mb-1">Design</h3>
+            <p className="text-xs text-gray-400">SOLIDWORKS, CATIA, AutoCAD</p>
           </motion.div>
           <motion.div 
             whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
-            className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300"
+            className="bg-gray-800/30 backdrop-blur-sm p-4 rounded-lg transform transition-all duration-300"
           >
-            <Code className="w-12 h-12 text-purple-400 mb-4 mx-auto" />
-            <h3 className="font-semibold mb-2">Analysis</h3>
-            <p className="text-sm text-gray-400">ANSYS, FEA, CFD</p>
+            <Code className="w-10 h-10 text-purple-400 mb-3 mx-auto" />
+            <h3 className="font-semibold mb-1">Analysis</h3>
+            <p className="text-xs text-gray-400">ANSYS, FEA, CFD</p>
           </motion.div>
           <motion.div 
             whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
-            className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300"
+            className="bg-gray-800/30 backdrop-blur-sm p-4 rounded-lg transform transition-all duration-300"
           >
-            <Database className="w-12 h-12 text-purple-400 mb-4 mx-auto" />
-            <h3 className="font-semibold mb-2">Automation</h3>
-            <p className="text-sm text-gray-400">Python, MATLAB, APIs</p>
+            <Database className="w-10 h-10 text-purple-400 mb-3 mx-auto" />
+            <h3 className="font-semibold mb-1">Automation</h3>
+            <p className="text-xs text-gray-400">Python, MATLAB, APIs</p>
           </motion.div>
           <motion.div 
             whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
-            className="bg-gray-800/30 backdrop-blur-sm p-6 rounded-lg transform transition-all duration-300"
+            className="bg-gray-800/30 backdrop-blur-sm p-4 rounded-lg transform transition-all duration-300"
           >
-            <Cpu className="w-12 h-12 text-purple-400 mb-4 mx-auto" />
-            <h3 className="font-semibold mb-2">Innovation</h3>
-            <p className="text-sm text-gray-400">R&D, Optimization</p>
+            <Cpu className="w-10 h-10 text-purple-400 mb-3 mx-auto" />
+            <h3 className="font-semibold mb-1">Innovation</h3>
+            <p className="text-xs text-gray-400">R&D, Optimization</p>
           </motion.div>
         </motion.div>
 
@@ -141,18 +141,18 @@ const Hero = ({ scrollToContact }: HeroProps) => {
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.1, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
-            className="bg-gray-800/50 backdrop-blur-sm p-4 rounded-full transition-colors group"
+            className="bg-gray-800/50 backdrop-blur-sm p-3 rounded-full transition-colors group"
           >
-            <Github className="w-8 h-8 text-white group-hover:text-purple-400 transition-colors" />
+            <Github className="w-6 h-6 text-white group-hover:text-purple-400 transition-colors" />
           </motion.a>
           <motion.a
             href="https://www.linkedin.com/in/viswa-m-91b544258/"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.1, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
-            className="bg-gray-800/50 backdrop-blur-sm p-4 rounded-full transition-colors group"
+            className="bg-gray-800/50 backdrop-blur-sm p-3 rounded-full transition-colors group"
           >
-            <Linkedin className="w-8 h-8 text-white group-hover:text-purple-400 transition-colors" />
+            <Linkedin className="w-6 h-6 text-white group-hover:text-purple-400 transition-colors" />
           </motion.a>
         </motion.div>
 
@@ -166,16 +166,16 @@ const Hero = ({ scrollToContact }: HeroProps) => {
           <motion.a
             href="/VISWA M.pdf"
             target="_blank"
-            className="bg-purple-600/80 backdrop-blur-sm hover:bg-purple-700 text-white px-8 py-4 rounded-full transition-colors flex items-center gap-3 text-lg"
+            className="bg-purple-600/80 backdrop-blur-sm hover:bg-purple-700 text-white px-6 py-3 rounded-full transition-colors flex items-center gap-2 text-base"
             whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.8)' }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <FileText className="w-6 h-6" />
+            <FileText className="w-5 h-5" />
             <span>Download Portfolio</span>
           </motion.a>
           <motion.button
             onClick={scrollToContact}
-            className="border-2 border-purple-600/80 backdrop-blur-sm text-purple-400 hover:bg-purple-600/80 hover:text-white px-8 py-4 rounded-full transition-colors text-lg"
+            className="border-2 border-purple-600/80 backdrop-blur-sm text-purple-400 hover:bg-purple-600/80 hover:text-white px-6 py-3 rounded-full transition-colors text-base"
             whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.2)' }}
             transition={{ type: 'spring', stiffness: 300 }}
           >

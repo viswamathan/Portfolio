@@ -58,7 +58,7 @@ const projectCategories = {
         simulations: ["/simulations/deform.gif", "/simulations/stress.gif"]
       },
       {
-        title: "Optimized Heat Exchanger Design",
+        title: "Optimized of Piston Head",
         description: "Development of a high-efficiency shell and tube heat exchanger with enhanced heat transfer characteristics.",
         problem: "Conventional heat exchangers exhibiting suboptimal thermal performance and high pressure drops.",
         solution: "Designed innovative baffle configurations and tube arrangements using CFD analysis.",
@@ -67,7 +67,7 @@ const projectCategories = {
         image1: "/images/heat-exchanger-cfd.jpg",
         image2: "/images/heat-exchanger-prototype.jpg",
         report: "/reports/heat-exchanger-optimization.pdf",
-        simulations: ["/simulations/heat-flow.gif", "/simulations/temperature-distribution.gif"]
+        simulations: ["/simulations/head stress.gif", "/simulations/head deform.gif","/simulations/head tempertature.gif"]
       },
       {
         title: "Lightweight Aircraft Component",

@@ -13,7 +13,8 @@ const SimulationModal = ({ isOpen, onClose, simulations }) => {
       exit={{ opacity: 0 }}
       className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
     >
-      <div className="bg-gray-900 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto">
+      {/* Increased max width and made height more adaptive */}
+      <div className="bg-gray-900 rounded-lg max-w-6xl w-full max-h-[95vh] overflow-auto">
         <div className="sticky top-0 bg-gray-900 p-4 flex justify-between items-center border-b border-gray-800">
           <h3 className="text-xl font-bold text-purple-400">Simulation View</h3>
           <button
@@ -23,16 +24,27 @@ const SimulationModal = ({ isOpen, onClose, simulations }) => {
             <X className="w-6 h-6" />
           </button>
         </div>
-        <div className="p-4 space-y-4">
-          {simulations.map((simulation, index) => (
-            <div key={index} className="flex justify-center">
-              <img
-                src={simulation}
-                alt={`Simulation ${index + 1}`}
-                className="max-w-full rounded-lg border-2 border-purple-500/30"
-              />
-            </div>
-          ))}
+        {/* Responsive grid for GIFs, adapts columns based on count and screen size */}
+        <div className="p-4">
+          <div
+            className={
+              simulations.length <= 2
+                ? "grid grid-cols-1 sm:grid-cols-2 gap-4"
+                : simulations.length <= 4
+                ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4"
+                : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+            }
+          >
+            {simulations.map((simulation, index) => (
+              <div key={index} className="flex justify-center">
+                <img
+                  src={simulation}
+                  alt={`Simulation ${index + 1}`}
+                  className="max-w-full rounded-lg border-2 border-purple-500/30"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </motion.div>
@@ -73,9 +85,7 @@ const projectCategories = {
          simulations: [
           "/simulations/head deform.gif",
           "/simulations/head stress.gif",
-          "/simulations/head temperature.gif",
-          "/simulations/extra2.gif",
-          "/simulations/extra3.gif"
+          "/simulations/head temperature.gif"
         ]
       },
       {

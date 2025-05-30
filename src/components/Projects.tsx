@@ -73,7 +73,7 @@ const projectCategories = {
          simulations: [
           "/simulations/head deform.gif",
           "/simulations/head stress.gif",
-          "/simulations/head stress.gif"
+          "/simulations/head temparature.gif",
         ]
       },
       {

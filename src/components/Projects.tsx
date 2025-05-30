@@ -43,7 +43,7 @@ const projectCategories = {
   mechanical: {
     icon: Cog,
     title: "Mechanical Engineering",
-    intro: "Pure mechanical engineering projects focusing on design, analysis, and optimization.",
+    intro: "Advanced mechanical engineering projects showcasing design optimization, structural analysis, and innovative solutions.",
     projects: [
       {
         title: "Flat Sprocket Analysis",
@@ -55,17 +55,50 @@ const projectCategories = {
         image1: "/images/SPROCKET STRESS.jpg",
         image2: "/images/SPROCKET DEFORM.jpg",
         report: "/reports/Structural Failure Analysis and Optimization of a Flat Sprocket Using Finite Element Analysis.pdf",
-        simulations: [
-          "/simulations/deform.gif",
-          "/simulations/stress.gif"
-        ]
+        simulations: ["/simulations/deform.gif", "/simulations/stress.gif"]
+      },
+      {
+        title: "Optimized Heat Exchanger Design",
+        description: "Development of a high-efficiency shell and tube heat exchanger with enhanced heat transfer characteristics.",
+        problem: "Conventional heat exchangers exhibiting suboptimal thermal performance and high pressure drops.",
+        solution: "Designed innovative baffle configurations and tube arrangements using CFD analysis.",
+        impact: "35% improvement in heat transfer efficiency and 20% reduction in pressure drop.",
+        technologies: ["ANSYS Fluent", "SolidWorks", "CFD", "Thermal Analysis"],
+        image1: "/images/heat-exchanger-cfd.jpg",
+        image2: "/images/heat-exchanger-prototype.jpg",
+        report: "/reports/heat-exchanger-optimization.pdf",
+        simulations: ["/simulations/heat-flow.gif", "/simulations/temperature-distribution.gif"]
+      },
+      {
+        title: "Lightweight Aircraft Component",
+        description: "Design and optimization of a critical aerospace component using topology optimization.",
+        problem: "Need for weight reduction while maintaining structural integrity in aircraft components.",
+        solution: "Applied topology optimization and lattice structures for weight reduction.",
+        impact: "45% weight reduction while maintaining structural requirements and safety factors.",
+        technologies: ["CATIA", "ANSYS", "Topology Optimization", "Aerospace Materials"],
+        image1: "/images/aircraft-component-original.jpg",
+        image2: "/images/aircraft-component-optimized.jpg",
+        report: "/reports/aerospace-component-design.pdf",
+        simulations: ["/simulations/stress-analysis.gif", "/simulations/modal-analysis.gif"]
+      },
+      {
+        title: "Industrial Gearbox Redesign",
+        description: "Complete redesign of an industrial gearbox for enhanced durability and reduced maintenance.",
+        problem: "Frequent failures and high maintenance costs in existing gearbox designs.",
+        solution: "Implemented advanced gear tooth profiles and improved lubrication system.",
+        impact: "300% increase in service life and 50% reduction in maintenance frequency.",
+        technologies: ["SolidWorks", "KISSsoft", "FEA", "Tribology"],
+        image1: "/images/gearbox-assembly.jpg",
+        image2: "/images/gearbox-analysis.jpg",
+        report: "/reports/gearbox-optimization.pdf",
+        simulations: ["/simulations/gear-stress.gif", "/simulations/oil-flow.gif"]
       }
     ]
   },
   software: {
     icon: Code,
     title: "Software Engineering",
-    intro: "Projects combining programming and automation with engineering principles.",
+    intro: "Innovative software solutions bridging mechanical engineering with modern technology.",
     projects: [
       {
         title: "Engineering Automation Suite",
@@ -90,7 +123,7 @@ const projectCategories = {
   hybrid: {
     icon: Cpu,
     title: "Mechatronics & Automation",
-    intro: "Projects combining mechanical systems with electronic control and automation.",
+    intro: "Advanced mechatronic systems combining mechanical design with smart control systems.",
     projects: [
       {
         title: "Solar Dryer with PCM",
@@ -102,6 +135,42 @@ const projectCategories = {
         image1: "/SOLAR DRYER MODAL.jpeg",
         image2: "/SOLAR DRYER PROTOTYPE.jpeg",
         report: "/reports/Modified Solar Dryer Report.pdf"
+      },
+      {
+        title: "Smart Manufacturing Cell",
+        description: "Automated manufacturing cell with real-time monitoring and adaptive control.",
+        problem: "Manual quality control and lack of process optimization in manufacturing.",
+        solution: "Implemented IoT sensors and machine learning for process control.",
+        impact: "85% reduction in defects and 40% increase in throughput.",
+        technologies: ["PLC", "Python", "Machine Learning", "IoT"],
+        image1: "/images/smart-cell-overview.jpg",
+        image2: "/images/smart-cell-control.jpg",
+        report: "/reports/smart-manufacturing.pdf",
+        simulations: ["/simulations/process-optimization.gif"]
+      },
+      {
+        title: "Autonomous Material Handling System",
+        description: "Self-navigating robotic system for warehouse automation.",
+        problem: "Inefficient manual material handling and inventory management.",
+        solution: "Developed autonomous navigation and smart inventory tracking.",
+        impact: "70% reduction in handling time and zero accidents.",
+        technologies: ["ROS", "Computer Vision", "Path Planning", "Sensor Fusion"],
+        image1: "/images/robot-navigation.jpg",
+        image2: "/images/warehouse-automation.jpg",
+        report: "/reports/autonomous-system.pdf",
+        simulations: ["/simulations/path-planning.gif"]
+      },
+      {
+        title: "Smart Energy Management System",
+        description: "Intelligent system for industrial energy optimization.",
+        problem: "High energy consumption and inefficient resource utilization.",
+        solution: "Implemented predictive control and real-time monitoring.",
+        impact: "30% reduction in energy consumption and improved sustainability.",
+        technologies: ["IoT", "Machine Learning", "SCADA", "Energy Analytics"],
+        image1: "/images/energy-dashboard.jpg",
+        image2: "/images/energy-optimization.jpg",
+        report: "/reports/energy-management.pdf",
+        simulations: ["/simulations/energy-flow.gif"]
       }
     ]
   }

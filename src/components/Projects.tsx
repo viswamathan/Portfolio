@@ -55,7 +55,10 @@ const projectCategories = {
         image1: "/images/SPROCKET STRESS.jpg",
         image2: "/images/SPROCKET DEFORM.jpg",
         report: "/reports/Structural Failure Analysis and Optimization of a Flat Sprocket Using Finite Element Analysis.pdf",
-        simulations: ["/simulations/deform.gif", "/simulations/stress.gif"]
+        simulations: [
+          "/simulations/deform.gif",
+          "/simulations/stress.gif",
+        ]
       },
       {
         title: "Optimized of Piston Head",
@@ -67,7 +70,13 @@ const projectCategories = {
         image1: "/images/heat-exchanger-cfd.jpg",
         image2: "/images/heat-exchanger-prototype.jpg",
         report: "/reports/heat-exchanger-optimization.pdf",
-        simulations: ["/simulations/head stress.gif", "/simulations/head deform.gif","/simulations/head tempertature.gif"]
+         simulations: [
+          "/simulations/head deform.gif",
+          "/simulations/head stress.gif",
+          "/simulations/head temperature.gif",
+          "/simulations/extra2.gif",
+          "/simulations/extra3.gif"
+        ]
       },
       {
         title: "Lightweight Aircraft Component",

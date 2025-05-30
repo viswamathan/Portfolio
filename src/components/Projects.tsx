@@ -52,8 +52,8 @@ const projectCategories = {
         solution: "Implemented optimized geometry and material distribution through FEA-driven design iterations.",
         impact: "40% increase in durability and 25% reduction in material usage while maintaining performance.",
         technologies: ["SolidWorks", "ANSYS", "FEA", "Material Science"],
-        image1: "/images/PISTON 1.png",
-        image2: "/images/PISTON 2.png",
+        image1: "/images/SPROCKET STRESS.jpg",
+        image2: "/images/SPROCKET DEFORM.jpg",
         report: "/reports/Thermo-Structural Analysis of Piston Head Using ANSYS Mechanical.pdf",
         simulations: [
           "/simulations/deform.gif",
@@ -67,8 +67,8 @@ const projectCategories = {
         solution: "Conducted integrated thermal and structural FEA to analyze temperature distribution, stress zones, and deformation.",
         impact: "Achieved up to 40% increase in durability and 25% reduction in material usage through design optimization.",
         technologies: ["ANSYS", "SolidWorks", "FEA", "Thermal Analysis"],
-        image1: "/images/heat-exchanger-cfd.jpg",
-        image2: "/images/heat-exchanger-prototype.jpg",
+        image1: "/images/PISTON 1.png",
+        image2: "/images/PISTON 1.png",
         report: "/reports/heat-exchanger-optimization.pdf",
          simulations: [
           "/simulations/head deform.gif",

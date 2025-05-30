@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Rocket, Code, Layers, TrendingUp, X, Cog, Cpu } from 'lucide-react';
+import { Rocket, Code, Layers, TrendingUp, X, Cog, Cpu, Github } from 'lucide-react';
 import ProjectCard from './ProjectCard';
 
 const SimulationModal = ({ isOpen, onClose, simulations }) => {
@@ -68,15 +68,22 @@ const projectCategories = {
     intro: "Projects combining programming and automation with engineering principles.",
     projects: [
       {
-        title: "Engineering Calculation Automation",
-        description: "Python-based automation tool for mechanical engineering calculations and analysis.",
-        problem: "Time-consuming manual calculations in engineering design process.",
-        solution: "Developed automated calculation tools with Python and engineering libraries.",
-        impact: "Reduced calculation time by 75% and improved accuracy by eliminating human error.",
-        technologies: ["Python", "NumPy", "SciPy", "Matplotlib"],
+        title: "Engineering Automation Suite",
+        description: "A comprehensive collection of Python-based tools for automating mechanical engineering calculations and analyses.",
+        technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Flask"],
+        githubUrl: "https://github.com/yourusername/engineering-automation",
         image1: "/calculator-1.jpg",
         image2: "/calculator-2.jpg",
         report: "/reports/automation-report.pdf"
+      },
+      {
+        title: "CAD File Converter",
+        description: "Web-based tool for converting between different CAD file formats with built-in optimization.",
+        technologies: ["JavaScript", "Three.js", "Node.js", "WebAssembly"],
+        githubUrl: "https://github.com/yourusername/cad-converter",
+        image1: "/converter-1.jpg",
+        image2: "/converter-2.jpg",
+        report: "/reports/converter-report.pdf"
       }
     ]
   },
@@ -112,6 +119,71 @@ const Projects = () => {
     setModalSimulations(null);
   };
 
+  const renderSoftwareProject = (project) => (
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      className="bg-gray-800/50 rounded-lg overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 p-6"
+    >
+      <h3 className="text-2xl font-bold text-purple-400 mb-4">{project.title}</h3>
+      <p className="text-gray-300 mb-6">{project.description}</p>
+
+      <div className="mb-6">
+        <h4 className="font-semibold text-purple-300 mb-2">Technologies Used:</h4>
+        <div className="flex flex-wrap gap-2">
+          {project.technologies.map((tech, index) => (
+            <span
+              key={index}
+              className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 mb-6">
+        <motion.img
+          whileHover={{ scale: 1.05 }}
+          src={project.image1}
+          alt={`${project.title} - View 1`}
+          className="w-full h-48 object-cover rounded-lg border-2 border-purple-500/30 hover:border-purple-500"
+        />
+        <motion.img
+          whileHover={{ scale: 1.05 }}
+          src={project.image2}
+          alt={`${project.title} - View 2`}
+          className="w-full h-48 object-cover rounded-lg border-2 border-purple-500/30 hover:border-purple-500"
+        />
+      </div>
+
+      <div className="flex flex-wrap gap-4">
+        <motion.a
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
+        >
+          <Github className="w-4 h-4" />
+          <span>View on GitHub</span>
+        </motion.a>
+        
+        <motion.a
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          href={project.report}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"
+        >
+          <Code className="w-4 h-4" />
+          <span>View Documentation</span>
+        </motion.a>
+      </div>
+    </motion.div>
+  );
+
   return (
     <div className="container mx-auto px-6">
       <motion.h2
@@ -123,7 +195,6 @@ const Projects = () => {
         Featured <span className="text-purple-500">Projects</span>
       </motion.h2>
 
-      {/* Category Navigation */}
       <div className="flex justify-center mb-12 space-x-4">
         {Object.entries(projectCategories).map(([key, category]) => {
           const Icon = category.icon;
@@ -146,7 +217,6 @@ const Projects = () => {
         })}
       </div>
 
-      {/* Category Intro */}
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -155,15 +225,19 @@ const Projects = () => {
         {projectCategories[activeCategory].intro}
       </motion.p>
 
-      {/* Projects Grid */}
       <div className="grid gap-8 md:grid-cols-2">
-        {projectCategories[activeCategory].projects.map((project, index) => (
-          <ProjectCard
-            key={index}
-            {...project}
-            onViewSimulation={project.simulations ? handleViewSimulation : undefined}
-          />
-        ))}
+        {activeCategory === 'software' 
+          ? projectCategories[activeCategory].projects.map((project, index) => (
+              renderSoftwareProject(project)
+            ))
+          : projectCategories[activeCategory].projects.map((project, index) => (
+              <ProjectCard
+                key={index}
+                {...project}
+                onViewSimulation={project.simulations ? handleViewSimulation : undefined}
+              />
+            ))
+        }
       </div>
 
       <SimulationModal

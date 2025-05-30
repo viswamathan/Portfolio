@@ -239,7 +239,7 @@ const Experience = () => {
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                Design Engineer Intern
+                Research and Development Intern
               </motion.h3>
               <motion.h4 
                 className="text-purple-400 mb-4 font-semibold"
@@ -247,7 +247,7 @@ const Experience = () => {
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                Super Auto Forge
+                Super Auto Forge Pvt.Ltd
               </motion.h4>
               <motion.ul 
                 className="space-y-2 text-gray-300"
@@ -256,9 +256,9 @@ const Experience = () => {
                 transition={{ delay: 0.4 }}
               >
                 {[
-                  'Assisted in Forging Stage Design & CAD Modeling',
-                  'Analyzed Material Flow & Defect Prediction via Simulation',
-                  'Optimized Process Parameters & Documented Process Sheets'
+                  'Contributed to forging stage development by creating precise 3D CAD models tailored for manufacturability.',
+                  'Conducted simulation-based analysis to study material flow and predict potential forging defects.',
+                  'Optimized key process parameters to enhance product quality and documented detailed process sheets for production.'
                 ].map((item, index) => (
                   <motion.li 
                     key={index}

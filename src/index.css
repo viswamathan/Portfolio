@@ -2,83 +2,264 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 :root {
-  --primary-color: #6b21a8;
-  font-family: 'Inter', Arial, sans-serif;
+  --primary-color: #8b5cf6;
+  --secondary-color: #3b82f6;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-.dark {
-  --primary-color: #a855f7;
-  background-color: #121212;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #111827;
   color: #ffffff;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Mobile-first responsive styles */
-@layer base {
-  html {
-    @apply text-base;
-  }
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
 
-  body {
-    @apply overflow-x-hidden min-h-screen bg-gray-900 text-white;
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #8b5cf6, #3b82f6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #7c3aed, #2563eb);
+}
+
+/* Firefox Scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #8b5cf6 #1f2937;
+}
+
+/* Base Styles */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
   }
 
   h1 {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl;
   }
 
   h2 {
-    @apply text-2xl sm:text-3xl md:text-4xl;
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl;
   }
 
   h3 {
+    @apply text-2xl sm:text-3xl md:text-4xl;
+  }
+
+  h4 {
     @apply text-xl sm:text-2xl md:text-3xl;
+  }
+
+  p {
+    @apply text-base sm:text-lg;
+    line-height: 1.7;
   }
 }
 
+/* Component Styles */
 @layer components {
   .container {
     @apply px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl;
   }
 
-  .section {
-    @apply py-12 sm:py-16 md:py-20 lg:py-24;
+  .section-padding {
+    @apply py-16 sm:py-20 lg:py-24;
   }
 
   .btn {
-    @apply px-4 py-2 sm:px-6 sm:py-3 rounded-lg transition-all duration-300;
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center justify-center gap-2;
   }
 
   .btn-primary {
-    @apply bg-purple-600 hover:bg-purple-700 text-white;
+    @apply bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 shadow-lg hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-purple-600/50 text-purple-400 hover:text-white hover:bg-purple-600/20 backdrop-blur-sm;
   }
 
   .card {
-    @apply bg-gray-800/50 rounded-lg p-4 sm:p-6 backdrop-blur-sm;
+    @apply bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-purple-500/30 transition-all duration-300;
+  }
+
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400;
+  }
+
+  .floating-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite alternate;
   }
 }
 
-/* Hide scrollbar but keep functionality */
-@media (max-width: 1024px) {
-  .hide-scrollbar {
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  from {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+  
+  .section-padding {
+    @apply py-12;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Hide scrollbar on mobile for cleaner look */
+  .hide-scrollbar-mobile {
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
   
-  .hide-scrollbar::-webkit-scrollbar {
+  .hide-scrollbar-mobile::-webkit-scrollbar {
     display: none;
   }
 }
 
-/* Responsive grid layouts */
-.responsive-grid {
-  @apply grid gap-4 sm:gap-6 md:gap-8;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-/* Touch-friendly interactions for mobile */
-@media (hover: none) {
-  .touch-hover {
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .hover\:scale-105:hover {
+    transform: none;
+  }
+  
+  .touch-optimized {
     @apply active:scale-95 transition-transform;
   }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card {
+    @apply border-2 border-white/30;
+  }
+  
+  .gradient-text {
+    @apply text-white;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .floating-animation {
+    animation: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* Focus styles for accessibility */
+.focus-visible:focus-visible {
+  @apply outline-2 outline-purple-500 outline-offset-2;
+}
+
+/* Loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Utility classes */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.backdrop-blur-strong {
+  backdrop-filter: blur(20px);
+}
+
+.border-gradient {
+  border-image: linear-gradient(45deg, #8b5cf6, #3b82f6) 1;
 }

@@ -103,24 +103,23 @@ const projectCategories = {
       }
     ]
   },
-  hybrid: {
-    icon: Cpu,
-    title: "Automation",
-    intro: "Advanced  systems combining mechanical design with smart control systems.",
-    projects: [
-      {
-        title: "Solar Dryer with PCM",
-        description: "Advanced solar dryer incorporating Phase Change Materials (PCM) for enhanced efficiency.",
-        problem: "Inconsistent drying performance and energy wastage in traditional solar dryers.",
-        solution: "Integrated PCM technology with forced convection and optimized fin design.",
-        impact: "60% improvement in drying efficiency and 8-hour extended operation after sunset.",
-        technologies: ["MATLAB", "CFD", "Thermal Analysis", "Arduino"],
-        image1: "/SOLAR DRYER MODAL.jpeg",
-        image2: "/SOLAR DRYER PROTOTYPE.jpeg",
-        report: "/reports/Modified Solar Dryer Report.pdf"
-      ]
-  }
-    ]
+  const hybrid = {
+  icon: Cpu,
+  title: "Automation",
+  intro: "Advanced systems combining mechanical design with smart control systems.",
+  projects: [
+    {
+      title: "Solar Dryer with PCM",
+      description: "Advanced solar dryer incorporating Phase Change Materials (PCM) for enhanced efficiency.",
+      problem: "Inconsistent drying performance and energy wastage in traditional solar dryers.",
+      solution: "Integrated PCM technology with forced convection and optimized fin design.",
+      impact: "60% improvement in drying efficiency and 8-hour extended operation after sunset.",
+      technologies: ["MATLAB", "CFD", "Thermal Analysis", "Arduino"],
+      image1: "/SOLAR_DRYER_MODAL.jpeg",
+      image2: "/SOLAR_DRYER_PROTOTYPE.jpeg",
+      report: "/reports/Modified_Solar_Dryer_Report.pdf"
+    }
+  ]
 };
 
 const Projects = () => {

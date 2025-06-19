@@ -68,37 +68,13 @@ const projectCategories = {
         impact: "Achieved up to 40% increase in durability and 25% reduction in material usage through design optimization.",
         technologies: ["ANSYS", "SolidWorks", "FEA", "Thermal Analysis"],
         image1: "/images/PISTON 1.png",
-        image2: "/images/PISTON 1.png",
+        image2: "/images/PISTON 2.png",
         report: "/reports/heat-exchanger-optimization.pdf",
          simulations: [
           "/simulations/head deform.gif",
           "/simulations/head stress.gif",
           "/simulations/head temparature.gif",
-        ]
-      },
-      {
-        title: "Lightweight Aircraft Component",
-        description: "Design and optimization of a critical aerospace component using topology optimization.",
-        problem: "Need for weight reduction while maintaining structural integrity in aircraft components.",
-        solution: "Applied topology optimization and lattice structures for weight reduction.",
-        impact: "45% weight reduction while maintaining structural requirements and safety factors.",
-        technologies: ["CATIA", "ANSYS", "Topology Optimization", "Aerospace Materials"],
-        image1: "/images/aircraft-component-original.jpg",
-        image2: "/images/aircraft-component-optimized.jpg",
-        report: "/reports/aerospace-component-design.pdf",
-        simulations: ["/simulations/stress-analysis.gif", "/simulations/modal-analysis.gif"]
-      },
-      {
-        title: "Industrial Gearbox Redesign",
-        description: "Complete redesign of an industrial gearbox for enhanced durability and reduced maintenance.",
-        problem: "Frequent failures and high maintenance costs in existing gearbox designs.",
-        solution: "Implemented advanced gear tooth profiles and improved lubrication system.",
-        impact: "300% increase in service life and 50% reduction in maintenance frequency.",
-        technologies: ["SolidWorks", "KISSsoft", "FEA", "Tribology"],
-        image1: "/images/gearbox-assembly.jpg",
-        image2: "/images/gearbox-analysis.jpg",
-        report: "/reports/gearbox-optimization.pdf",
-        simulations: ["/simulations/gear-stress.gif", "/simulations/oil-flow.gif"]
+         ]
       }
     ]
   },

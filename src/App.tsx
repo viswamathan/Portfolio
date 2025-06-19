@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, Suspense } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { LazyMotion, domAnimation, motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 // Components
@@ -77,14 +77,14 @@ export default function App() {
     animate: { 
       opacity: 1,
       transition: {
-        duration: 0.8,
+        duration: 0.4, // reduced for snappier transition
         ease: "easeOut"
       }
     },
     exit: { 
       opacity: 0,
       transition: {
-        duration: 0.5
+        duration: 0.3
       }
     }
   };
@@ -95,29 +95,30 @@ export default function App() {
         {isLoading ? (
           <LoadingScreen key="loading" />
         ) : (
-          <motion.div
-            key="main"
-            variants={pageVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="relative"
-          >
-            {/* Particle Background */}
-            <ParticleBackground />
-            
-            {/* Navigation */}
-            <Navigation 
-              activeSection={activeSection}
-              isMenuOpen={isMenuOpen}
-              setMenuOpen={setMenuOpen}
-              scrollToSection={scrollToSection}
-              scrollY={scrollY}
-            />
+          <LazyMotion features={domAnimation}>
+            <motion.div
+              key="main"
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="relative"
+            >
+              {/* Particle Background */}
+              <ParticleBackground />
+              
+              {/* Navigation */}
+              <Navigation 
+                activeSection={activeSection}
+                isMenuOpen={isMenuOpen}
+                setMenuOpen={setMenuOpen}
+                scrollToSection={scrollToSection}
+                scrollY={scrollY}
+              />
 
-            {/* Main Content */}
-            <main className="relative">
-              <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+              {/* Main Content */}
+              <main className="relative">
+                {/* Remove Suspense fallback for instant render */}
                 {[Hero, About, Experience, Skills, Projects, Contact].map((Component, index) => (
                   <motion.section
                     key={index}
@@ -128,47 +129,45 @@ export default function App() {
                     className={`relative ${
                       index === 0 ? 'min-h-screen' : 'min-h-screen py-12 sm:py-16 lg:py-20'
                     }`}
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    viewport={{ once: true, margin: "-100px" }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
                   >
                     <Component
                       scrollToContact={index === 0 ? () => scrollToSection(5) : undefined}
                     />
                   </motion.section>
                 ))}
-              </Suspense>
+                {/* Engineering Calculator */}
+                <EngineeringCalculator />
+              </main>
 
-              {/* Engineering Calculator */}
-              <EngineeringCalculator />
-            </main>
+              {/* Scroll Progress */}
+              <ScrollProgress 
+                activeSection={activeSection}
+                scrollToSection={scrollToSection}
+              />
 
-            {/* Scroll Progress */}
-            <ScrollProgress 
-              activeSection={activeSection}
-              scrollToSection={scrollToSection}
-            />
-
-            {/* Floating Action Button */}
-            <motion.div
-              className="fixed bottom-6 right-6 z-40"
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ delay: 2, type: "spring", stiffness: 260, damping: 20 }}
-            >
-              <motion.button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                whileHover={{ scale: 1.1, rotate: 360 }}
-                whileTap={{ scale: 0.9 }}
+              {/* Floating Action Button */}
+              <motion.div
+                className="fixed bottom-6 right-6 z-40"
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 2, type: "spring", stiffness: 260, damping: 20 }}
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                </svg>
-              </motion.button>
+                <motion.button
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                  whileHover={{ scale: 1.1, rotate: 360 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg>
+                </motion.button>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </LazyMotion>
         )}
       </AnimatePresence>
     </div>

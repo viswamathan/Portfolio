@@ -103,24 +103,62 @@ const projectCategories = {
       }
     ]
   },
-  const hybrid = {
-  icon: Cpu,
-  title: "Automation",
-  intro: "Advanced systems combining mechanical design with smart control systems.",
-  projects: [
-    {
-      title: "Solar Dryer with PCM",
-      description: "Advanced solar dryer incorporating Phase Change Materials (PCM) for enhanced efficiency.",
-      problem: "Inconsistent drying performance and energy wastage in traditional solar dryers.",
-      solution: "Integrated PCM technology with forced convection and optimized fin design.",
-      impact: "60% improvement in drying efficiency and 8-hour extended operation after sunset.",
-      technologies: ["MATLAB", "CFD", "Thermal Analysis", "Arduino"],
-      image1: "/SOLAR_DRYER_MODAL.jpeg",
-      image2: "/SOLAR_DRYER_PROTOTYPE.jpeg",
-      report: "/reports/Modified_Solar_Dryer_Report.pdf"
-    }
-  ]
+   hybrid: {
+    icon: Cpu,
+    title: "Mechatronics & Automation",
+    intro: "Advanced mechatronic systems combining mechanical design with smart control systems.",
+    projects: [
+      {
+        title: "Solar Dryer with PCM",
+        description: "Advanced solar dryer incorporating Phase Change Materials (PCM) for enhanced efficiency.",
+        problem: "Inconsistent drying performance and energy wastage in traditional solar dryers.",
+        solution: "Integrated PCM technology with forced convection and optimized fin design.",
+        impact: "60% improvement in drying efficiency and 8-hour extended operation after sunset.",
+        technologies: ["MATLAB", "CFD", "Thermal Analysis", "Arduino"],
+        image1: "/SOLAR DRYER MODAL.jpeg",
+        image2: "/SOLAR DRYER PROTOTYPE.jpeg",
+        report: "/reports/Modified Solar Dryer Report.pdf"
+      },
+      {
+        title: "Smart Manufacturing Cell",
+        description: "Automated manufacturing cell with real-time monitoring and adaptive control.",
+        problem: "Manual quality control and lack of process optimization in manufacturing.",
+        solution: "Implemented IoT sensors and machine learning for process control.",
+        impact: "85% reduction in defects and 40% increase in throughput.",
+        technologies: ["PLC", "Python", "Machine Learning", "IoT"],
+        image1: "/images/smart-cell-overview.jpg",
+        image2: "/images/smart-cell-control.jpg",
+        report: "/reports/smart-manufacturing.pdf",
+        simulations: ["/simulations/process-optimization.gif"]
+      },
+      {
+        title: "Autonomous Material Handling System",
+        description: "Self-navigating robotic system for warehouse automation.",
+        problem: "Inefficient manual material handling and inventory management.",
+        solution: "Developed autonomous navigation and smart inventory tracking.",
+        impact: "70% reduction in handling time and zero accidents.",
+        technologies: ["ROS", "Computer Vision", "Path Planning", "Sensor Fusion"],
+        image1: "/images/robot-navigation.jpg",
+        image2: "/images/warehouse-automation.jpg",
+        report: "/reports/autonomous-system.pdf",
+        simulations: ["/simulations/path-planning.gif"]
+      },
+      {
+        title: "Smart Energy Management System",
+        description: "Intelligent system for industrial energy optimization.",
+        problem: "High energy consumption and inefficient resource utilization.",
+        solution: "Implemented predictive control and real-time monitoring.",
+        impact: "30% reduction in energy consumption and improved sustainability.",
+        technologies: ["IoT", "Machine Learning", "SCADA", "Energy Analytics"],
+        image1: "/images/energy-dashboard.jpg",
+        image2: "/images/energy-optimization.jpg",
+        report: "/reports/energy-management.pdf",
+        simulations: ["/simulations/energy-flow.gif"]
+      }
+    ]
+  }
 };
+
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("mechanical");

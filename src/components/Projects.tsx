@@ -42,8 +42,8 @@ const SimulationModal = ({ isOpen, onClose, simulations }) => {
 const projectCategories = {
   mechanical: {
     icon: Cog,
-    title: "Mechanical Engineering",
-    intro: "Advanced mechanical engineering projects showcasing design optimization, structural analysis, and innovative solutions.",
+    title: "Optimization and Innovation",
+    intro: "Advanced Mechanical engineering projects showcasing design optimization, structural analysis, and innovative solutions.",
     projects: [
       {
         title: "Flat Sprocket Analysis",
@@ -80,7 +80,7 @@ const projectCategories = {
   },
   software: {
     icon: Code,
-    title: "Software Engineering",
+    title: "Software X Mechanical",
     intro: "Innovative software solutions bridging mechanical engineering with modern technology.",
     projects: [
       {
@@ -105,8 +105,8 @@ const projectCategories = {
   },
   hybrid: {
     icon: Cpu,
-    title: "Mechatronics & Automation",
-    intro: "Advanced mechatronic systems combining mechanical design with smart control systems.",
+    title: "Automation",
+    intro: "Advanced Systems combining mechanical design with smart control systems.",
     projects: [
       {
         title: "Solar Dryer with PCM",

@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sphere, MeshDistortMaterial, Float } from '@react-three/drei';
-import { Github, Linkedin, FileText, Download, Play } from 'lucide-react';
+import { Github, Linkedin, FileText } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 
 interface HeroProps {
@@ -91,7 +91,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
             <motion.img
               src="/viswa.jpeg"
               alt="Viswa M - Mechanical Engineer"
-              className="mx-auto mb-6 w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 rounded-full object-cover shadow-2xl border-4 border-purple-500/50"
+              className="mx-auto mb-6 w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 rounded-full object-cover shadow-2xl border-4 border-purple-500/50"
               whileHover={{ 
                 scale: 1.1,
                 boxShadow: "0 0 30px rgba(139, 92, 246, 0.6)"
@@ -122,7 +122,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
         {/* Main Title */}
         <motion.div variants={itemVariants} className="mb-8">
           <motion.h1 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
             whileHover={{ scale: 1.02 }}
           >
             Hi, I'm{' '}
@@ -141,9 +141,9 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
         {/* Animated Subtitle */}
         <motion.div 
           variants={itemVariants}
-          className="mb-8 h-16 sm:h-20 flex items-center justify-center"
+          className="mb-8 h-12 sm:h-14 flex items-center justify-center"
         >
-          <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-300 font-light">
+          <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 font-light">
             <TypeAnimation
               sequence={[
                 'Mechanical Design Engineer',
@@ -196,7 +196,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
         {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-gray-400 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto mb-12 leading-relaxed"
+          className="text-gray-400 text-base sm:text-lg max-w-3xl mx-auto mb-12 leading-relaxed"
         >
           Passionate mechanical engineer specializing in advanced CAD design, FEA/CFD analysis, 
           and engineering automation. I bridge traditional mechanical engineering with cutting-edge 
@@ -262,30 +262,6 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
               whileHover={{ scale: 1.1 }}
             />
           </motion.button>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          variants={itemVariants}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center text-gray-400"
-          >
-            <span className="text-sm mb-2">Scroll to explore</span>
-            <motion.div
-              className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center"
-              whileHover={{ borderColor: '#8b5cf6' }}
-            >
-              <motion.div
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-1 h-3 bg-gray-400 rounded-full mt-2"
-              />
-            </motion.div>
-          </motion.div>
         </motion.div>
       </motion.div>
     </div>

@@ -188,15 +188,15 @@ Portfolio: https://viswam-portfolio.com
               className="fixed bottom-4 left-4 right-4 sm:left-4 sm:right-auto sm:w-96 bg-gray-900/95 backdrop-blur-md border border-purple-500/30 rounded-2xl shadow-2xl z-50 max-h-[80vh] overflow-y-auto"
             >
               {/* Header */}
-              <div className="sticky top-0 bg-gray-900/95 backdrop-blur-md p-6 border-b border-purple-500/20 rounded-t-2xl">
+              <div className="sticky top-0 bg-gray-900/95 backdrop-blur-md p-4 border-b border-purple-500/20 rounded-t-2xl">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg">
-                      <Zap className="w-5 h-5 text-white" />
+                      <Zap className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-white">Engineering Calculator</h3>
-                      <p className="text-sm text-gray-400">Advanced Mechanical Analysis</p>
+                      <h3 className="text-lg font-bold text-white">Engineering Calculator</h3>
+                      <p className="text-xs text-gray-400">Advanced Mechanical Analysis</p>
                     </div>
                   </div>
                   <motion.button
@@ -205,12 +205,12 @@ Portfolio: https://viswam-portfolio.com
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    <X className="w-5 h-5 text-gray-400" />
+                    <X className="w-4 h-4 text-gray-400" />
                   </motion.button>
                 </div>
               </div>
 
-              <div className="p-6 space-y-6">
+              <div className="p-4 space-y-4">
                 {/* Stress Analysis Section */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -222,7 +222,7 @@ Portfolio: https://viswam-portfolio.com
                     onClick={() => toggleSection('stress')}
                     whileHover={{ scale: 1.02 }}
                   >
-                    <h4 className="text-purple-400 font-semibold flex items-center gap-2">
+                    <h4 className="text-purple-400 font-semibold flex items-center gap-2 text-sm">
                       <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
                       Stress Calculator (σ = F/A)
                     </h4>
@@ -230,7 +230,7 @@ Portfolio: https://viswam-portfolio.com
                       animate={{ rotate: expandedSection === 'stress' ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                      <ChevronDown className="w-4 h-4 text-gray-400" />
                     </motion.div>
                   </motion.div>
                   
@@ -240,27 +240,27 @@ Portfolio: https://viswam-portfolio.com
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="grid grid-cols-2 gap-4 mt-4 overflow-hidden"
+                        className="grid grid-cols-2 gap-3 mt-3 overflow-hidden"
                       >
                         <div>
-                          <label className="block text-sm font-medium text-gray-300 mb-2">Force (N)</label>
+                          <label className="block text-xs font-medium text-gray-300 mb-1">Force (N)</label>
                           <input
                             type="number"
                             name="force"
                             value={values.force}
                             onChange={handleInputChange}
-                            className="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                            className="w-full bg-gray-800 border border-gray-600 rounded-lg px-2 py-1.5 text-sm text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                             placeholder="Enter force"
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-300 mb-2">Area (m²)</label>
+                          <label className="block text-xs font-medium text-gray-300 mb-1">Area (m²)</label>
                           <input
                             type="number"
                             name="area"
                             value={values.area}
                             onChange={handleInputChange}
-                            className="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                            className="w-full bg-gray-800 border border-gray-600 rounded-lg px-2 py-1.5 text-sm text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
                             placeholder="Enter area"
                           />
                         </div>
@@ -280,7 +280,7 @@ Portfolio: https://viswam-portfolio.com
                     onClick={() => toggleSection('strain')}
                     whileHover={{ scale: 1.02 }}
                   >
-                    <h4 className="text-blue-400 font-semibold flex items-center gap-2">
+                    <h4 className="text-blue-400 font-semibold flex items-center gap-2 text-sm">
                       <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
                       Strain Calculator (ε = ΔL/L)
                     </h4>
@@ -288,7 +288,7 @@ Portfolio: https://viswam-portfolio.com
                       animate={{ rotate: expandedSection === 'strain' ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                      <ChevronDown className="w-4 h-4 text-gray-400" />
                     </motion.div>
                   </motion.div>
                   
@@ -298,27 +298,27 @@ Portfolio: https://viswam-portfolio.com
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="grid grid-cols-2 gap-4 mt-4 overflow-hidden"
+                        className="grid grid-cols-2 gap-3 mt-3 overflow-hidden"
                       >
                         <div>
-                          <label className="block text-sm font-medium text-gray-300 mb-2">ΔL (m)</label>
+                          <label className="block text-xs font-medium text-gray-300 mb-1">ΔL (m)</label>
                           <input
                             type="number"
                             name="deltaLength"
                             value={values.deltaLength}
                             onChange={handleInputChange}
-                            className="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                            className="w-full bg-gray-800 border border-gray-600 rounded-lg px-2 py-1.5 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                             placeholder="Change in length"
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-300 mb-2">L (m)</label>
+                          <label className="block text-xs font-medium text-gray-300 mb-1">L (m)</label>
                           <input
                             type="number"
                             name="originalLength"
                             value={values.originalLength}
                             onChange={handleInputChange}
-                            className="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                            className="w-full bg-gray-800 border border-gray-600 rounded-lg px-2 py-1.5 text-sm text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                             placeholder="Original length"
                           />
                         </div>
@@ -332,13 +332,13 @@ Portfolio: https://viswam-portfolio.com
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 p-4 rounded-lg border border-purple-500/20"
+                  className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 p-3 rounded-lg border border-purple-500/20"
                 >
-                  <h4 className="text-green-400 font-semibold mb-4 flex items-center gap-2">
+                  <h4 className="text-green-400 font-semibold mb-3 flex items-center gap-2 text-sm">
                     <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                     Results
                   </h4>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-3">
                     {[
                       { label: 'Stress (Pa)', value: values.stress, color: 'purple' },
                       { label: 'Strain', value: values.strain, color: 'blue' },
@@ -346,12 +346,12 @@ Portfolio: https://viswam-portfolio.com
                       { label: 'Shear Stress (Pa)', value: values.shearStress, color: 'yellow' }
                     ].map((result, index) => (
                       <div key={result.label}>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">{result.label}</label>
+                        <label className="block text-xs font-medium text-gray-300 mb-1">{result.label}</label>
                         <input
                           type="text"
                           value={result.value}
                           readOnly
-                          className={`w-full bg-gray-800 border border-${result.color}-500/30 rounded-lg px-3 py-2 text-${result.color}-400 font-mono`}
+                          className={`w-full bg-gray-800 border border-${result.color}-500/30 rounded-lg px-2 py-1.5 text-xs text-${result.color}-400 font-mono`}
                         />
                       </div>
                     ))}
@@ -359,20 +359,20 @@ Portfolio: https://viswam-portfolio.com
                 </motion.div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <motion.button
                     onClick={calculateResults}
-                    className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-3 px-4 rounded-lg transition-all duration-300 font-semibold flex items-center justify-center gap-2"
+                    className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-2 px-3 rounded-lg transition-all duration-300 font-semibold flex items-center justify-center gap-2 text-sm"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <Zap className="w-4 h-4" />
+                    <Zap className="w-3 h-3" />
                     Calculate
                   </motion.button>
                   
                   <motion.button
                     onClick={resetCalculator}
-                    className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 px-4 rounded-lg transition-all duration-300 font-semibold"
+                    className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 px-3 rounded-lg transition-all duration-300 font-semibold text-sm"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -381,11 +381,11 @@ Portfolio: https://viswam-portfolio.com
                   
                   <motion.button
                     onClick={generateReport}
-                    className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg transition-all duration-300 font-semibold"
+                    className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white py-2 px-3 rounded-lg transition-all duration-300 font-semibold text-sm"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <Download className="w-4 h-4" />
+                    <Download className="w-3 h-3" />
                     Report
                   </motion.button>
                 </div>

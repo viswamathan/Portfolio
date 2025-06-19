@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Linkedin, Github } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Linkedin, Github, Heart } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -30,7 +30,7 @@ export default function Contact() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-4xl font-bold mb-12 text-center"
+        className="text-3xl sm:text-4xl font-bold mb-12 text-center"
       >
         Get in <span className="text-purple-500">Touch</span>
       </motion.h2>
@@ -43,7 +43,7 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           className="bg-gray-800/50 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
         >
-          <h3 className="text-2xl font-semibold mb-6 text-purple-500">Contact Form</h3>
+          <h3 className="text-xl font-semibold mb-6 text-purple-500">Contact Form</h3>
           <form onSubmit={handleSubmit} className="space-y-6">
             {successMessage && (
               <motion.div
@@ -111,12 +111,14 @@ export default function Contact() {
           className="space-y-8"
         >
           <div className="bg-gray-800/50 p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-semibold mb-4 text-purple-500">Contact Info</h3>
+            <h3 className="text-xl font-semibold mb-4 text-purple-500">Contact Info</h3>
             <ul className="space-y-4">
               <li className="flex items-center gap-4">
                 <Mail className="w-6 h-6 text-purple-500" />
-                <span>viswamathanagopal@gmail.com</span>
-                <span>,viswamathan2k4@gmail.com</span>
+                <div className="text-sm">
+                  <div>viswamathanagopal@gmail.com</div>
+                  <div>viswamathan2k4@gmail.com</div>
+                </div>
               </li>
               <li className="flex items-center gap-4">
                 <Phone className="w-6 h-6 text-purple-500" />
@@ -131,7 +133,7 @@ export default function Contact() {
 
           {/* Social Links */}
           <div className="bg-gray-800/50 p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-semibold mb-4 text-purple-500">Follow Me</h3>
+            <h3 className="text-xl font-semibold mb-4 text-purple-500">Follow Me</h3>
             <div className="flex space-x-4">
               <a
                 href="https://github.com/viswamathan"
@@ -154,13 +156,82 @@ export default function Contact() {
 
           {/* Map Placeholder */}
           <div className="bg-gray-800/50 p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-semibold mb-4 text-purple-500">Location</h3>
+            <h3 className="text-xl font-semibold mb-4 text-purple-500">Location</h3>
             <div className="w-full h-48 bg-gray-700 rounded-lg flex items-center justify-center text-gray-400">
               Map Placeholder
             </div>
           </div>
         </motion.div>
       </div>
+
+      {/* Copyright Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="mt-20 pt-8 border-t border-gray-700/50"
+      >
+        <div className="text-center space-y-4">
+          <motion.div
+            className="flex items-center justify-center gap-2 text-gray-400"
+            whileHover={{ scale: 1.05 }}
+          >
+            <span>Made with</span>
+            <motion.div
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            >
+              <Heart className="w-4 h-4 text-red-500 fill-current" />
+            </motion.div>
+            <span>by Viswa M</span>
+          </motion.div>
+          
+          <div className="text-sm text-gray-500 space-y-2">
+            <p>© {new Date().getFullYear()} Viswa M. All rights reserved.</p>
+            <p>Mechanical Design Engineer | FEA & CFD Specialist | Innovation Enthusiast</p>
+            <div className="flex items-center justify-center gap-4 text-xs">
+              <span>Built with React, TypeScript & Framer Motion</span>
+              <span>•</span>
+              <span>Designed for Excellence</span>
+            </div>
+          </div>
+
+          <motion.div
+            className="flex items-center justify-center gap-6 pt-4"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            <motion.a
+              href="mailto:viswamathanagopal@gmail.com"
+              className="text-purple-400 hover:text-purple-300 transition-colors text-sm"
+              whileHover={{ scale: 1.1 }}
+            >
+              Email
+            </motion.a>
+            <span className="text-gray-600">•</span>
+            <motion.a
+              href="https://www.linkedin.com/in/viswa-m-91b544258/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-400 hover:text-purple-300 transition-colors text-sm"
+              whileHover={{ scale: 1.1 }}
+            >
+              LinkedIn
+            </motion.a>
+            <span className="text-gray-600">•</span>
+            <motion.a
+              href="https://github.com/viswamathan"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-400 hover:text-purple-300 transition-colors text-sm"
+              whileHover={{ scale: 1.1 }}
+            >
+              GitHub
+            </motion.a>
+          </motion.div>
+        </div>
+      </motion.div>
     </div>
   );
 }

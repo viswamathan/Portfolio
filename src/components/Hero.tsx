@@ -61,7 +61,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">
       {/* 3D Background */}
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 5] }}>
@@ -122,12 +122,14 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
         {/* Main Title */}
         <motion.div variants={itemVariants} className="mb-8">
           <motion.h1 
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+            className="font-bold mb-4"
             whileHover={{ scale: 1.02 }}
           >
-            Hi, I'm{' '}
+            <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+              Hi, I'm{' '}
+            </span>
             <motion.span 
-              className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500"
               animate={{
                 backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
               }}
@@ -143,7 +145,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           variants={itemVariants}
           className="mb-8 h-12 sm:h-14 flex items-center justify-center"
         >
-          <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-300 font-light">
+          <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-300 font-bold">
             <TypeAnimation
               sequence={[
                 'Mechanical Design Engineer',
@@ -164,7 +166,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
             />
           </div>
         </motion.div>
-
+        
         {/* Expertise Cards */}
         <motion.div
           variants={itemVariants}
@@ -178,7 +180,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           ].map((item, index) => (
             <motion.div
               key={item.title}
-              className="bg-gray-800/30 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-purple-500/20"
+              className="bg-gray-800/30 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-purple-500/20"
               whileHover={{ 
                 scale: 1.05,
                 backgroundColor: 'rgba(139, 92, 246, 0.1)',
@@ -186,9 +188,9 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
               }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="text-2xl sm:text-3xl mb-2">{item.icon}</div>
-              <h3 className="font-semibold text-sm sm:text-base mb-1">{item.title}</h3>
-              <p className="text-xs sm:text-sm text-gray-400">{item.desc}</p>
+              <div className="text-3xl sm:text-4xl mb-2 font-bold">{item.icon}</div>
+              <h3 className="font-bold text-lg sm:text-xl mb-1">{item.title}</h3>
+              <p className="text-base sm:text-lg text-gray-400 font-semibold">{item.desc}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -196,7 +198,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
         {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-gray-400 text-base sm:text-lg max-w-3xl mx-auto mb-12 leading-relaxed"
+          className="text-gray-400 text-lg sm:text-xl max-w-3xl mx-auto mb-12 leading-relaxed font-semibold"
         >
           Passionate mechanical engineer specializing in advanced CAD design, FEA/CFD analysis, 
           and engineering automation. I bridge traditional mechanical engineering with cutting-edge 
@@ -206,7 +208,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
         {/* Social Links */}
         <motion.div
           variants={itemVariants}
-          className="flex justify-center items-center space-x-6 mb-12"
+          className="flex justify-center items-center space-x-8 mb-12"
         >
           {[
             { icon: Github, href: "https://github.com/viswamathan", label: "GitHub" },
@@ -233,7 +235,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
         {/* Call to Action Buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
+          className="flex flex-col sm:flex-row justify-center items-center space-y-6 sm:space-y-0 sm:space-x-8"
         >
           <motion.a
             href="/VISWA M.pdf"

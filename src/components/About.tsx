@@ -69,25 +69,25 @@ const About = () => {
               Passionate about leveraging Python for automation in engineering workflows. 
               Proven track record in designing innovative solutions for complex engineering challenges.
             </p>
-          </motion.div>
-
-          <motion.div 
-            whileHover={cardHover}
-            className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm transform transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <Cpu className="text-purple-500 w-5 h-5" />
-              <h3 className="text-base font-semibold">Technical Focus</h3>
-            </div>
-            <ul className="list-disc list-inside text-gray-300 space-y-1 text-sm">
-              <li>Advanced CAD modeling and design optimization</li>
-              <li>Finite Element Analysis (FEA) for structural analysis</li>
-              <li>Computational Fluid Dynamics (CFD) simulations</li>
-              <li>Python automation for engineering workflows</li>
-              <li>Design for Manufacturing (DFM)</li>
-            </ul>
-          </motion.div>
-
+       </motion.div>
+          
+       <motion.div 
+         whileHover={cardHover}
+         className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm transform transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20"
+        >
+         <div className="flex items-center gap-3 mb-4">
+           <Cpu className="text-purple-500 w-5 h-5" />
+           <h3 className="text-base font-semibold">Technical Focus</h3>
+         </div>
+         <ul className="list-disc list-inside text-gray-300 space-y-1 text-sm">
+           <li>Advanced CAD modeling and design optimization</li>
+           <li>Finite Element Analysis (FEA) for structural analysis</li>
+           <li>Computational Fluid Dynamics (CFD) simulations</li>
+           <li>Python automation for engineering workflows</li>
+           <li>Design for Manufacturing (DFM)</li>
+         </ul>
+       </motion.div>
+       
           <motion.div 
             whileHover={cardHover}
             className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm transform transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20"
@@ -97,10 +97,10 @@ const About = () => {
               <h3 className="text-base font-semibold">Research Interests</h3>
             </div>
             <ul className="list-disc list-inside text-gray-300 space-y-1 text-sm">
-              <li>Solar thermal systems, energy storage, efficiency optimization</li>
-              <li>Composite materials, material characterization, failure analysis</li>
-              <li>Machine learning for design optimization, predictive maintenance</li>
-              <li>Heat transfer optimization, cooling systems design</li>
+              <li><strong className="text-white">Renewable Energy Systems</strong>: Solar thermal systems, energy storage, efficiency optimization</li>
+              <li><strong className="text-white">Advanced Materials</strong>: Composite materials, material characterization, failure analysis</li>
+              <li><strong className="text-white">AI in Engineering</strong>: Machine learning for design optimization, predictive maintenance</li>
+              <li><strong className="text-white">Thermal Management</strong>: Heat transfer optimization, cooling systems design</li>
             </ul>
           </motion.div>
 

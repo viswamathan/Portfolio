@@ -104,7 +104,6 @@ const About = () => {
             </ul>
           </motion.div>
 
-
         {/* Education Timeline */}
         <motion.div
           variants={fadeInUp}

@@ -56,7 +56,7 @@ const Experience = () => {
         variants={itemVariants}
       >
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-center">
-          Professional <span className="text-purple-500">Experience</span>
+          Professional Experience
         </h2>
         <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full" />
       </motion.div>

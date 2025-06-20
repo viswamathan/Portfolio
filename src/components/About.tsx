@@ -96,36 +96,14 @@ const About = () => {
               <Microscope className="text-purple-500 w-5 h-5" />
               <h3 className="text-base font-semibold">Research Interests</h3>
             </div>
-            <ul className="space-y-3 text-sm">
-              {[
-                {
-                  title: "Renewable Energy Systems",
-                  desc: "Solar thermal systems, energy storage, efficiency optimization"
-                },
-                {
-                  title: "Advanced Materials",
-                  desc: "Composite materials, material characterization, failure analysis"
-                },
-                {
-                  title: "AI in Engineering",
-                  desc: "Machine learning for design optimization, predictive maintenance"
-                },
-                {
-                  title: "Thermal Management",
-                  desc: "Heat transfer optimization, cooling systems design"
-                }
-              ].map((item, index) => (
-                <motion.li key={index} whileHover={{ x: 10 }} className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
-                  <div>
-                    <h4 className="font-semibold text-purple-400">{item.title}</h4>
-                    <p className="text-gray-300 text-xs">{item.desc}</p>
-                  </div>
-                </motion.li>
-              ))}
+            <ul className="list-disc list-inside text-gray-300 space-y-1 text-sm">
+              <li>Solar thermal systems, energy storage, efficiency optimization</li>
+              <li>Composite materials, material characterization, failure analysis</li>
+              <li>Machine learning for design optimization, predictive maintenance</li>
+              <li>Heat transfer optimization, cooling systems design</li>
             </ul>
           </motion.div>
-        </motion.div>
+
 
         {/* Education Timeline */}
         <motion.div

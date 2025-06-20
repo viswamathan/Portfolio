@@ -145,7 +145,7 @@ const Skills = () => {
         transition={{ duration: 0.8 }}
         className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-12 text-center"
       >
-        Technical <span className="text-purple-500">Expertise</span>
+        Technical Expertise
       </motion.h2>
 
       {/* Main Skills Grid */}
@@ -241,7 +241,7 @@ const Skills = () => {
         className="mt-16"
       >
         <h3 className="text-4xl sm:text-5xl lg:text-6xl font-semibold mb-8 text-center">
-          Professional <span className="text-purple-500">Certifications</span>
+          Professional Certifications
         </h3>
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="bg-gray-800/50 p-6 rounded-lg">

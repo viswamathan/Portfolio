@@ -207,7 +207,7 @@ const Projects = () => {
         transition={{ duration: 0.8 }}
         className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-12 text-center"
       >
-        Featured <span className="text-purple-500">Projects</span>
+        Featured Projects
       </motion.h2>
 
       <div className="flex justify-center mb-12 space-x-4">

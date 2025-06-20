@@ -38,10 +38,10 @@ const About = () => {
         className="text-white text-sm leading-normal max-w-4xl mx-auto"
       >
         <p className="text-center text-base font-semibold mb-6">
-          I am a <span className="text-purple-500">mechanical engineer</span> with expertise in <span className="text-blue-500">CAD design</span>, <span className="text-green-500">FEA/CFD analysis</span>, and <span className="text-yellow-500">engineering automation</span>. My goal is to bridge the gap between <span className="text-red-500">traditional engineering</span> and <span className="text-purple-500">modern technology</span>.
+          I am a mechanical engineer</span> with expertise in CAD design ,FEA/CFD analysis and engineering automation. My goal is to bridge the gap between traditional engineering and modern technology.
         </p>
         <p className="text-center text-base">
-          With a strong foundation in <span className="text-green-500">mechanical principles</span> and hands-on experience in <span className="text-blue-500">simulation tools</span>, I deliver <span className="text-yellow-500">high-quality results</span> that drive <span className="text-purple-500">efficiency</span> and <span className="text-red-500">innovation</span>.
+          With a strong foundation in mechanical principles and hands-on experience in simulation tools, I deliver that drive efficiency and innovation.
         </p>
       </motion.div>
 

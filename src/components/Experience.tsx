@@ -14,7 +14,7 @@ const Experience = () => {
   };
 
   const handleUpcomingCertificate = () => {
-    window.open('/UPCOMING_INTERNSHIP_CERTIFICATE.pdf', '_blank');
+    window.open('/SAF CERTIFICATE.pdf', '_blank');
   };
 
   const handleUpcomingReport = () => {
@@ -180,7 +180,7 @@ const Experience = () => {
                 >
                   <img 
                     src="/NIOT IMAGE 1.jpg" 
-                    alt="Internship Photo 1" 
+                    alt="NIOT 1" 
                     className="w-full h-40 object-cover rounded-lg border-2 border-purple-500/30 group-hover:border-purple-500 transition-all duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -191,7 +191,7 @@ const Experience = () => {
                 >
                   <img 
                     src="/NIOT IMAGE 2.jpg" 
-                    alt="Internship Photo 2" 
+                    alt="NIOT 2" 
                     className="w-full h-40 object-cover rounded-lg border-2 border-purple-500/30 group-hover:border-purple-500 transition-all duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

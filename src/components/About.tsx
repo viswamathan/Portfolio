@@ -30,7 +30,7 @@ const About = () => {
         {...fadeInUp}
         className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-12 text-center"
       >
-        About <span className="text-purple-500">Me</span>
+        About Me
       </motion.h2>
 
       <motion.div
@@ -226,7 +226,7 @@ const About = () => {
         className="mt-16"
       >
         <h3 className="text-4xl sm:text-5xl lg:text-6xl font-semibold mb-8 text-center">
-          Publications & <span className="text-purple-500">Patents</span>
+          Publications & Patents
         </h3>
         <motion.div 
           variants={staggerContainer}

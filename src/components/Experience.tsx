@@ -55,7 +55,7 @@ const Experience = () => {
         className="relative mb-16"
         variants={itemVariants}
       >
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-center">
+        <h2 className="text-4xl font-bold text-center">
           Professional Experience
         </h2>
         <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full" />
@@ -90,7 +90,7 @@ const Experience = () => {
           icon={<Briefcase className="w-5 h-5" />}
         >
           <motion.div 
-            className="relative flex flex-col xl:flex-row group-hover:scale-[1.02] transition-transform duration-300"
+            className="relative flex flex-col md:flex-row group-hover:scale-[1.02] transition-transform duration-300"
             whileHover={{ scale: 1.01 }}
           >
             <div className="flex-1 z-10">
@@ -161,7 +161,7 @@ const Experience = () => {
             </div>
 
             <motion.div 
-              className="relative flex flex-col items-end mt-6 xl:mt-0 xl:ml-8"
+              className="relative flex flex-col items-end mt-6 md:mt-0 md:ml-8"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.7 }}
@@ -229,7 +229,7 @@ const Experience = () => {
           icon={<Briefcase className="w-5 h-5" />}
         >
           <motion.div 
-            className="relative flex flex-col xl:flex-row group-hover:scale-[1.02] transition-transform duration-300"
+            className="relative flex flex-col md:flex-row group-hover:scale-[1.02] transition-transform duration-300"
             whileHover={{ scale: 1.01 }}
           >
             <div className="flex-1 z-10">
@@ -300,7 +300,7 @@ const Experience = () => {
             </div>
 
             <motion.div 
-              className="relative flex flex-col items-end mt-6 xl:mt-0 xl:ml-8"
+              className="relative flex flex-col items-end mt-6 md:mt-0 md:ml-8"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.7 }}

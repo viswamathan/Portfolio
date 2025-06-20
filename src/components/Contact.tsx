@@ -32,7 +32,7 @@ export default function Contact() {
         transition={{ duration: 0.8 }}
         className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-12 text-center"
       >
-        Get in <span className="text-purple-500">Touch</span>
+        Get in Touch
       </motion.h2>
 
       <div className="grid lg:grid-cols-2 gap-12">

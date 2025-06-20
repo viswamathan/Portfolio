@@ -35,10 +35,10 @@ const About = () => {
 
       <motion.div
         {...fadeInUp}
-        className="text-white text-lg leading-relaxed max-w-4xl mx-auto"
+        className="text-white text-base leading-relaxed max-w-4xl mx-auto"
       >
         <p className="text-center font-semibold mb-6">
-          I am a Mechanical engineer with expertise in CAD design, FEA/CFD analysis, and engineering automation. My goal is to bridge the gap between traditional engineering and modern technology.
+          I am a Mechanical engineer with expertise in CAD design, FEA/CFD analysis and engineering automation. My goal is to bridge the gap between traditional engineering and modern technology.
         </p>
         <p className="text-center font-semibold">
           With a strong foundation in mechanical principles and hands-on experience in simulation tools, I deliver solutions that drive efficiency and innovation.
@@ -56,21 +56,23 @@ const About = () => {
           {/* Professional Summary */}
           <motion.div whileHover={cardHover} className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/20">
             <div className="flex items-center gap-3 mb-4">
-              <Tool className="text-purple-500 w-6 h-6" />
-              <h3 className="text-xl font-bold text-white">Professional Summary</h3>
+              <Tool className="text-purple-500 w-5 h-5" />
+              <h3 className="text-base font-semibold">Professional Summary</h3>
             </div>
-            <p className="text-gray-300 text-base leading-relaxed">
-              Mechanical engineer with expertise in CAD design, FEA, and CFD analysis. Passionate about leveraging Python for automation in engineering workflows. Proven track record in designing innovative solutions for complex engineering challenges.
+            <p className="text-gray-300 text-sm">
+              Mechanical engineer with expertise in CAD design, FEA, and CFD analysis. 
+              Passionate about leveraging Python for automation in engineering workflows. 
+              Proven track record in designing innovative solutions for complex engineering challenges.
             </p>
           </motion.div>
 
           {/* Technical Focus */}
           <motion.div whileHover={cardHover} className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/20">
             <div className="flex items-center gap-3 mb-4">
-              <Cpu className="text-purple-500 w-6 h-6" />
-              <h3 className="text-xl font-bold text-white">Technical Focus</h3>
+              <Cpu className="text-purple-500 w-5 h-5" />
+              <h3 className="text-base font-semibold">Technical Focus</h3>
             </div>
-            <ul className="list-disc list-inside text-gray-300 space-y-2 text-base leading-relaxed">
+            <ul className="list-disc list-inside text-gray-300 space-y-1 text-sm">
               <li>Advanced CAD modeling and design optimization</li>
               <li>Finite Element Analysis (FEA) for structural analysis</li>
               <li>Computational Fluid Dynamics (CFD) simulations</li>
@@ -82,14 +84,14 @@ const About = () => {
           {/* Research Interests */}
           <motion.div whileHover={cardHover} className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/20">
             <div className="flex items-center gap-3 mb-4">
-              <Microscope className="text-purple-500 w-6 h-6" />
-              <h3 className="text-xl font-bold text-white">Research Interests</h3>
+              <Microscope className="text-purple-500 w-5 h-5" />
+              <h3 className="text-base font-semibold">Research Interests</h3>
             </div>
-            <ul className="list-disc list-inside text-gray-300 space-y-2 text-base leading-relaxed">
-              <li><strong className="text-white">Renewable Energy Systems:</strong> Solar thermal systems, energy storage, efficiency optimization</li>
-              <li><strong className="text-white">Advanced Materials:</strong> Composite materials, material characterization, failure analysis</li>
-              <li><strong className="text-white">AI in Engineering:</strong> Machine learning for design optimization, predictive maintenance</li>
-              <li><strong className="text-white">Thermal Management:</strong> Heat transfer optimization, cooling systems design</li>
+            <ul className="list-disc list-inside text-gray-300 space-y-1 text-sm">
+              <li><strong className="text-white">Renewable Energy Systems</strong>: Solar thermal systems, energy storage, efficiency optimization</li>
+              <li><strong className="text-white">Advanced Materials</strong>: Composite materials, material characterization, failure analysis</li>
+              <li><strong className="text-white">AI in Engineering</strong>: Machine learning for design optimization, predictive maintenance</li>
+              <li><strong className="text-white">Thermal Management</strong>: Heat transfer optimization, cooling systems design</li>
             </ul>
           </motion.div>
         </motion.div>
@@ -98,8 +100,8 @@ const About = () => {
         <motion.div variants={fadeInUp}>
           <motion.div whileHover={cardHover} className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/20">
             <div className="flex items-center gap-3 mb-6">
-              <BookOpen className="text-purple-500 w-6 h-6" />
-              <h3 className="text-xl font-bold text-white">Education</h3>
+              <BookOpen className="text-purple-500 w-5 h-5" />
+              <h3 className="text-base font-semibold">Education</h3>
             </div>
             <VerticalTimeline layout="1-column-left" lineColor="#6b21a8">
               {[
@@ -150,44 +152,30 @@ const About = () => {
         <motion.div variants={staggerContainer} className="grid lg:grid-cols-2 gap-8">
           {/* Publications */}
           <motion.div whileHover={cardHover} className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/20">
-            <h4 className="text-xl font-bold mb-4 text-purple-500">Publications</h4>
-            <ul className="space-y-4 text-base text-gray-300 leading-relaxed">
-              <motion.li whileHover={{ x: 10 }} className="flex items-start gap-3">
-                <img src="https://img.icons8.com/color/48/book.png" alt="Publication Icon" className="w-6 h-6" />
-                <div>
-                  <strong>Title:</strong> "Modified Solar Dryer With Energy Storage System"<br />
-                  <strong>Journal:</strong> International Journal of Renewable Energy<br />
-                  <strong>Status:</strong> The study is presently in the validation phase ahead of submission.
-                </div>
-              </motion.li>
+            <div className="flex items-center gap-3 mb-4">
+              <img src="https://img.icons8.com/color/48/book.png" alt="Publication Icon" className="w-5 h-5" />
+              <h4 className="text-base font-semibold text-white">Publications</h4>
+            </div>
+            <ul className="list-disc list-inside text-gray-300 space-y-1 text-sm">
+              <li>
+                <span className="text-white">Modified Solar Dryer With Energy Storage System</span>: Published in International Journal of Renewable Energy (Currently in validation phase).
+              </li>
             </ul>
           </motion.div>
 
           {/* Patents */}
           <motion.div whileHover={cardHover} className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/20">
-            <h4 className="text-xl font-bold mb-4 text-purple-500">Patents</h4>
-            <ul className="space-y-4 text-base text-gray-300 leading-relaxed">
-              {[
-                {
-                  title: "Multi Purpose Knife",
-                  number: "IN2023456789",
-                  status: "Granted"
-                },
-                {
-                  title: "Modified Solar Dryer With Energy Storage System",
-                  number: "IN2023123456",
-                  status: "Pending"
-                }
-              ].map((patent, idx) => (
-                <motion.li key={idx} whileHover={{ x: 10 }} className="flex items-start gap-3">
-                  <img src="https://img.icons8.com/color/48/certificate.png" alt="Patent Icon" className="w-6 h-6" />
-                  <div>
-                    <strong>Title:</strong> {patent.title}<br />
-                    <strong>Patent Number:</strong> {patent.number}<br />
-                    <strong>Status:</strong> {patent.status}
-                  </div>
-                </motion.li>
-              ))}
+            <div className="flex items-center gap-3 mb-4">
+              <img src="https://img.icons8.com/color/48/certificate.png" alt="Patent Icon" className="w-5 h-5" />
+              <h4 className="text-base font-semibold text-white">Patents</h4>
+            </div>
+            <ul className="list-disc list-inside text-gray-300 space-y-1 text-sm">
+              <li>
+                <span className="text-white">Multi Purpose Knife</span> — Patent No: IN2023456789 — <span className="italic text-purple-400">Granted</span>
+              </li>
+              <li>
+                <span className="text-white">Modified Solar Dryer With Energy Storage System</span> — Patent No: IN2023123456 — <span className="italic text-purple-400">Pending</span>
+              </li>
             </ul>
           </motion.div>
         </motion.div>

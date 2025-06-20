@@ -143,13 +143,13 @@ const Skills = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-4xl font-bold mb-12 text-center"
+        className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-12 text-center"
       >
         Technical <span className="text-purple-500">Expertise</span>
       </motion.h2>
 
       {/* Main Skills Grid */}
-      <div className="grid md:grid-cols-3 gap-8 mb-16">
+      <div className="grid lg:grid-cols-3 gap-8 mb-16">
         {skillCategories.map((category, idx) => {
           const Icon = category.icon;
           return (
@@ -204,7 +204,7 @@ const Skills = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="grid md:grid-cols-4 gap-6"
+        className="grid lg:grid-cols-4 gap-6"
       >
         {additionalSkills.map((skillSet, idx) => {
           const Icon = skillSet.icon;
@@ -240,10 +240,10 @@ const Skills = () => {
         transition={{ duration: 0.8 }}
         className="mt-16"
       >
-        <h3 className="text-2xl font-semibold mb-8 text-center">
+        <h3 className="text-4xl sm:text-5xl lg:text-6xl font-semibold mb-8 text-center">
           Professional <span className="text-purple-500">Certifications</span>
         </h3>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid lg:grid-cols-3 gap-6">
           <div className="bg-gray-800/50 p-6 rounded-lg">
             <div className="flex items-center gap-3 mb-4">
               <BookOpen className="text-purple-500 w-5 h-5" />

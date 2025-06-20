@@ -205,7 +205,7 @@ const Projects = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-4xl font-bold mb-12 text-center"
+        className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-12 text-center"
       >
         Featured <span className="text-purple-500">Projects</span>
       </motion.h2>
@@ -240,7 +240,7 @@ const Projects = () => {
         {projectCategories[activeCategory].intro}
       </motion.p>
 
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid gap-8 lg:grid-cols-2">
         {activeCategory === 'software' 
           ? projectCategories[activeCategory].projects.map((project, index) => (
               renderSoftwareProject(project)

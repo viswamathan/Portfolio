@@ -56,31 +56,31 @@ html {
 /* Consistent Text Sizing */
 @layer base {
   h1 {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold;
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold;
   }
 
   h2 {
-    @apply text-2xl sm:text-3xl md:text-4xl font-bold;
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold;
   }
 
   h3 {
-    @apply text-xl sm:text-2xl font-semibold;
+    @apply text-2xl sm:text-3xl md:text-4xl font-semibold;
   }
 
   h4 {
-    @apply text-lg sm:text-xl font-semibold;
+    @apply text-xl sm:text-2xl font-semibold;
   }
 
   h5 {
-    @apply text-base sm:text-lg font-medium;
+    @apply text-lg sm:text-xl font-medium;
   }
 
   h6 {
-    @apply text-sm sm:text-base font-medium;
+    @apply text-base sm:text-lg font-medium;
   }
 
   p, span, div {
-    @apply text-base;
+    @apply text-base lg:text-lg;
     line-height: 1.6;
   }
 
@@ -89,7 +89,7 @@ html {
   }
 
   .text-large {
-    @apply text-lg;
+    @apply text-lg lg:text-xl;
   }
 }
 
@@ -169,7 +169,42 @@ html {
   animation: gradient-shift 3s ease infinite;
 }
 
-/* Responsive Design */
+/* Desktop Responsive Improvements */
+@media (min-width: 1024px) {
+  .container {
+    @apply max-w-6xl;
+  }
+  
+  /* Better spacing for desktop */
+  .section-padding {
+    @apply py-24;
+  }
+  
+  /* Larger text for desktop readability */
+  h1 {
+    @apply text-6xl xl:text-7xl;
+  }
+  
+  h2 {
+    @apply text-5xl xl:text-6xl;
+  }
+  
+  h3 {
+    @apply text-3xl xl:text-4xl;
+  }
+  
+  p, span, div {
+    @apply text-lg xl:text-xl;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    @apply max-w-7xl;
+  }
+}
+
+/* Mobile Responsive */
 @media (max-width: 640px) {
   .container {
     @apply px-4;
@@ -181,15 +216,15 @@ html {
 
   /* Smaller text on mobile for better readability */
   h1 {
-    @apply text-2xl sm:text-3xl;
+    @apply text-3xl;
   }
 
   h2 {
-    @apply text-xl sm:text-2xl;
+    @apply text-2xl;
   }
 
   h3 {
-    @apply text-lg sm:text-xl;
+    @apply text-xl;
   }
 
   p, span, div {

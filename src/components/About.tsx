@@ -28,19 +28,19 @@ const About = () => {
     <div className="container mx-auto px-6 py-20">
       <motion.h2 
         {...fadeInUp}
-        className="text-4xl font-bold mb-12 text-center"
+        className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-12 text-center"
       >
         About <span className="text-purple-500">Me</span>
       </motion.h2>
 
       <motion.div
         {...fadeInUp}
-        className="text-white text-lg leading-relaxed max-w-3xl mx-auto"
+        className="text-white text-lg leading-relaxed max-w-4xl mx-auto"
       >
-        <p className="text-center text-lg font-semibold mb-6">
+        <p className="text-center text-xl font-semibold mb-6">
           I am a <span className="text-purple-500">mechanical engineer</span> with expertise in <span className="text-blue-500">CAD design</span>, <span className="text-green-500">FEA/CFD analysis</span>, and <span className="text-yellow-500">engineering automation</span>. My goal is to bridge the gap between <span className="text-red-500">traditional engineering</span> and <span className="text-purple-500">modern technology</span>.
         </p>
-        <p className="text-center text-lg">
+        <p className="text-center text-xl">
           With a strong foundation in <span className="text-green-500">mechanical principles</span> and hands-on experience in <span className="text-blue-500">simulation tools</span>, I deliver <span className="text-yellow-500">high-quality results</span> that drive <span className="text-purple-500">efficiency</span> and <span className="text-red-500">innovation</span>.
         </p>
       </motion.div>
@@ -49,7 +49,7 @@ const About = () => {
         variants={staggerContainer}
         initial="initial"
         whileInView="whileInView"
-        className="grid md:grid-cols-2 gap-8 mt-16"
+        className="grid lg:grid-cols-2 gap-8 mt-16"
       >
         {/* Summary & Tech Focus */}
         <motion.div
@@ -225,14 +225,14 @@ const About = () => {
         whileInView="whileInView"
         className="mt-16"
       >
-        <h3 className="text-2xl font-semibold mb-8 text-center">
+        <h3 className="text-4xl sm:text-5xl lg:text-6xl font-semibold mb-8 text-center">
           Publications & <span className="text-purple-500">Patents</span>
         </h3>
         <motion.div 
           variants={staggerContainer}
           initial="initial"
           whileInView="whileInView"
-          className="grid md:grid-cols-2 gap-8"
+          className="grid lg:grid-cols-2 gap-8"
         >
           {/* Publications */}
           <motion.div 

@@ -41,12 +41,12 @@ const Navigation: React.FC<NavigationProps> = ({
   const mobileMenuVariants = {
     hidden: { 
       opacity: 0, 
-      y: -20,
+      x: 300,
       scale: 0.95
     },
     visible: { 
       opacity: 1, 
-      y: 0,
+      x: 0,
       scale: 1,
       transition: {
         duration: 0.3,
@@ -55,7 +55,7 @@ const Navigation: React.FC<NavigationProps> = ({
     },
     exit: {
       opacity: 0,
-      y: -20,
+      x: 300,
       scale: 0.95,
       transition: {
         duration: 0.2
@@ -88,10 +88,10 @@ const Navigation: React.FC<NavigationProps> = ({
             </span>
           </motion.div>
 
-          {/* Mobile Menu Button */}
+          {/* Hamburger Menu Button - Now for all screen sizes */}
           <motion.button
             onClick={() => setMenuOpen(!isMenuOpen)}
-            className="text-gray-300 hover:text-white focus:outline-none md:hidden p-2"
+            className="text-gray-300 hover:text-white focus:outline-none p-2 z-60"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -119,85 +119,82 @@ const Navigation: React.FC<NavigationProps> = ({
               )}
             </AnimatePresence>
           </motion.button>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-1 lg:space-x-2">
-            {navItems.map((item, index) => (
-              <motion.button
-                key={item.name}
-                onClick={() => scrollToSection(index)}
-                className={`relative px-4 py-2 text-sm lg:text-base font-medium transition-all duration-300 rounded-lg ${
-                  activeSection === index
-                    ? 'text-white'
-                    : 'text-gray-300 hover:text-purple-400'
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {activeSection === index && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{item.name}</span>
-              </motion.button>
-            ))}
-          </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Side Menu - Now for all screen sizes */}
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div
-              variants={mobileMenuVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="absolute top-full left-0 right-0 bg-gray-900/98 backdrop-blur-md border-b border-purple-500/20 md:hidden"
-            >
-              <div className="py-4 space-y-2">
-                {navItems.map((item, index) => (
-                  <motion.button
-                    key={item.name}
-                    onClick={() => scrollToSection(index)}
-                    className={`w-full py-3 px-6 flex items-center space-x-3 text-left transition-all duration-300 ${
-                      activeSection === index
-                        ? 'bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-400 border-r-4 border-purple-500'
-                        : 'text-gray-300 hover:bg-gray-800/50 hover:text-purple-400'
-                    }`}
-                    whileHover={{ x: 10 }}
-                    whileTap={{ scale: 0.98 }}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ 
-                      opacity: 1, 
-                      x: 0,
-                      transition: { delay: index * 0.1 }
-                    }}
-                  >
-                    <span className="text-xl">{item.icon}</span>
-                    <span className="font-medium">{item.name}</span>
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-black/50 z-40"
+                onClick={() => setMenuOpen(false)}
+              />
+              
+              {/* Side Menu */}
+              <motion.div
+                variants={mobileMenuVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="fixed top-0 right-0 h-full w-80 bg-gray-900/98 backdrop-blur-md border-l border-purple-500/20 z-50 overflow-y-auto"
+              >
+                {/* Menu Header */}
+                <div className="p-6 border-b border-purple-500/20">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-bold text-purple-400">Navigation</h3>
+                    <motion.button
+                      onClick={() => setMenuOpen(false)}
+                      className="p-2 hover:bg-gray-800 rounded-full transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <X className="w-5 h-5 text-gray-400" />
+                    </motion.button>
+                  </div>
+                </div>
+
+                {/* Menu Items */}
+                <div className="py-6 space-y-2">
+                  {navItems.map((item, index) => (
+                    <motion.button
+                      key={item.name}
+                      onClick={() => scrollToSection(index)}
+                      className={`w-full py-4 px-6 flex items-center space-x-4 text-left transition-all duration-300 ${
+                        activeSection === index
+                          ? 'bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-400 border-r-4 border-purple-500'
+                          : 'text-gray-300 hover:bg-gray-800/50 hover:text-purple-400'
+                      }`}
+                      whileHover={{ x: 10 }}
+                      whileTap={{ scale: 0.98 }}
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ 
+                        opacity: 1, 
+                        x: 0,
+                        transition: { delay: index * 0.1 }
+                      }}
+                    >
+                      <span className="text-2xl">{item.icon}</span>
+                      <span className="font-medium text-lg">{item.name}</span>
+                    </motion.button>
+                  ))}
+                </div>
+
+                {/* Menu Footer */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-purple-500/20">
+                  <div className="text-center">
+                    <p className="text-gray-400 text-sm">Mechanical Design Engineer</p>
+                    <p className="text-purple-400 text-xs mt-1">Portfolio 2024</p>
+                  </div>
+                </div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </motion.nav>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-40 md:hidden"
-            onClick={() => setMenuOpen(false)}
-          />
-        )}
-      </AnimatePresence>
     </>
   );
 };

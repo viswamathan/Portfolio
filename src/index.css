@@ -53,43 +53,46 @@ html {
   scrollbar-color: #8b5cf6 #1f2937;
 }
 
-/* Consistent Text Sizing */
+/* Optimized Text Sizing System */
 @layer base {
-  h1 {
+  /* Main Section Headings */
+  .section-heading {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold;
+  }
+
+  /* Sub Section Headings */
+  .subsection-heading {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-bold;
+  }
+
+  /* Card Titles */
+  .card-title {
+    @apply text-lg sm:text-xl font-bold;
+  }
+
+  /* Content Text */
+  .content-text {
+    @apply text-sm sm:text-base leading-relaxed;
+  }
+
+  /* Small Text */
+  .small-text {
+    @apply text-xs sm:text-sm;
+  }
+
+  /* Large Text */
+  .large-text {
+    @apply text-base sm:text-lg;
+  }
+
+  /* Hero Text */
+  .hero-text {
     @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold;
   }
 
-  h2 {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold;
-  }
-
-  h3 {
-    @apply text-2xl sm:text-3xl md:text-4xl font-semibold;
-  }
-
-  h4 {
-    @apply text-xl sm:text-2xl font-semibold;
-  }
-
-  h5 {
-    @apply text-lg sm:text-xl font-medium;
-  }
-
-  h6 {
-    @apply text-base sm:text-lg font-medium;
-  }
-
-  p, span, div {
-    @apply text-base lg:text-lg;
-    line-height: 1.6;
-  }
-
-  .text-small {
-    @apply text-sm;
-  }
-
-  .text-large {
-    @apply text-lg lg:text-xl;
+  /* Hero Subtitle */
+  .hero-subtitle {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold;
   }
 }
 
@@ -104,7 +107,7 @@ html {
   }
 
   .btn {
-    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center justify-center gap-2 text-base;
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300 inline-flex items-center justify-center gap-2 text-sm sm:text-base;
   }
 
   .btn-primary {
@@ -175,26 +178,8 @@ html {
     @apply max-w-6xl;
   }
   
-  /* Better spacing for desktop */
   .section-padding {
     @apply py-24;
-  }
-  
-  /* Larger text for desktop readability */
-  h1 {
-    @apply text-6xl xl:text-7xl;
-  }
-  
-  h2 {
-    @apply text-5xl xl:text-6xl;
-  }
-  
-  h3 {
-    @apply text-3xl xl:text-4xl;
-  }
-  
-  p, span, div {
-    @apply text-lg xl:text-xl;
   }
 }
 
@@ -213,27 +198,9 @@ html {
   .section-padding {
     @apply py-12;
   }
-
-  /* Smaller text on mobile for better readability */
-  h1 {
-    @apply text-3xl;
-  }
-
-  h2 {
-    @apply text-2xl;
-  }
-
-  h3 {
-    @apply text-xl;
-  }
-
-  p, span, div {
-    @apply text-sm;
-  }
 }
 
 @media (max-width: 768px) {
-  /* Hide scrollbar on mobile for cleaner look */
   .hide-scrollbar-mobile {
     scrollbar-width: none;
     -ms-overflow-style: none;

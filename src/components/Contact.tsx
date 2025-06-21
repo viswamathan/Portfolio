@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Linkedin, Github, Heart } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Linkedin, Github, Heart, MessageCircle, User, Clock } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -24,141 +24,236 @@ export default function Contact() {
     setFormData({ name: "", email: "", message: "" });
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6
+      }
+    }
+  };
+
   return (
-    <div className="container mx-auto px-6 py-20">
+    <motion.div 
+      className="container mx-auto px-6 py-20"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
       <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-3xl sm:text-4xl font-bold mb-12 text-center"
+        variants={itemVariants}
+        className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-12 text-center"
       >
         Get in Touch
       </motion.h2>
 
-      <div className="grid md:grid-cols-2 gap-12">
+      <motion.p
+        variants={itemVariants}
+        className="text-center text-gray-400 text-base sm:text-lg mb-12 max-w-2xl mx-auto"
+      >
+        Ready to collaborate on your next engineering project? Let's discuss how we can bring your ideas to life with innovative mechanical design solutions.
+      </motion.p>
+
+      <div className="grid lg:grid-cols-2 gap-12">
         {/* Contact Form */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="bg-gray-800/50 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
+          variants={itemVariants}
+          className="bg-gray-800/50 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 backdrop-blur-sm border border-gray-700/50"
         >
-          <h3 className="text-xl font-semibold mb-6 text-purple-500">Contact Form</h3>
+          <div className="flex items-center gap-3 mb-6">
+            <MessageCircle className="w-6 h-6 text-purple-500" />
+            <h3 className="text-xl sm:text-2xl font-bold text-purple-500">Send Message</h3>
+          </div>
+          
           <form onSubmit={handleSubmit} className="space-y-6">
             {successMessage && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-green-500 text-sm mb-4"
+                className="bg-green-500/20 border border-green-500/50 text-green-400 p-4 rounded-lg text-sm"
               >
-                Message sent successfully!
+                ✅ Message sent successfully! I'll get back to you soon.
               </motion.div>
             )}
+            
             <div>
-              <label className="block text-sm mb-2">Name</label>
+              <label className="block text-sm font-medium mb-2 text-gray-300">
+                <User className="w-4 h-4 inline mr-2" />
+                Full Name
+              </label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                className="w-full bg-gray-700 rounded px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none hover:ring-2 hover:ring-purple-400"
-                placeholder="Your Name"
+                className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:bg-gray-700/70"
+                placeholder="Enter your full name"
               />
             </div>
+            
             <div>
-              <label className="block text-sm mb-2">Email</label>
+              <label className="block text-sm font-medium mb-2 text-gray-300">
+                <Mail className="w-4 h-4 inline mr-2" />
+                Email Address
+              </label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="w-full bg-gray-700 rounded px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none hover:ring-2 hover:ring-purple-400"
-                placeholder="Your Email"
+                className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:bg-gray-700/70"
+                placeholder="Enter your email address"
               />
             </div>
+            
             <div>
-              <label className="block text-sm mb-2">Message</label>
+              <label className="block text-sm font-medium mb-2 text-gray-300">
+                <MessageCircle className="w-4 h-4 inline mr-2" />
+                Message
+              </label>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleInputChange}
                 required
-                className="w-full bg-gray-700 rounded px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:outline-none hover:ring-2 hover:ring-purple-400"
-                placeholder="Your Message"
+                className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:bg-gray-700/70 resize-none"
+                placeholder="Tell me about your project or inquiry..."
                 rows={5}
               />
             </div>
+            
             <motion.button
               type="submit"
-              className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded transition-colors flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: 'spring', stiffness: 300 }}
+              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 font-semibold shadow-lg hover:shadow-xl"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Send className="w-4 h-4" />
+              <Send className="w-5 h-5" />
               <span>Send Message</span>
             </motion.button>
           </form>
         </motion.div>
 
-        {/* Contact Info */}
+        {/* Contact Information */}
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={itemVariants}
           className="space-y-8"
         >
-          <div className="bg-gray-800/50 p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-4 text-purple-500">Contact Info</h3>
-            <ul className="space-y-4">
-              <li className="flex items-center gap-4">
-                <Mail className="w-6 h-6 text-purple-500" />
-                <div className="text-sm">
-                  <div>viswamathanagopal@gmail.com</div>
-                  <div>viswamathan2k4@gmail.com</div>
+          {/* Contact Details */}
+          <div className="bg-gray-800/50 p-8 rounded-xl shadow-lg backdrop-blur-sm border border-gray-700/50">
+            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-purple-500">Contact Information</h3>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="bg-purple-500/20 p-3 rounded-lg">
+                  <Mail className="w-6 h-6 text-purple-400" />
                 </div>
-              </li>
-              <li className="flex items-center gap-4">
-                <Phone className="w-6 h-6 text-purple-500" />
-                <span>+91 63699 05438</span>
-              </li>
-              <li className="flex items-center gap-4">
-                <MapPin className="w-6 h-6 text-purple-500" />
-                <span>Coimbatore, India</span>
-              </li>
-            </ul>
-          </div>
+                <div>
+                  <h4 className="font-semibold text-white mb-1">Email</h4>
+                  <div className="text-gray-300 text-sm space-y-1">
+                    <p>viswamathanagopal@gmail.com</p>
+                    <p>viswamathan2k4@gmail.com</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="bg-purple-500/20 p-3 rounded-lg">
+                  <Phone className="w-6 h-6 text-purple-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-white mb-1">Phone</h4>
+                  <p className="text-gray-300 text-sm">+91 63699 05438</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="bg-purple-500/20 p-3 rounded-lg">
+                  <MapPin className="w-6 h-6 text-purple-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-white mb-1">Location</h4>
+                  <p className="text-gray-300 text-sm">Coimbatore, Tamil Nadu, India</p>
+                </div>
+              </div>
 
-          {/* Social Links */}
-          <div className="bg-gray-800/50 p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-4 text-purple-500">Follow Me</h3>
-            <div className="flex space-x-4">
-              <a
-                href="https://github.com/viswamathan"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gray-700 p-3 rounded-full hover:bg-gray-600 transition-colors hover:ring-2 hover:ring-purple-400"
-              >
-                <Github className="w-6 h-6 text-white" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/viswa-m-91b544258/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gray-700 p-3 rounded-full hover:bg-gray-600 transition-colors hover:ring-2 hover:ring-purple-400"
-              >
-                <Linkedin className="w-6 h-6 text-white" />
-              </a>
+              <div className="flex items-start gap-4">
+                <div className="bg-purple-500/20 p-3 rounded-lg">
+                  <Clock className="w-6 h-6 text-purple-400" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-white mb-1">Response Time</h4>
+                  <p className="text-gray-300 text-sm">Usually within 24 hours</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Map Placeholder */}
-          <div className="bg-gray-800/50 p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-4 text-purple-500">Location</h3>
-            <div className="w-full h-48 bg-gray-700 rounded-lg flex items-center justify-center text-gray-400">
-              Map Placeholder
+          {/* Social Links */}
+          <div className="bg-gray-800/50 p-8 rounded-xl shadow-lg backdrop-blur-sm border border-gray-700/50">
+            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-purple-500">Connect With Me</h3>
+            <div className="flex space-x-4">
+              <motion.a
+                href="https://github.com/viswamathan"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-gray-700/50 p-4 rounded-xl hover:bg-gray-600/50 transition-all duration-300 flex-1 text-center border border-gray-600/50 hover:border-purple-500/50"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Github className="w-8 h-8 text-white group-hover:text-purple-400 transition-colors mx-auto mb-2" />
+                <p className="text-sm font-medium text-gray-300 group-hover:text-white">GitHub</p>
+              </motion.a>
+              
+              <motion.a
+                href="https://www.linkedin.com/in/viswa-m-91b544258/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-gray-700/50 p-4 rounded-xl hover:bg-gray-600/50 transition-all duration-300 flex-1 text-center border border-gray-600/50 hover:border-purple-500/50"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Linkedin className="w-8 h-8 text-white group-hover:text-purple-400 transition-colors mx-auto mb-2" />
+                <p className="text-sm font-medium text-gray-300 group-hover:text-white">LinkedIn</p>
+              </motion.a>
+            </div>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="bg-gray-800/50 p-8 rounded-xl shadow-lg backdrop-blur-sm border border-gray-700/50">
+            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-purple-500">Why Work With Me?</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center p-4 bg-purple-500/10 rounded-lg">
+                <div className="text-2xl font-bold text-purple-400 mb-1">2+</div>
+                <div className="text-xs text-gray-300">Years Experience</div>
+              </div>
+              <div className="text-center p-4 bg-purple-500/10 rounded-lg">
+                <div className="text-2xl font-bold text-purple-400 mb-1">5+</div>
+                <div className="text-xs text-gray-300">Projects Completed</div>
+              </div>
+              <div className="text-center p-4 bg-purple-500/10 rounded-lg">
+                <div className="text-2xl font-bold text-purple-400 mb-1">24h</div>
+                <div className="text-xs text-gray-300">Response Time</div>
+              </div>
+              <div className="text-center p-4 bg-purple-500/10 rounded-lg">
+                <div className="text-2xl font-bold text-purple-400 mb-1">100%</div>
+                <div className="text-xs text-gray-300">Client Satisfaction</div>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -166,9 +261,7 @@ export default function Contact() {
 
       {/* Copyright Section */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
+        variants={itemVariants}
         className="mt-20 pt-8 border-t border-gray-700/50"
       >
         <div className="text-center space-y-4">
@@ -232,6 +325,6 @@ export default function Contact() {
           </motion.div>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }

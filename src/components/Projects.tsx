@@ -80,14 +80,14 @@ const projectCategories = {
   },
   software: {
     icon: Code,
-    title: "Software X Mechanical",
-    intro: "Innovative software solutions bridging mechanical engineering with modern technology.",
+    title: "Software",
+    intro: "Innovative software solutions bridging modern technology.",
     projects: [
       {
-        title: "Engineering Automation Suite",
-        description: "A comprehensive collection of Python-based tools for automating mechanical engineering calculations and analyses.",
-        technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Flask"],
-        githubUrl: "https://github.com/yourusername/engineering-automation",
+        title: "Petrol Management Project",
+        description: "Designed to track fuel stock, sales, and transactions efficiently, enabling real-time monitoring and report generation for petrol stations..",
+        technologies: ["Python", "MySql", "OS", "Matplotlib"],
+        githubUrl: "https://github.com/viswamathan/PETROL-MANAGEMENT-PROJECT-USING-PYTHON-AND-SQL",
         image1: "/calculator-1.jpg",
         image2: "/calculator-2.jpg",
         report: "/reports/automation-report.pdf"

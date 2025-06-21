@@ -127,7 +127,7 @@ const LoadingScreen = () => {
           className="mb-8"
         >
           <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
-            Viswa M
+            VISWA M
           </h1>
           <p className="text-xl text-gray-300">Mechanical Design Engineer</p>
         </motion.div>

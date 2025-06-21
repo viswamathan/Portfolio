@@ -88,10 +88,10 @@ const Navigation: React.FC<NavigationProps> = ({
             </span>
           </motion.div>
 
-          {/* Hamburger Menu Button - Now for all screen sizes */}
+          {/* Hamburger Menu Button - Positioned in Right Corner */}
           <motion.button
             onClick={() => setMenuOpen(!isMenuOpen)}
-            className="text-gray-300 hover:text-white focus:outline-none p-2 z-60"
+            className="text-gray-300 hover:text-white focus:outline-none p-2 z-60 ml-auto"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -121,7 +121,7 @@ const Navigation: React.FC<NavigationProps> = ({
           </motion.button>
         </div>
 
-        {/* Side Menu - Now for all screen sizes */}
+        {/* Side Menu - Enhanced for All Sections */}
         <AnimatePresence>
           {isMenuOpen && (
             <>
@@ -140,12 +140,15 @@ const Navigation: React.FC<NavigationProps> = ({
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="fixed top-0 right-0 h-full w-80 bg-gray-900/98 backdrop-blur-md border-l border-purple-500/20 z-50 overflow-y-auto"
+                className="fixed top-0 right-0 h-full w-80 bg-gray-900/98 backdrop-blur-md border-l border-purple-500/20 z-50 overflow-y-auto shadow-2xl"
               >
                 {/* Menu Header */}
-                <div className="p-6 border-b border-purple-500/20">
+                <div className="p-6 border-b border-purple-500/20 bg-gray-900/50">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-purple-400">Navigation</h3>
+                    <div>
+                      <h3 className="text-xl font-bold text-purple-400">Navigation</h3>
+                      <p className="text-xs text-gray-400 mt-1">Portfolio Sections</p>
+                    </div>
                     <motion.button
                       onClick={() => setMenuOpen(false)}
                       className="p-2 hover:bg-gray-800 rounded-full transition-colors"
@@ -178,16 +181,29 @@ const Navigation: React.FC<NavigationProps> = ({
                       }}
                     >
                       <span className="text-2xl">{item.icon}</span>
-                      <span className="font-medium text-lg">{item.name}</span>
+                      <div className="flex-1">
+                        <span className="font-medium text-lg">{item.name}</span>
+                        {activeSection === index && (
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: '100%' }}
+                            className="h-0.5 bg-purple-500 mt-1"
+                          />
+                        )}
+                      </div>
                     </motion.button>
                   ))}
                 </div>
 
                 {/* Menu Footer */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-purple-500/20">
+                <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-purple-500/20 bg-gray-900/50">
                   <div className="text-center">
                     <p className="text-gray-400 text-sm">Mechanical Design Engineer</p>
                     <p className="text-purple-400 text-xs mt-1">Portfolio 2024</p>
+                    <div className="flex items-center justify-center gap-2 mt-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      <span className="text-xs text-gray-500">Available for Projects</span>
+                    </div>
                   </div>
                 </div>
               </motion.div>

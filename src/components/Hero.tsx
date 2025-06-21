@@ -232,19 +232,19 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           ))}
         </motion.div>
 
-        {/* Call to Action Buttons */}
+        {/* Call to Action Buttons - Made Smaller and More Elegant */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row justify-center items-center space-y-6 sm:space-y-0 sm:space-x-8"
+          className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
         >
           <motion.a
             href="/VISWA M.pdf"
             target="_blank"
-            className="group relative bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 flex items-center gap-3 shadow-lg hover:shadow-xl"
+            className="group relative bg-gradient-to-r from-purple-600 to-blue-600 text-white px-5 py-2.5 rounded-full font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl text-sm"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <FileText className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+            <FileText className="w-4 h-4 group-hover:rotate-12 transition-transform" />
             <span>Download Portfolio</span>
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-purple-700 to-blue-700 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
@@ -254,7 +254,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
 
           <motion.button
             onClick={scrollToContact}
-            className="group relative border-2 border-purple-600/50 text-purple-400 hover:text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 backdrop-blur-sm hover:bg-purple-600/20"
+            className="group relative border-2 border-purple-600/50 text-purple-400 hover:text-white px-5 py-2.5 rounded-full font-medium transition-all duration-300 backdrop-blur-sm hover:bg-purple-600/20 text-sm"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >

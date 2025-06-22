@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Linkedin, Github, Heart, MessageCircle, User, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Linkedin, Github, Heart, MessageCircle, User, Clock, CheckCircle, AlertCircle } from "lucide-react";
+import { submitContactForm } from "../lib/supabase";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -9,19 +10,70 @@ export default function Contact() {
     message: "",
   });
 
-  const [successMessage, setSuccessMessage] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    
+    // Clear status when user starts typing
+    if (submitStatus.type) {
+      setSubmitStatus({ type: null, message: '' });
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add form submission logic here (e.g., emailjs or API call)
-    setSuccessMessage(true);
-    setTimeout(() => setSuccessMessage(false), 3000); // Hide message after 3 seconds
-    setFormData({ name: "", email: "", message: "" });
+    
+    // Validate form
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Please fill in all required fields.'
+      });
+      return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setSubmitStatus({
+        type: 'error',
+        message: 'Please enter a valid email address.'
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const result = await submitContactForm({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        message: formData.message.trim(),
+      });
+
+      setSubmitStatus({
+        type: 'success',
+        message: result.message || 'Thank you for your message! I\'ll get back to you soon.'
+      });
+      
+      // Reset form
+      setFormData({ name: "", email: "", message: "" });
+      
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'Failed to send message. Please try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const containerVariants = {
@@ -79,21 +131,31 @@ export default function Contact() {
           </div>
           
           <form onSubmit={handleSubmit} className="space-y-6">
-            {successMessage && (
+            {/* Status Messages */}
+            {submitStatus.type && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-green-500/20 border border-green-500/50 text-green-400 p-4 rounded-lg text-sm"
+                className={`p-4 rounded-lg text-sm flex items-center gap-2 ${
+                  submitStatus.type === 'success'
+                    ? 'bg-green-500/20 border border-green-500/50 text-green-400'
+                    : 'bg-red-500/20 border border-red-500/50 text-red-400'
+                }`}
               >
-                ✅ Message sent successfully! I'll get back to you soon.
+                {submitStatus.type === 'success' ? (
+                  <CheckCircle className="w-4 h-4 flex-shrink-0" />
+                ) : (
+                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                )}
+                <span>{submitStatus.message}</span>
               </motion.div>
             )}
             
             <div>
               <label className="block text-sm font-medium mb-2 text-gray-300">
                 <User className="w-4 h-4 inline mr-2" />
-                Full Name
+                Full Name *
               </label>
               <input
                 type="text"
@@ -101,7 +163,8 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:bg-gray-700/70"
+                disabled={isSubmitting}
+                className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:bg-gray-700/70 disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Enter your full name"
               />
             </div>
@@ -109,7 +172,7 @@ export default function Contact() {
             <div>
               <label className="block text-sm font-medium mb-2 text-gray-300">
                 <Mail className="w-4 h-4 inline mr-2" />
-                Email Address
+                Email Address *
               </label>
               <input
                 type="email"
@@ -117,7 +180,8 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:bg-gray-700/70"
+                disabled={isSubmitting}
+                className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:bg-gray-700/70 disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Enter your email address"
               />
             </div>
@@ -125,14 +189,15 @@ export default function Contact() {
             <div>
               <label className="block text-sm font-medium mb-2 text-gray-300">
                 <MessageCircle className="w-4 h-4 inline mr-2" />
-                Message
+                Message *
               </label>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleInputChange}
                 required
-                className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:bg-gray-700/70 resize-none"
+                disabled={isSubmitting}
+                className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:bg-gray-700/70 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Tell me about your project or inquiry..."
                 rows={5}
               />
@@ -140,12 +205,22 @@ export default function Contact() {
             
             <motion.button
               type="submit"
-              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 font-semibold shadow-lg hover:shadow-xl"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              disabled={isSubmitting}
+              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 font-semibold shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+              whileTap={!isSubmitting ? { scale: 0.98 } : {}}
             >
-              <Send className="w-5 h-5" />
-              <span>Send Message</span>
+              {isSubmitting ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <span>Sending...</span>
+                </>
+              ) : (
+                <>
+                  <Send className="w-5 h-5" />
+                  <span>Send Message</span>
+                </>
+              )}
             </motion.button>
           </form>
         </motion.div>

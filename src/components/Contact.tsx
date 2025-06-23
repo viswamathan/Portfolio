@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Linkedin, Github, Heart, MessageCircle, User, Clock, CheckCircle, AlertCircle, Loader } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Linkedin, Github, Heart, MessageCircle, User, Clock, CheckCircle, AlertCircle } from "lucide-react";
 import { submitContactForm } from "../lib/supabase";
 
 export default function Contact() {
@@ -48,23 +48,6 @@ export default function Contact() {
       return;
     }
 
-    // Validate message length
-    if (formData.message.trim().length < 10) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Please provide a more detailed message (at least 10 characters).'
-      });
-      return;
-    }
-
-    if (formData.message.trim().length > 5000) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Message is too long (maximum 5000 characters).'
-      });
-      return;
-    }
-
     setIsSubmitting(true);
     
     try {
@@ -81,11 +64,6 @@ export default function Contact() {
       
       // Reset form
       setFormData({ name: "", email: "", message: "" });
-      
-      // Auto-clear success message after 10 seconds
-      setTimeout(() => {
-        setSubmitStatus({ type: null, message: '' });
-      }, 10000);
       
     } catch (error) {
       console.error('Form submission error:', error);
@@ -186,13 +164,9 @@ export default function Contact() {
                 onChange={handleInputChange}
                 required
                 disabled={isSubmitting}
-                maxLength={100}
                 className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:bg-gray-700/70 disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Enter your full name"
               />
-              <div className="text-xs text-gray-500 mt-1">
-                {formData.name.length}/100 characters
-              </div>
             </div>
             
             <div>
@@ -207,13 +181,9 @@ export default function Contact() {
                 onChange={handleInputChange}
                 required
                 disabled={isSubmitting}
-                maxLength={255}
                 className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:bg-gray-700/70 disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Enter your email address"
               />
-              <div className="text-xs text-gray-500 mt-1">
-                {formData.email.length}/255 characters
-              </div>
             </div>
             
             <div>
@@ -227,17 +197,10 @@ export default function Contact() {
                 onChange={handleInputChange}
                 required
                 disabled={isSubmitting}
-                maxLength={5000}
                 className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all hover:bg-gray-700/70 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Tell me about your project or inquiry..."
                 rows={5}
               />
-              <div className="text-xs text-gray-500 mt-1 flex justify-between">
-                <span>{formData.message.length}/5000 characters</span>
-                <span className={formData.message.length < 10 ? 'text-yellow-500' : 'text-green-500'}>
-                  {formData.message.length < 10 ? 'Minimum 10 characters' : 'Good length'}
-                </span>
-              </div>
             </div>
             
             <motion.button
@@ -249,7 +212,7 @@ export default function Contact() {
             >
               {isSubmitting ? (
                 <>
-                  <Loader className="w-5 h-5 animate-spin" />
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   <span>Sending...</span>
                 </>
               ) : (

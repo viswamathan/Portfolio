@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, Linkedin, Github, Heart, MessageCircle, User, Clock, CheckCircle, AlertCircle } from "lucide-react";
-import { submitContactForm } from "../lib/supabase";
 
 export default function Contact() {
   const [formData, setFormData] = useState({

@@ -333,7 +333,7 @@ const Experience = () => {
               100%
             </div>
             <div className="text-sm text-gray-300">Project Completion Rate</div>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </motion.div>

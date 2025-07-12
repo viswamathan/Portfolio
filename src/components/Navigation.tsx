@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home, User, Briefcase, Wrench, FolderOpen, Phone } from 'lucide-react';
 
 interface NavigationProps {
   activeSection: number;
@@ -18,12 +18,12 @@ const Navigation: React.FC<NavigationProps> = ({
   scrollY
 }) => {
   const navItems = [
-    { name: 'Home', icon: '🏠' },
-    { name: 'About', icon: 'ℹ️' },
-    { name: 'Experience', icon: '💼' },
-    { name: 'Skills', icon: '🛠️' },
-    { name: 'Projects', icon: '📂' },
-    { name: 'Contact', icon: '📞' },
+    { name: 'Home', icon: Home, symbol: '⚙️' },
+    { name: 'About', icon: User, symbol: '🔧' },
+    { name: 'Experience', icon: Briefcase, symbol: '⚡' },
+    { name: 'Skills', icon: Wrench, symbol: '🛠️' },
+    { name: 'Projects', icon: FolderOpen, symbol: '🔩' },
+    { name: 'Contact', icon: Phone, symbol: '📞' },
   ];
 
   const navVariants = {
@@ -63,6 +63,15 @@ const Navigation: React.FC<NavigationProps> = ({
     }
   };
 
+  const handleMenuToggle = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
+  const handleSectionClick = (index: number) => {
+    scrollToSection(index);
+    setMenuOpen(false);
+  };
+
   return (
     <>
       <motion.nav
@@ -78,20 +87,21 @@ const Navigation: React.FC<NavigationProps> = ({
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           {/* Logo */}
           <motion.div 
-            className="text-purple-500 font-bold text-lg sm:text-xl md:text-2xl cursor-pointer"
+            className="text-purple-500 font-bold text-lg sm:text-xl md:text-2xl cursor-pointer flex items-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => scrollToSection(0)}
+            onClick={() => handleSectionClick(0)}
           >
+            <span className="text-2xl">⚙️</span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
               Viswa M
             </span>
           </motion.div>
 
-          {/* Hamburger Menu Button - Positioned in Right Corner */}
+          {/* Hamburger Menu Button */}
           <motion.button
-            onClick={() => setMenuOpen(!isMenuOpen)}
-            className="text-gray-300 hover:text-white focus:outline-none p-2 z-60 ml-auto"
+            onClick={handleMenuToggle}
+            className="text-gray-300 hover:text-white focus:outline-none p-2 z-60 relative"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -120,52 +130,58 @@ const Navigation: React.FC<NavigationProps> = ({
             </AnimatePresence>
           </motion.button>
         </div>
+      </motion.nav>
 
-        {/* Side Menu - Enhanced for All Sections */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <>
-              {/* Backdrop */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/50 z-40"
-                onClick={() => setMenuOpen(false)}
-              />
-              
-              {/* Side Menu */}
-              <motion.div
-                variants={mobileMenuVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="fixed top-0 right-0 h-full w-80 bg-gray-900/98 backdrop-blur-md border-l border-purple-500/20 z-50 overflow-y-auto shadow-2xl"
-              >
-                {/* Menu Header */}
-                <div className="p-6 border-b border-purple-500/20 bg-gray-900/50">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="text-xl font-bold text-purple-400">Navigation</h3>
-                      <p className="text-xs text-gray-400 mt-1">Portfolio Sections</p>
-                    </div>
-                    <motion.button
-                      onClick={() => setMenuOpen(false)}
-                      className="p-2 hover:bg-gray-800 rounded-full transition-colors"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <X className="w-5 h-5 text-gray-400" />
-                    </motion.button>
+      {/* Side Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 z-40"
+              onClick={() => setMenuOpen(false)}
+            />
+            
+            {/* Side Menu */}
+            <motion.div
+              variants={mobileMenuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed top-0 right-0 h-full w-80 bg-gray-900/98 backdrop-blur-md border-l border-purple-500/20 z-50 overflow-y-auto shadow-2xl"
+            >
+              {/* Menu Header */}
+              <div className="p-6 border-b border-purple-500/20 bg-gray-900/50">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold text-purple-400 flex items-center gap-2">
+                      <span className="text-2xl">⚙️</span>
+                      Navigation
+                    </h3>
+                    <p className="text-xs text-gray-400 mt-1">Mechanical Engineering Portfolio</p>
                   </div>
+                  <motion.button
+                    onClick={() => setMenuOpen(false)}
+                    className="p-2 hover:bg-gray-800 rounded-full transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <X className="w-5 h-5 text-gray-400" />
+                  </motion.button>
                 </div>
+              </div>
 
-                {/* Menu Items */}
-                <div className="py-6 space-y-2">
-                  {navItems.map((item, index) => (
+              {/* Menu Items */}
+              <div className="py-6 space-y-2">
+                {navItems.map((item, index) => {
+                  const IconComponent = item.icon;
+                  return (
                     <motion.button
                       key={item.name}
-                      onClick={() => scrollToSection(index)}
+                      onClick={() => handleSectionClick(index)}
                       className={`w-full py-4 px-6 flex items-center space-x-4 text-left transition-all duration-300 ${
                         activeSection === index
                           ? 'bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-400 border-r-4 border-purple-500'
@@ -180,7 +196,8 @@ const Navigation: React.FC<NavigationProps> = ({
                         transition: { delay: index * 0.1 }
                       }}
                     >
-                      <span className="text-2xl">{item.icon}</span>
+                      <span className="text-2xl">{item.symbol}</span>
+                      <IconComponent className="w-5 h-5" />
                       <div className="flex-1">
                         <span className="font-medium text-lg">{item.name}</span>
                         {activeSection === index && (
@@ -192,25 +209,28 @@ const Navigation: React.FC<NavigationProps> = ({
                         )}
                       </div>
                     </motion.button>
-                  ))}
-                </div>
+                  );
+                })}
+              </div>
 
-                {/* Menu Footer */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-purple-500/20 bg-gray-900/50">
-                  <div className="text-center">
+              {/* Menu Footer */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-purple-500/20 bg-gray-900/50">
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <span className="text-2xl">🔧</span>
                     <p className="text-gray-400 text-sm">Mechanical Design Engineer</p>
-                    <p className="text-purple-400 text-xs mt-1">Portfolio 2024</p>
-                    <div className="flex items-center justify-center gap-2 mt-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                      <span className="text-xs text-gray-500">Available for Projects</span>
-                    </div>
+                  </div>
+                  <p className="text-purple-400 text-xs mt-1">Portfolio 2024</p>
+                  <div className="flex items-center justify-center gap-2 mt-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-xs text-gray-500">Available for Projects</span>
                   </div>
                 </div>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-      </motion.nav>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };

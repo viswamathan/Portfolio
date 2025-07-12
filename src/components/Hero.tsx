@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sphere, MeshDistortMaterial, Float } from '@react-three/drei';
-import { Github, Linkedin, FileText } from 'lucide-react';
+import { Github, Linkedin, FileText, Cog, Wrench, Zap } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
 
 interface HeroProps {
@@ -60,8 +60,40 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
     }
   };
 
+  // Mechanical symbols floating around
+  const mechanicalSymbols = [
+    { symbol: '⚙️', x: 10, y: 20, delay: 0 },
+    { symbol: '🔧', x: 85, y: 30, delay: 1 },
+    { symbol: '🔩', x: 15, y: 70, delay: 2 },
+    { symbol: '⚡', x: 80, y: 75, delay: 3 },
+    { symbol: '🛠️', x: 50, y: 10, delay: 4 },
+    { symbol: '⚙️', x: 90, y: 60, delay: 5 },
+  ];
+
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Mechanical Symbols Background */}
+      {mechanicalSymbols.map((item, index) => (
+        <motion.div
+          key={index}
+          className="absolute text-4xl opacity-10 pointer-events-none"
+          style={{ left: `${item.x}%`, top: `${item.y}%` }}
+          animate={{
+            y: [0, -30, 0],
+            rotate: [0, 360],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 8 + item.delay,
+            repeat: Infinity,
+            delay: item.delay,
+            ease: "easeInOut"
+          }}
+        >
+          {item.symbol}
+        </motion.div>
+      ))}
+
       {/* 3D Background */}
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 5] }}>
@@ -99,23 +131,27 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
               transition={{ type: "spring", stiffness: 300 }}
             />
             
-            {/* Floating Elements around Profile */}
+            {/* Floating Mechanical Elements around Profile */}
             <motion.div
-              className="absolute -top-4 -right-4 w-8 h-8 bg-purple-500/30 rounded-full blur-sm"
+              className="absolute -top-4 -right-4 text-2xl"
               animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.3, 0.8, 0.3],
+                rotate: [0, 360],
+                scale: [1, 1.2, 1],
               }}
-              transition={{ duration: 3, repeat: Infinity }}
-            />
+              transition={{ duration: 4, repeat: Infinity }}
+            >
+              ⚙️
+            </motion.div>
             <motion.div
-              className="absolute -bottom-4 -left-4 w-6 h-6 bg-blue-500/30 rounded-full blur-sm"
+              className="absolute -bottom-4 -left-4 text-xl"
               animate={{
-                scale: [1.5, 1, 1.5],
-                opacity: [0.8, 0.3, 0.8],
+                rotate: [360, 0],
+                scale: [1.2, 1, 1.2],
               }}
               transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
-            />
+            >
+              🔧
+            </motion.div>
           </motion.div>
         </motion.div>
 
@@ -145,7 +181,8 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           variants={itemVariants}
           className="mb-8 h-12 sm:h-14 flex items-center justify-center"
         >
-          <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-300 font-bold">
+          <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-300 font-bold flex items-center gap-3">
+            <span className="text-3xl">⚙️</span>
             <TypeAnimation
               sequence={[
                 'Mechanical Design Engineer',
@@ -173,14 +210,14 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto"
         >
           {[
-            { icon: '🎯', title: 'Design', desc: 'SolidWorks, CATIA' },
-            { icon: '🔬', title: 'Analysis', desc: 'ANSYS, FEA, CFD' },
-            { icon: '⚡', title: 'Automation', desc: 'Python, MATLAB' },
-            { icon: '💡', title: 'Innovation', desc: 'R&D, Optimization' }
+            { icon: Cog, title: 'Design', desc: 'SolidWorks, CATIA', symbol: '🎯' },
+            { icon: Zap, title: 'Analysis', desc: 'ANSYS, FEA, CFD', symbol: '🔬' },
+            { icon: Wrench, title: 'Automation', desc: 'Python, MATLAB', symbol: '⚡' },
+            { icon: FileText, title: 'Innovation', desc: 'R&D, Optimization', symbol: '💡' }
           ].map((item, index) => (
             <motion.div
               key={item.title}
-              className="bg-gray-800/30 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-purple-500/20"
+              className="bg-gray-800/30 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-purple-500/20 relative overflow-hidden"
               whileHover={{ 
                 scale: 1.05,
                 backgroundColor: 'rgba(139, 92, 246, 0.1)',
@@ -188,7 +225,10 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
               }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="text-3xl sm:text-4xl mb-2 font-bold">{item.icon}</div>
+              <div className="absolute top-2 right-2 text-2xl opacity-20">
+                {item.symbol}
+              </div>
+              <item.icon className="w-8 h-8 text-purple-500 mb-3 mx-auto" />
               <h3 className="font-bold text-lg sm:text-xl mb-1">{item.title}</h3>
               <p className="text-base sm:text-lg text-gray-400 font-semibold">{item.desc}</p>
             </motion.div>
@@ -211,8 +251,8 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           className="flex justify-center items-center space-x-8 mb-12"
         >
           {[
-            { icon: Github, href: "https://github.com/viswamathan", label: "GitHub" },
-            { icon: Linkedin, href: "https://www.linkedin.com/in/viswa-m-91b544258/", label: "LinkedIn" }
+            { icon: Github, href: "https://github.com/viswamathan", label: "GitHub", symbol: "💻" },
+            { icon: Linkedin, href: "https://www.linkedin.com/in/viswa-m-91b544258/", label: "LinkedIn", symbol: "🔗" }
           ].map((social, index) => (
             <motion.a
               key={social.label}
@@ -224,6 +264,9 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
               whileTap={{ scale: 0.95 }}
             >
               <social.icon className="w-6 h-6 text-white group-hover:text-purple-400 transition-colors" />
+              <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                {social.symbol}
+              </span>
               <motion.div
                 className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity"
                 whileHover={{ scale: 1.1 }}
@@ -232,7 +275,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           ))}
         </motion.div>
 
-        {/* Call to Action Buttons - Made Smaller and More Elegant */}
+        {/* Call to Action Buttons */}
         <motion.div
           variants={itemVariants}
           className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
@@ -246,23 +289,17 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           >
             <FileText className="w-4 h-4 group-hover:rotate-12 transition-transform" />
             <span>Download Portfolio</span>
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-purple-700 to-blue-700 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-              whileHover={{ scale: 1.05 }}
-            />
+            <span className="text-lg">📄</span>
           </motion.a>
 
           <motion.button
             onClick={scrollToContact}
-            className="group relative border-2 border-purple-600/50 text-purple-400 hover:text-white px-5 py-2.5 rounded-full font-medium transition-all duration-300 backdrop-blur-sm hover:bg-purple-600/20 text-sm"
+            className="group relative border-2 border-purple-600/50 text-purple-400 hover:text-white px-5 py-2.5 rounded-full font-medium transition-all duration-300 backdrop-blur-sm hover:bg-purple-600/20 text-sm flex items-center gap-2"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
             <span>Let's Connect</span>
-            <motion.div
-              className="absolute inset-0 border-2 border-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-              whileHover={{ scale: 1.1 }}
-            />
+            <span className="text-lg">🤝</span>
           </motion.button>
         </motion.div>
       </motion.div>

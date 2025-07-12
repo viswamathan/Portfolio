@@ -336,7 +336,6 @@ const Experience = () => {
           </motion.div>
           </div>
         </div>
-      </motion.div>
     </motion.div>
   );
 };

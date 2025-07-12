@@ -18,12 +18,12 @@ const Navigation: React.FC<NavigationProps> = ({
   scrollY
 }) => {
   const navItems = [
-    { name: 'Home', icon: Home, symbol: '⚙️' },
-    { name: 'About', icon: User, symbol: '🔧' },
-    { name: 'Experience', icon: Briefcase, symbol: '⚡' },
-    { name: 'Skills', icon: Wrench, symbol: '🛠️' },
-    { name: 'Projects', icon: FolderOpen, symbol: '🔩' },
-    { name: 'Contact', icon: Phone, symbol: '📞' },
+    { name: 'Home', icon: Home, symbol: '●' },
+    { name: 'About', icon: User, symbol: '◆' },
+    { name: 'Experience', icon: Briefcase, symbol: '▲' },
+    { name: 'Skills', icon: Wrench, symbol: '■' },
+    { name: 'Projects', icon: FolderOpen, symbol: '◇' },
+    { name: 'Contact', icon: Phone, symbol: '★' },
   ];
 
   const navVariants = {
@@ -92,7 +92,7 @@ const Navigation: React.FC<NavigationProps> = ({
             whileTap={{ scale: 0.95 }}
             onClick={() => handleSectionClick(0)}
           >
-            <span className="text-2xl">⚙️</span>
+            <span className="text-2xl">◉</span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
               Viswa M
             </span>
@@ -158,7 +158,7 @@ const Navigation: React.FC<NavigationProps> = ({
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-xl font-bold text-purple-400 flex items-center gap-2">
-                      <span className="text-2xl">⚙️</span>
+                      <span className="text-2xl">◉</span>
                       Navigation
                     </h3>
                     <p className="text-xs text-gray-400 mt-1">Mechanical Engineering Portfolio</p>
@@ -217,7 +217,7 @@ const Navigation: React.FC<NavigationProps> = ({
               <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-purple-500/20 bg-gray-900/50">
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-2 mb-2">
-                    <span className="text-2xl">🔧</span>
+                    <span className="text-2xl">◆</span>
                     <p className="text-gray-400 text-sm">Mechanical Design Engineer</p>
                   </div>
                   <p className="text-purple-400 text-xs mt-1">Portfolio 2024</p>

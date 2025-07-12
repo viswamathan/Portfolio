@@ -348,7 +348,7 @@ export default function Contact() {
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 1, repeat: Infinity }}
             >
-              <Heart className="w-4 h-4 text-red-500 fill-current" />
+              <span className="text-red-500">♥</span>
             </motion.div>
             <span>by Viswa M</span>
           </motion.div>

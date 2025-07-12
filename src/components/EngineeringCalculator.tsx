@@ -223,7 +223,7 @@ Portfolio: https://viswam-portfolio.com
                     whileHover={{ scale: 1.02 }}
                   >
                     <h4 className="text-purple-400 font-semibold flex items-center gap-2 text-sm">
-                      <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                      <span className="text-purple-500">●</span>
                       Stress Calculator (σ = F/A)
                     </h4>
                     <motion.div
@@ -281,7 +281,7 @@ Portfolio: https://viswam-portfolio.com
                     whileHover={{ scale: 1.02 }}
                   >
                     <h4 className="text-blue-400 font-semibold flex items-center gap-2 text-sm">
-                      <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                      <span className="text-blue-500">●</span>
                       Strain Calculator (ε = ΔL/L)
                     </h4>
                     <motion.div
@@ -335,7 +335,7 @@ Portfolio: https://viswam-portfolio.com
                   className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 p-3 rounded-lg border border-purple-500/20"
                 >
                   <h4 className="text-green-400 font-semibold mb-3 flex items-center gap-2 text-sm">
-                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span className="text-green-500">●</span>
                     Results
                   </h4>
                   <div className="grid grid-cols-2 gap-3">

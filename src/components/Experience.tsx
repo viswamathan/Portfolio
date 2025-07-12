@@ -44,7 +44,7 @@ const Experience = () => {
   };
 
   // Mechanical symbols for decoration
-  const mechanicalSymbols = ['◉', '◆', '◇', '▲', '■', '●'];
+  const mechanicalSymbols = ['⚙️', '🔧', '🔩', '⚡', '🛠️', '⚙️'];
 
   const experiences = [
     {
@@ -65,7 +65,7 @@ const Experience = () => {
       skills: ["ANSYS Workbench", "FEA", "Marine Engineering", "Structural Analysis", "Research Methodology", "OTEC Systems"],
       onCertificate: handleNIOTCertificate,
       onReport: handleNIOTReport,
-      symbol: "◇"
+      symbol: "🌊"
     },
     {
       title: "Design Engineer Intern",
@@ -85,7 +85,7 @@ const Experience = () => {
       skills: ["CAD Design", "Forging Processes", "Material Flow Analysis", "Process Optimization", "Manufacturing", "Quality Control"],
       onCertificate: handleUpcomingCertificate,
       onReport: handleUpcomingReport,
-      symbol: "■"
+      symbol: "🔨"
     }
   ];
 
@@ -125,9 +125,9 @@ const Experience = () => {
         variants={itemVariants}
       >
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center flex items-center justify-center gap-4 flex-wrap">
-          <span className="text-3xl sm:text-4xl">◆</span>
+          <span className="text-3xl sm:text-4xl">💼</span>
           Professional Experience
-          <span className="text-3xl sm:text-4xl">◉</span>
+          <span className="text-3xl sm:text-4xl">⚙️</span>
         </h2>
         <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full" />
       </motion.div>
@@ -191,7 +191,7 @@ const Experience = () => {
                 >
                   <Award className="w-4 h-4" />
                   <span>Certificate</span>
-                  <span className="text-lg">★</span>
+                  <span className="text-lg">🏆</span>
                 </motion.button>
                 <motion.button
                   onClick={exp.onReport}
@@ -201,14 +201,14 @@ const Experience = () => {
                 >
                   <FileText className="w-4 h-4" />
                   <span>Report</span>
-                  <span className="text-lg">◆</span>
+                  <span className="text-lg">📄</span>
                 </motion.button>
               </div>
             </div>
 
             {/* Description */}
             <div className="bg-gray-700/30 p-4 sm:p-6 rounded-xl mb-6 sm:mb-8 relative">
-              <div className="absolute top-2 right-2 text-xl opacity-20">●</div>
+              <div className="absolute top-2 right-2 text-xl opacity-20">💡</div>
               <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
                 {exp.description}
               </p>
@@ -220,7 +220,7 @@ const Experience = () => {
               <div className="lg:col-span-2">
                 <h5 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                   <Target className="w-5 h-5 text-purple-500" />
-                  <span className="text-lg">●</span>
+                  <span className="text-lg">🎯</span>
                   Key Responsibilities
                 </h5>
                 <ul className="space-y-3">
@@ -243,7 +243,7 @@ const Experience = () => {
                 <div className="mt-6">
                   <h5 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
                     <Wrench className="w-5 h-5 text-purple-500" />
-                    <span className="text-lg">■</span>
+                    <span className="text-lg">🛠️</span>
                     Skills & Technologies
                   </h5>
                   <div className="flex flex-wrap gap-2">
@@ -297,11 +297,11 @@ const Experience = () => {
         variants={itemVariants}
         className="mt-12 sm:mt-16 bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-2xl p-6 sm:p-8 border border-purple-500/20 relative overflow-hidden"
       >
-        <div className="absolute top-4 right-4 text-4xl opacity-20">◆</div>
+        <div className="absolute top-4 right-4 text-4xl opacity-20">📊</div>
         <h3 className="text-xl sm:text-2xl font-bold text-center text-purple-400 mb-6 flex items-center justify-center gap-3">
-          <span className="text-2xl">▲</span>
+          <span className="text-2xl">📈</span>
           Experience Highlights
-          <span className="text-2xl">★</span>
+          <span className="text-2xl">⭐</span>
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
           <motion.div 
@@ -309,7 +309,7 @@ const Experience = () => {
             whileHover={{ scale: 1.05 }}
           >
             <div className="text-2xl sm:text-3xl font-bold text-purple-400 flex items-center justify-center gap-2">
-              <span className="text-2xl">◇</span>
+              <span className="text-2xl">⏱️</span>
               2+
             </div>
             <div className="text-sm text-gray-300">Months of Internship</div>
@@ -319,7 +319,7 @@ const Experience = () => {
             whileHover={{ scale: 1.05 }}
           >
             <div className="text-2xl sm:text-3xl font-bold text-purple-400 flex items-center justify-center gap-2">
-              <span className="text-2xl">■</span>
+              <span className="text-2xl">🛠️</span>
               5+
             </div>
             <div className="text-sm text-gray-300">Technical Skills Gained</div>
@@ -329,11 +329,11 @@ const Experience = () => {
             whileHover={{ scale: 1.05 }}
           >
             <div className="text-2xl sm:text-3xl font-bold text-purple-400 flex items-center justify-center gap-2">
-              <span className="text-2xl">●</span>
+              <span className="text-2xl">✅</span>
               100%
             </div>
             <div className="text-sm text-gray-300">Project Completion Rate</div>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
     </motion.div>

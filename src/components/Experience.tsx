@@ -120,8 +120,8 @@ const Experience = () => {
 
       {/* Section Header */}
       <motion.div className="relative mb-12 sm:mb-16" variants={itemVariants}>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center flex items-center justify-center gap-4 flex-wrap">
-          <span>💼</span> Professional Experience <span>⚙️</span>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center">
+          Professional Experience
         </h2>
         <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full" />
       </motion.div>
@@ -135,10 +135,6 @@ const Experience = () => {
             className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 sm:p-8 hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 hover:border-purple-500/30 relative overflow-hidden"
             whileHover={{ scale: 1.01, y: -5 }}
           >
-            <div className="absolute top-4 right-4 text-4xl sm:text-6xl opacity-10">
-              {exp.symbol}
-            </div>
-
             {/* Top Section */}
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 sm:mb-8">
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mb-6 lg:mb-0">
@@ -151,7 +147,7 @@ const Experience = () => {
                 />
                 <div className="text-center sm:text-left">
                   <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-purple-400 mb-2 flex items-center gap-2 justify-center sm:justify-start">
-                    <span>{exp.symbol}</span> {exp.title}
+                    {exp.title}
                   </h3>
                   <h4 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white mb-3">{exp.company}</h4>
                   <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 text-xs sm:text-sm text-gray-400">
@@ -170,7 +166,7 @@ const Experience = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Award className="w-4 h-4" /> Certificate 🏆
+                  <Award className="w-4 h-4" /> Certificate
                 </motion.button>
                 <motion.button
                   onClick={exp.onReport}
@@ -178,14 +174,13 @@ const Experience = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <FileText className="w-4 h-4" /> Report 📄
+                  <FileText className="w-4 h-4" /> Report
                 </motion.button>
               </div>
             </div>
 
             {/* Description */}
             <div className="bg-gray-700/30 p-4 sm:p-6 rounded-xl mb-6 sm:mb-8 relative">
-              <div className="absolute top-2 right-2 text-xl opacity-20">💡</div>
               <p className="text-gray-300 text-sm sm:text-base">{exp.description}</p>
             </div>
 
@@ -194,7 +189,7 @@ const Experience = () => {
               {/* Responsibilities */}
               <div className="lg:col-span-2">
                 <h5 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                  <Target className="w-5 h-5 text-purple-500" /> 🎯 Key Responsibilities
+                  <Target className="w-5 h-5 text-purple-500" /> Key Responsibilities
                 </h5>
                 <ul className="space-y-3">
                   {exp.responsibilities.map((item, idx) => (
@@ -215,7 +210,7 @@ const Experience = () => {
                 {/* Skills */}
                 <div className="mt-6">
                   <h5 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
-                    <Wrench className="w-5 h-5 text-purple-500" /> 🛠️ Skills & Technologies
+                    <Wrench className="w-5 h-5 text-purple-500" /> Skills & Technologies
                   </h5>
                   <div className="flex flex-wrap gap-2">
                     {exp.skills.map((skill, idx) => (
@@ -251,7 +246,7 @@ const Experience = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-transparent opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300" />
                     <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <p className="text-white text-sm font-medium flex items-center gap-2">
-                        <span>{exp.symbol}</span> {exp.company} - Experience {idx + 1}
+                        {exp.company} - Experience {idx + 1}
                       </p>
                     </div>
                   </motion.div>
@@ -267,21 +262,20 @@ const Experience = () => {
         variants={itemVariants}
         className="mt-12 sm:mt-16 bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-2xl p-6 sm:p-8 border border-purple-500/20 relative overflow-hidden"
       >
-        <div className="absolute top-4 right-4 text-4xl opacity-20">📊</div>
-        <h3 className="text-xl sm:text-2xl font-bold text-center text-purple-400 mb-6 flex items-center justify-center gap-3">
-          <span>📈</span> Experience Highlights <span>⭐</span>
+        <h3 className="text-xl sm:text-2xl font-bold text-center text-purple-400 mb-6">
+          Experience Highlights
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
           <motion.div className="space-y-2 p-4 bg-gray-800/30 rounded-xl" whileHover={{ scale: 1.05 }}>
-            <div className="text-2xl font-bold text-purple-400 flex justify-center items-center gap-2">⏱️ 2+</div>
+            <div className="text-2xl font-bold text-purple-400">2+</div>
             <div className="text-sm text-gray-300">Months of Internship</div>
           </motion.div>
           <motion.div className="space-y-2 p-4 bg-gray-800/30 rounded-xl" whileHover={{ scale: 1.05 }}>
-            <div className="text-2xl font-bold text-purple-400 flex justify-center items-center gap-2">🛠️ 5+</div>
+            <div className="text-2xl font-bold text-purple-400">5+</div>
             <div className="text-sm text-gray-300">Technical Skills Gained</div>
           </motion.div>
           <motion.div className="space-y-2 p-4 bg-gray-800/30 rounded-xl" whileHover={{ scale: 1.05 }}>
-            <div className="text-2xl font-bold text-purple-400 flex justify-center items-center gap-2">✅ 100%</div>
+            <div className="text-2xl font-bold text-purple-400">100%</div>
             <div className="text-sm text-gray-300">Project Completion Rate</div>
           </motion.div>
         </div>

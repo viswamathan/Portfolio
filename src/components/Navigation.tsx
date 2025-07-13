@@ -18,12 +18,12 @@ const Navigation: React.FC<NavigationProps> = ({
   scrollY
 }) => {
   const navItems = [
-    { name: 'Home', icon: Home, symbol: '⚙️' },
-    { name: 'About', icon: User, symbol: '🔧' },
-    { name: 'Experience', icon: Briefcase, symbol: '⚡' },
-    { name: 'Skills', icon: Wrench, symbol: '🛠️' },
-    { name: 'Projects', icon: FolderOpen, symbol: '🔩' },
-    { name: 'Contact', icon: Phone, symbol: '📞' },
+    { name: 'Home', icon: Home },
+    { name: 'About', icon: User },
+    { name: 'Experience', icon: Briefcase },
+    { name: 'Skills', icon: Wrench },
+    { name: 'Projects', icon: FolderOpen },
+    { name: 'Contact', icon: Phone },
   ];
 
   const navVariants = {
@@ -87,12 +87,11 @@ const Navigation: React.FC<NavigationProps> = ({
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           {/* Logo */}
           <motion.div 
-            className="text-purple-500 font-bold text-lg sm:text-xl md:text-2xl cursor-pointer flex items-center gap-2"
+            className="text-purple-500 font-bold text-lg sm:text-xl md:text-2xl cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => handleSectionClick(0)}
           >
-            <span className="text-2xl">⚙️</span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
               Viswa M
             </span>
@@ -157,8 +156,7 @@ const Navigation: React.FC<NavigationProps> = ({
               <div className="p-6 border-b border-purple-500/20 bg-gray-900/50">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-xl font-bold text-purple-400 flex items-center gap-2">
-                      <span className="text-2xl">⚙️</span>
+                    <h3 className="text-xl font-bold text-purple-400">
                       Navigation
                     </h3>
                     <p className="text-xs text-gray-400 mt-1">Mechanical Engineering Portfolio</p>
@@ -196,7 +194,6 @@ const Navigation: React.FC<NavigationProps> = ({
                         transition: { delay: index * 0.1 }
                       }}
                     >
-                      <span className="text-2xl">{item.symbol}</span>
                       <IconComponent className="w-5 h-5" />
                       <div className="flex-1">
                         <span className="font-medium text-lg">{item.name}</span>
@@ -216,8 +213,7 @@ const Navigation: React.FC<NavigationProps> = ({
               {/* Menu Footer */}
               <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-purple-500/20 bg-gray-900/50">
                 <div className="text-center">
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <span className="text-2xl">🔧</span>
+                  <div className="mb-2">
                     <p className="text-gray-400 text-sm">Mechanical Design Engineer</p>
                   </div>
                   <p className="text-purple-400 text-xs mt-1">Portfolio 2024</p>

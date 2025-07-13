@@ -181,8 +181,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           variants={itemVariants}
           className="mb-8 h-12 sm:h-14 flex items-center justify-center"
         >
-          <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-300 font-bold flex items-center gap-3">
-            <span className="text-3xl">⚙️</span>
+          <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-300 font-bold">
             <TypeAnimation
               sequence={[
                 'Mechanical Design Engineer',
@@ -210,10 +209,10 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto"
         >
           {[
-            { icon: Cog, title: 'Design', desc: 'SolidWorks, CATIA', symbol: '🎯' },
-            { icon: Zap, title: 'Analysis', desc: 'ANSYS, FEA, CFD', symbol: '🔬' },
-            { icon: Wrench, title: 'Automation', desc: 'Python, MATLAB', symbol: '⚡' },
-            { icon: FileText, title: 'Innovation', desc: 'R&D, Optimization', symbol: '💡' }
+            { icon: Cog, title: 'Design', desc: 'SolidWorks, CATIA' },
+            { icon: Zap, title: 'Analysis', desc: 'ANSYS, FEA, CFD' },
+            { icon: Wrench, title: 'Automation', desc: 'Python, MATLAB' },
+            { icon: FileText, title: 'Innovation', desc: 'R&D, Optimization' }
           ].map((item, index) => (
             <motion.div
               key={item.title}
@@ -225,9 +224,6 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
               }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="absolute top-2 right-2 text-2xl opacity-20">
-                {item.symbol}
-              </div>
               <item.icon className="w-8 h-8 text-purple-500 mb-3 mx-auto" />
               <h3 className="font-bold text-lg sm:text-xl mb-1">{item.title}</h3>
               <p className="text-base sm:text-lg text-gray-400 font-semibold">{item.desc}</p>
@@ -251,8 +247,8 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           className="flex justify-center items-center space-x-8 mb-12"
         >
           {[
-            { icon: Github, href: "https://github.com/viswamathan", label: "GitHub", symbol: "💻" },
-            { icon: Linkedin, href: "https://www.linkedin.com/in/viswa-m-91b544258/", label: "LinkedIn", symbol: "🔗" }
+            { icon: Github, href: "https://github.com/viswamathan", label: "GitHub" },
+            { icon: Linkedin, href: "https://www.linkedin.com/in/viswa-m-91b544258/", label: "LinkedIn" }
           ].map((social, index) => (
             <motion.a
               key={social.label}
@@ -264,9 +260,6 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
               whileTap={{ scale: 0.95 }}
             >
               <social.icon className="w-6 h-6 text-white group-hover:text-purple-400 transition-colors" />
-              <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-xs opacity-0 group-hover:opacity-100 transition-opacity">
-                {social.symbol}
-              </span>
               <motion.div
                 className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity"
                 whileHover={{ scale: 1.1 }}
@@ -289,7 +282,6 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           >
             <FileText className="w-4 h-4 group-hover:rotate-12 transition-transform" />
             <span>Download Portfolio</span>
-            <span className="text-lg">📄</span>
           </motion.a>
 
           <motion.button
@@ -299,7 +291,6 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
             whileTap={{ scale: 0.95 }}
           >
             <span>Let's Connect</span>
-            <span className="text-lg">🤝</span>
           </motion.button>
         </motion.div>
       </motion.div>

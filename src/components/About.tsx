@@ -160,7 +160,7 @@ const About = () => {
                     school: "Sri Krishna College of Technology",
                     date: "2022 - 2026",
                     details: "CGPA: 7.35/10",
-                    symbol: "🎓"
+                    symbol: " 🎓 "
                   },
                   {
                     title: "Senior Secondary Education",
@@ -168,14 +168,14 @@ const About = () => {
                     date: "2021 - 2022",
                     details: "Percentage: 61%",
                     extra: "Major: Mathematics, Physics, Chemistry and Computer Science",
-                    symbol: "🎒"
+                    symbol: " 🎓 "
                   },
                   {
                     title: "Secondary Education",
                     school: "Amrita Vidyalayam, Ramnad",
                     date: "2019 - 2020",
                     details: "Percentage: 78%",
-                    symbol: "🎒"
+                    symbol: " 🎓 "
                   }
                 ].map((edu, idx) => (
                   <VerticalTimelineElement

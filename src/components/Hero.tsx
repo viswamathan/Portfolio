@@ -60,40 +60,8 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
     }
   };
 
-  // Mechanical symbols floating around
-  const mechanicalSymbols = [
-    { symbol: '⚙️', x: 10, y: 20, delay: 0 },
-    { symbol: '🔧', x: 85, y: 30, delay: 1 },
-    { symbol: '🔩', x: 15, y: 70, delay: 2 },
-    { symbol: '⚡', x: 80, y: 75, delay: 3 },
-    { symbol: '🛠️', x: 50, y: 10, delay: 4 },
-    { symbol: '⚙️', x: 90, y: 60, delay: 5 },
-  ];
-
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Mechanical Symbols Background */}
-      {mechanicalSymbols.map((item, index) => (
-        <motion.div
-          key={index}
-          className="absolute text-4xl opacity-10 pointer-events-none"
-          style={{ left: `${item.x}%`, top: `${item.y}%` }}
-          animate={{
-            y: [0, -30, 0],
-            rotate: [0, 360],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 8 + item.delay,
-            repeat: Infinity,
-            delay: item.delay,
-            ease: "easeInOut"
-          }}
-        >
-          {item.symbol}
-        </motion.div>
-      ))}
-
       {/* 3D Background */}
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 5] }}>
@@ -133,24 +101,24 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
             
             {/* Floating Mechanical Elements around Profile */}
             <motion.div
-              className="absolute -top-4 -right-4 text-2xl"
+              className="absolute -top-4 -right-4 w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center border border-purple-500/30"
               animate={{
-                rotate: [0, 360],
+                rotate: [0, 180, 360],
                 scale: [1, 1.2, 1],
               }}
               transition={{ duration: 4, repeat: Infinity }}
             >
-              ⚙️
+              <Cog className="w-4 h-4 text-purple-400" />
             </motion.div>
             <motion.div
-              className="absolute -bottom-4 -left-4 text-xl"
+              className="absolute -bottom-4 -left-4 w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center border border-blue-500/30"
               animate={{
-                rotate: [360, 0],
+                rotate: [360, 180, 0],
                 scale: [1.2, 1, 1.2],
               }}
               transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
             >
-              🔧
+              <Wrench className="w-4 h-4 text-blue-400" />
             </motion.div>
           </motion.div>
         </motion.div>

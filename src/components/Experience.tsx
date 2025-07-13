@@ -42,8 +42,6 @@ const Experience = () => {
     }
   };
 
-  const mechanicalSymbols = ['⚙️', '🔧', '🔩', '⚡', '🛠️', '⚙️'];
-
   const experiences = [
     {
       title: "Student Intern",
@@ -95,29 +93,6 @@ const Experience = () => {
       whileInView="visible"
       viewport={{ once: true }}
     >
-      {/* Background Symbols */}
-      {mechanicalSymbols.map((symbol, index) => (
-        <motion.div
-          key={index}
-          className="absolute text-4xl sm:text-6xl opacity-5 pointer-events-none"
-          style={{
-            left: `${5 + (index * 15)}%`,
-            top: `${15 + (index % 3) * 25}%`,
-          }}
-          animate={{
-            rotate: [0, 360],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 12 + index,
-            repeat: Infinity,
-            delay: index * 2,
-          }}
-        >
-          {symbol}
-        </motion.div>
-      ))}
-
       {/* Section Header */}
       <motion.div className="relative mb-12 sm:mb-16" variants={itemVariants}>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center">
@@ -141,12 +116,15 @@ const Experience = () => {
                 <motion.img
                   src={exp.logo}
                   alt={`${exp.company} Logo`}
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-purple-500/50 shadow-lg object-cover mx-auto sm:mx-0"
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-purple-500/50 shadow-lg object-cover mx-auto sm:mx-0 bg-gray-800/50"
                   whileHover={{ scale: 1.1, rotate: 360 }}
                   transition={{ duration: 0.5 }}
                 />
                 <div className="text-center sm:text-left">
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-purple-400 mb-2 flex items-center gap-2 justify-center sm:justify-start">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-purple-400 mb-2 flex items-center gap-3 justify-center sm:justify-start">
+                    <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center border border-purple-500/30">
+                      <Briefcase className="w-4 h-4 text-purple-400" />
+                    </div>
                     {exp.title}
                   </h3>
                   <h4 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white mb-3">{exp.company}</h4>

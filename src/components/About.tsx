@@ -24,34 +24,8 @@ const About = () => {
     transition: { type: "spring", stiffness: 300 }
   };
 
-  // Mechanical symbols for decoration
-  const mechanicalSymbols = ['⚙️', '🔧', '🔩', '⚡', '🛠️', '⚙️'];
-
   return (
     <div className="container mx-auto px-6 py-20 relative">
-      {/* Background Mechanical Elements */}
-      {mechanicalSymbols.map((symbol, index) => (
-        <motion.div
-          key={index}
-          className="absolute text-6xl opacity-5 pointer-events-none"
-          style={{
-            left: `${10 + (index * 15)}%`,
-            top: `${20 + (index % 3) * 30}%`,
-          }}
-          animate={{
-            rotate: [0, 360],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 10 + index,
-            repeat: Infinity,
-            delay: index * 2,
-          }}
-        >
-          {symbol}
-        </motion.div>
-      ))}
-
       <motion.div className="relative z-10">
         <motion.h2 
           {...fadeInUp}
@@ -174,7 +148,9 @@ const About = () => {
               className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/20 relative overflow-hidden border border-gray-700/50"
             >
               <div className="flex items-center gap-3 mb-6">
-                <BookOpen className="text-purple-500 w-5 h-5" />
+                <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center border border-purple-500/30">
+                  <GraduationCap className="text-purple-500 w-4 h-4" />
+                </div>
                 <h3 className="text-lg sm:text-xl font-bold text-white">Education</h3>
               </div>
               <VerticalTimeline layout="1-column-left" lineColor="#6b21a8">

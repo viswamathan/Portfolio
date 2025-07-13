@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Calendar, Building, Award, FileText, ChevronRight, Target, Wrench } from 'lucide-react';
+import { MapPin, Calendar, Building, Award, FileText, ChevronRight, Target, Wrench, Briefcase } from 'lucide-react';
 import 'react-vertical-timeline-component/style.min.css';
 
 const Experience = () => {

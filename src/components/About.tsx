@@ -222,6 +222,7 @@ const About = () => {
                   </motion.div>
                 ))}
               </div>
+            </div>
             </motion.div>
           </motion.div>
         </motion.div>

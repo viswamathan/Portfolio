@@ -143,24 +143,23 @@ const About = () => {
 
           {/* Education Timeline */}
           <motion.div variants={fadeInUp}>
-            <motion.div 
-              whileHover={cardHover} 
-              className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/20 relative overflow-hidden border border-gray-700/50"
-            >
+            <div className="bg-gray-800/50 p-6 rounded-lg backdrop-blur-sm hover:shadow-xl hover:shadow-purple-500/20 relative overflow-hidden border border-gray-700/50">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center border border-purple-500/30">
                   <GraduationCap className="text-purple-500 w-4 h-4" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-white">Education</h3>
               </div>
-              <VerticalTimeline layout="1-column-left" lineColor="#6b21a8">
+              
+              <div className="space-y-6">
                 {[
                   {
                     title: "B.E in Mechanical Engineering",
                     school: "Sri Krishna College of Technology",
                     date: "2022 - 2026",
                     details: "CGPA: 7.35/10",
-                    symbol: " 🎓 "
+                    status: "Current",
+                    level: "Bachelor's Degree"
                   },
                   {
                     title: "Senior Secondary Education",
@@ -168,40 +167,61 @@ const About = () => {
                     date: "2021 - 2022",
                     details: "Percentage: 61%",
                     extra: "Major: Mathematics, Physics, Chemistry and Computer Science",
-                    symbol: " 🎓 "
+                    status: "Completed",
+                    level: "Higher Secondary"
                   },
                   {
                     title: "Secondary Education",
                     school: "Amrita Vidyalayam, Ramnad",
                     date: "2019 - 2020",
                     details: "Percentage: 78%",
-                    symbol: " 🎓 "
+                    status: "Completed",
+                    level: "Secondary"
                   }
                 ].map((edu, idx) => (
-                  <VerticalTimelineElement
+                  <motion.div
                     key={idx}
-                    contentStyle={{ 
-                      background: 'rgba(31, 41, 55, 0.5)', 
-                      color: '#fff', 
-                      backdropFilter: 'blur(10px)', 
-                      boxShadow: '0 0 20px rgba(139, 92, 246, 0.1)',
-                      border: '1px solid rgba(139, 92, 246, 0.2)'
-                    }}
-                    contentArrowStyle={{ borderRight: '7px solid rgba(31, 41, 55, 0.5)' }}
-                    date={edu.date}
-                    iconStyle={{ background: '#7c3aed', color: '#fff', fontSize: '1.2rem' }}
-                    icon={<span>{edu.symbol}</span>}
+                    className="relative pl-8 pb-6 border-l-2 border-purple-500/30 last:border-l-0"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.2 }}
+                    whileHover={{ x: 5 }}
                   >
-                    <h3 className="font-bold text-sm sm:text-base flex items-center gap-2">
-                      <span>{edu.symbol}</span>
-                      {edu.title}
-                    </h3>
-                    <h4 className="text-purple-400 text-xs sm:text-sm">{edu.school}</h4>
-                    <p className="text-gray-300 text-xs sm:text-sm mt-1">{edu.details}</p>
-                    {edu.extra && <p className="text-gray-300 text-xs sm:text-sm">{edu.extra}</p>}
-                  </VerticalTimelineElement>
+                    {/* Timeline dot */}
+                    <div className="absolute -left-3 top-0 w-6 h-6 bg-purple-600 rounded-full border-4 border-gray-800 flex items-center justify-center">
+                      <GraduationCap className="w-3 h-3 text-white" />
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="bg-gray-700/30 p-4 rounded-lg hover:bg-gray-700/50 transition-all duration-300">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                        <h4 className="font-bold text-white text-sm sm:text-base">{edu.title}</h4>
+                        <div className="flex items-center gap-2">
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                            edu.status === 'Current' 
+                              ? 'bg-green-500/20 text-green-400 border border-green-500/30' 
+                              : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                          }`}>
+                            {edu.status}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <h5 className="text-purple-400 text-xs sm:text-sm font-medium mb-1">{edu.school}</h5>
+                      <p className="text-gray-400 text-xs mb-2">{edu.level}</p>
+                      
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs text-gray-300">
+                        <span className="font-medium">{edu.details}</span>
+                        <span className="text-purple-300">{edu.date}</span>
+                      </div>
+                      
+                      {edu.extra && (
+                        <p className="text-gray-400 text-xs mt-2 italic">{edu.extra}</p>
+                      )}
+                    </div>
+                  </motion.div>
                 ))}
-              </VerticalTimeline>
+              </div>
             </motion.div>
           </motion.div>
         </motion.div>

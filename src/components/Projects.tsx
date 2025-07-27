@@ -54,13 +54,13 @@ const projectCategories = {
         technologies: ["SolidWorks", "ANSYS", "FEA", "Material Science"],
         image1: "/images/SPROCKET STRESS.jpg",
         image2: "/images/SPROCKET DEFORM.jpg",
-        report: "/reports/Thermo-Structural Analysis of Piston Head Using ANSYS Mechanical.pdf",
+        report: "/reports/Structural Failure Analysis and Optimization of a Flat Sprocket Using Finite Element Analysis.pdf',
         simulations: [
           "/simulations/deform.gif",
           "/simulations/stress.gif",
         ]
       },
-      {
+      {`
         title: "Piston Head Optimization Through Thermal and Structural FEA",
         description: "Simulated piston head in ANSYS to identify thermal and stress hotspots, enabling durability and material optimization.",
         problem: "Piston head faces extreme heat and pressure, causing thermal fatigue and structural deformation.",
@@ -69,7 +69,7 @@ const projectCategories = {
         technologies: ["ANSYS", "SolidWorks", "FEA", "Thermal Analysis"],
         image1: "/images/PISTON 1.png",
         image2: "/images/PISTON 2.png",
-        report: "/reports/heat-exchanger-optimization.pdf",
+        report: "/reports/Thermo-Structural Analysis of Piston Head Using ANSYS Mechanical.pdf",
          simulations: [
           "/simulations/head deform.gif",
           "/simulations/head stress.gif",

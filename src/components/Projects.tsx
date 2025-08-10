@@ -54,7 +54,7 @@ const projectCategories = {
         technologies: ["SolidWorks", "ANSYS", "FEA", "Material Science"],
         image1: "/images/SPROCKET STRESS.jpg",
         image2: "/images/SPROCKET DEFORM.jpg",
-        report: "/reports/Structural Failure Analysis and Optimization of a Flat Sprocket Using Finite Element Analysis.pdf',
+        report: "/reports/Structural Failure Analysis and Optimization of a Flat Sprocket Using Finite Element Analysis.pdf",
         simulations: [
           "/simulations/deform.gif",
           "/simulations/stress.gif",

@@ -88,8 +88,8 @@ const projectCategories = {
         description: "Designed to track fuel stock, sales, and transactions efficiently, enabling real-time monitoring and report generation for petrol stations..",
         technologies: ["Python", "MySql", "OS", "Matplotlib"],
         githubUrl: "https://github.com/viswamathan/PETROL-MANAGEMENT-PROJECT-USING-PYTHON-AND-SQL",
-        image1: "/calculator-1.jpg",
-        image2: "/calculator-2.jpg",
+        image1: "https://images.pexels.com/photos/4386321/pexels-photo-4386321.jpeg?auto=compress&cs=tinysrgb&w=800",
+        image2: "https://images.pexels.com/photos/590016/pexels-photo-590016.jpg?auto=compress&cs=tinysrgb&w=800",
         report: "/reports/automation-report.pdf"
       },
       {
@@ -109,15 +109,6 @@ const projectCategories = {
     intro: "Advanced Systems combining mechanical design with smart control systems.",
     projects: [
       {
-        title: "Solar Dryer with PCM",
-        description: "Advanced solar dryer incorporating Phase Change Materials (PCM) for enhanced efficiency.",
-        problem: "Inconsistent drying performance and energy wastage in traditional solar dryers.",
-        solution: "Integrated PCM technology with forced convection and optimized fin design.",
-        impact: "60% improvement in drying efficiency and 8-hour extended operation after sunset.",
-        technologies: ["MATLAB", "CFD", "Thermal Analysis", "Arduino"],
-        image1: "/SOLAR DRYER MODAL.jpeg",
-        image2: "/SOLAR DRYER PROTOTYPE.jpeg",
-        report: "/reports/Modified Solar Dryer Report.pdf"
       }
     ]
   }

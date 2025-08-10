@@ -219,7 +219,7 @@ const Projects = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveCategory(key)}
-              className={\`flex items-center gap-2 px-6 py-3 rounded-full transition-all ${
+              className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all ${
                 activeCategory === key
                   ? 'bg-purple-600 text-white'
                   : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700'

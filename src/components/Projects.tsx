@@ -60,7 +60,7 @@ const projectCategories = {
           "/simulations/stress.gif",
         ]
       },
-      {`
+      {
         title: "Piston Head Optimization Through Thermal and Structural FEA",
         description: "Simulated piston head in ANSYS to identify thermal and stress hotspots, enabling durability and material optimization.",
         problem: "Piston head faces extreme heat and pressure, causing thermal fatigue and structural deformation.",
@@ -160,13 +160,13 @@ const Projects = () => {
         <motion.img
           whileHover={{ scale: 1.05 }}
           src={project.image1}
-          alt={`${project.title} - View 1`}
+          alt={\`${project.title} - View 1`}
           className="w-full h-48 object-cover rounded-lg border-2 border-purple-500/30 hover:border-purple-500"
         />
         <motion.img
           whileHover={{ scale: 1.05 }}
           src={project.image2}
-          alt={`${project.title} - View 2`}
+          alt={\`${project.title} - View 2`}
           className="w-full h-48 object-cover rounded-lg border-2 border-purple-500/30 hover:border-purple-500"
         />
       </div>
@@ -219,7 +219,7 @@ const Projects = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveCategory(key)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all ${
+              className={\`flex items-center gap-2 px-6 py-3 rounded-full transition-all ${
                 activeCategory === key
                   ? 'bg-purple-600 text-white'
                   : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700'

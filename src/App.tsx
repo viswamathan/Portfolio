@@ -9,6 +9,7 @@ import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import CADModels from './components/CADModels';
 import EngineeringCalculator from './components/EngineeringCalculator';
 import LoadingScreen from './components/LoadingScreen';
 import Navigation from './components/Navigation';
@@ -72,6 +73,11 @@ export default function App() {
     setMenuOpen(false);
   };
 
+  const navigateToPage = (page: string) => {
+    setCurrentPage(page);
+    setMenuOpen(false);
+  };
+
   const pageVariants = {
     initial: { opacity: 0 },
     animate: { 
@@ -118,26 +124,38 @@ export default function App() {
 
               {/* Main Content */}
               <main className="relative">
-                {/* Remove Suspense fallback for instant render */}
-                {[Hero, About, Experience, Skills, Projects, Contact].map((Component, index) => (
+                {currentPage === 'portfolio' ? (
+                  /* Portfolio Sections */
+                  [Hero, About, Experience, Skills, Projects, Contact].map((Component, index) => (
+                    <motion.section
+                      key={index}
+                      ref={el => {
+                        sections.current[index] = el;
+                        sectionRefs[index](el);
+                      }}
+                      className={`relative ${
+                        index === 0 ? 'min-h-screen' : 'min-h-screen py-12 sm:py-16 lg:py-20'
+                      }`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                    >
+                      <Component
+                        scrollToContact={index === 0 ? () => scrollToSection(5) : undefined}
+                      />
+                    </motion.section>
+                  ))
+                ) : currentPage === 'cad-models' ? (
+                  /* CAD Models Page */
                   <motion.section
-                    key={index}
-                    ref={el => {
-                      sections.current[index] = el;
-                      sectionRefs[index](el);
-                    }}
-                    className={`relative ${
-                      index === 0 ? 'min-h-screen' : 'min-h-screen py-12 sm:py-16 lg:py-20'
-                    }`}
+                    className="relative min-h-screen py-12 sm:py-16 lg:py-20"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                   >
-                    <Component
-                      scrollToContact={index === 0 ? () => scrollToSection(5) : undefined}
-                    />
+                    <CADModels />
                   </motion.section>
-                ))}
+                ) : null}
                 {/* Engineering Calculator */}
                 <EngineeringCalculator />
               </main>

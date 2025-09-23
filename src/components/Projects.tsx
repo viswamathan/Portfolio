@@ -92,15 +92,6 @@ const projectCategories = {
         image2: "https://images.pexels.com/photos/590016/pexels-photo-590016.jpg?auto=compress&cs=tinysrgb&w=800",
         report: "/reports/automation-report.pdf"
       },
-      {
-        title: "CAD File Converter",
-        description: "Web-based tool for converting between different CAD file formats with built-in optimization.",
-        technologies: ["JavaScript", "Three.js", "Node.js", "WebAssembly"],
-        githubUrl: "https://github.com/yourusername/cad-converter",
-        image1: "/converter-1.jpg",
-        image2: "/converter-2.jpg",
-        report: "/reports/converter-report.pdf"
-      }
     ]
   },
   hybrid: {

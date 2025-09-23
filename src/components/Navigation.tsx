@@ -28,6 +28,11 @@ const Navigation: React.FC<NavigationProps> = ({
     { name: 'Contact', icon: Phone },
   ];
 
+  const pageItems = [
+    { name: 'Portfolio', page: 'portfolio', icon: Home },
+    { name: 'About', page: 'about', icon: User },
+  ];
+
   const navVariants = {
     hidden: { y: -100, opacity: 0 },
     visible: { 
@@ -220,8 +225,6 @@ const Navigation: React.FC<NavigationProps> = ({
                       </motion.button>
                     );
                   })}
-                  </div>
-                )}
                 </div>
 
                 {/* Section Navigation (only show when on portfolio page) */}
@@ -231,39 +234,41 @@ const Navigation: React.FC<NavigationProps> = ({
                       Sections
                     </h4>
                     {navItems.map((item, index) => {
-                  const IconComponent = item.icon;
-                  return (
-                    <motion.button
-                      key={item.name}
-                      onClick={() => handleSectionClick(index)}
-                      className={`w-full py-4 px-6 flex items-center space-x-4 text-left transition-all duration-300 ${
-                        activeSection === index
-                          ? 'bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-400 border-r-4 border-purple-500'
-                          : 'text-gray-300 hover:bg-gray-800/50 hover:text-purple-400'
-                      }`}
-                      whileHover={{ x: 10 }}
-                      whileTap={{ scale: 0.98 }}
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ 
-                        opacity: 1, 
-                        x: 0,
-                        transition: { delay: index * 0.1 }
-                      }}
-                    >
-                      <IconComponent className="w-5 h-5" />
-                      <div className="flex-1">
-                        <span className="font-medium text-lg">{item.name}</span>
-                        {activeSection === index && (
-                          <motion.div
-                            initial={{ width: 0 }}
-                            animate={{ width: '100%' }}
-                            className="h-0.5 bg-purple-500 mt-1"
-                          />
-                        )}
-                      </div>
-                    </motion.button>
-                  );
-                })}
+                      const IconComponent = item.icon;
+                      return (
+                        <motion.button
+                          key={item.name}
+                          onClick={() => handleSectionClick(index)}
+                          className={`w-full py-4 px-6 flex items-center space-x-4 text-left transition-all duration-300 ${
+                            activeSection === index
+                              ? 'bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-400 border-r-4 border-purple-500'
+                              : 'text-gray-300 hover:bg-gray-800/50 hover:text-purple-400'
+                          }`}
+                          whileHover={{ x: 10 }}
+                          whileTap={{ scale: 0.98 }}
+                          initial={{ opacity: 0, x: 50 }}
+                          animate={{ 
+                            opacity: 1, 
+                            x: 0,
+                            transition: { delay: index * 0.1 }
+                          }}
+                        >
+                          <IconComponent className="w-5 h-5" />
+                          <div className="flex-1">
+                            <span className="font-medium text-lg">{item.name}</span>
+                            {activeSection === index && (
+                              <motion.div
+                                initial={{ width: 0 }}
+                                animate={{ width: '100%' }}
+                                className="h-0.5 bg-purple-500 mt-1"
+                              />
+                            )}
+                          </div>
+                        </motion.button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
 
               {/* Menu Footer */}

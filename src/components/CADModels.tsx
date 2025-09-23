@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Cube, Download, Eye, Layers, Ruler, Cog } from 'lucide-react';
+import { Download, Eye, Layers, Ruler, Cog } from 'lucide-react';
 
 const CADModels = () => {
   const cadModels = [
@@ -151,7 +151,7 @@ const CADModels = () => {
                 {/* Overlay Icons */}
                 <div className="absolute top-4 right-4 flex gap-2">
                   <div className="bg-purple-600/80 backdrop-blur-sm p-2 rounded-full">
-                    <Cube className="w-4 h-4 text-white" />
+                    <Layers className="w-4 h-4 text-white" />
                   </div>
                 </div>
               </div>

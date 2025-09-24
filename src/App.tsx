@@ -10,7 +10,6 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import CADModels from './components/CADModels';
-import CADModels from './components/CADModels';
 import EngineeringCalculator from './components/EngineeringCalculator';
 import LoadingScreen from './components/LoadingScreen';
 import Navigation from './components/Navigation';

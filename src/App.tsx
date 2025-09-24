@@ -24,7 +24,6 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [currentPage, setCurrentPage] = useState('portfolio');
-  const [currentPage, setCurrentPage] = useState('portfolio');
 
   useEffect(() => {
     const handleResize = () => {

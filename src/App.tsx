@@ -10,6 +10,7 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import CADModels from './components/CADModels';
+import CADModels from './components/CADModels';
 import EngineeringCalculator from './components/EngineeringCalculator';
 import LoadingScreen from './components/LoadingScreen';
 import Navigation from './components/Navigation';
@@ -23,6 +24,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [currentPage, setCurrentPage] = useState('portfolio');
   const [currentPage, setCurrentPage] = useState('portfolio');
 
   useEffect(() => {
@@ -123,10 +125,14 @@ export default function App() {
                 scrollY={scrollY}
                 currentPage={currentPage}
                 navigateToPage={setCurrentPage}
+                currentPage={currentPage}
+                navigateToPage={setCurrentPage}
               />
 
               {/* Main Content */}
               <main className="relative">
+                {currentPage === 'portfolio' ? (
+                  /* Portfolio Sections */
                 {currentPage === 'portfolio' ? (
                   /* Portfolio Sections */
                   [Hero, About, Experience, Skills, Projects, Contact].map((Component, index) => (
@@ -148,6 +154,17 @@ export default function App() {
                       />
                     </motion.section>
                   ))
+                ) : currentPage === 'cad-models' ? (
+                  /* CAD Models Page */
+                  <motion.section
+                    className="relative min-h-screen py-12 sm:py-16 lg:py-20"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                  >
+                    <CADModels />
+                  </motion.section>
+                ) : null}
                 ) : currentPage === 'cad-models' ? (
                   /* CAD Models Page */
                   <motion.section

@@ -10,6 +10,8 @@ interface NavigationProps {
   scrollY: number;
   currentPage: string;
   navigateToPage: (page: string) => void;
+  currentPage: string;
+  navigateToPage: (page: string) => void;
 }
 
 const Navigation: React.FC<NavigationProps> = ({
@@ -17,6 +19,8 @@ const Navigation: React.FC<NavigationProps> = ({
   isMenuOpen,
   setMenuOpen,
   scrollToSection,
+  currentPage,
+  navigateToPage,
   currentPage,
   navigateToPage,
   scrollY
@@ -33,6 +37,11 @@ const Navigation: React.FC<NavigationProps> = ({
   const pageItems = [
     { name: 'Portfolio', page: 'portfolio', icon: Home },
     { name: 'About', page: 'about', icon: User },
+  ];
+
+  const pageItems = [
+    { name: 'Portfolio', page: 'portfolio', icon: Home },
+    { name: 'CAD Models', page: 'cad-models', icon: FolderOpen },
   ];
 
   const navVariants = {
@@ -78,6 +87,11 @@ const Navigation: React.FC<NavigationProps> = ({
 
   const handleSectionClick = (index: number) => {
     scrollToSection(index);
+    setMenuOpen(false);
+  };
+
+  const handlePageClick = (page: string) => {
+    navigateToPage(page);
     setMenuOpen(false);
   };
 
@@ -235,6 +249,53 @@ const Navigation: React.FC<NavigationProps> = ({
                     <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 mb-2">
                       Sections
                     </h4>
+                {/* Page Navigation */}
+                <div className="mb-4">
+                  <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 mb-2">
+                    Pages
+                  </h4>
+                  {pageItems.map((item) => {
+                    const IconComponent = item.icon;
+                    return (
+                      <motion.button
+                        key={item.page}
+                        onClick={() => handlePageClick(item.page)}
+                        className={`w-full py-4 px-6 flex items-center space-x-4 text-left transition-all duration-300 ${
+                          currentPage === item.page
+                            ? 'bg-gradient-to-r from-purple-600/20 to-blue-600/20 text-purple-400 border-r-4 border-purple-500'
+                            : 'text-gray-300 hover:bg-gray-800/50 hover:text-purple-400'
+                        }`}
+                        whileHover={{ x: 10 }}
+                        whileTap={{ scale: 0.98 }}
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ 
+                          opacity: 1, 
+                          x: 0,
+                          transition: { delay: 0.1 }
+                        }}
+                      >
+                        <IconComponent className="w-5 h-5" />
+                        <div className="flex-1">
+                          <span className="font-medium text-lg">{item.name}</span>
+                          {currentPage === item.page && (
+                            <motion.div
+                              initial={{ width: 0 }}
+                              animate={{ width: '100%' }}
+                              className="h-0.5 bg-purple-500 mt-1"
+                            />
+                          )}
+                        </div>
+                      </motion.button>
+                    );
+                  })}
+                </div>
+
+                {/* Section Navigation (only show when on portfolio page) */}
+                {currentPage === 'portfolio' && (
+                  <div>
+                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 mb-2">
+                      Sections
+                    </h4>
                     {navItems.map((item, index) => {
                       const IconComponent = item.icon;
                       return (
@@ -269,6 +330,8 @@ const Navigation: React.FC<NavigationProps> = ({
                         </motion.button>
                       );
                     })}
+                  </div>
+                )}
                   </div>
                 )}
               </div>

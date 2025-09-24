@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, Suspense } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { LazyMotion, domAnimation, motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -18,29 +18,23 @@ import ScrollProgress from './components/ScrollProgress';
 
 export default function App() {
   const sections = useRef<(HTMLElement | null)[]>([]);
-  const [activeSection, setActiveSection] = React.useState(0);
-  const [isMenuOpen, setMenuOpen] = React.useState(false);
+  const [activeSection, setActiveSection] = useState(0);
+  const [isMenuOpen, setMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [currentPage, setCurrentPage] = useState('portfolio');
+  const [currentPage, setCurrentPage] = useState<'portfolio' | 'cad-models'>('portfolio');
 
+  // ✅ Resize & scroll tracking
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleScroll = () => setScrollY(window.scrollY);
 
     handleResize();
     window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
 
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    const timer = setTimeout(() => setIsLoading(false), 3000);
 
     return () => {
       clearTimeout(timer);
@@ -49,50 +43,37 @@ export default function App() {
     };
   }, []);
 
-  const createSectionObserver = (index: number) => {
+  // ✅ Section intersection observers
+  const sectionRefs = [0, 1, 2, 3, 4, 5].map(index => {
     const { ref, inView } = useInView({
       threshold: isMobile ? 0.2 : 0.4,
       rootMargin: '-20% 0px -20% 0px'
     });
 
-    React.useEffect(() => {
-      if (inView) {
-        setActiveSection(index);
-      }
+    useEffect(() => {
+      if (inView) setActiveSection(index);
     }, [inView]);
 
     return ref;
-  };
-
-  const sectionRefs = [0, 1, 2, 3, 4, 5].map(index => createSectionObserver(index));
+  });
 
   const scrollToSection = (index: number) => {
-    sections.current[index]?.scrollIntoView({ 
+    sections.current[index]?.scrollIntoView({
       behavior: 'smooth',
       block: 'start'
     });
     setMenuOpen(false);
   };
 
-  const navigateToPage = (page: string) => {
-    setCurrentPage(page);
-    setMenuOpen(false);
-  };
-
   const pageVariants = {
     initial: { opacity: 0 },
-    animate: { 
+    animate: {
       opacity: 1,
-      transition: {
-        duration: 0.4, // reduced for snappier transition
-        ease: "easeOut"
-      }
+      transition: { duration: 0.4, ease: 'easeOut' }
     },
-    exit: { 
+    exit: {
       opacity: 0,
-      transition: {
-        duration: 0.3
-      }
+      transition: { duration: 0.3 }
     }
   };
 
@@ -113,9 +94,9 @@ export default function App() {
             >
               {/* Particle Background */}
               <ParticleBackground />
-              
+
               {/* Navigation */}
-              <Navigation 
+              <Navigation
                 activeSection={activeSection}
                 isMenuOpen={isMenuOpen}
                 setMenuOpen={setMenuOpen}
@@ -123,73 +104,56 @@ export default function App() {
                 scrollY={scrollY}
                 currentPage={currentPage}
                 navigateToPage={setCurrentPage}
-                currentPage={currentPage}
-                navigateToPage={setCurrentPage}
               />
 
               {/* Main Content */}
               <main className="relative">
                 {currentPage === 'portfolio' ? (
-                  /* Portfolio Sections */
-                {currentPage === 'portfolio' ? (
-                  /* Portfolio Sections */
                   [Hero, About, Experience, Skills, Projects, Contact].map((Component, index) => (
                     <motion.section
                       key={index}
                       ref={el => {
                         sections.current[index] = el;
-                        sectionRefs[index](el);
+                        if (sectionRefs[index]) sectionRefs[index](el);
                       }}
                       className={`relative ${
-                        index === 0 ? 'min-h-screen' : 'min-h-screen py-12 sm:py-16 lg:py-20'
+                        index === 0
+                          ? 'min-h-screen'
+                          : 'min-h-screen py-12 sm:py-16 lg:py-20'
                       }`}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      transition={{ duration: 0.5, ease: 'easeOut' }}
                     >
                       <Component
                         scrollToContact={index === 0 ? () => scrollToSection(5) : undefined}
                       />
                     </motion.section>
                   ))
-                ) : currentPage === 'cad-models' ? (
-                  /* CAD Models Page */
+                ) : (
                   <motion.section
                     className="relative min-h-screen py-12 sm:py-16 lg:py-20"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
                   >
                     <CADModels />
                   </motion.section>
-                ) : null}
-                ) : currentPage === 'cad-models' ? (
-                  /* CAD Models Page */
-                  <motion.section
-                    className="relative min-h-screen py-12 sm:py-16 lg:py-20"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
-                  >
-                    <CADModels />
-                  </motion.section>
-                ) : null}
+                )}
+
                 {/* Engineering Calculator */}
                 <EngineeringCalculator />
               </main>
 
               {/* Scroll Progress */}
-              <ScrollProgress 
-                activeSection={activeSection}
-                scrollToSection={scrollToSection}
-              />
+              <ScrollProgress activeSection={activeSection} scrollToSection={scrollToSection} />
 
               {/* Floating Action Button */}
               <motion.div
                 className="fixed bottom-6 right-6 z-40"
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 2, type: "spring", stiffness: 260, damping: 20 }}
+                transition={{ delay: 2, type: 'spring', stiffness: 260, damping: 20 }}
               >
                 <motion.button
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

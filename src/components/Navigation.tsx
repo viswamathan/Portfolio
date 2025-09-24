@@ -8,6 +8,8 @@ interface NavigationProps {
   setMenuOpen: (open: boolean) => void;
   scrollToSection: (index: number) => void;
   scrollY: number;
+  currentPage: string;
+  navigateToPage: (page: string) => void;
 }
 
 const Navigation: React.FC<NavigationProps> = ({

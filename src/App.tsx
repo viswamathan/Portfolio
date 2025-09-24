@@ -23,6 +23,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [currentPage, setCurrentPage] = useState('portfolio');
 
   useEffect(() => {
     const handleResize = () => {
@@ -120,6 +121,8 @@ export default function App() {
                 setMenuOpen={setMenuOpen}
                 scrollToSection={scrollToSection}
                 scrollY={scrollY}
+                currentPage={currentPage}
+                navigateToPage={setCurrentPage}
               />
 
               {/* Main Content */}

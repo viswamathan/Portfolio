@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Calendar, Building, Award, FileText, ChevronRight, Target, Wrench, Briefcase } from 'lucide-react';
+import { MapPin, Calendar, Building, Award, FileText, ChevronRight, Target, Wrench, Briefcase, Eye, X } from 'lucide-react';
 import 'react-vertical-timeline-component/style.min.css';
 
 const Experience = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const handleNIOTCertificate = () => {
     window.open('/NIOT INTERNSHIP CERTIFICATE.png', '_blank');
   };
@@ -212,20 +214,22 @@ const Experience = () => {
                 {exp.images.map((image, idx) => (
                   <motion.div
                     key={idx}
-                    className="relative group overflow-hidden rounded-xl"
+                    className="relative group overflow-hidden rounded-xl border border-purple-500/30"
                     whileHover={{ scale: 1.03 }}
                     transition={{ duration: 0.3 }}
                   >
                     <img 
                       src={image}
                       alt={`${exp.company} Experience ${idx + 1}`}
-                      className="w-full h-32 sm:h-36 object-cover rounded-lg border-2 border-purple-500/30 group-hover:border-purple-500 transition-all duration-300"
+                      className="w-full h-32 sm:h-36 object-cover rounded-lg"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 to-transparent opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300" />
-                    <div className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <p className="text-white text-xs font-medium flex items-center gap-1">
-                        {exp.company} - Experience {idx + 1}
-                      </p>
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                      <button
+                        onClick={() => setSelectedImage(image)}
+                        className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition"
+                      >
+                        <Eye className="w-5 h-5 text-white" />
+                      </button>
                     </div>
                   </motion.div>
                 ))}
@@ -258,6 +262,21 @@ const Experience = () => {
           </motion.div>
         </div>
       </motion.div>
+
+      {/* Modal for Image View */}
+      {selectedImage && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+          <div className="relative max-w-4xl w-full px-4">
+            <img src={selectedImage} alt="Full View" className="w-full h-auto rounded-lg shadow-lg object-contain" />
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 bg-gray-800/70 p-2 rounded-full hover:bg-gray-700 transition"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 };

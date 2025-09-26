@@ -214,14 +214,14 @@ const Experience = () => {
                 {exp.images.map((image, idx) => (
                   <motion.div
                     key={idx}
-                    className="relative group overflow-hidden rounded-xl border border-purple-500/30"
+                    className="relative group overflow-hidden rounded-xl border border-purple-500/30 bg-black flex items-center justify-center"
                     whileHover={{ scale: 1.03 }}
                     transition={{ duration: 0.3 }}
                   >
                     <img 
                       src={image}
                       alt={`${exp.company} Experience ${idx + 1}`}
-                      className="w-full h-32 sm:h-36 object-cover rounded-lg"
+                      className="w-full h-40 sm:h-48 object-contain rounded-lg bg-black"
                     />
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
                       <button
@@ -266,8 +266,12 @@ const Experience = () => {
       {/* Modal for Image View */}
       {selectedImage && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          <div className="relative max-w-4xl w-full px-4">
-            <img src={selectedImage} alt="Full View" className="w-full h-auto rounded-lg shadow-lg object-contain" />
+          <div className="relative max-w-6xl w-full h-full flex items-center justify-center p-4">
+            <img 
+              src={selectedImage} 
+              alt="Full View" 
+              className="max-h-[90vh] w-auto rounded-lg shadow-lg object-contain"
+            />
             <button
               onClick={() => setSelectedImage(null)}
               className="absolute top-4 right-4 bg-gray-800/70 p-2 rounded-full hover:bg-gray-700 transition"

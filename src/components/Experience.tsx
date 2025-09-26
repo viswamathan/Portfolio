@@ -211,28 +211,33 @@ const Experience = () => {
 
               {/* Images */}
               <div className="space-y-3">
-                {exp.images.map((image, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="relative group overflow-hidden rounded-xl border border-purple-500/30 bg-black flex items-center justify-center"
-                    whileHover={{ scale: 1.03 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <img 
-                      src={image}
-                      alt={`${exp.company} Experience ${idx + 1}`}
-                      className="w-full h-40 sm:h-48 object-contain rounded-lg bg-black"
-                    />
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-                      <button
-                        onClick={() => setSelectedImage(image)}
-                        className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition"
-                      >
-                        <Eye className="w-5 h-5 text-white" />
-                      </button>
-                    </div>
-                  </motion.div>
-                ))}
+                {exp.images.map((image, idx) => {
+                  const isSpecialImage = image === "/SAF 2.jpg"; // only SAF 2
+                  return (
+                    <motion.div
+                      key={idx}
+                      className="relative group overflow-hidden rounded-xl border border-purple-500/30 bg-black flex items-center justify-center"
+                      whileHover={{ scale: 1.03 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <img
+                        src={image}
+                        alt={`${exp.company} Experience ${idx + 1}`}
+                        className={`w-full rounded-lg bg-black ${
+                          isSpecialImage ? 'h-60 sm:h-72 object-contain' : 'h-40 sm:h-48 object-cover'
+                        }`}
+                      />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                        <button
+                          onClick={() => setSelectedImage(image)}
+                          className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition"
+                        >
+                          <Eye className="w-5 h-5 text-white" />
+                        </button>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
           </motion.div>
@@ -267,9 +272,9 @@ const Experience = () => {
       {selectedImage && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
           <div className="relative max-w-6xl w-full h-full flex items-center justify-center p-4">
-            <img 
-              src={selectedImage} 
-              alt="Full View" 
+            <img
+              src={selectedImage}
+              alt="Full View"
               className="max-h-[90vh] w-auto rounded-lg shadow-lg object-contain"
             />
             <button

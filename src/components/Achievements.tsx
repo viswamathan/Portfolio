@@ -12,7 +12,7 @@ const Achievements = () => {
       issuer: "Dassault Systèmes SolidWorks Corporation",
       date: "2024",
       description: "Professional certification demonstrating proficiency in SolidWorks 3D CAD software, including part modeling, assembly creation, and drawing generation.",
-      image: "https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      image: "/acheivements/VISWA CSWA",
       skills: ["3D Modeling", "Assembly Design", "Technical Drawings", "Part Configuration", "Design Validation"],
       credentialId: "CSWA-2024-VM-001",
       verificationUrl: "#",

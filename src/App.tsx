@@ -149,8 +149,7 @@ export default function App() {
                   >
                     <Achievements />
                   </motion.section>
-                ) : null
-                )}
+                ) : null}
 
                 {/* Engineering Calculator */}
                 <EngineeringCalculator />

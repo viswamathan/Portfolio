@@ -12,6 +12,7 @@ import Contact from './components/Contact';
 import CADModels from './components/CADModels';
 import EngineeringCalculator from './components/EngineeringCalculator';
 import LoadingScreen from './components/LoadingScreen';
+import Achievements from './components/Achievements';
 import Navigation from './components/Navigation';
 import ParticleBackground from './components/ParticleBackground';
 import ScrollProgress from './components/ScrollProgress';
@@ -23,7 +24,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [currentPage, setCurrentPage] = useState<'portfolio' | 'cad-models'>('portfolio');
+  const [currentPage, setCurrentPage] = useState<'portfolio' | 'cad-models' | 'achievements'>('portfolio');
 
   // ✅ Resize & scroll tracking
   useEffect(() => {
@@ -130,7 +131,7 @@ export default function App() {
                       />
                     </motion.section>
                   ))
-                ) : (
+                ) : currentPage === 'cad-models' ? (
                   <motion.section
                     className="relative min-h-screen py-12 sm:py-16 lg:py-20"
                     initial={{ opacity: 0, y: 20 }}
@@ -139,6 +140,16 @@ export default function App() {
                   >
                     <CADModels />
                   </motion.section>
+                ) : currentPage === 'achievements' ? (
+                  <motion.section
+                    className="relative min-h-screen py-12 sm:py-16 lg:py-20"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                  >
+                    <Achievements />
+                  </motion.section>
+                ) : null
                 )}
 
                 {/* Engineering Calculator */}

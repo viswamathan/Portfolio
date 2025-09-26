@@ -8,8 +8,8 @@ interface NavigationProps {
   setMenuOpen: (open: boolean) => void;
   scrollToSection: (index: number) => void;
   scrollY: number;
-  currentPage: string;
-  navigateToPage: (page: string) => void;
+  currentPage: 'portfolio' | 'cad-models' | 'achievements';
+  navigateToPage: (page: 'portfolio' | 'cad-models' | 'achievements') => void;
 }
 
 const Navigation: React.FC<NavigationProps> = ({
@@ -33,6 +33,7 @@ const Navigation: React.FC<NavigationProps> = ({
   const pageItems = [
     { name: 'Portfolio', page: 'portfolio', icon: Home },
     { name: 'CAD Models', page: 'cad-models', icon: FolderOpen },
+    { name: 'Achievements', page: 'achievements', icon: Briefcase },
   ];
 
   const navVariants = {

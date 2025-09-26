@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Calendar, CheckCircle, ExternalLink, Download, Star, Trophy, Medal } from 'lucide-react';
 
 const Achievements = () => {
-  const [selectedCertificate, setSelectedCertificate] = useState(null);
-
   const certificates = [
     {
       id: 1,
       title: "Certified SolidWorks Associate (CSWA)",
       issuer: "Dassault Systèmes SolidWorks Corporation",
       date: "2024",
-      description: "Professional certification demonstrating proficiency in SolidWorks 3D CAD software, including part modeling, assembly creation, and drawing generation.",
-      image: "VISWA CSWA.png",
-      skills: ["3D Modeling", "Assembly Design", "Technical Drawings", "Part Configuration", "Design Validation"],
+      description:
+        "Professional certification demonstrating proficiency in SolidWorks 3D CAD software, including part modeling, assembly creation, and drawing generation.",
+      image: "VISWA CSWA.png", // make sure this file is inside your public folder
+      skills: [
+        "3D Modeling",
+        "Assembly Design",
+        "Technical Drawings",
+        "Part Configuration",
+        "Design Validation",
+      ],
       credentialId: "C-L3G7SF84B9",
-      verificationUrl: "#",
       category: "Professional Certification",
       level: "Associate",
       validUntil: "Lifetime",
@@ -23,16 +27,16 @@ const Achievements = () => {
         "Demonstrated proficiency in 3D part modeling",
         "Mastered assembly creation and constraints",
         "Skilled in creating technical drawings and annotations",
-        "Validated understanding of design intent and best practices"
-      ]
-    }
+        "Validated understanding of design intent and best practices",
+      ],
+    },
   ];
 
   const achievements = [
     { icon: Trophy, title: "Academic Excellence", count: "7.35/10", description: "CGPA in Mechanical Engineering" },
     { icon: Medal, title: "Patents Filed", count: "2", description: "Innovation in mechanical design" },
     { icon: Star, title: "Certifications", count: "10+", description: "Professional and technical certifications" },
-    { icon: Award, title: "Projects Completed", count: "5+", description: "Engineering and research projects" }
+    { icon: Award, title: "Projects Completed", count: "5+", description: "Engineering and research projects" },
   ];
 
   const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
@@ -76,7 +80,7 @@ const Achievements = () => {
           <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-purple-400">
             Featured Certification
           </h3>
-          
+
           {certificates.map((cert) => (
             <motion.div
               key={cert.id}
@@ -86,27 +90,15 @@ const Achievements = () => {
             >
               <div className="grid lg:grid-cols-2 gap-8">
                 {/* Certificate Image */}
-                <div className="relative group w-full flex items-center justify-center overflow-hidden">
+                <div className="relative w-full flex items-center justify-center overflow-hidden">
                   <motion.img
                     src={cert.image}
                     alt={cert.title}
                     className="w-full h-auto max-h-[500px] object-contain cursor-pointer"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.5 }}
-                    onClick={() => setSelectedCertificate(cert)}
+                    onClick={() => window.open(cert.image, "_blank")}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <motion.div
-                    className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    initial={{ y: 20 }}
-                    whileHover={{ y: 0 }}
-                  >
-                    <p className="text-white font-medium mb-2">Click to view full certificate</p>
-                    <div className="flex items-center gap-2 text-purple-400">
-                      <ExternalLink className="w-4 h-4" />
-                      <span className="text-sm">Expand View</span>
-                    </div>
-                  </motion.div>
                 </div>
 
                 {/* Certificate Details */}
@@ -117,7 +109,7 @@ const Achievements = () => {
                       <p className="text-purple-400 font-medium">{cert.issuer}</p>
                     </div>
                     <div className="text-right">
-                      <div className={`px-3 py-1 rounded-full text-xs border bg-green-500/20 text-green-400 border-green-500/30`}>
+                      <div className="px-3 py-1 rounded-full text-xs border bg-green-500/20 text-green-400 border-green-500/30">
                         <CheckCircle className="w-3 h-3 inline mr-1" />
                         Certified
                       </div>
@@ -179,20 +171,30 @@ const Achievements = () => {
 
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-3">
+                    {/* View Certificate */}
                     <motion.button
                       className="flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-colors font-medium"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      onClick={() => window.open(cert.verificationUrl, '_blank')}
+                      onClick={() => window.open(cert.image, "_blank")}
                     >
                       <ExternalLink className="w-4 h-4" />
-                      Verify Certificate
+                      View Certificate
                     </motion.button>
-                    
+
+                    {/* Download Certificate */}
                     <motion.button
                       className="flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition-colors font-medium"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        const link = document.createElement("a");
+                        link.href = cert.image;
+                        link.download = `${cert.title}.png`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                      }}
                     >
                       <Download className="w-4 h-4" />
                       Download Certificate
@@ -220,43 +222,6 @@ const Achievements = () => {
           </motion.button>
         </motion.div>
       </motion.div>
-
-      {/* Certificate Modal */}
-      {selectedCertificate && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
-          onClick={() => setSelectedCertificate(null)}
-        >
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            className="relative max-w-4xl w-full"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={selectedCertificate.image}
-              alt={selectedCertificate.title}
-              className="w-full h-auto rounded-lg shadow-2xl"
-            />
-            <motion.button
-              className="absolute top-4 right-4 bg-gray-900/80 hover:bg-gray-800 text-white p-2 rounded-full"
-              onClick={() => setSelectedCertificate(null)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <ExternalLink className="w-6 h-6" />
-            </motion.button>
-            <div className="absolute bottom-4 left-4 right-4 bg-gray-900/90 backdrop-blur-sm rounded-lg p-4">
-              <h4 className="text-white font-bold text-lg mb-2">{selectedCertificate.title}</h4>
-              <p className="text-gray-300 text-sm">{selectedCertificate.issuer} • {selectedCertificate.date}</p>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
     </div>
   );
 };

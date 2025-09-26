@@ -14,7 +14,7 @@ const Achievements = () => {
       description: "Professional certification demonstrating proficiency in SolidWorks 3D CAD software, including part modeling, assembly creation, and drawing generation.",
       image: "VISWA CSWA.png",
       skills: ["3D Modeling", "Assembly Design", "Technical Drawings", "Part Configuration", "Design Validation"],
-      credentialId: "CSWA-2024-VM-001",
+      credentialId: "C-L3G7SF84B9",
       verificationUrl: "#",
       category: "Professional Certification",
       level: "Associate",
@@ -29,41 +29,14 @@ const Achievements = () => {
   ];
 
   const achievements = [
-    {
-      icon: Trophy,
-      title: "Academic Excellence",
-      count: "7.35/10",
-      description: "CGPA in Mechanical Engineering"
-    },
-    {
-      icon: Medal,
-      title: "Patents Filed",
-      count: "2",
-      description: "Innovation in mechanical design"
-    },
-    {
-      icon: Star,
-      title: "Certifications",
-      count: "10+",
-      description: "Professional and technical certifications"
-    },
-    {
-      icon: Award,
-      title: "Projects Completed",
-      count: "5+",
-      description: "Engineering and research projects"
-    }
+    { icon: Trophy, title: "Academic Excellence", count: "7.35/10", description: "CGPA in Mechanical Engineering" },
+    { icon: Medal, title: "Patents Filed", count: "2", description: "Innovation in mechanical design" },
+    { icon: Star, title: "Certifications", count: "10+", description: "Professional and technical certifications" },
+    { icon: Award, title: "Projects Completed", count: "5+", description: "Engineering and research projects" }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  };
+  const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
+  const itemVariants = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 
   return (
     <div className="container mx-auto px-6 py-20">
@@ -113,11 +86,11 @@ const Achievements = () => {
             >
               <div className="grid lg:grid-cols-2 gap-8">
                 {/* Certificate Image */}
-                <div className="relative group">
+                <div className="relative group w-full flex items-center justify-center overflow-hidden">
                   <motion.img
                     src={cert.image}
                     alt={cert.title}
-                    className="w-full h-96 lg:h-full object-cover cursor-pointer"
+                    className="w-full h-auto max-h-[500px] object-contain cursor-pointer"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.5 }}
                     onClick={() => setSelectedCertificate(cert)}

@@ -15,110 +15,17 @@ import {
 const CADModels = () => {
   const cadModels = [
     {
-      title: "Advanced Gear Transmission System",
-      description:
-        "High-precision planetary gear system with optimized tooth profiles for maximum power transmission efficiency and minimal backlash.",
+      title: "Pair of Spur Gears",
+      description:"Precision-engineered spur gear pair with optimized module and pressure angle for smooth torque transmission and minimal vibration under varying loads.",
       software: "SolidWorks",
       category: "Mechanical Parts",
-      complexity: "Advanced",
-      designTime: "120 hours",
-      features: ["Parametric Design", "Motion Study", "Stress Analysis"],
-      image:
-        "https://images.pexels.com/photos/159275/macro-gear-gear-wheel-clockwork-159275.jpeg?auto=compress&cs=tinysrgb&w=800",
-      downloadUrl: "/models/gear-system.step",
+      complexity: "Intermediate",
+      designTime: "1 hour",
+      features: ["Parametric Design", "Gear Ratio Analysis", "Motion Study"],
+      image:"/3d Pictures/gear profile.png",
+      downloadUrl: "/models/gear profile.sldasm",
       views: 1247,
       downloads: 89,
-    },
-    {
-      title: "Automotive Brake Disc Assembly",
-      description:
-        "Ventilated brake disc with optimized cooling channels, weight reduction features, and integrated ABS sensor mounting.",
-      software: "CATIA",
-      category: "Automotive",
-      complexity: "Intermediate",
-      designTime: "85 hours",
-      features: ["Thermal Analysis", "Weight Optimization", "Quality Control"],
-      image:
-        "https://images.pexels.com/photos/3806288/pexels-photo-3806288.jpeg?auto=compress&cs=tinysrgb&w=800",
-      downloadUrl: "/models/brake-disc.step",
-      views: 892,
-      downloads: 67,
-    },
-    {
-      title: "Industrial Valve Control System",
-      description:
-        "Multi-port industrial control valve with pneumatic actuator and fail-safe mechanisms for critical applications.",
-      software: "SolidWorks",
-      category: "Industrial",
-      complexity: "Advanced",
-      designTime: "150 hours",
-      features: ["Flow Simulation", "Pressure Testing", "Actuator Integration"],
-      image:
-        "https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=800",
-      downloadUrl: "/models/valve.step",
-      views: 1156,
-      downloads: 94,
-    },
-    {
-      title: "Compact Heat Exchanger Design",
-      description:
-        "Shell-and-tube heat exchanger with enhanced thermal performance, minimal pressure drop, and compact footprint.",
-      software: "SolidWorks",
-      category: "Thermal Systems",
-      complexity: "Advanced",
-      designTime: "200 hours",
-      features: ["CFD Analysis", "Thermal Optimization", "Pressure Drop Analysis"],
-      image:
-        "https://images.pexels.com/photos/2760241/pexels-photo-2760241.jpeg?auto=compress&cs=tinysrgb&w=800",
-      downloadUrl: "/models/heat-exchanger.step",
-      views: 743,
-      downloads: 52,
-    },
-    {
-      title: "Precision Robotic Joint Mechanism",
-      description:
-        "Six-axis robotic joint with precision bearings and advanced position control for industrial automation.",
-      software: "Fusion 360",
-      category: "Robotics",
-      complexity: "Expert",
-      designTime: "180 hours",
-      features: ["Kinematic Analysis", "Servo Integration", "Precision Bearings"],
-      image:
-        "https://images.pexels.com/photos/2085831/pexels-photo-2085831.jpeg?auto=compress&cs=tinysrgb&w=800",
-      downloadUrl: "/models/robotic-joint.step",
-      views: 1389,
-      downloads: 112,
-    },
-    {
-      title: "Multi-Component Assembly System",
-      description:
-        "Complex mechanical assembly with 150+ components, featuring advanced mating conditions and exploded views.",
-      software: "SolidWorks",
-      category: "Assembly",
-      complexity: "Expert",
-      designTime: "300 hours",
-      features: ["Large Assembly", "Motion Simulation", "BOM Generation"],
-      image:
-        "https://images.pexels.com/photos/159298/gears-cogs-machine-machinery-159298.jpeg?auto=compress&cs=tinysrgb&w=800",
-      downloadUrl: "/models/assembly.step",
-      views: 2156,
-      downloads: 178,
-    },
-    // More models
-    {
-      title: "Drone Propeller Assembly",
-      description:
-        "Lightweight carbon-fiber propeller optimized for aerodynamic efficiency and low noise.",
-      software: "Fusion 360",
-      category: "Aerospace",
-      complexity: "Intermediate",
-      designTime: "60 hours",
-      features: ["Aerodynamic Optimization", "Lightweight", "CFD Validated"],
-      image:
-        "https://images.pexels.com/photos/163786/pexels-photo-163786.jpeg?auto=compress&cs=tinysrgb&w=800",
-      downloadUrl: "/models/drone-propeller.step",
-      views: 642,
-      downloads: 45,
     },
   ];
 

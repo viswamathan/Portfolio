@@ -1,10 +1,44 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Rocket, Code, Layers, TrendingUp, X, Cog, Cpu, Github, Eye, ZoomIn, Play, FileText, ExternalLink } from 'lucide-react';
-import ProjectCard from './ProjectCard';
+import {
+  Rocket,
+  Code,
+  Layers,
+  TrendingUp,
+  X,
+  Cog,
+  Cpu,
+  Github,
+  Eye,
+  ZoomIn,
+  Play,
+  FileText,
+  ExternalLink,
+} from 'lucide-react';
 
-// Simulation Modal
-const SimulationModal = ({ isOpen, onClose, simulations }: { isOpen: boolean; onClose: () => void; simulations: string[] }) => {
+/**
+ * Projects.tsx
+ * - Complete, fixed version of your Projects component with:
+ *   - SimulationModal
+ *   - ImageModal (lightbox)
+ *   - ProjectGalleryModal (multi-image gallery with thumbnails)
+ *   - EnhancedProjectCard
+ *   - renderSoftwareProject
+ *
+ * Notes:
+ * - This is TypeScript/TSX. If your project is plain JS, remove the type annotations.
+ * - Replace image/report/simulation paths with real assets or URLs.
+ */
+
+/* ----------------------------- Modal Components ---------------------------- */
+
+type SimulationModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  simulations: string[];
+};
+
+const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simulations }) => {
   if (!isOpen) return null;
 
   return (
@@ -37,8 +71,14 @@ const SimulationModal = ({ isOpen, onClose, simulations }: { isOpen: boolean; on
   );
 };
 
-// Image Lightbox Modal
-const ImageModal = ({ isOpen, onClose, image, title }: { isOpen: boolean; onClose: () => void; image: string; title?: string }) => {
+type ImageModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  image: string;
+  title?: string;
+};
+
+const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image, title }) => {
   if (!isOpen) return null;
 
   return (
@@ -47,8 +87,15 @@ const ImageModal = ({ isOpen, onClose, image, title }: { isOpen: boolean; onClos
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
     >
-      <div className="relative max-w-6xl w-full max-h-[90vh] flex flex-col">
+      <div
+        className="relative max-w-6xl w-full max-h-[90vh] flex flex-col"
+        onClick={(e) => {
+          // prevent closing when clicking inside
+          e.stopPropagation();
+        }}
+      >
         <div className="flex justify-between items-center mb-4">
           {title && <h3 className="text-xl font-bold text-white">{title}</h3>}
           <button onClick={onClose} className="p-2 hover:bg-gray-800 rounded-full transition-colors">
@@ -66,13 +113,19 @@ const ImageModal = ({ isOpen, onClose, image, title }: { isOpen: boolean; onClos
   );
 };
 
-// Enhanced Project Gallery Modal
-const ProjectGalleryModal = ({ isOpen, onClose, project }: { isOpen: boolean; onClose: () => void; project: any }) => {
+type ProjectGalleryModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  project: any | null;
+};
+
+const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClose, project }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
+
   if (!isOpen || !project) return null;
 
-  const images = [project.image1, project.image2];
+  // Collect available images safely
+  const images = [project.image1, project.image2].filter(Boolean) as string[];
 
   return (
     <motion.div
@@ -80,33 +133,39 @@ const ProjectGalleryModal = ({ isOpen, onClose, project }: { isOpen: boolean; on
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
     >
-      <div className="relative max-w-7xl w-full max-h-[95vh] flex flex-col">
+      <div
+        className="relative max-w-7xl w-full max-h-[95vh] flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <div>
             <h3 className="text-2xl font-bold text-white">{project.title}</h3>
-            <p className="text-gray-400">{project.technologies?.join(', ')}</p>
+            {project.technologies && (
+              <p className="text-gray-400">{project.technologies.join(', ')}</p>
+            )}
           </div>
           <button onClick={onClose} className="p-3 hover:bg-gray-800 rounded-full transition-colors">
             <X className="w-6 h-6 text-white" />
           </button>
         </div>
-        
+
         {/* Main Image */}
         <div className="flex-1 flex items-center justify-center mb-6">
           <div className="relative">
-            <img 
-              src={images[currentImageIndex]} 
-              alt={`${project.title} - View ${currentImageIndex + 1}`} 
+            <img
+              src={images[currentImageIndex]}
+              alt={`${project.title} - View ${currentImageIndex + 1}`}
               className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl"
             />
-            
+
             {/* Navigation Arrows */}
             {images.length > 1 && (
               <>
                 <button
-                  onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)}
+                  onClick={() => setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
                   className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 rounded-full transition-colors"
                 >
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -114,7 +173,7 @@ const ProjectGalleryModal = ({ isOpen, onClose, project }: { isOpen: boolean; on
                   </svg>
                 </button>
                 <button
-                  onClick={() => setCurrentImageIndex(prev => prev === images.length - 1 ? 0 : prev + 1)}
+                  onClick={() => setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
                   className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 rounded-full transition-colors"
                 >
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,7 +184,7 @@ const ProjectGalleryModal = ({ isOpen, onClose, project }: { isOpen: boolean; on
             )}
           </div>
         </div>
-        
+
         {/* Thumbnails */}
         {images.length > 1 && (
           <div className="flex justify-center gap-4 mb-6">
@@ -142,7 +201,7 @@ const ProjectGalleryModal = ({ isOpen, onClose, project }: { isOpen: boolean; on
             ))}
           </div>
         )}
-        
+
         {/* Project Info */}
         <div className="bg-gray-900/80 backdrop-blur-sm rounded-lg p-6">
           <div className="grid md:grid-cols-2 gap-6">
@@ -162,6 +221,7 @@ const ProjectGalleryModal = ({ isOpen, onClose, project }: { isOpen: boolean; on
                 </div>
               )}
             </div>
+
             <div>
               {project.impact && (
                 <div className="mb-4">
@@ -170,8 +230,8 @@ const ProjectGalleryModal = ({ isOpen, onClose, project }: { isOpen: boolean; on
                 </div>
               )}
               <div className="flex flex-wrap gap-2">
-                {project.technologies?.map((tech, index) => (
-                  <span key={index} className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full text-xs">
+                {project.technologies?.map((tech: string, idx: number) => (
+                  <span key={idx} className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full text-xs">
                     {tech}
                   </span>
                 ))}
@@ -184,9 +244,24 @@ const ProjectGalleryModal = ({ isOpen, onClose, project }: { isOpen: boolean; on
   );
 };
 
-// Enhanced Project Card Component
-const EnhancedProjectCard = ({ project, onViewGallery, onViewImage }) => {
-  const [hoveredImage, setHoveredImage] = useState(null);
+/* --------------------------- Enhanced Project Card -------------------------- */
+
+type EnhancedProjectCardProps = {
+  project: any;
+  onViewGallery: (project: any) => void;
+  onViewImage: (image: string, title?: string) => void;
+  onViewSimulation: (sims: string[]) => void;
+};
+
+const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
+  project,
+  onViewGallery,
+  onViewImage,
+  onViewSimulation,
+}) => {
+  const [hoveredImage, setHoveredImage] = useState<number | null>(null);
+
+  const images = [project.image1, project.image2].filter(Boolean) as string[];
 
   return (
     <motion.div
@@ -239,11 +314,11 @@ const EnhancedProjectCard = ({ project, onViewGallery, onViewImage }) => {
           <div className="mb-6">
             <h4 className="font-semibold text-purple-300 mb-2 text-sm">Technologies Used:</h4>
             <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech, index) => (
+              {project.technologies.map((tech: string, index: number) => (
                 <motion.span
                   key={index}
                   className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30"
-                  whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.3)' }}
+                  whileHover={{ scale: 1.05 }}
                 >
                   {tech}
                 </motion.span>
@@ -254,7 +329,7 @@ const EnhancedProjectCard = ({ project, onViewGallery, onViewImage }) => {
 
         {/* Enhanced Image Gallery */}
         <div className="grid grid-cols-2 gap-3 mb-6">
-          {[project.image1, project.image2].map((img, idx) => (
+          {images.map((img, idx) => (
             <div key={idx} className="relative group">
               <motion.div
                 className="relative w-full h-40 rounded-lg overflow-hidden border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
@@ -264,7 +339,7 @@ const EnhancedProjectCard = ({ project, onViewGallery, onViewImage }) => {
                 onClick={() => onViewImage(img, project.title)}
               >
                 <img src={img} alt={`${project.title} - View ${idx + 1}`} className="w-full h-full object-cover" />
-                
+
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <div className="flex gap-2">
@@ -272,6 +347,10 @@ const EnhancedProjectCard = ({ project, onViewGallery, onViewImage }) => {
                       className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onViewImage(img, project.title);
+                      }}
                     >
                       <Eye className="w-4 h-4 text-white" />
                     </motion.button>
@@ -288,7 +367,7 @@ const EnhancedProjectCard = ({ project, onViewGallery, onViewImage }) => {
                     </motion.button>
                   </div>
                 </div>
-                
+
                 {/* Image Label */}
                 <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
                   View {idx + 1}
@@ -313,19 +392,19 @@ const EnhancedProjectCard = ({ project, onViewGallery, onViewImage }) => {
               <span>Technical Report</span>
             </motion.a>
           )}
-          
+
           {project.simulations && (
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => onViewSimulation?.(project.simulations)}
+              onClick={() => onViewSimulation(project.simulations)}
               className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
             >
               <Play className="w-4 h-4" />
               <span>View Simulation</span>
             </motion.button>
           )}
-          
+
           {project.githubUrl && (
             <motion.a
               whileHover={{ scale: 1.05 }}
@@ -339,7 +418,7 @@ const EnhancedProjectCard = ({ project, onViewGallery, onViewImage }) => {
               <span>Source Code</span>
             </motion.a>
           )}
-          
+
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -349,16 +428,23 @@ const EnhancedProjectCard = ({ project, onViewGallery, onViewImage }) => {
             <ExternalLink className="w-4 h-4" />
             <span>Full Gallery</span>
           </motion.button>
-          <X className="w-6 h-6 text-white" />
-        </button>
-        <img src={image} alt="Project View" className="max-w-full max-h-[90vh] object-contain rounded-lg" />
+        </div>
       </div>
     </motion.div>
   );
 };
 
-// Project Categories
-const projectCategories = {
+/* ----------------------------- Project Data -------------------------------- */
+
+const projectCategories: Record<
+  string,
+  {
+    icon: React.ComponentType<any>;
+    title: string;
+    intro: string;
+    projects: any[];
+  }
+> = {
   mechanical: {
     icon: Cog,
     title: 'Optimization and Innovation',
@@ -428,95 +514,109 @@ const projectCategories = {
   },
 };
 
-const Projects = () => {
-  const [activeCategory, setActiveCategory] = useState('mechanical');
+/* ------------------------------- Main Page --------------------------------- */
+
+const Projects: React.FC = () => {
+  const [activeCategory, setActiveCategory] = useState<'mechanical' | 'software' | 'hybrid'>('mechanical');
   const [modalSimulations, setModalSimulations] = useState<string[] | null>(null);
-  const [lightboxImage, setLightboxImage] = useState<{ image: string; title: string } | null>(null);
-  const [galleryProject, setGalleryProject] = useState(null);
+  const [lightboxImage, setLightboxImage] = useState<{ image: string; title?: string } | null>(null);
+  const [galleryProject, setGalleryProject] = useState<any | null>(null);
 
   const handleViewSimulation = (simulations: string[]) => setModalSimulations(simulations);
   const closeSimulationModal = () => setModalSimulations(null);
 
-  const openLightbox = (image: string, title: string = '') => setLightboxImage({ image, title });
+  const openLightbox = (image: string, title?: string) => setLightboxImage({ image, title });
   const closeLightbox = () => setLightboxImage(null);
 
-  const openGallery = (project) => setGalleryProject(project);
+  const openGallery = (project: any) => setGalleryProject(project);
   const closeGallery = () => setGalleryProject(null);
 
-  const renderSoftwareProject = (project) => (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
-      className="bg-gray-800/50 rounded-lg overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 p-6"
-    >
-      <h3 className="text-2xl font-bold text-purple-400 mb-4">{project.title}</h3>
-      <p className="text-gray-300 mb-6">{project.description}</p>
+  const renderSoftwareProject = (project: any, idx: number) => {
+    const images = [project.image1, project.image2].filter(Boolean) as string[];
 
-      <div className="mb-6">
-        <h4 className="font-semibold text-purple-300 mb-2">Technologies Used:</h4>
-        <div className="flex flex-wrap gap-2">
-          {project.technologies.map((tech, index) => (
-            <span key={index} className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm">
-              {tech}
-            </span>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-      <div className="grid grid-cols-2 gap-4 mb-6">
-        {[project.image1, project.image2].map((img, idx) => (
-          <div key={idx} className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-purple-500/30">
-            <motion.img 
-              whileHover={{ scale: 1.05 }} 
-              src={img} 
-              alt={`${project.title} - View ${idx + 1}`} 
-              className="w-full h-full object-cover cursor-pointer" 
-              onClick={() => openLightbox(img, project.title)}
-            />
-            <button
-              onClick={() => openLightbox(img, project.title)}
-              className="absolute top-2 right-2 p-2 bg-black/50 rounded-full hover:bg-purple-600 transition-colors"
-            >
-              <Eye className="w-5 h-5 text-white" />
-            </button>
+    return (
+      <motion.div
+        key={idx}
+        whileHover={{ scale: 1.02 }}
+        className="bg-gray-800/50 rounded-lg overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 p-6"
+      >
+        <h3 className="text-2xl font-bold text-purple-400 mb-4">{project.title}</h3>
+        <p className="text-gray-300 mb-6">{project.description}</p>
+
+        <div className="mb-6">
+          <h4 className="font-semibold text-purple-300 mb-2">Technologies Used:</h4>
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map((tech: string, index: number) => (
+              <span key={index} className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm">
+                {tech}
+              </span>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
 
-      <div className="flex flex-wrap gap-4">
-        {project.githubUrl && (
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
-          >
-            <Github className="w-4 h-4" />
-            <span>View on GitHub</span>
-          </motion.a>
+        {images.length > 0 && (
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            {images.map((img, idxImg) => (
+              <div key={idxImg} className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-purple-500/30">
+                <motion.img
+                  whileHover={{ scale: 1.05 }}
+                  src={img}
+                  alt={`${project.title} - View ${idxImg + 1}`}
+                  className="w-full h-full object-cover cursor-pointer"
+                  onClick={() => openLightbox(img, project.title)}
+                />
+                <button
+                  onClick={() => openLightbox(img, project.title)}
+                  className="absolute top-2 right-2 p-2 bg-black/50 rounded-full hover:bg-purple-600 transition-colors"
+                >
+                  <Eye className="w-5 h-5 text-white" />
+                </button>
+              </div>
+            ))}
+          </div>
         )}
 
-        {project.report && (
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href={project.report}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"
-          >
-            <Code className="w-4 h-4" />
-            <span>View Documentation</span>
-          </motion.a>
-        )}
-      </div>
-    </motion.div>
-  );
+        <div className="flex flex-wrap gap-4">
+          {project.githubUrl && (
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
+            >
+              <Github className="w-4 h-4" />
+              <span>View on GitHub</span>
+            </motion.a>
+          )}
+
+          {project.report && (
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href={project.report}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"
+            >
+              <Code className="w-4 h-4" />
+              <span>View Documentation</span>
+            </motion.a>
+          )}
+        </div>
+      </motion.div>
+    );
+  };
 
   return (
-    <div className="container mx-auto px-6">
-      <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-4xl font-bold mb-12 text-center">
+    <div className="container mx-auto px-6 py-12">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-4xl font-bold mb-12 text-center"
+      >
         Featured Projects
       </motion.h2>
 
@@ -528,7 +628,7 @@ const Projects = () => {
               key={key}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveCategory(key)}
+              onClick={() => setActiveCategory(key as any)}
               className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all ${
                 activeCategory === key ? 'bg-purple-600 text-white' : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700'
               }`}
@@ -546,7 +646,7 @@ const Projects = () => {
 
       <div className="grid gap-8 md:grid-cols-2">
         {activeCategory === 'software'
-          ? projectCategories[activeCategory].projects.map((project, index) => renderSoftwareProject(project))
+          ? projectCategories[activeCategory].projects.map((project, index) => renderSoftwareProject(project, index))
           : projectCategories[activeCategory].projects.map((project, index) => (
               <EnhancedProjectCard
                 key={index}
@@ -559,17 +659,15 @@ const Projects = () => {
       </div>
 
       <SimulationModal isOpen={!!modalSimulations} onClose={closeSimulationModal} simulations={modalSimulations || []} />
-      <ImageModal 
-        isOpen={!!lightboxImage} 
-        onClose={closeLightbox} 
-        image={lightboxImage?.image || ''} 
+
+      <ImageModal
+        isOpen={!!lightboxImage}
+        onClose={closeLightbox}
+        image={lightboxImage?.image || ''}
         title={lightboxImage?.title}
       />
-      <ProjectGalleryModal 
-        isOpen={!!galleryProject} 
-        onClose={closeGallery} 
-        project={galleryProject}
-      />
+
+      <ProjectGalleryModal isOpen={!!galleryProject} onClose={closeGallery} project={galleryProject} />
     </div>
   );
 };

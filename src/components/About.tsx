@@ -8,7 +8,6 @@ import {
   GraduationCap,
   Target,
   Zap,
-  Lightbulb,
   Award,
 } from "lucide-react";
 import {
@@ -47,26 +46,19 @@ const About = () => {
         About <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Me</span>
       </motion.h2>
 
-      {/* Intro */}
+      {/* Intro - completely white text */}
       <motion.div
         {...fadeInUp}
         className="text-white text-lg leading-relaxed max-w-4xl mx-auto bg-gray-900/40 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-purple-500/20"
       >
         <p className="text-center text-lg font-semibold mb-6">
-          I am a <span className="text-purple-400">Mechanical Engineer</span>{" "}
-          passionate about merging{" "}
-          <span className="text-blue-400">traditional design principles</span>{" "}
-          with <span className="text-pink-400">modern technology</span>.
+          I am a Mechanical Engineer passionate about merging traditional design
+          principles with modern technology.
         </p>
         <p className="text-center text-lg">
-          With expertise in{" "}
-          <span className="text-yellow-400">CAD modeling</span>,{" "}
-          <span className="text-green-400">FEA/CFD simulations</span>, and{" "}
-          <span className="text-red-400">automation with Python</span>, I create
-          solutions that optimize{" "}
-          <span className="text-purple-400">performance</span>, reduce{" "}
-          <span className="text-blue-400">complexity</span>, and deliver{" "}
-          <span className="text-yellow-400">real-world impact</span>.
+          With expertise in CAD modeling, FEA/CFD simulations, and automation
+          with Python, I create solutions that optimize performance, reduce
+          complexity, and deliver real-world impact.
         </p>
       </motion.div>
 
@@ -160,7 +152,7 @@ const About = () => {
           </motion.div>
         </motion.div>
 
-        {/* Education Timeline */}
+        {/* Education Timeline with logos */}
         <motion.div
           variants={fadeInUp}
           className="education-timeline flex flex-col"
@@ -181,18 +173,21 @@ const About = () => {
                   title: "B.E Mechanical Engineering",
                   place: "Sri Krishna College of Technology",
                   details: "CGPA: 7.35/10",
+                  logo: "/logos/skct.png",
                 },
                 {
                   date: "2021 - 2022",
                   title: "Senior Secondary",
                   place: "Alagar Public School, Tuticorin",
                   details: "61% - MPCS (Maths, Physics, Chem, Comp. Sci.)",
+                  logo: "/logos/alagar.png",
                 },
                 {
                   date: "2019 - 2020",
                   title: "Secondary School",
                   place: "Amrita Vidyalayam, Ramnad",
                   details: "78%",
+                  logo: "/logos/amrita.png",
                 },
               ].map((edu, idx) => (
                 <VerticalTimelineElement
@@ -203,6 +198,7 @@ const About = () => {
                     color: "#fff",
                     borderRadius: "12px",
                     border: "1px solid rgba(139,92,246,0.3)",
+                    position: "relative",
                   }}
                   contentArrowStyle={{
                     borderRight: "7px solid rgba(139,92,246,0.3)",
@@ -210,6 +206,12 @@ const About = () => {
                   iconStyle={{ background: "#7c3aed", color: "#fff" }}
                   icon={<GraduationCap />}
                 >
+                  {/* Logo in top-right corner */}
+                  <img
+                    src={edu.logo}
+                    alt="Logo"
+                    className="absolute top-4 right-4 w-10 h-10 rounded-full border border-purple-400 shadow-md"
+                  />
                   <h3 className="font-bold text-lg">{edu.title}</h3>
                   <h4 className="text-purple-300">{edu.place}</h4>
                   <p className="text-gray-300 text-sm mt-2">{edu.details}</p>
@@ -218,143 +220,6 @@ const About = () => {
             </VerticalTimeline>
           </motion.div>
         </motion.div>
-      </motion.div>
-
-      {/* Publications & Patents */}
-      <motion.div
-        variants={fadeInUp}
-        initial="initial"
-        whileInView="whileInView"
-        className="mt-20"
-      >
-        <h3 className="text-3xl font-bold mb-10 text-center">
-          Publications & <span className="text-purple-400">Patents</span>
-        </h3>
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="whileInView"
-          className="grid md:grid-cols-2 gap-10"
-        >
-          {/* Publications */}
-          <motion.div
-            variants={fadeInUp}
-            whileHover={cardHover}
-            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
-          >
-            <h4 className="text-xl font-semibold mb-4 text-purple-400">
-              Publications
-            </h4>
-            <ul className="space-y-4">
-              <motion.li whileHover={{ x: 10 }} className="flex gap-3">
-                <img
-                  src="https://img.icons8.com/color/48/book.png"
-                  alt="Publication Icon"
-                  className="w-6 h-6"
-                />
-                <div>
-                  <strong>Optimization of Heat Transfer in Solar Systems</strong>
-                  <br />
-                  <span className="text-gray-400">
-                    Intl. Journal of Renewable Energy, 2023
-                  </span>
-                </div>
-              </motion.li>
-            </ul>
-          </motion.div>
-
-          {/* Patents */}
-          <motion.div
-            variants={fadeInUp}
-            whileHover={cardHover}
-            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
-          >
-            <h4 className="text-xl font-semibold mb-4 text-purple-400">
-              Patents
-            </h4>
-            <ul className="space-y-4">
-              {[
-                {
-                  title: "Multi-Purpose Knife",
-                  number: "IN2023456789",
-                  status: "Granted",
-                },
-                {
-                  title: "Modified Solar Dryer with Energy Storage",
-                  number: "IN2023123456",
-                  status: "Pending",
-                },
-              ].map((p, idx) => (
-                <motion.li
-                  key={idx}
-                  whileHover={{ x: 10 }}
-                  className="flex gap-3"
-                >
-                  <img
-                    src="https://img.icons8.com/color/48/certificate.png"
-                    alt="Patent Icon"
-                    className="w-6 h-6"
-                  />
-                  <div>
-                    <strong>{p.title}</strong>
-                    <br />
-                    <span className="text-gray-400">#{p.number}</span> —{" "}
-                    <span
-                      className={`${
-                        p.status === "Granted"
-                          ? "text-green-400"
-                          : "text-yellow-400"
-                      }`}
-                    >
-                      {p.status}
-                    </span>
-                  </div>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
-        </motion.div>
-      </motion.div>
-
-      {/* Quick Achievements */}
-      <motion.div
-        variants={fadeInUp}
-        initial="initial"
-        whileInView="whileInView"
-        className="mt-20"
-      >
-        <h3 className="text-3xl font-bold mb-10 text-center">
-          At a <span className="text-purple-400">Glance</span>
-        </h3>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: <Target className="w-8 h-8 text-purple-400" />,
-              title: "10+ Projects",
-              desc: "CAD, FEA, and CFD case studies",
-            },
-            {
-              icon: <Zap className="w-8 h-8 text-yellow-400" />,
-              title: "Automation",
-              desc: "Python-based engineering tools",
-            },
-            {
-              icon: <Award className="w-8 h-8 text-green-400" />,
-              title: "Innovation",
-              desc: "Patents & Research contributions",
-            },
-          ].map((a, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={cardHover}
-              className="p-6 bg-gradient-to-br from-gray-900/70 to-gray-800/50 rounded-2xl text-center border border-purple-500/20 hover:shadow-lg hover:shadow-purple-500/20"
-            >
-              <div className="flex justify-center mb-4">{a.icon}</div>
-              <h4 className="text-xl font-semibold mb-2">{a.title}</h4>
-              <p className="text-gray-400 text-sm">{a.desc}</p>
-            </motion.div>
-          ))}
-        </div>
       </motion.div>
     </div>
   );

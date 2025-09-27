@@ -1,425 +1,360 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { 
-  Zap, 
-  Target, 
-  Lightbulb, 
-  Rocket, 
-  Brain, 
-  Heart,
-  Code,
-  Wrench,
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  PenTool as Tool,
+  Cpu,
+  BookOpen,
+  Microscope,
+  GraduationCap,
+  Target,
+  Zap,
+  Lightbulb,
   Award,
-  TrendingUp,
-  Users,
-  Globe,
-  Clock,
-  Star,
-  ChevronRight,
-  Play,
-  Pause,
-  Volume2,
-  VolumeX
-} from 'lucide-react';
-import { useState, useEffect } from 'react';
+} from "lucide-react";
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
+import "react-vertical-timeline-component/style.min.css";
 
 const About = () => {
-  const [activeStory, setActiveStory] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentMetric, setCurrentMetric] = useState(0);
-
-  // Auto-rotate story sections
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveStory(prev => (prev + 1) % 3);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Auto-rotate metrics
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentMetric(prev => (prev + 1) % 4);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 0.8 }
+    transition: { duration: 0.8 },
   };
 
   const staggerContainer = {
     initial: { opacity: 0 },
     whileInView: { opacity: 1 },
     viewport: { once: true },
-    transition: { staggerChildren: 0.2 }
+    transition: { staggerChildren: 0.2 },
   };
 
-  // Interactive story sections
-  const storyData = [
-    {
-      title: "The Spark",
-      icon: Lightbulb,
-      content: "My engineering journey began with curiosity about how things work. From dismantling toys to understanding complex mechanisms, I discovered my passion for mechanical systems and design innovation.",
-      highlight: "Curiosity-Driven Learning",
-      color: "yellow"
-    },
-    {
-      title: "The Growth",
-      icon: TrendingUp,
-      content: "Through rigorous academic training and hands-on projects, I developed expertise in CAD design, FEA analysis, and engineering automation. Each challenge became a stepping stone to mastery.",
-      highlight: "Skill Development",
-      color: "blue"
-    },
-    {
-      title: "The Vision",
-      icon: Rocket,
-      content: "Today, I combine traditional mechanical engineering with cutting-edge technology to create solutions that matter. My goal is to innovate at the intersection of design and technology.",
-      highlight: "Future-Focused Innovation",
-      color: "purple"
-    }
-  ];
-
-  // Dynamic metrics with real-time updates
-  const metrics = [
-    { label: "Projects Completed", value: 15, icon: Target, suffix: "+" },
-    { label: "Design Hours", value: 1200, icon: Clock, suffix: "+" },
-    { label: "Technologies Mastered", value: 8, icon: Code, suffix: "" },
-    { label: "Certifications Earned", value: 10, icon: Award, suffix: "+" }
-  ];
-
-  // Core values with interactive elements
-  const coreValues = [
-    {
-      title: "Innovation First",
-      description: "Constantly pushing boundaries to create breakthrough solutions",
-      icon: Lightbulb,
-      color: "from-yellow-500 to-orange-500"
-    },
-    {
-      title: "Precision Engineering",
-      description: "Meticulous attention to detail in every design and analysis",
-      icon: Target,
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      title: "Collaborative Spirit",
-      description: "Building bridges between disciplines for holistic solutions",
-      icon: Users,
-      color: "from-green-500 to-emerald-500"
-    },
-    {
-      title: "Continuous Learning",
-      description: "Embracing new technologies and methodologies for growth",
-      icon: Brain,
-      color: "from-purple-500 to-pink-500"
-    }
-  ];
-
-  // Technical expertise with proficiency levels
-  const technicalExpertise = [
-    { category: "CAD Design", skills: ["SolidWorks", "AutoCAD", "Fusion 360", "CATIA"], proficiency: 85 },
-    { category: "Analysis", skills: ["ANSYS", "FEA", "CFD", "Thermal Analysis"], proficiency: 75 },
-    { category: "Programming", skills: ["Python", "MATLAB", "C++", "Java"], proficiency: 70 },
-    { category: "Manufacturing", skills: ["DFM", "GD&T", "Quality Control", "Process Optimization"], proficiency: 80 }
-  ];
+  const cardHover = {
+    scale: 1.03,
+    transition: { type: "spring", stiffness: 300 },
+  };
 
   return (
-    <div className="container mx-auto px-6 py-20 relative">
-      <motion.div className="relative z-10">
-        {/* Dynamic Header */}
-        <motion.div 
-          {...fadeInUp}
-          className="text-center mb-16"
-        >
-          <motion.h2 
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
-            animate={{ 
-              backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-            }}
-            transition={{ duration: 5, repeat: Infinity }}
-            style={{
-              background: 'linear-gradient(45deg, #8b5cf6, #3b82f6, #10b981, #f59e0b)',
-              backgroundSize: '300% 300%',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            Engineering Excellence
-          </motion.h2>
-          <motion.p 
-            className="text-xl text-gray-400 max-w-3xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            Where mechanical precision meets digital innovation
-          </motion.p>
-        </motion.div>
+    <div className="container mx-auto px-6 py-20">
+      {/* Heading */}
+      <motion.h2
+        {...fadeInUp}
+        className="text-4xl md:text-5xl font-bold mb-12 text-center"
+      >
+        About <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Me</span>
+      </motion.h2>
 
-        {/* Interactive Story Timeline */}
-        <motion.div 
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="whileInView"
-          className="mb-20"
-        >
-          <h3 className="text-2xl font-bold text-center mb-12 text-purple-400">My Engineering Journey</h3>
-          
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-purple-500 to-blue-500 rounded-full" />
-            
-            {storyData.map((story, index) => {
-              const Icon = story.icon;
-              return (
-                <motion.div
-                  key={index}
-                  className={`relative flex items-center mb-16 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.3 }}
-                >
-                  {/* Content Card */}
-                  <motion.div 
-                    className={`w-5/12 ${index % 2 === 0 ? 'pr-8' : 'pl-8'}`}
-                    whileHover={{ scale: 1.05 }}
-                    onClick={() => setActiveStory(index)}
-                  >
-                    <div className={`bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
-                      activeStory === index 
-                        ? `border-${story.color}-500 shadow-lg shadow-${story.color}-500/20` 
-                        : 'border-gray-700 hover:border-gray-600'
-                    }`}>
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className={`p-3 rounded-full bg-${story.color}-500/20`}>
-                          <Icon className={`w-6 h-6 text-${story.color}-400`} />
-                        </div>
-                        <h4 className="text-xl font-bold text-white">{story.title}</h4>
-                      </div>
-                      <p className="text-gray-300 mb-4">{story.content}</p>
-                      <div className={`inline-block px-3 py-1 rounded-full bg-${story.color}-500/20 text-${story.color}-400 text-sm font-medium`}>
-                        {story.highlight}
-                      </div>
-                    </div>
-                  </motion.div>
-                  
-                  {/* Timeline Node */}
-                  <motion.div 
-                    className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full border-4 border-gray-800 z-10"
-                    style={{ backgroundColor: activeStory === index ? `var(--${story.color}-500)` : '#6b7280' }}
-                    animate={{ 
-                      scale: activeStory === index ? 1.5 : 1,
-                      boxShadow: activeStory === index ? `0 0 20px var(--${story.color}-500)` : 'none'
-                    }}
-                  />
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
+      {/* Intro */}
+      <motion.div
+        {...fadeInUp}
+        className="text-white text-lg leading-relaxed max-w-4xl mx-auto bg-gray-900/40 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-purple-500/20"
+      >
+        <p className="text-center text-lg font-semibold mb-6">
+          I am a <span className="text-purple-400">Mechanical Engineer</span>{" "}
+          passionate about merging{" "}
+          <span className="text-blue-400">traditional design principles</span>{" "}
+          with <span className="text-pink-400">modern technology</span>.
+        </p>
+        <p className="text-center text-lg">
+          With expertise in{" "}
+          <span className="text-yellow-400">CAD modeling</span>,{" "}
+          <span className="text-green-400">FEA/CFD simulations</span>, and{" "}
+          <span className="text-red-400">automation with Python</span>, I create
+          solutions that optimize{" "}
+          <span className="text-purple-400">performance</span>, reduce{" "}
+          <span className="text-blue-400">complexity</span>, and deliver{" "}
+          <span className="text-yellow-400">real-world impact</span>.
+        </p>
+      </motion.div>
 
-        {/* Dynamic Metrics Dashboard */}
-        <motion.div 
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="whileInView"
-          className="mb-20"
-        >
-          <h3 className="text-2xl font-bold text-center mb-12 text-blue-400">Impact Metrics</h3>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {metrics.map((metric, index) => {
-              const Icon = metric.icon;
-              return (
-                <motion.div
-                  key={index}
-                  className={`bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 text-center relative overflow-hidden ${
-                    currentMetric === index ? 'border-purple-500 shadow-lg shadow-purple-500/20' : ''
-                  }`}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  animate={{
-                    borderColor: currentMetric === index ? '#8b5cf6' : '#374151',
-                  }}
-                >
-                  <Icon className={`w-8 h-8 mx-auto mb-4 ${currentMetric === index ? 'text-purple-400' : 'text-gray-400'}`} />
-                  <motion.div 
-                    className="text-3xl font-bold text-white mb-2"
-                    animate={{ scale: currentMetric === index ? 1.1 : 1 }}
-                  >
-                    {metric.value}{metric.suffix}
-                  </motion.div>
-                  <div className="text-gray-400 text-sm">{metric.label}</div>
-                  
-                  {/* Animated background */}
-                  {currentMetric === index && (
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-xl"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.5 }}
-                    />
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
-
-        {/* Core Values Grid */}
-        <motion.div 
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="whileInView"
-          className="mb-20"
-        >
-          <h3 className="text-2xl font-bold text-center mb-12 text-green-400">Core Values</h3>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            {coreValues.map((value, index) => {
-              const Icon = value.icon;
-              return (
-                <motion.div
-                  key={index}
-                  className="group bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 hover:border-transparent relative overflow-hidden"
-                  whileHover={{ scale: 1.02 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                >
-                  {/* Gradient Border on Hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-r ${value.color} opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-xl`} />
-                  
-                  <div className="relative z-10">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className={`p-4 rounded-full bg-gradient-to-r ${value.color} bg-opacity-20`}>
-                        <Icon className="w-8 h-8 text-white" />
-                      </div>
-                      <h4 className="text-xl font-bold text-white">{value.title}</h4>
-                    </div>
-                    <p className="text-gray-300 leading-relaxed">{value.description}</p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
-
-        {/* Technical Expertise with Progress Bars */}
-        <motion.div 
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="whileInView"
-          className="mb-20"
-        >
-          <h3 className="text-2xl font-bold text-center mb-12 text-orange-400">Technical Expertise</h3>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            {technicalExpertise.map((area, index) => (
-              <motion.div
-                key={index}
-                className="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700"
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.2 }}
-              >
-                <div className="flex justify-between items-center mb-4">
-                  <h4 className="text-lg font-bold text-white">{area.category}</h4>
-                  <span className="text-purple-400 font-bold">{area.proficiency}%</span>
-                </div>
-                
-                {/* Progress Bar */}
-                <div className="w-full bg-gray-700 rounded-full h-3 mb-4">
-                  <motion.div
-                    className="bg-gradient-to-r from-purple-500 to-blue-500 h-3 rounded-full"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${area.proficiency}%` }}
-                    transition={{ duration: 1.5, delay: index * 0.3 }}
-                  />
-                </div>
-                
-                {/* Skills Tags */}
-                <div className="flex flex-wrap gap-2">
-                  {area.skills.map((skill, skillIndex) => (
-                    <motion.span
-                      key={skillIndex}
-                      className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: (index * 0.2) + (skillIndex * 0.1) }}
-                      whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.3)' }}
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Personal Mission Statement */}
-        <motion.div
-          {...fadeInUp}
-          className="text-center bg-gradient-to-r from-purple-900/20 via-blue-900/20 to-green-900/20 rounded-2xl p-12 border border-purple-500/20 relative overflow-hidden"
-        >
-          {/* Animated Background Pattern */}
+      {/* Two-column content */}
+      <motion.div
+        variants={staggerContainer}
+        initial="initial"
+        whileInView="whileInView"
+        className="grid md:grid-cols-2 gap-10 mt-16"
+      >
+        {/* Summary & Technicals */}
+        <motion.div variants={fadeInUp} className="space-y-8">
+          {/* Professional Summary */}
           <motion.div
-            className="absolute inset-0 opacity-10"
-            animate={{
-              backgroundPosition: ['0% 0%', '100% 100%'],
-            }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            style={{
-              backgroundImage: 'radial-gradient(circle, #8b5cf6 2px, transparent 2px)',
-              backgroundSize: '50px 50px',
-            }}
-          />
-          
-          <div className="relative z-10">
-            <motion.div
-              className="flex justify-center mb-6"
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
-              <Heart className="w-12 h-12 text-red-500" />
-            </motion.div>
-            
-            <h3 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
-              My Mission
-            </h3>
-            
-            <motion.p 
-              className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
-              To bridge the gap between traditional mechanical engineering and cutting-edge technology, 
-              creating innovative solutions that drive efficiency, sustainability, and human progress. 
-              Every design, every analysis, every line of code is crafted with precision and purpose.
-            </motion.p>
-            
-            <motion.div 
-              className="flex justify-center gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <motion.button
-                className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-full font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Rocket className="w-5 h-5" />
-                Let's Innovate Together
-              </motion.button>
-            </motion.div>
-          </div>
+            whileHover={cardHover}
+            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <Tool className="text-purple-400 w-6 h-6" />
+              <h3 className="text-xl font-semibold">Professional Summary</h3>
+            </div>
+            <p className="text-gray-300">
+              Results-driven engineer with a strong foundation in mechanics and
+              product design. Experienced in tackling multidisciplinary
+              challenges and leveraging automation to enhance engineering
+              workflows.
+            </p>
+          </motion.div>
+
+          {/* Technical Focus */}
+          <motion.div
+            whileHover={cardHover}
+            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <Cpu className="text-purple-400 w-6 h-6" />
+              <h3 className="text-xl font-semibold">Technical Focus</h3>
+            </div>
+            <ul className="list-disc list-inside text-gray-300 space-y-2">
+              <li>CAD design & design optimization</li>
+              <li>FEA & CFD for real-world problem solving</li>
+              <li>Engineering automation with Python</li>
+              <li>Design for Manufacturing (DFM)</li>
+              <li>System-level efficiency optimization</li>
+            </ul>
+          </motion.div>
+
+          {/* Research Interests */}
+          <motion.div
+            whileHover={cardHover}
+            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <Microscope className="text-purple-400 w-6 h-6" />
+              <h3 className="text-xl font-semibold">Research Interests</h3>
+            </div>
+            <ul className="space-y-4">
+              {[
+                {
+                  title: "Renewable Energy Systems",
+                  desc: "Solar thermal, energy storage, and sustainable design",
+                },
+                {
+                  title: "Advanced Materials",
+                  desc: "Composites, failure analysis, lightweight structures",
+                },
+                {
+                  title: "AI in Engineering",
+                  desc: "Predictive maintenance, ML-driven optimization",
+                },
+                {
+                  title: "Thermal Management",
+                  desc: "Heat transfer, cooling systems, HVAC design",
+                },
+              ].map((item, idx) => (
+                <motion.li
+                  key={idx}
+                  whileHover={{ x: 10 }}
+                  className="flex items-start gap-3"
+                >
+                  <div className="w-2 h-2 bg-purple-400 rounded-full mt-2"></div>
+                  <div>
+                    <h4 className="font-semibold text-purple-300">
+                      {item.title}
+                    </h4>
+                    <p className="text-gray-400 text-sm">{item.desc}</p>
+                  </div>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
         </motion.div>
+
+        {/* Education Timeline */}
+        <motion.div
+          variants={fadeInUp}
+          className="education-timeline flex flex-col"
+        >
+          <motion.div
+            whileHover={cardHover}
+            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <BookOpen className="text-purple-400 w-6 h-6" />
+              <h3 className="text-xl font-semibold">Education</h3>
+            </div>
+
+            <VerticalTimeline layout="1-column-left" lineColor="#a855f7">
+              {[
+                {
+                  date: "2022 - 2026",
+                  title: "B.E Mechanical Engineering",
+                  place: "Sri Krishna College of Technology",
+                  details: "CGPA: 7.35/10",
+                },
+                {
+                  date: "2021 - 2022",
+                  title: "Senior Secondary",
+                  place: "Alagar Public School, Tuticorin",
+                  details: "61% - MPCS (Maths, Physics, Chem, Comp. Sci.)",
+                },
+                {
+                  date: "2019 - 2020",
+                  title: "Secondary School",
+                  place: "Amrita Vidyalayam, Ramnad",
+                  details: "78%",
+                },
+              ].map((edu, idx) => (
+                <VerticalTimelineElement
+                  key={idx}
+                  date={edu.date}
+                  contentStyle={{
+                    background: "rgba(31,41,55,0.7)",
+                    color: "#fff",
+                    borderRadius: "12px",
+                    border: "1px solid rgba(139,92,246,0.3)",
+                  }}
+                  contentArrowStyle={{
+                    borderRight: "7px solid rgba(139,92,246,0.3)",
+                  }}
+                  iconStyle={{ background: "#7c3aed", color: "#fff" }}
+                  icon={<GraduationCap />}
+                >
+                  <h3 className="font-bold text-lg">{edu.title}</h3>
+                  <h4 className="text-purple-300">{edu.place}</h4>
+                  <p className="text-gray-300 text-sm mt-2">{edu.details}</p>
+                </VerticalTimelineElement>
+              ))}
+            </VerticalTimeline>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+
+      {/* Publications & Patents */}
+      <motion.div
+        variants={fadeInUp}
+        initial="initial"
+        whileInView="whileInView"
+        className="mt-20"
+      >
+        <h3 className="text-3xl font-bold mb-10 text-center">
+          Publications & <span className="text-purple-400">Patents</span>
+        </h3>
+        <motion.div
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="whileInView"
+          className="grid md:grid-cols-2 gap-10"
+        >
+          {/* Publications */}
+          <motion.div
+            variants={fadeInUp}
+            whileHover={cardHover}
+            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
+          >
+            <h4 className="text-xl font-semibold mb-4 text-purple-400">
+              Publications
+            </h4>
+            <ul className="space-y-4">
+              <motion.li whileHover={{ x: 10 }} className="flex gap-3">
+                <img
+                  src="https://img.icons8.com/color/48/book.png"
+                  alt="Publication Icon"
+                  className="w-6 h-6"
+                />
+                <div>
+                  <strong>Optimization of Heat Transfer in Solar Systems</strong>
+                  <br />
+                  <span className="text-gray-400">
+                    Intl. Journal of Renewable Energy, 2023
+                  </span>
+                </div>
+              </motion.li>
+            </ul>
+          </motion.div>
+
+          {/* Patents */}
+          <motion.div
+            variants={fadeInUp}
+            whileHover={cardHover}
+            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
+          >
+            <h4 className="text-xl font-semibold mb-4 text-purple-400">
+              Patents
+            </h4>
+            <ul className="space-y-4">
+              {[
+                {
+                  title: "Multi-Purpose Knife",
+                  number: "IN2023456789",
+                  status: "Granted",
+                },
+                {
+                  title: "Modified Solar Dryer with Energy Storage",
+                  number: "IN2023123456",
+                  status: "Pending",
+                },
+              ].map((p, idx) => (
+                <motion.li
+                  key={idx}
+                  whileHover={{ x: 10 }}
+                  className="flex gap-3"
+                >
+                  <img
+                    src="https://img.icons8.com/color/48/certificate.png"
+                    alt="Patent Icon"
+                    className="w-6 h-6"
+                  />
+                  <div>
+                    <strong>{p.title}</strong>
+                    <br />
+                    <span className="text-gray-400">#{p.number}</span> —{" "}
+                    <span
+                      className={`${
+                        p.status === "Granted"
+                          ? "text-green-400"
+                          : "text-yellow-400"
+                      }`}
+                    >
+                      {p.status}
+                    </span>
+                  </div>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+
+      {/* Quick Achievements */}
+      <motion.div
+        variants={fadeInUp}
+        initial="initial"
+        whileInView="whileInView"
+        className="mt-20"
+      >
+        <h3 className="text-3xl font-bold mb-10 text-center">
+          At a <span className="text-purple-400">Glance</span>
+        </h3>
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            {
+              icon: <Target className="w-8 h-8 text-purple-400" />,
+              title: "10+ Projects",
+              desc: "CAD, FEA, and CFD case studies",
+            },
+            {
+              icon: <Zap className="w-8 h-8 text-yellow-400" />,
+              title: "Automation",
+              desc: "Python-based engineering tools",
+            },
+            {
+              icon: <Award className="w-8 h-8 text-green-400" />,
+              title: "Innovation",
+              desc: "Patents & Research contributions",
+            },
+          ].map((a, idx) => (
+            <motion.div
+              key={idx}
+              whileHover={cardHover}
+              className="p-6 bg-gradient-to-br from-gray-900/70 to-gray-800/50 rounded-2xl text-center border border-purple-500/20 hover:shadow-lg hover:shadow-purple-500/20"
+            >
+              <div className="flex justify-center mb-4">{a.icon}</div>
+              <h4 className="text-xl font-semibold mb-2">{a.title}</h4>
+              <p className="text-gray-400 text-sm">{a.desc}</p>
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
     </div>
   );

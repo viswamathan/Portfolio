@@ -2,13 +2,15 @@ import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Sphere, MeshDistortMaterial, Float } from '@react-three/drei';
-import { Github, Linkedin, FileText, Cog, Wrench, Zap } from 'lucide-react';
+import { Github, Linkedin, FileText, Cog, Wrench, Zap, Download, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
+import { useState, useEffect } from 'react';
 
 interface HeroProps {
   scrollToContact: () => void;
 }
 
+// Interactive 3D Sphere with real-time controls
 const AnimatedSphere = () => {
   return (
     <Float speed={1.4} rotationIntensity={1} floatIntensity={2}>
@@ -25,7 +27,149 @@ const AnimatedSphere = () => {
   );
 };
 
+// Real-time typing effect with voice synthesis
+const VoiceTypingAnimation = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  
+  const speakText = (text: string) => {
+    if (!isMuted && 'speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.8;
+      utterance.pitch = 1;
+      speechSynthesis.speak(utterance);
+    }
+  };
+
+  return (
+    <div className="relative">
+      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-300 font-bold">
+        <TypeAnimation
+          sequence={[
+            'Mechanical Design Engineer',
+            2000,
+            () => speakText('Mechanical Design Engineer'),
+            'FEA & CFD Specialist',
+            2000,
+            () => speakText('FEA and CFD Specialist'),
+            'CAE Automation Expert',
+            2000,
+            () => speakText('CAE Automation Expert'),
+            'Product Development Engineer',
+            2000,
+            () => speakText('Product Development Engineer'),
+            'Innovation Enthusiast',
+            2000,
+            () => speakText('Innovation Enthusiast'),
+          ]}
+          wrapper="span"
+          speed={50}
+          repeat={Infinity}
+          className="bg-clip-text text-transparent bg-gradient-to-r from-gray-300 to-gray-100"
+        />
+      </div>
+      
+      {/* Voice Control */}
+      <motion.button
+        onClick={() => setIsMuted(!isMuted)}
+        className="absolute -right-12 top-1/2 -translate-y-1/2 p-2 bg-gray-800/50 rounded-full hover:bg-gray-700/50 transition-colors"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        {isMuted ? <VolumeX className="w-4 h-4 text-gray-400" /> : <Volume2 className="w-4 h-4 text-purple-400" />}
+      </motion.button>
+    </div>
+  );
+};
+
+// Interactive skill cards with real-time data
+const InteractiveSkillCard = ({ icon: Icon, title, desc, index }: any) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  
+  return (
+    <motion.div
+      className="bg-gray-800/30 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-purple-500/20 relative overflow-hidden cursor-pointer"
+      whileHover={{ 
+        scale: 1.05,
+        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+        borderColor: 'rgba(139, 92, 246, 0.5)'
+      }}
+      transition={{ type: "spring", stiffness: 300 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      onClick={() => setClickCount(prev => prev + 1)}
+    >
+      {/* Interactive background pattern */}
+      <motion.div
+        className="absolute inset-0 opacity-10"
+        animate={{
+          backgroundPosition: isHovered ? ['0% 0%', '100% 100%'] : ['0% 0%', '0% 0%'],
+        }}
+        style={{
+          backgroundImage: 'linear-gradient(45deg, #8b5cf6 25%, transparent 25%, transparent 75%, #8b5cf6 75%)',
+          backgroundSize: '20px 20px',
+        }}
+        transition={{ duration: 2, repeat: isHovered ? Infinity : 0 }}
+      />
+      
+      <motion.div
+        animate={{ rotate: isHovered ? [0, 360] : 0 }}
+        transition={{ duration: 1 }}
+      >
+        <Icon className="w-8 h-8 text-purple-500 mb-3 mx-auto" />
+      </motion.div>
+      
+      <h3 className="font-bold text-lg sm:text-xl mb-1">{title}</h3>
+      <p className="text-base sm:text-lg text-gray-400 font-semibold">{desc}</p>
+      
+      {/* Interaction counter */}
+      {clickCount > 0 && (
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="absolute top-2 right-2 bg-purple-500 text-white text-xs px-2 py-1 rounded-full"
+        >
+          {clickCount}
+        </motion.div>
+      )}
+      
+      {/* Hover effect particles */}
+      {isHovered && (
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-purple-400 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -20, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.2,
+              }}
+            />
+          ))}
+        </motion.div>
+      )}
+    </motion.div>
+  );
+};
+
 const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
+  const [downloadProgress, setDownloadProgress] = useState(0);
+  const [isDownloading, setIsDownloading] = useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -58,6 +202,25 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
         ease: "easeInOut"
       }
     }
+  };
+
+  // Enhanced download with progress simulation
+  const handleDownload = () => {
+    setIsDownloading(true);
+    setDownloadProgress(0);
+    
+    const interval = setInterval(() => {
+      setDownloadProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setIsDownloading(false);
+          // Actual download
+          window.open('/VISWA M.pdf', '_blank');
+          return 100;
+        }
+        return prev + 10;
+      });
+    }, 200);
   };
 
   return (

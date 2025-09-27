@@ -17,17 +17,11 @@ import {
 } from 'lucide-react';
 
 /**
- * Projects.tsx
- * - Complete, fixed version of your Projects component with:
- *   - SimulationModal
- *   - ImageModal (lightbox)
- *   - ProjectGalleryModal (multi-image gallery with thumbnails)
- *   - EnhancedProjectCard
- *   - renderSoftwareProject
- *
- * Notes:
- * - This is TypeScript/TSX. If your project is plain JS, remove the type annotations.
- * - Replace image/report/simulation paths with real assets or URLs.
+ * Enhanced Projects Component
+ * - Consistent button colors (purple theme)
+ * - Removed duplicate image viewing functionality
+ * - Improved modal interactions
+ * - Cleaner code structure
  */
 
 /* ----------------------------- Modal Components ---------------------------- */
@@ -36,9 +30,10 @@ type SimulationModalProps = {
   isOpen: boolean;
   onClose: () => void;
   simulations: string[];
+  title?: string;
 };
 
-const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simulations }) => {
+const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simulations, title }) => {
   if (!isOpen) return null;
 
   return (
@@ -50,8 +45,13 @@ const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simu
     >
       <div className="bg-gray-900 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto">
         <div className="sticky top-0 bg-gray-900 p-4 flex justify-between items-center border-b border-gray-800">
-          <h3 className="text-xl font-bold text-purple-400">Simulation View</h3>
-          <button onClick={onClose} className="p-2 hover:bg-gray-800 rounded-full transition-colors">
+          <h3 className="text-xl font-bold text-purple-400">
+            {title || 'Simulation View'}
+          </h3>
+          <button 
+            onClick={onClose} 
+            className="p-2 hover:bg-gray-800 rounded-full transition-colors"
+          >
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -91,22 +91,23 @@ const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image, title }
     >
       <div
         className="relative max-w-6xl w-full max-h-[90vh] flex flex-col"
-        onClick={(e) => {
-          // prevent closing when clicking inside
-          e.stopPropagation();
-        }}
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4">
           {title && <h3 className="text-xl font-bold text-white">{title}</h3>}
-          <button onClick={onClose} className="p-2 hover:bg-gray-800 rounded-full transition-colors">
+          <button 
+            onClick={onClose} 
+            className="p-2 hover:bg-gray-800 rounded-full transition-colors"
+          >
             <X className="w-6 h-6 text-white" />
           </button>
         </div>
         <div className="flex-1 flex items-center justify-center">
-          <img src={image} alt="Project View" className="max-w-full max-h-full object-contain rounded-lg shadow-2xl" />
-        </div>
-        <div className="mt-4 text-center">
-          <p className="text-gray-400 text-sm">Click outside to close</p>
+          <img 
+            src={image} 
+            alt="Project View" 
+            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl" 
+          />
         </div>
       </div>
     </motion.div>
@@ -124,7 +125,6 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
 
   if (!isOpen || !project) return null;
 
-  // Collect available images safely
   const images = [project.image1, project.image2].filter(Boolean) as string[];
 
   return (
@@ -147,7 +147,10 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
               <p className="text-gray-400">{project.technologies.join(', ')}</p>
             )}
           </div>
-          <button onClick={onClose} className="p-3 hover:bg-gray-800 rounded-full transition-colors">
+          <button 
+            onClick={onClose} 
+            className="p-3 hover:bg-gray-800 rounded-full transition-colors"
+          >
             <X className="w-6 h-6 text-white" />
           </button>
         </div>
@@ -210,7 +213,7 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
               <p className="text-gray-300 text-sm mb-4">{project.description}</p>
               {project.problem && (
                 <div className="mb-3">
-                  <h5 className="font-medium text-white mb-1">Problem:</h5>
+                  <h5 className="font-medium text-white mb-1">Challenge:</h5>
                   <p className="text-gray-400 text-sm">{project.problem}</p>
                 </div>
               )}
@@ -250,7 +253,7 @@ type EnhancedProjectCardProps = {
   project: any;
   onViewGallery: (project: any) => void;
   onViewImage: (image: string, title?: string) => void;
-  onViewSimulation: (sims: string[]) => void;
+  onViewSimulation: (sims: string[], title?: string) => void;
 };
 
 const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
@@ -259,9 +262,10 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
   onViewImage,
   onViewSimulation,
 }) => {
-  const [hoveredImage, setHoveredImage] = useState<number | null>(null);
-
   const images = [project.image1, project.image2].filter(Boolean) as string[];
+
+  // Consolidated button style for consistency
+  const buttonStyle = "flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium";
 
   return (
     <motion.div
@@ -327,57 +331,40 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
           </div>
         )}
 
-        {/* Enhanced Image Gallery */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          {images.map((img, idx) => (
-            <div key={idx} className="relative group">
-              <motion.div
-                className="relative w-full h-40 rounded-lg overflow-hidden border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
-                whileHover={{ scale: 1.03 }}
-                onHoverStart={() => setHoveredImage(idx)}
-                onHoverEnd={() => setHoveredImage(null)}
-                onClick={() => onViewImage(img, project.title)}
-              >
-                <img src={img} alt={`${project.title} - View ${idx + 1}`} className="w-full h-full object-cover" />
+        {/* Enhanced Image Gallery - Simplified */}
+        {images.length > 0 && (
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            {images.map((img, idx) => (
+              <div key={idx} className="relative group">
+                <motion.div
+                  className="relative w-full h-40 rounded-lg overflow-hidden border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
+                  whileHover={{ scale: 1.03 }}
+                  onClick={() => onViewImage(img, project.title)}
+                >
+                  <img src={img} alt={`${project.title} - View ${idx + 1}`} className="w-full h-full object-cover" />
 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <div className="flex gap-2">
+                  {/* Overlay with single view button */}
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <motion.button
                       className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onViewImage(img, project.title);
-                      }}
                     >
                       <Eye className="w-4 h-4 text-white" />
                     </motion.button>
-                    <motion.button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onViewGallery(project);
-                      }}
-                      className="p-2 bg-blue-600 rounded-full hover:bg-blue-700 transition-colors"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <ZoomIn className="w-4 h-4 text-white" />
-                    </motion.button>
                   </div>
-                </div>
 
-                {/* Image Label */}
-                <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
-                  View {idx + 1}
-                </div>
-              </motion.div>
-            </div>
-          ))}
-        </div>
+                  {/* Image Label */}
+                  <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
+                    View {idx + 1}
+                  </div>
+                </motion.div>
+              </div>
+            ))}
+          </div>
+        )}
 
-        {/* Enhanced Actions */}
+        {/* Enhanced Actions - Consistent Colors */}
         <div className="flex flex-wrap gap-3">
           {project.report && (
             <motion.a
@@ -386,7 +373,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
               href={project.report}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium"
+              className={buttonStyle}
             >
               <FileText className="w-4 h-4" />
               <span>Technical Report</span>
@@ -397,8 +384,8 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => onViewSimulation(project.simulations)}
-              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
+              onClick={() => onViewSimulation(project.simulations, project.title)}
+              className={buttonStyle}
             >
               <Play className="w-4 h-4" />
               <span>View Simulation</span>
@@ -412,7 +399,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
+              className={buttonStyle}
             >
               <Github className="w-4 h-4" />
               <span>Source Code</span>
@@ -423,7 +410,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => onViewGallery(project)}
-            className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
+            className={buttonStyle}
           >
             <ExternalLink className="w-4 h-4" />
             <span>Full Gallery</span>
@@ -518,11 +505,11 @@ const projectCategories: Record<
 
 const Projects: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<'mechanical' | 'software' | 'hybrid'>('mechanical');
-  const [modalSimulations, setModalSimulations] = useState<string[] | null>(null);
+  const [modalSimulations, setModalSimulations] = useState<{simulations: string[], title?: string} | null>(null);
   const [lightboxImage, setLightboxImage] = useState<{ image: string; title?: string } | null>(null);
   const [galleryProject, setGalleryProject] = useState<any | null>(null);
 
-  const handleViewSimulation = (simulations: string[]) => setModalSimulations(simulations);
+  const handleViewSimulation = (simulations: string[], title?: string) => setModalSimulations({simulations, title});
   const closeSimulationModal = () => setModalSimulations(null);
 
   const openLightbox = (image: string, title?: string) => setLightboxImage({ image, title });
@@ -531,8 +518,17 @@ const Projects: React.FC = () => {
   const openGallery = (project: any) => setGalleryProject(project);
   const closeGallery = () => setGalleryProject(null);
 
+  // Consolidated button style for category buttons
+  const categoryButtonStyle = (isActive: boolean) => 
+    `flex items-center gap-2 px-6 py-3 rounded-full transition-all ${
+      isActive 
+        ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white' 
+        : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700'
+    }`;
+
   const renderSoftwareProject = (project: any, idx: number) => {
     const images = [project.image1, project.image2].filter(Boolean) as string[];
+    const buttonStyle = "flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium";
 
     return (
       <motion.div
@@ -584,7 +580,7 @@ const Projects: React.FC = () => {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
+              className={buttonStyle}
             >
               <Github className="w-4 h-4" />
               <span>View on GitHub</span>
@@ -598,12 +594,22 @@ const Projects: React.FC = () => {
               href={project.report}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"
+              className={buttonStyle}
             >
-              <Code className="w-4 h-4" />
-              <span>View Documentation</span>
+              <FileText className="w-4 h-4" />
+              <span>Technical Report</span>
             </motion.a>
           )}
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => openGallery(project)}
+            className={buttonStyle}
+          >
+            <ExternalLink className="w-4 h-4" />
+            <span>Full Gallery</span>
+          </motion.button>
         </div>
       </motion.div>
     );
@@ -615,7 +621,7 @@ const Projects: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-4xl font-bold mb-12 text-center"
+        className="text-4xl font-bold mb-12 text-center text-white"
       >
         Featured Projects
       </motion.h2>
@@ -629,9 +635,7 @@ const Projects: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveCategory(key as any)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all ${
-                activeCategory === key ? 'bg-purple-600 text-white' : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700'
-              }`}
+              className={categoryButtonStyle(activeCategory === key)}
             >
               <Icon className="w-5 h-5" />
               <span>{category.title}</span>
@@ -640,7 +644,11 @@ const Projects: React.FC = () => {
         })}
       </div>
 
-      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center text-gray-300 mb-12 max-w-3xl mx-auto">
+      <motion.p 
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        className="text-center text-gray-300 mb-12 max-w-3xl mx-auto"
+      >
         {projectCategories[activeCategory].intro}
       </motion.p>
 
@@ -658,7 +666,12 @@ const Projects: React.FC = () => {
             ))}
       </div>
 
-      <SimulationModal isOpen={!!modalSimulations} onClose={closeSimulationModal} simulations={modalSimulations || []} />
+      <SimulationModal 
+        isOpen={!!modalSimulations} 
+        onClose={closeSimulationModal} 
+        simulations={modalSimulations?.simulations || []}
+        title={modalSimulations?.title ? `${modalSimulations.title} - Simulations` : undefined}
+      />
 
       <ImageModal
         isOpen={!!lightboxImage}
@@ -667,7 +680,11 @@ const Projects: React.FC = () => {
         title={lightboxImage?.title}
       />
 
-      <ProjectGalleryModal isOpen={!!galleryProject} onClose={closeGallery} project={galleryProject} />
+      <ProjectGalleryModal 
+        isOpen={!!galleryProject} 
+        onClose={closeGallery} 
+        project={galleryProject} 
+      />
     </div>
   );
 };

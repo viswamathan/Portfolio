@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Rocket, Code, Layers, TrendingUp, X, Cog, Cpu, Github, Eye } from 'lucide-react';
+import { Rocket, Code, Layers, TrendingUp, X, Cog, Cpu, Github, Eye, ZoomIn, Play, FileText, ExternalLink } from 'lucide-react';
 import ProjectCard from './ProjectCard';
 
 // Simulation Modal
@@ -38,7 +38,7 @@ const SimulationModal = ({ isOpen, onClose, simulations }: { isOpen: boolean; on
 };
 
 // Image Lightbox Modal
-const ImageModal = ({ isOpen, onClose, image }: { isOpen: boolean; onClose: () => void; image: string }) => {
+const ImageModal = ({ isOpen, onClose, image, title }: { isOpen: boolean; onClose: () => void; image: string; title?: string }) => {
   if (!isOpen) return null;
 
   return (
@@ -48,8 +48,307 @@ const ImageModal = ({ isOpen, onClose, image }: { isOpen: boolean; onClose: () =
       exit={{ opacity: 0 }}
       className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
     >
-      <div className="relative max-w-4xl w-full max-h-[90vh]">
-        <button onClick={onClose} className="absolute top-2 right-2 p-2 hover:bg-gray-800 rounded-full z-50">
+      <div className="relative max-w-6xl w-full max-h-[90vh] flex flex-col">
+        <div className="flex justify-between items-center mb-4">
+          {title && <h3 className="text-xl font-bold text-white">{title}</h3>}
+          <button onClick={onClose} className="p-2 hover:bg-gray-800 rounded-full transition-colors">
+            <X className="w-6 h-6 text-white" />
+          </button>
+        </div>
+        <div className="flex-1 flex items-center justify-center">
+          <img src={image} alt="Project View" className="max-w-full max-h-full object-contain rounded-lg shadow-2xl" />
+        </div>
+        <div className="mt-4 text-center">
+          <p className="text-gray-400 text-sm">Click outside to close</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Enhanced Project Gallery Modal
+const ProjectGalleryModal = ({ isOpen, onClose, project }: { isOpen: boolean; onClose: () => void; project: any }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  if (!isOpen || !project) return null;
+
+  const images = [project.image1, project.image2];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 p-4"
+    >
+      <div className="relative max-w-7xl w-full max-h-[95vh] flex flex-col">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h3 className="text-2xl font-bold text-white">{project.title}</h3>
+            <p className="text-gray-400">{project.technologies?.join(', ')}</p>
+          </div>
+          <button onClick={onClose} className="p-3 hover:bg-gray-800 rounded-full transition-colors">
+            <X className="w-6 h-6 text-white" />
+          </button>
+        </div>
+        
+        {/* Main Image */}
+        <div className="flex-1 flex items-center justify-center mb-6">
+          <div className="relative">
+            <img 
+              src={images[currentImageIndex]} 
+              alt={`${project.title} - View ${currentImageIndex + 1}`} 
+              className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl"
+            />
+            
+            {/* Navigation Arrows */}
+            {images.length > 1 && (
+              <>
+                <button
+                  onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 rounded-full transition-colors"
+                >
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setCurrentImageIndex(prev => prev === images.length - 1 ? 0 : prev + 1)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 rounded-full transition-colors"
+                >
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+        
+        {/* Thumbnails */}
+        {images.length > 1 && (
+          <div className="flex justify-center gap-4 mb-6">
+            {images.map((img, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImageIndex(index)}
+                className={`relative w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                  currentImageIndex === index ? 'border-purple-500' : 'border-gray-600 hover:border-gray-400'
+                }`}
+              >
+                <img src={img} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+        )}
+        
+        {/* Project Info */}
+        <div className="bg-gray-900/80 backdrop-blur-sm rounded-lg p-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="text-lg font-semibold text-purple-400 mb-2">Project Overview</h4>
+              <p className="text-gray-300 text-sm mb-4">{project.description}</p>
+              {project.problem && (
+                <div className="mb-3">
+                  <h5 className="font-medium text-white mb-1">Problem:</h5>
+                  <p className="text-gray-400 text-sm">{project.problem}</p>
+                </div>
+              )}
+              {project.solution && (
+                <div className="mb-3">
+                  <h5 className="font-medium text-white mb-1">Solution:</h5>
+                  <p className="text-gray-400 text-sm">{project.solution}</p>
+                </div>
+              )}
+            </div>
+            <div>
+              {project.impact && (
+                <div className="mb-4">
+                  <h5 className="font-medium text-green-400 mb-1">Impact:</h5>
+                  <p className="text-gray-300 text-sm">{project.impact}</p>
+                </div>
+              )}
+              <div className="flex flex-wrap gap-2">
+                {project.technologies?.map((tech, index) => (
+                  <span key={index} className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full text-xs">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Enhanced Project Card Component
+const EnhancedProjectCard = ({ project, onViewGallery, onViewImage }) => {
+  const [hoveredImage, setHoveredImage] = useState(null);
+
+  return (
+    <motion.div
+      whileHover={{ scale: 1.02, y: -5 }}
+      className="bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-2xl"
+    >
+      <div className="p-6">
+        {/* Header */}
+        <div className="flex justify-between items-start mb-4">
+          <div>
+            <h3 className="text-2xl font-bold text-purple-400 mb-2">{project.title}</h3>
+            <p className="text-gray-300 text-sm">{project.description}</p>
+          </div>
+          <motion.button
+            onClick={() => onViewGallery(project)}
+            className="p-2 bg-purple-600/20 hover:bg-purple-600/40 rounded-lg transition-colors"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <ZoomIn className="w-5 h-5 text-purple-400" />
+          </motion.button>
+        </div>
+
+        {/* Project Details Grid */}
+        {(project.problem || project.solution || project.impact) && (
+          <div className="grid gap-3 mb-6">
+            {project.problem && (
+              <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+                <h4 className="font-semibold text-red-400 text-sm mb-1">Challenge</h4>
+                <p className="text-gray-300 text-xs">{project.problem}</p>
+              </div>
+            )}
+            {project.solution && (
+              <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
+                <h4 className="font-semibold text-blue-400 text-sm mb-1">Solution</h4>
+                <p className="text-gray-300 text-xs">{project.solution}</p>
+              </div>
+            )}
+            {project.impact && (
+              <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
+                <h4 className="font-semibold text-green-400 text-sm mb-1">Impact</h4>
+                <p className="text-gray-300 text-xs">{project.impact}</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Technologies */}
+        {project.technologies && (
+          <div className="mb-6">
+            <h4 className="font-semibold text-purple-300 mb-2 text-sm">Technologies Used:</h4>
+            <div className="flex flex-wrap gap-2">
+              {project.technologies.map((tech, index) => (
+                <motion.span
+                  key={index}
+                  className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30"
+                  whileHover={{ scale: 1.05, backgroundColor: 'rgba(139, 92, 246, 0.3)' }}
+                >
+                  {tech}
+                </motion.span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Enhanced Image Gallery */}
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          {[project.image1, project.image2].map((img, idx) => (
+            <div key={idx} className="relative group">
+              <motion.div
+                className="relative w-full h-40 rounded-lg overflow-hidden border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
+                whileHover={{ scale: 1.03 }}
+                onHoverStart={() => setHoveredImage(idx)}
+                onHoverEnd={() => setHoveredImage(null)}
+                onClick={() => onViewImage(img, project.title)}
+              >
+                <img src={img} alt={`${project.title} - View ${idx + 1}`} className="w-full h-full object-cover" />
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <div className="flex gap-2">
+                    <motion.button
+                      className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Eye className="w-4 h-4 text-white" />
+                    </motion.button>
+                    <motion.button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onViewGallery(project);
+                      }}
+                      className="p-2 bg-blue-600 rounded-full hover:bg-blue-700 transition-colors"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <ZoomIn className="w-4 h-4 text-white" />
+                    </motion.button>
+                  </div>
+                </div>
+                
+                {/* Image Label */}
+                <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
+                  View {idx + 1}
+                </div>
+              </motion.div>
+            </div>
+          ))}
+        </div>
+
+        {/* Enhanced Actions */}
+        <div className="flex flex-wrap gap-3">
+          {project.report && (
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href={project.report}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium"
+            >
+              <FileText className="w-4 h-4" />
+              <span>Technical Report</span>
+            </motion.a>
+          )}
+          
+          {project.simulations && (
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => onViewSimulation?.(project.simulations)}
+              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
+            >
+              <Play className="w-4 h-4" />
+              <span>View Simulation</span>
+            </motion.button>
+          )}
+          
+          {project.githubUrl && (
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
+            >
+              <Github className="w-4 h-4" />
+              <span>Source Code</span>
+            </motion.a>
+          )}
+          
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => onViewGallery(project)}
+            className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg transition-colors text-sm font-medium"
+          >
+            <ExternalLink className="w-4 h-4" />
+            <span>Full Gallery</span>
+          </motion.button>
           <X className="w-6 h-6 text-white" />
         </button>
         <img src={image} alt="Project View" className="max-w-full max-h-[90vh] object-contain rounded-lg" />
@@ -132,13 +431,17 @@ const projectCategories = {
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState('mechanical');
   const [modalSimulations, setModalSimulations] = useState<string[] | null>(null);
-  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<{ image: string; title: string } | null>(null);
+  const [galleryProject, setGalleryProject] = useState(null);
 
   const handleViewSimulation = (simulations: string[]) => setModalSimulations(simulations);
   const closeSimulationModal = () => setModalSimulations(null);
 
-  const openLightbox = (image: string) => setLightboxImage(image);
+  const openLightbox = (image: string, title: string = '') => setLightboxImage({ image, title });
   const closeLightbox = () => setLightboxImage(null);
+
+  const openGallery = (project) => setGalleryProject(project);
+  const closeGallery = () => setGalleryProject(null);
 
   const renderSoftwareProject = (project) => (
     <motion.div
@@ -158,13 +461,19 @@ const Projects = () => {
           ))}
         </div>
       </div>
-
+    </motion.div>
       <div className="grid grid-cols-2 gap-4 mb-6">
         {[project.image1, project.image2].map((img, idx) => (
           <div key={idx} className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-purple-500/30">
-            <motion.img whileHover={{ scale: 1.05 }} src={img} alt={`${project.title} - View ${idx + 1}`} className="w-full h-full object-cover" />
+            <motion.img 
+              whileHover={{ scale: 1.05 }} 
+              src={img} 
+              alt={`${project.title} - View ${idx + 1}`} 
+              className="w-full h-full object-cover cursor-pointer" 
+              onClick={() => openLightbox(img, project.title)}
+            />
             <button
-              onClick={() => openLightbox(img)}
+              onClick={() => openLightbox(img, project.title)}
               className="absolute top-2 right-2 p-2 bg-black/50 rounded-full hover:bg-purple-600 transition-colors"
             >
               <Eye className="w-5 h-5 text-white" />
@@ -239,17 +548,28 @@ const Projects = () => {
         {activeCategory === 'software'
           ? projectCategories[activeCategory].projects.map((project, index) => renderSoftwareProject(project))
           : projectCategories[activeCategory].projects.map((project, index) => (
-              <ProjectCard
+              <EnhancedProjectCard
                 key={index}
-                {...project}
-                onViewSimulation={project.simulations ? handleViewSimulation : undefined}
+                project={project}
+                onViewGallery={openGallery}
                 onViewImage={openLightbox}
+                onViewSimulation={handleViewSimulation}
               />
             ))}
       </div>
 
       <SimulationModal isOpen={!!modalSimulations} onClose={closeSimulationModal} simulations={modalSimulations || []} />
-      <ImageModal isOpen={!!lightboxImage} onClose={closeLightbox} image={lightboxImage || ''} />
+      <ImageModal 
+        isOpen={!!lightboxImage} 
+        onClose={closeLightbox} 
+        image={lightboxImage?.image || ''} 
+        title={lightboxImage?.title}
+      />
+      <ProjectGalleryModal 
+        isOpen={!!galleryProject} 
+        onClose={closeGallery} 
+        project={galleryProject}
+      />
     </div>
   );
 };

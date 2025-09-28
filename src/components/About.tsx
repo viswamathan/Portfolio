@@ -173,21 +173,21 @@ const About = () => {
                   title: "B.E Mechanical Engineering",
                   place: "Sri Krishna College of Technology",
                   details: "CGPA: 7.35/10",
-                  logo: "/logos/skct.png",
+                  logo: "https://tse4.mm.bing.net/th/id/OIP.geEJ2yhGJ7uxvhFGgJx8CwHaHE?pid=Api&P=0&h=180",
                 },
                 {
                   date: "2021 - 2022",
                   title: "Senior Secondary",
                   place: "Alagar Public School, Tuticorin",
                   details: "61% - MPCS (Maths, Physics, Chem, Comp. Sci.)",
-                  logo: "/logos/alagar.png",
+                  logo: "https://tse3.mm.bing.net/th/id/OIP.KSj5rKEpwB-j7nYNzuxIxwHaHa?pid=Api&P=0&h=180",
                 },
                 {
                   date: "2019 - 2020",
                   title: "Secondary School",
                   place: "Amrita Vidyalayam, Ramnad",
                   details: "78%",
-                  logo: "/logos/amrita.png",
+                  logo: "https://tse2.mm.bing.net/th/id/OIP.LYfHgz7qrPjDyYB66BESDAHaHa?pid=Api&P=0&h=180",
                 },
               ].map((edu, idx) => (
                 <VerticalTimelineElement

@@ -187,7 +187,7 @@ const About = () => {
                   title: "Secondary School",
                   place: "Amrita Vidyalayam, Ramnad",
                   details: "78%",
-                  logo: "https://tse2.mm.bing.net/th/id/OIP.LYfHgz7qrPjDyYB66BESDAHaHa?pid=Api&P=0&h=180",
+                  logo: "https://www.joonsquare.com/usermanage/image/business/amrita-vidyalayam-ahmedabad-5293/amrita-vidyalayam-ahmedabad-logo.png",
                 },
               ].map((edu, idx) => (
                 <VerticalTimelineElement

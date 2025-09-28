@@ -27,6 +27,16 @@ const CADModels = () => {
       views: 1247,
       downloads: 89,
     },
+    {
+      title: "Exhaust Manifold",
+      description:"Optimized exhaust manifold designed for efficient gas flow, reduced backpressure, and improved engine performance. Features smooth flow paths and minimized thermal stresses for durability.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Advanced",
+      designTime: "3 hours",
+      features: ["Flow Simulation", "Thermal Analysis", "Parametric Design"],
+      image:"/3d Pictures/exhaust manifold.png",
+    },
   ];
 
   const categories = [

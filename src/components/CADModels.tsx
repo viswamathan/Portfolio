@@ -74,7 +74,7 @@ const CADModels = () => {
       complexity: "Basic",
       designTime: "1 hour",
       features: ["Parametric Design", "Torque Analysis", "Stress Check"],
-      image:"https://images.pexels.com/photos/159275/macro-gear-gear-wheel-clockwork-159275.jpeg?auto=compress&cs=tinysrgb&w=800"
+      image:"/3d Pictures/muff coupling.png",
       views: 189,
       downloads: 15,
     },

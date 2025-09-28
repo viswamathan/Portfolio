@@ -75,7 +75,7 @@ const CADModels = () => {
       designTime: "1 hour",
       features: ["Parametric Design", "Torque Analysis", "Stress Check"],
       image:"/3d Pictures/muff coupling.png",
-      downloadUrl:"https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing"
+      downloadUrl:"https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
       views: 189,
       downloads: 15,
     },

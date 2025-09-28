@@ -66,6 +66,19 @@ const CADModels = () => {
       views: 189,
       downloads: 15,
     },
+    {
+      title: "Muff Coupling",
+      description:"Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Basic",
+      designTime: "1 hour",
+      features: ["Parametric Design", "Torque Analysis", "Stress Check"],
+      image:"https://images.pexels.com/photos/159275/macro-gear-gear-wheel-clockwork-159275.jpeg?auto=compress&cs=tinysrgb&w=800"
+      views: 189,
+      downloads: 15,
+    },
+
   ];
 
   const categories = [

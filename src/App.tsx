@@ -113,6 +113,7 @@ export default function App() {
                   [Hero, About, Experience, Skills, Projects, Contact].map((Component, index) => (
                     <motion.section
                       key={index}
+                      id={['hero', 'about', 'experience', 'skills', 'projects', 'contact'][index]}
                       ref={el => {
                         sections.current[index] = el;
                         if (sectionRefs[index]) sectionRefs[index](el);
@@ -128,6 +129,7 @@ export default function App() {
                     >
                       <Component
                         scrollToContact={index === 0 ? () => scrollToSection(5) : undefined}
+                        scrollToSection={index === 0 ? scrollToSection : undefined}
                       />
                     </motion.section>
                   ))

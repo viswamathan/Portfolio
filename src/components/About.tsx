@@ -221,6 +221,45 @@ const About = () => {
           </motion.div>
         </motion.div>
       </motion.div>
+
+      {/* Integration Links */}
+      <motion.div
+        variants={itemVariants}
+        className="mt-16 text-center"
+      >
+        <h3 className="text-2xl font-bold text-purple-400 mb-6">Explore My Work</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <motion.div
+            className="bg-gray-800/30 p-6 rounded-xl border border-purple-500/20 hover:border-purple-500/50 transition-all cursor-pointer"
+            whileHover={{ scale: 1.05, y: -5 }}
+            onClick={() => window.scrollTo({ top: document.querySelector('#experience')?.offsetTop || 0, behavior: 'smooth' })}
+          >
+            <div className="text-3xl mb-3">💼</div>
+            <h4 className="font-bold text-white mb-2">Professional Journey</h4>
+            <p className="text-gray-400 text-sm">Discover my internships at NIOT and Super Auto Forge</p>
+          </motion.div>
+          
+          <motion.div
+            className="bg-gray-800/30 p-6 rounded-xl border border-blue-500/20 hover:border-blue-500/50 transition-all cursor-pointer"
+            whileHover={{ scale: 1.05, y: -5 }}
+            onClick={() => window.scrollTo({ top: document.querySelector('#skills')?.offsetTop || 0, behavior: 'smooth' })}
+          >
+            <div className="text-3xl mb-3">⚡</div>
+            <h4 className="font-bold text-white mb-2">Technical Skills</h4>
+            <p className="text-gray-400 text-sm">Explore my expertise in CAD, FEA, and programming</p>
+          </motion.div>
+          
+          <motion.div
+            className="bg-gray-800/30 p-6 rounded-xl border border-green-500/20 hover:border-green-500/50 transition-all cursor-pointer"
+            whileHover={{ scale: 1.05, y: -5 }}
+            onClick={() => window.scrollTo({ top: document.querySelector('#projects')?.offsetTop || 0, behavior: 'smooth' })}
+          >
+            <div className="text-3xl mb-3">🚀</div>
+            <h4 className="font-bold text-white mb-2">Featured Projects</h4>
+            <p className="text-gray-400 text-sm">See my engineering projects and innovations</p>
+          </motion.div>
+        </div>
+      </motion.div>
     </div>
   );
 };

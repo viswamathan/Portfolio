@@ -528,6 +528,70 @@ const Skills = () => {
           ))}
         </div>
       </motion.div>
+
+      {/* Experience Integration */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        className="mt-16 bg-gradient-to-r from-gray-800/30 to-gray-900/30 rounded-2xl p-8 border border-gray-700/50"
+      >
+        <h3 className="text-2xl font-bold text-center text-purple-400 mb-8">Skills in Action</h3>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div>
+            <h4 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+              <span>🏢</span> NIOT Internship Applications
+            </h4>
+            <div className="space-y-3">
+              {[
+                { skill: 'ANSYS Workbench', application: 'Marine energy component simulation' },
+                { skill: 'FEA', application: 'OTEC & LTDD beam structure analysis' },
+                { skill: 'Structural Analysis', application: 'Load condition optimization' },
+                { skill: 'Research Methodology', application: 'Material performance studies' }
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start gap-3 p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                  <div>
+                    <span className="text-blue-400 font-medium">{item.skill}:</span>
+                    <p className="text-gray-300 text-sm">{item.application}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+              <span>🏭</span> Super Auto Forge Applications
+            </h4>
+            <div className="space-y-3">
+              {[
+                { skill: 'CAD Design', application: 'Forging stage design & modeling' },
+                { skill: 'Material Flow Analysis', application: 'Defect prediction simulation' },
+                { skill: 'Process Optimization', application: 'Parameter optimization' },
+                { skill: 'Manufacturing', application: 'Process sheet documentation' }
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start gap-3 p-3 bg-green-500/10 rounded-lg border border-green-500/20">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                  <div>
+                    <span className="text-green-400 font-medium">{item.skill}:</span>
+                    <p className="text-gray-300 text-sm">{item.application}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 text-center">
+          <motion.button
+            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-colors"
+            whileHover={{ scale: 1.05 }}
+            onClick={() => window.scrollTo({ top: document.querySelector('#experience')?.offsetTop || 0, behavior: 'smooth' })}
+          >
+            View Detailed Experience →
+          </motion.button>
+        </div>
+      </motion.div>
     </div>
   );
 };

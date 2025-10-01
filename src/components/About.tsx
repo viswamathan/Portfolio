@@ -224,7 +224,7 @@ const About = () => {
 
       {/* Integration Links */}
       <motion.div
-        variants={itemVariants}
+        variants={fadeInUp}
         className="mt-16 text-center"
       >
         <h3 className="text-2xl font-bold text-purple-400 mb-6">Explore My Work</h3>

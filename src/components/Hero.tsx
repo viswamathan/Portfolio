@@ -402,7 +402,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
         {/* Call to Action Buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8"
+          className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
         >
           <motion.a
             href="/VISWA M.pdf"
@@ -423,29 +423,6 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
           >
             <span>Let's Connect</span>
           </motion.button>
-        </motion.div>
-
-        {/* Quick Navigation to Key Sections */}
-        <motion.div
-          variants={itemVariants}
-          className="flex justify-center items-center space-x-8 text-sm"
-        >
-          {[
-            { label: 'View Projects', section: 4, icon: '🚀' },
-            { label: 'See Skills', section: 3, icon: '⚡' },
-            { label: 'Experience', section: 2, icon: '💼' }
-          ].map((item, index) => (
-            <motion.button
-              key={item.label}
-              onClick={() => scrollToSection(item.section)}
-              className="flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span>{item.icon}</span>
-              <span>{item.label}</span>
-            </motion.button>
-          ))}
         </motion.div>
       </motion.div>
     </div>

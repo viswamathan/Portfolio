@@ -286,10 +286,10 @@ const Experience = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        className="mt-16"
+        className="mt-16 text-center"
       >
-        <div className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-2xl p-8 border border-purple-500/20 mb-12">
-          <h3 className="text-2xl font-bold text-purple-400 mb-6 text-center">Experience Impact</h3>
+        <div className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-2xl p-8 border border-purple-500/20">
+          <h3 className="text-2xl font-bold text-purple-400 mb-6">Experience Impact</h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-400 mb-2">2+</div>
@@ -308,87 +308,6 @@ const Experience = () => {
               <div className="text-gray-300">Success Rate</div>
             </div>
           </div>
-        </div>
-
-        {/* Skills Integration */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <motion.div
-            className="bg-gray-800/30 p-6 rounded-xl border border-gray-700/50"
-            whileHover={{ borderColor: 'rgba(139, 92, 246, 0.5)' }}
-          >
-            <h4 className="text-xl font-bold text-purple-400 mb-4 flex items-center gap-2">
-              <span>🛠️</span> Skills Developed Through Experience
-            </h4>
-            <div className="space-y-3">
-              {[
-                { skill: 'ANSYS Workbench', level: 85, source: 'NIOT Internship' },
-                { skill: 'CAD Modeling', level: 90, source: 'Super Auto Forge' },
-                { skill: 'FEA Analysis', level: 80, source: 'Both Internships' },
-                { skill: 'Process Optimization', level: 75, source: 'Industrial Experience' }
-              ].map((item, idx) => (
-                <div key={idx} className="space-y-1">
-                  <div className="flex justify-between items-center">
-                    <span className="text-white font-medium">{item.skill}</span>
-                    <span className="text-purple-400 text-sm">{item.level}%</span>
-                  </div>
-                  <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${item.level}%` }}
-                      transition={{ duration: 1, delay: idx * 0.1 }}
-                      className="h-full bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"
-                    />
-                  </div>
-                  <p className="text-gray-400 text-xs">{item.source}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="bg-gray-800/30 p-6 rounded-xl border border-gray-700/50"
-            whileHover={{ borderColor: 'rgba(59, 130, 246, 0.5)' }}
-          >
-            <h4 className="text-xl font-bold text-blue-400 mb-4 flex items-center gap-2">
-              <span>🚀</span> Projects Born from Experience
-            </h4>
-            <div className="space-y-4">
-              {[
-                {
-                  title: 'Flat Sprocket Analysis',
-                  connection: 'Applied ANSYS skills from NIOT',
-                  impact: 'Structural optimization techniques'
-                },
-                {
-                  title: 'Piston Head Optimization',
-                  connection: 'Thermal analysis expertise',
-                  impact: 'Advanced FEA methodologies'
-                },
-                {
-                  title: 'Solar Dryer Design',
-                  connection: 'Manufacturing insights from SAF',
-                  impact: 'Process optimization approach'
-                }
-              ].map((project, idx) => (
-                <motion.div
-                  key={idx}
-                  className="p-4 bg-gray-700/30 rounded-lg border border-gray-600/30 hover:border-blue-500/30 transition-all"
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <h5 className="font-semibold text-white mb-1">{project.title}</h5>
-                  <p className="text-blue-300 text-sm mb-1">{project.connection}</p>
-                  <p className="text-gray-400 text-xs">{project.impact}</p>
-                </motion.div>
-              ))}
-            </div>
-            <motion.button
-              className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors text-sm"
-              whileHover={{ scale: 1.02 }}
-              onClick={() => window.scrollTo({ top: document.querySelector('#projects')?.offsetTop || 0, behavior: 'smooth' })}
-            >
-              View All Projects →
-            </motion.button>
-          </motion.div>
         </div>
       </motion.div>
 

@@ -172,7 +172,7 @@ const About = () => {
                   date: "2022 - 2026",
                   title: "B.E Mechanical Engineering",
                   place: "Sri Krishna College of Technology",
-                  details: "CGPA: 7.35/10",
+                  details: "CGPA: 7.50/10",
                   logo: "https://tse4.mm.bing.net/th/id/OIP.geEJ2yhGJ7uxvhFGgJx8CwHaHE?pid=Api&P=0&h=180",
                 },
                 {

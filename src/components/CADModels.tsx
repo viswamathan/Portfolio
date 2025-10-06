@@ -92,7 +92,33 @@ const CADModels = () => {
       views: 312,
       downloads: 22,
     },
-
+    {
+      title: "Flanged Tee Pipe Fitting",
+      description:
+        "Industrial-grade flanged tee pipe fitting designed for fluid distribution systems. Features precise flanges for secure bolted connections and optimized internal geometry for minimal pressure loss.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Intermediate",
+      designTime: "2 hours",
+      features: ["Parametric Design", "Flow Optimization", "Assembly Ready"],
+      image: "/3d Pictures/flanged tee pipe fitting.png",
+      downloadUrl:"https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
+      views: 278,
+      downloads: 18,
+    },
+    {
+      title: "Refrigeration Valves Assembly",
+      description:"Precision-designed refrigeration valve assembly used for controlling refrigerant flow in HVAC and cooling systems. Includes service, expansion, and solenoid valves optimized for durability, leak-proof operation, and ease of maintenance.",
+      software: "SolidWorks",
+      category: "Thermal Systems",
+      complexity: "Basic",
+      designTime: "2 hours",
+      features: ["Parametric Design", "Flow Simulation", "Thermal Analysis"],
+      image: "/3d Pictures/refrigeration valves.png",
+      downloadUrl:"https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
+      views: 342,
+      downloads: 27,
+    },
   ];
 
   const categories = [

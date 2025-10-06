@@ -79,6 +79,19 @@ const CADModels = () => {
       views: 189,
       downloads: 15,
     },
+    {
+      title: "Door Lock Mechanism",
+      description: "Compact and reliable door lock mechanism featuring latch, spring, and handle components. Designed for durability, ease of operation, and smooth locking motion with tolerance-based assembly.",
+      software: "SolidWorks",
+      category: "Assembly",
+      complexity: "Basic",
+      designTime: "1 hour",
+      features: ["Assembly Modeling", "Motion Simulation", "Tolerance Analysis"],
+      image: "/3d Pictures/DOOR LOCK.png",
+      downloadUrl: "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
+      views: 312,
+      downloads: 22,
+    },
 
   ];
 

@@ -68,166 +68,20 @@ const About = () => {
         About <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Me</span>
       </motion.h2>
 
-      {/* Quick Stats Bar */}
-      <motion.div
-        {...fadeInUp}
-        className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
-      >
-        {quickStats.map((stat, index) => {
-          const Icon = stat.icon;
-          return (
-            <div key={index} className="bg-gray-800/30 p-4 rounded-xl text-center border border-purple-500/20">
-              <Icon className="w-6 h-6 text-purple-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-purple-400">{stat.value}</div>
-              <div className="text-sm text-gray-400">{stat.label}</div>
-            </div>
-          );
-        })}
-      </motion.div>
-
-      {/* Interactive Tabs */}
-      <motion.div
-        {...fadeInUp}
-        className="flex justify-center mb-8"
-      >
-        <div className="bg-gray-800/50 p-2 rounded-xl border border-gray-700/50">
-          {[
-            { id: 'summary', label: 'Summary', icon: User },
-            { id: 'personal', label: 'Personal', icon: MapPin },
-            { id: 'education', label: 'Education', icon: GraduationCap }
-          ].map((tab) => {
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg transition-all ${
-                  activeTab === tab.id
-                    ? 'bg-purple-600 text-white'
-                    : 'text-gray-400 hover:text-white hover:bg-gray-700/50'
-                }`}
-              >
-                <Icon className="w-4 h-4" />
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
-      </motion.div>
       {/* Intro - completely white text */}
-      {/* Tab Content */}
       <motion.div
-        key={activeTab}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="mb-16"
+        {...fadeInUp}
+        className="text-white text-lg leading-relaxed max-w-4xl mx-auto bg-gray-900/40 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-purple-500/20 mb-16"
       >
-        {activeTab === 'summary' && (
-          <div className="text-white text-lg leading-relaxed max-w-4xl mx-auto bg-gray-900/40 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-purple-500/20">
-            <p className="text-center text-lg font-semibold mb-6">
-              I am a Mechanical Engineer passionate about merging traditional design
-              principles with modern technology.
-            </p>
-            <p className="text-center text-lg">
-              With expertise in CAD modeling, FEA/CFD simulations, and automation
-              with Python, I create solutions that optimize performance, reduce
-              complexity, and deliver real-world impact.
-            </p>
-          </div>
-        )}
-
-        {activeTab === 'personal' && (
-          <div className="max-w-4xl mx-auto bg-gray-900/40 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-purple-500/20">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-bold text-purple-400 mb-4">Personal Details</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-purple-400" />
-                    <span className="text-white">{personalInfo.location}</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Calendar className="w-5 h-5 text-purple-400" />
-                    <span className="text-white">{personalInfo.age}</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <User className="w-5 h-5 text-purple-400" />
-                    <span className="text-white">Languages: {personalInfo.languages.join(', ')}</span>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-purple-400 mb-4">Current Focus</h3>
-                <p className="text-white mb-4">{personalInfo.currentFocus}</p>
-                <h4 className="font-semibold text-purple-300 mb-2">Research Interests:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {personalInfo.interests.map((interest, index) => (
-                    <span key={index} className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm">
-                      {interest}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'education' && (
-          <div className="max-w-4xl mx-auto">
-            <VerticalTimeline layout="1-column-left" lineColor="#a855f7">
-              {[
-                {
-                  date: "2022 - 2026",
-                  title: "B.E Mechanical Engineering",
-                  place: "Sri Krishna College of Technology",
-                  details: "CGPA: 7.50/10",
-                  logo: "https://tse4.mm.bing.net/th/id/OIP.geEJ2yhGJ7uxvhFGgJx8CwHaHE?pid=Api&P=0&h=180",
-                },
-                {
-                  date: "2021 - 2022",
-                  title: "Senior Secondary",
-                  place: "Alagar Public School, Tuticorin",
-                  details: "61% - MPCS (Maths, Physics, Chem, Comp. Sci.)",
-                  logo: "https://tse3.mm.bing.net/th/id/OIP.KSj5rKEpwB-j7nYNzuxIxwHaHa?pid=Api&P=0&h=180",
-                },
-                {
-                  date: "2019 - 2020",
-                  title: "Secondary School",
-                  place: "Amrita Vidyalayam, Ramnad",
-                  details: "78%",
-                  logo: "https://www.joonsquare.com/usermanage/image/business/amrita-vidyalayam-ahmedabad-5293/amrita-vidyalayam-ahmedabad-logo.png",
-                },
-              ].map((edu, idx) => (
-                <VerticalTimelineElement
-                  key={idx}
-                  date={edu.date}
-                  contentStyle={{
-                    background: "rgba(31,41,55,0.7)",
-                    color: "#fff",
-                    borderRadius: "12px",
-                    border: "1px solid rgba(139,92,246,0.3)",
-                    position: "relative",
-                  }}
-                  contentArrowStyle={{
-                    borderRight: "7px solid rgba(139,92,246,0.3)",
-                  }}
-                  iconStyle={{ background: "#7c3aed", color: "#fff" }}
-                  icon={<GraduationCap />}
-                >
-                  <img
-                    src={edu.logo}
-                    alt="Logo"
-                    className="absolute top-4 right-4 w-10 h-10 rounded-full border border-purple-400 shadow-md"
-                  />
-                  <h3 className="font-bold text-lg">{edu.title}</h3>
-                  <h4 className="text-purple-300">{edu.place}</h4>
-                  <p className="text-gray-300 text-sm mt-2">{edu.details}</p>
-                </VerticalTimelineElement>
-              ))}
-            </VerticalTimeline>
-          </div>
-        )}
+        <p className="text-center text-lg font-semibold mb-6">
+          I am a Mechanical Engineer passionate about merging traditional design
+          principles with modern technology.
+        </p>
+        <p className="text-center text-lg">
+          With expertise in CAD modeling, FEA/CFD simulations, and automation
+          with Python, I create solutions that optimize performance, reduce
+          complexity, and deliver real-world impact.
+        </p>
       </motion.div>
 
       {/* Two-column content */}
@@ -320,11 +174,39 @@ const About = () => {
           </motion.div>
         </motion.div>
 
-        {/* Achievement Highlights */}
+        {/* Education Timeline & Achievement Highlights */}
         <motion.div
           variants={fadeInUp}
           className="space-y-8"
         >
+          {/* Education Timeline */}
+          <motion.div
+            whileHover={cardHover}
+            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <GraduationCap className="text-purple-400 w-6 h-6" />
+              <h3 className="text-xl font-semibold">Education</h3>
+            </div>
+            <div className="space-y-4">
+              <div className="border-l-2 border-purple-500/30 pl-4">
+                <h4 className="font-semibold text-white">B.E Mechanical Engineering</h4>
+                <p className="text-purple-300 text-sm">Sri Krishna College of Technology</p>
+                <p className="text-gray-400 text-sm">2022 - 2026 | CGPA: 7.50/10</p>
+              </div>
+              <div className="border-l-2 border-purple-500/30 pl-4">
+                <h4 className="font-semibold text-white">Senior Secondary</h4>
+                <p className="text-purple-300 text-sm">Alagar Public School, Tuticorin</p>
+                <p className="text-gray-400 text-sm">2021 - 2022 | 61% - MPCS</p>
+              </div>
+              <div className="border-l-2 border-purple-500/30 pl-4">
+                <h4 className="font-semibold text-white">Secondary School</h4>
+                <p className="text-purple-300 text-sm">Amrita Vidyalayam, Ramnad</p>
+                <p className="text-gray-400 text-sm">2019 - 2020 | 78%</p>
+              </div>
+            </div>
+          </motion.div>
+
           {/* Key Achievements */}
           <motion.div
             whileHover={cardHover}

@@ -24,9 +24,6 @@ import {
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState(0);
   const [isAutoRotating, setIsAutoRotating] = useState(true);
-  const [skillProgress, setSkillProgress] = useState({});
-  const [showComparison, setShowComparison] = useState(false);
-  const [selectedSkill, setSelectedSkill] = useState(null);
 
   // Auto-rotate categories
   useEffect(() => {
@@ -256,34 +253,6 @@ const Skills = () => {
     return colors[color] || colors.purple;
   };
 
-  // Skill comparison data
-  const skillComparison = {
-    "SolidWorks": {
-      industry: 85,
-      personal: 50,
-      projects: ["Gear Design", "Exhaust Manifold", "Solar Dryer"],
-      timeSpent: "200+ hours"
-    },
-    "ANSYS": {
-      industry: 90,
-      personal: 70,
-      projects: ["Sprocket Analysis", "Piston Head Study", "Thermal Analysis"],
-      timeSpent: "150+ hours"
-    },
-    "Python": {
-      industry: 75,
-      personal: 60,
-      projects: ["Petrol Management", "Engineering Calculator", "Data Analysis"],
-      timeSpent: "300+ hours"
-    },
-    "AutoCAD": {
-      industry: 80,
-      personal: 75,
-      projects: ["Technical Drawings", "2D Layouts", "Documentation"],
-      timeSpent: "250+ hours"
-    }
-  };
-
   return (
     <div className="container mx-auto px-6 py-16">
       {/* Enhanced Header */}
@@ -298,16 +267,6 @@ const Skills = () => {
         <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8">
           Comprehensive skill set spanning design, analysis, and automation with hands-on project experience
         </p>
-        
-        {/* New Feature Toggle */}
-        <div className="flex items-center justify-center gap-4 mb-4">
-          <button
-            onClick={() => setShowComparison(!showComparison)}
-            className={`px-4 py-2 rounded-lg transition-all ${showComparison ? 'bg-purple-600 text-white' : 'bg-gray-700 text-gray-300'}`}
-          >
-            {showComparison ? 'Hide' : 'Show'} Industry Comparison
-          </button>
-        </div>
         
         {/* Auto-rotation Controls */}
         <div className="flex items-center justify-center gap-4 mb-8">
@@ -332,36 +291,6 @@ const Skills = () => {
             <RotateCcw className="w-4 h-4" />
             Reset
           </motion.button>
-        </div>
-      </motion.div>
-
-      {/* Skills Learning Path */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        className="mt-16 bg-gradient-to-r from-gray-800/30 to-gray-900/30 rounded-2xl p-8 border border-gray-700/50"
-      >
-        <h3 className="text-2xl font-bold text-center text-purple-400 mb-8">Learning Journey Timeline</h3>
-        <div className="grid md:grid-cols-4 gap-6">
-          {[
-            { year: "2022", skills: ["AutoCAD", "Basic CAD"], color: "blue" },
-            { year: "2023", skills: ["SolidWorks", "Python"], color: "green" },
-            { year: "2024", skills: ["ANSYS", "FEA/CFD"], color: "purple" },
-            { year: "2025", skills: ["Advanced Analysis", "AI Integration"], color: "orange" }
-          ].map((period, index) => (
-            <div key={index} className="text-center">
-              <div className={`w-16 h-16 bg-${period.color}-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-${period.color}-500/30`}>
-                <span className={`text-${period.color}-400 font-bold`}>{period.year}</span>
-              </div>
-              <div className="space-y-2">
-                {period.skills.map((skill, idx) => (
-                  <div key={idx} className={`bg-${period.color}-500/10 text-${period.color}-300 px-3 py-1 rounded-full text-sm`}>
-                    {skill}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
         </div>
       </motion.div>
 
@@ -429,7 +358,6 @@ const Skills = () => {
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.1 }}
-                      onClick={() => setSelectedSkill(skill)}
                       className="bg-gray-800/50 p-6 rounded-xl border border-gray-700/50 hover:border-gray-600/50 transition-all group"
                       whileHover={{ scale: 1.02, y: -5 }}
                     >
@@ -469,25 +397,6 @@ const Skills = () => {
                           </motion.div>
                         </div>
                       </div>
-                      
-                      {/* Industry Comparison */}
-                      {showComparison && skillComparison[skill.name] && (
-                        <div className="mt-4 p-3 bg-gray-700/30 rounded-lg">
-                          <div className="flex justify-between text-xs mb-2">
-                            <span className="text-gray-400">Industry Standard</span>
-                            <span className={colors.text}>{skillComparison[skill.name].industry}%</span>
-                          </div>
-                          <div className="h-2 bg-gray-600 rounded-full mb-2">
-                            <div 
-                              className={`h-full bg-gradient-to-r ${colors.gradient} rounded-full`}
-                              style={{ width: `${skillComparison[skill.name].industry}%` }}
-                            />
-                          </div>
-                          <div className="text-xs text-gray-400">
-                            Time Invested: {skillComparison[skill.name].timeSpent}
-                          </div>
-                        </div>
-                      )}
 
                       {/* Specialties */}
                       <div>
@@ -515,68 +424,6 @@ const Skills = () => {
           })()}
         </motion.div>
       </AnimatePresence>
-
-      {/* Skill Detail Modal */}
-      {selectedSkill && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-900 rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-auto">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-6">
-                <div className="flex items-center gap-4">
-                  <img src={selectedSkill.logo} alt={selectedSkill.name} className="w-12 h-12 rounded-lg" />
-                  <div>
-                    <h3 className="text-2xl font-bold text-white">{selectedSkill.name}</h3>
-                    <p className="text-purple-400">{selectedSkill.level} Level</p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setSelectedSkill(null)}
-                  className="p-2 hover:bg-gray-800 rounded-full"
-                >
-                  <X className="w-6 h-6 text-gray-400" />
-                </button>
-              </div>
-              
-              <div className="space-y-6">
-                <div>
-                  <h4 className="font-semibold text-purple-400 mb-3">Proficiency Breakdown</h4>
-                  <div className="space-y-3">
-                    <div>
-                      <div className="flex justify-between mb-1">
-                        <span className="text-gray-300">Current Level</span>
-                        <span className="text-purple-400">{selectedSkill.percentage}%</span>
-                      </div>
-                      <div className="h-3 bg-gray-700 rounded-full">
-                        <div 
-                          className="h-full bg-gradient-to-r from-purple-500 to-purple-600 rounded-full"
-                          style={{ width: `${selectedSkill.percentage}%` }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div>
-                  <h4 className="font-semibold text-purple-400 mb-3">Experience Details</h4>
-                  <p className="text-gray-300 mb-2">Experience: {selectedSkill.experience}</p>
-                  <p className="text-gray-300">Projects Completed: {selectedSkill.projects}</p>
-                </div>
-                
-                <div>
-                  <h4 className="font-semibold text-purple-400 mb-3">Specializations</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedSkill.specialties.map((specialty, idx) => (
-                      <span key={idx} className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm">
-                        {specialty}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Additional Skills Grid */}
       <motion.div

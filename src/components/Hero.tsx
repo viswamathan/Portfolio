@@ -166,7 +166,12 @@ const InteractiveSkillCard = ({ icon: Icon, title, desc, index }: any) => {
   );
 };
 
-const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
+interface HeroProps {
+  scrollToContact: () => void;
+  navigateToPage?: (page: 'portfolio' | 'cad-models' | 'achievements') => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [isDownloading, setIsDownloading] = useState(false);
 
@@ -414,6 +419,16 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact }) => {
             <FileText className="w-4 h-4 group-hover:rotate-12 transition-transform" />
             <span>Download Portfolio</span>
           </motion.a>
+
+          <motion.button
+            onClick={() => navigateToPage('cad-models')}
+            className="group relative bg-gradient-to-r from-green-600 to-teal-600 text-white px-5 py-2.5 rounded-full font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl text-sm"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Cog className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+            <span>View CAD Models</span>
+          </motion.button>
 
           <motion.button
             onClick={scrollToContact}

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Calendar, Building, Award, FileText, ChevronRight, Target, Wrench, Briefcase, Eye, X, Clock, Users, TrendingUp } from 'lucide-react';
+import { MapPin, Calendar, Building, Award, FileText, Briefcase, Eye, X } from 'lucide-react';
 
 const Experience = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [activeExperience, setActiveExperience] = useState(0);
 
   const handleNIOTCertificate = () => {
     window.open('/NIOT INTERNSHIP CERTIFICATE.png', '_blank');
@@ -29,6 +28,7 @@ const Experience = () => {
       location: "Chennai, Tamil Nadu",
       duration: "June 2024 - July 2024",
       type: "Research Internship",
+      status: "Completed",
       logo: "/NIOT_LOGO.png",
       images: ["/NIOT IMAGE 1.jpg", "/NIOT IMAGE 2.jpg"],
       description: "Specialized training in marine energy systems and advanced simulation techniques with focus on OTEC & LTDD systems.",
@@ -41,10 +41,6 @@ const Experience = () => {
       skills: ["ANSYS Workbench", "FEA", "Marine Engineering", "Structural Analysis", "Research Methodology", "OTEC Systems"],
       onCertificate: handleNIOTCertificate,
       onReport: handleNIOTReport,
-      status: "completed",
-      teamSize: "8 members",
-      mentor: "Dr. Marine Engineer",
-      impact: "Improved structural efficiency by 15%"
     },
     {
       title: "Design Engineer Intern",
@@ -52,6 +48,7 @@ const Experience = () => {
       location: "Coimbatore, Tamil Nadu",
       duration: "May 2025 - July 2025",
       type: "Industrial Internship",
+      status: "Upcoming",
       logo: "/SUPERAUTOFORGE_LOGO.png",
       images: ["/SAF 1.jpg", "/SAF 2.jpg"],
       description: "Hands-on experience in automotive forging processes and manufacturing optimization with advanced CAD modeling.",
@@ -64,218 +61,163 @@ const Experience = () => {
       skills: ["CAD Design", "Forging Processes", "Material Flow Analysis", "Process Optimization", "Manufacturing", "Quality Control"],
       onCertificate: handleUpcomingCertificate,
       onReport: handleUpcomingReport,
-      status: "upcoming",
-      teamSize: "12 members",
-      mentor: "Senior Design Engineer",
-      impact: "Expected 20% process optimization"
     }
   ];
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
-      {/* Unique Header with Interactive Timeline */}
-      <div className="text-center mb-16">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-8"
-        >
-          Professional Journey
-        </motion.h2>
-        
-        {/* Interactive Timeline Navigation */}
-        <div className="flex justify-center items-center mb-8">
-          <div className="relative flex items-center">
-            {experiences.map((_, index) => (
-              <React.Fragment key={index}>
-                <motion.button
-                  onClick={() => setActiveExperience(index)}
-                  className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                    activeExperience === index 
-                      ? 'bg-purple-500 border-purple-500 scale-125' 
-                      : 'bg-transparent border-gray-400 hover:border-purple-400'
-                  }`}
-                  whileHover={{ scale: 1.2 }}
-                />
-                {index < experiences.length - 1 && (
-                  <div className={`w-24 h-0.5 mx-2 transition-colors duration-300 ${
-                    activeExperience > index ? 'bg-purple-500' : 'bg-gray-400'
-                  }`} />
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      </div>
+    <div className="container mx-auto px-6 py-20">
+      {/* Section Header */}
+      <motion.div 
+        className="text-center mb-16"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-4xl font-bold mb-4">
+          Professional <span className="text-purple-500">Experience</span>
+        </h2>
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          Hands-on experience in marine engineering and automotive manufacturing, 
+          developing expertise in advanced simulation and design optimization.
+        </p>
+      </motion.div>
 
-      {/* Experience Cards with Unique Layout */}
+      {/* Experience Cards */}
       <div className="space-y-12">
         {experiences.map((exp, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            className={`flex flex-col lg:flex-row items-center gap-8 ${
-              index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-            }`}
-            onHoverStart={() => setActiveExperience(index)}
+            className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: index * 0.2 }}
           >
-            {/* Content Side */}
-            <div className="flex-1 space-y-6">
-              {/* Header Card */}
-              <motion.div 
-                className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 p-6 rounded-2xl border border-gray-700/50"
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <motion.img
-                    src={exp.logo}
-                    alt={`${exp.company} Logo`}
-                    className="w-16 h-16 rounded-full border-2 border-purple-500/50 object-cover"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.5 }}
-                  />
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-purple-400">{exp.title}</h3>
-                    <h4 className="text-xl font-semibold text-white">{exp.company}</h4>
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-400 mt-2">
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-4 h-4" /> {exp.location}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" /> {exp.duration}
-                      </span>
-                      <span className={`px-3 py-1 rounded-full text-xs ${
-                        exp.status === 'completed' 
-                          ? 'bg-green-500/20 text-green-400' 
-                          : 'bg-blue-500/20 text-blue-400'
-                      }`}>
-                        {exp.status === 'completed' ? 'Completed' : 'Upcoming'}
-                      </span>
+            {/* Header Section */}
+            <div className="bg-gradient-to-r from-gray-800/80 to-gray-900/80 p-8 border-b border-gray-700/50">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                {/* Left: Company Info */}
+                <div className="flex items-center gap-6">
+                  <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-purple-500/50 bg-gray-800">
+                    <img
+                      src={exp.logo}
+                      alt={`${exp.company} Logo`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white mb-2">{exp.title}</h3>
+                    <h4 className="text-xl text-purple-400 font-semibold mb-3">{exp.company}</h4>
+                    <div className="flex flex-wrap gap-4 text-sm text-gray-300">
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-purple-500" />
+                        <span>{exp.location}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4 text-purple-500" />
+                        <span>{exp.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Building className="w-4 h-4 text-purple-500" />
+                        <span>{exp.type}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-                
-                <p className="text-gray-300 mb-4">{exp.description}</p>
-                
-                {/* Quick Stats */}
-                <div className="grid grid-cols-3 gap-4 mb-4">
-                  <div className="text-center p-3 bg-gray-700/30 rounded-lg">
-                    <Users className="w-5 h-5 text-purple-400 mx-auto mb-1" />
-                    <div className="text-sm font-semibold text-white">{exp.teamSize}</div>
-                    <div className="text-xs text-gray-400">Team Size</div>
+
+                {/* Right: Status & Actions */}
+                <div className="flex flex-col items-end gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium border ${
+                    exp.status === 'Completed' 
+                      ? 'bg-green-500/20 text-green-400 border-green-500/30' 
+                      : 'bg-blue-500/20 text-blue-400 border-blue-500/30'
+                  }`}>
+                    {exp.status}
                   </div>
-                  <div className="text-center p-3 bg-gray-700/30 rounded-lg">
-                    <Target className="w-5 h-5 text-blue-400 mx-auto mb-1" />
-                    <div className="text-sm font-semibold text-white">{exp.skills.length}</div>
-                    <div className="text-xs text-gray-400">Skills</div>
-                  </div>
-                  <div className="text-center p-3 bg-gray-700/30 rounded-lg">
-                    <TrendingUp className="w-5 h-5 text-green-400 mx-auto mb-1" />
-                    <div className="text-sm font-semibold text-white">High</div>
-                    <div className="text-xs text-gray-400">Impact</div>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={exp.onCertificate}
+                      className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    >
+                      <Award className="w-4 h-4" />
+                      Certificate
+                    </button>
+                    <button
+                      onClick={exp.onReport}
+                      className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    >
+                      <FileText className="w-4 h-4" />
+                      Report
+                    </button>
                   </div>
                 </div>
-
-                {/* Action Buttons */}
-                <div className="flex gap-3">
-                  <motion.button
-                    onClick={exp.onCertificate}
-                    className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Award className="w-4 h-4" /> Certificate
-                  </motion.button>
-                  <motion.button
-                    onClick={exp.onReport}
-                    className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FileText className="w-4 h-4" /> Report
-                  </motion.button>
-                </div>
-              </motion.div>
-
-              {/* Responsibilities & Skills */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <motion.div 
-                  className="bg-gray-800/30 p-6 rounded-xl border border-gray-700/50"
-                  whileHover={{ borderColor: 'rgba(139, 92, 246, 0.5)' }}
-                >
-                  <h5 className="font-bold text-white mb-4 flex items-center gap-2">
-                    <Target className="w-5 h-5 text-purple-500" /> Key Responsibilities
-                  </h5>
-                  <ul className="space-y-3">
-                    {exp.responsibilities.map((item, idx) => (
-                      <motion.li
-                        key={idx}
-                        className="flex gap-3 text-gray-300 text-sm"
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.1 * idx }}
-                      >
-                        <ChevronRight className="w-4 h-4 text-purple-500 mt-0.5 flex-shrink-0" />
-                        {item}
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-
-                <motion.div 
-                  className="bg-gray-800/30 p-6 rounded-xl border border-gray-700/50"
-                  whileHover={{ borderColor: 'rgba(59, 130, 246, 0.5)' }}
-                >
-                  <h5 className="font-bold text-white mb-4 flex items-center gap-2">
-                    <Wrench className="w-5 h-5 text-blue-500" /> Technologies & Skills
-                  </h5>
-                  <div className="flex flex-wrap gap-2">
-                    {exp.skills.map((skill, idx) => (
-                      <motion.span
-                        key={idx}
-                        className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.05 * idx }}
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        {skill}
-                      </motion.span>
-                    ))}
-                  </div>
-                </motion.div>
               </div>
             </div>
 
-            {/* Images Side */}
-            <div className="flex-1 max-w-md">
-              <div className="grid grid-cols-1 gap-4">
-                {exp.images.map((image, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="relative group overflow-hidden rounded-xl border-2 border-gray-700/50 hover:border-purple-500/50 transition-colors"
-                    whileHover={{ scale: 1.03 }}
-                  >
-                    <img 
-                      src={image}
-                      alt={`${exp.company} Experience ${idx + 1}`}
-                      className="w-full h-48 object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <button
+            {/* Content Section */}
+            <div className="p-8">
+              {/* Description */}
+              <div className="mb-8">
+                <p className="text-gray-300 text-lg leading-relaxed">{exp.description}</p>
+              </div>
+
+              {/* Main Content Grid */}
+              <div className="grid lg:grid-cols-3 gap-8">
+                {/* Responsibilities */}
+                <div className="lg:col-span-2">
+                  <h5 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <Briefcase className="w-5 h-5 text-purple-500" />
+                    Key Responsibilities
+                  </h5>
+                  <div className="space-y-3">
+                    {exp.responsibilities.map((item, idx) => (
+                      <div key={idx} className="flex gap-3 p-4 bg-gray-700/30 rounded-lg">
+                        <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <p className="text-gray-300">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Skills Gained */}
+                  <div className="mt-6">
+                    <h5 className="text-lg font-bold text-white mb-4">Skills & Technologies</h5>
+                    <div className="flex flex-wrap gap-2">
+                      {exp.skills.map((skill, idx) => (
+                        <span
+                          key={idx}
+                          className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm font-medium border border-purple-500/30"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Images */}
+                <div className="space-y-4">
+                  <h5 className="text-lg font-bold text-white mb-4">Experience Gallery</h5>
+                  {exp.images.map((image, idx) => (
+                    <div
+                      key={idx}
+                      className="relative group overflow-hidden rounded-xl border border-purple-500/30 bg-black"
+                    >
+                      <img 
+                        src={image}
+                        alt={`${exp.company} Experience ${idx + 1}`}
+                        className="w-full h-48 object-contain rounded-lg bg-black cursor-pointer"
                         onClick={() => setSelectedImage(image)}
-                        className="p-3 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
-                      >
-                        <Eye className="w-5 h-5 text-white" />
-                      </button>
+                      />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <button
+                          onClick={() => setSelectedImage(image)}
+                          className="p-3 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
+                        >
+                          <Eye className="w-5 h-5 text-white" />
+                        </button>
+                      </div>
                     </div>
-                    <div className="absolute top-3 left-3 bg-black/70 px-3 py-1 rounded-full text-xs text-white">
-                      {exp.company} - View {idx + 1}
-                    </div>
-                  </motion.div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>
@@ -284,37 +226,35 @@ const Experience = () => {
 
       {/* Experience Summary */}
       <motion.div
+        className="mt-16 bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-2xl p-8 border border-purple-500/20"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        className="mt-16 text-center"
+        transition={{ duration: 0.8 }}
       >
-        <div className="bg-gradient-to-r from-purple-900/20 to-blue-900/20 rounded-2xl p-8 border border-purple-500/20">
-          <h3 className="text-2xl font-bold text-purple-400 mb-6">Experience Impact</h3>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-purple-400 mb-2">2+</div>
-              <div className="text-gray-300">Months Experience</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-blue-400 mb-2">10+</div>
-              <div className="text-gray-300">Skills Acquired</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-400 mb-2">2</div>
-              <div className="text-gray-300">Major Projects</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-yellow-400 mb-2">100%</div>
-              <div className="text-gray-300">Success Rate</div>
-            </div>
+        <h3 className="text-2xl font-bold text-center text-purple-400 mb-8">Experience Summary</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="space-y-2">
+            <div className="text-3xl font-bold text-purple-400">2+</div>
+            <div className="text-gray-300">Months of Internship</div>
+            <div className="text-sm text-gray-400">Hands-on Industry Experience</div>
+          </div>
+          <div className="space-y-2">
+            <div className="text-3xl font-bold text-purple-400">12+</div>
+            <div className="text-gray-300">Technical Skills Gained</div>
+            <div className="text-sm text-gray-400">Advanced Engineering Tools</div>
+          </div>
+          <div className="space-y-2">
+            <div className="text-3xl font-bold text-purple-400">100%</div>
+            <div className="text-gray-300">Project Completion Rate</div>
+            <div className="text-sm text-gray-400">Successful Deliverables</div>
           </div>
         </div>
       </motion.div>
 
       {/* Image Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          <div className="relative max-w-4xl w-full h-full flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
+          <div className="relative max-w-6xl w-full h-full flex items-center justify-center">
             <img 
               src={selectedImage} 
               alt="Full View" 
@@ -322,7 +262,7 @@ const Experience = () => {
             />
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 bg-gray-800/70 p-3 rounded-full hover:bg-gray-700 transition-colors"
+              className="absolute top-4 right-4 bg-gray-800/80 p-3 rounded-full hover:bg-gray-700 transition-colors"
             >
               <X className="w-6 h-6 text-white" />
             </button>

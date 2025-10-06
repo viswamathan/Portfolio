@@ -128,6 +128,7 @@ export default function App() {
                     >
                       <Component
                         scrollToContact={index === 0 ? () => scrollToSection(5) : undefined}
+                        navigateToPage={index === 0 ? setCurrentPage : undefined}
                       />
                     </motion.section>
                   ))

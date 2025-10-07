@@ -114,7 +114,7 @@ const CADModels = () => {
       features: ["Parametric Design", "Flow Optimization", "Assembly Ready"],
       image: "/3d Pictures/flanged tee pipe fitting.png",
       downloadUrl: "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
-      modelPath: "/Models/Flanged_Tee_Pipe_Fitting.stl",
+      modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
       views: 278,
       downloads: 18,
     },

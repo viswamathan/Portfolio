@@ -26,7 +26,7 @@ const CADModels = () => {
       image: "/3d Pictures/gear profile.png",
       downloadUrl:
         "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
-      modelPath: "/Models/Spur_Gears.stl",
+      modelPath: "/Models/Spur Gears.stl",
       views: 1247,
       downloads: 89,
     },
@@ -41,7 +41,7 @@ const CADModels = () => {
       image: "/3d Pictures/exhaust manifold.png",
       downloadUrl:
         "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
-      modelPath: "/Models/Exhaust_Manifold.stl",
+      modelPath: "/Models/Exhaust Manifold.stl",
       views: 500,
       downloads: 25,
     },
@@ -56,7 +56,7 @@ const CADModels = () => {
       image: "/3d Pictures/knuckle joint.png",
       downloadUrl:
         "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
-      modelPath: "/Models/Knuckle_Joint.stl",
+      modelPath: "/Models/Knuckle Joint.stl",
       views: 226,
       downloads: 10,
     },
@@ -71,7 +71,7 @@ const CADModels = () => {
       image: "/3d Pictures/universal coupling.png",
       downloadUrl:
         "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
-      modelPath: "/Models/Universal_Coupling.stl",
+      modelPath: "/Models/Universal Coupling.stl",
       views: 189,
       downloads: 15,
     },
@@ -86,7 +86,7 @@ const CADModels = () => {
       image: "/3d Pictures/muff coupling.png",
       downloadUrl:
         "https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
-      modelPath: "/Models/Muff_Coupling.stl",
+      modelPath: "/Models/Muff Coupling.stl",
       views: 189,
       downloads: 15,
     },
@@ -101,10 +101,7 @@ const CADModels = () => {
       image: "/3d Pictures/DOOR LOCK.png",
       downloadUrl:
         "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
-      modelPaths: [
-        "/Models/Door lock mechanism base.STL",
-        "/Models/Door lock mechanism lock.STL",
-      ],
+      modelPath: "/Models/Door lock.STL",
       views: 312,
       downloads: 22,
     },
@@ -134,7 +131,7 @@ const CADModels = () => {
       image: "/3d Pictures/refrigeration valves.png",
       downloadUrl:
         "https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
-      modelPath: "/Models/Refrigeration_Valves_Assembly.stl",
+      modelPath: "/Models/Refrigeration Valves Assembly.stl",
       views: 342,
       downloads: 27,
     },

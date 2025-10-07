@@ -5,7 +5,11 @@ import {
   Download,
   Eye,
   Layers,
+  Ruler,
+  Cog,
   Award,
+  Lightbulb,
+  Target,
 } from "lucide-react";
 
 // Three.js imports for STL viewer
@@ -16,118 +20,134 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 const CADModels = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [previewModel, setPreviewModel] = useState(null);
-  const [previewImage, setPreviewImage] = useState(null);
+  const [zoomFactor, setZoomFactor] = useState(1);
   const mountRef = useRef(null);
 
   const cadModels = [
     {
       title: "Pair of Spur Gears",
-      description: "Precision-engineered spur gear pair with optimized module and pressure angle for smooth torque transmission and minimal vibration under varying loads.",
+      description:
+        "Precision-engineered spur gear pair with optimized module and pressure angle for smooth torque transmission and minimal vibration under varying loads.",
       software: "SolidWorks",
       category: "Mechanical Parts",
       complexity: "Intermediate",
       designTime: "1 hour",
       features: ["Parametric Design", "Gear Ratio Analysis", "Motion Study"],
       image: "/3d Pictures/gear profile.png",
-      downloadUrl: "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
+      downloadUrl:
+        "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
       modelPath: "/Models/Spur_Gears.stl",
       views: 1247,
       downloads: 89,
     },
     {
       title: "Exhaust Manifold",
-      description: "Optimized exhaust manifold designed for efficient gas flow, reduced backpressure, and improved engine performance. Features smooth flow paths and minimized thermal stresses for durability.",
+      description:
+        "Optimized exhaust manifold designed for efficient gas flow, reduced backpressure, and improved engine performance. Features smooth flow paths and minimized thermal stresses for durability.",
       software: "SolidWorks",
       category: "Automotive",
       complexity: "Advanced",
       designTime: "3 hours",
       features: ["Flow Simulation", "Thermal Analysis", "Parametric Design"],
       image: "/3d Pictures/exhaust manifold.png",
-      downloadUrl: "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
+      downloadUrl:
+        "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
       modelPath: "/Models/Exhaust_Manifold.stl",
       views: 500,
       downloads: 25,
     },
     {
       title: "Knuckle Joint",
-      description: "Robust knuckle joint designed for heavy load applications, ensuring secure connections while allowing limited angular movement. Suitable for linkages in structural and mechanical systems.",
+      description:
+        "Robust knuckle joint designed for heavy load applications, ensuring secure connections while allowing limited angular movement. Suitable for linkages in structural and mechanical systems.",
       software: "SolidWorks",
       category: "Mechanical Parts",
       complexity: "Intermediate",
       designTime: "2 hours",
       features: ["Parametric Design", "Stress Analysis", "Motion Study"],
       image: "/3d Pictures/knuckle joint.png",
-      downloadUrl: "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
+      downloadUrl:
+        "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
       modelPath: "/Models/Knuckle_Joint.stl",
       views: 226,
       downloads: 10,
     },
     {
       title: "Universal Coupling",
-      description: "Precision universal coupling enabling torque transmission between shafts at varying angles. Designed to minimize backlash and maintain smooth power delivery in dynamic conditions.",
+      description:
+        "Precision universal coupling enabling torque transmission between shafts at varying angles. Designed to minimize backlash and maintain smooth power delivery in dynamic conditions.",
       software: "SolidWorks",
       category: "Industrial",
       complexity: "Beginner",
       designTime: "3 hours",
       features: ["Parametric Design", "Motion Study", "Torque Analysis"],
       image: "/3d Pictures/universal coupling.png",
-      downloadUrl: "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
+      downloadUrl:
+        "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
       modelPath: "/Models/Universal_Coupling.stl",
       views: 189,
       downloads: 15,
     },
     {
       title: "Muff Coupling",
-      description: "Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
+      description:
+        "Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
       software: "SolidWorks",
       category: "Industrial",
       complexity: "Basic",
       designTime: "1 hour",
       features: ["Parametric Design", "Torque Analysis", "Stress Check"],
       image: "/3d Pictures/muff coupling.png",
-      downloadUrl:"https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
+      downloadUrl:
+        "https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
       modelPath: "/Models/Muff_Coupling.stl",
       views: 189,
       downloads: 15,
     },
     {
       title: "Door Lock Mechanism",
-      description: "Compact and reliable door lock mechanism featuring latch, spring, and handle components. Designed for durability, ease of operation, and smooth locking motion with tolerance-based assembly.",
+      description:
+        "Compact and reliable door lock mechanism featuring latch, spring, and handle components. Designed for durability, ease of operation, and smooth locking motion with tolerance-based assembly.",
       software: "SolidWorks",
       category: "Assembly",
       complexity: "Basic",
       designTime: "1 hour",
       features: ["Assembly Modeling", "Motion Simulation", "Tolerance Analysis"],
       image: "/3d Pictures/DOOR LOCK.png",
-      downloadUrl: "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
+      downloadUrl:
+        "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
       modelPath: "/Models/Door_Lock_Mechanism.stl",
       views: 312,
       downloads: 22,
     },
     {
       title: "Flanged Tee Pipe Fitting",
-      description: "Industrial-grade flanged tee pipe fitting designed for fluid distribution systems. Features precise flanges for secure bolted connections and optimized internal geometry for minimal pressure loss.",
+      description:
+        "Industrial-grade flanged tee pipe fitting designed for fluid distribution systems. Features precise flanges for secure bolted connections and optimized internal geometry for minimal pressure loss.",
       software: "SolidWorks",
       category: "Industrial",
       complexity: "Intermediate",
       designTime: "2 hours",
       features: ["Parametric Design", "Flow Optimization", "Assembly Ready"],
       image: "/3d Pictures/flanged tee pipe fitting.png",
-      downloadUrl: "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
-      modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
+      downloadUrl:
+        "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
+      modelPath: "/Models/Flanged_Tee_Pipe_Fitting.stl",
       views: 278,
       downloads: 18,
     },
     {
       title: "Refrigeration Valves Assembly",
-      description: "Precision-designed refrigeration valve assembly used for controlling refrigerant flow in HVAC and cooling systems. Includes service, expansion, and solenoid valves optimized for durability, leak-proof operation, and ease of maintenance.",
+      description:
+        "Precision-designed refrigeration valve assembly used for controlling refrigerant flow in HVAC and cooling systems. Includes service, expansion, and solenoid valves optimized for durability, leak-proof operation, and ease of maintenance.",
       software: "SolidWorks",
       category: "Thermal Systems",
       complexity: "Basic",
       designTime: "2 hours",
       features: ["Parametric Design", "Flow Simulation", "Thermal Analysis"],
       image: "/3d Pictures/refrigeration valves.png",
-      downloadUrl: "https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
+      downloadUrl:
+        "https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
       modelPath: "/Models/Refrigeration_Valves_Assembly.stl",
       views: 342,
       downloads: 27,
@@ -203,19 +223,23 @@ const CADModels = () => {
     const light2 = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(light2);
 
+    let mesh;
     const loader = new STLLoader();
     loader.load(previewModel.modelPath, (geometry) => {
-      const material = new THREE.MeshStandardMaterial({ color: 0x7c3aed, metalness: 0.5, roughness: 0.2 });
-      const mesh = new THREE.Mesh(geometry, material);
+      const material = new THREE.MeshStandardMaterial({
+        color: 0x7c3aed,
+        metalness: 0.5,
+        roughness: 0.2,
+      });
+      mesh = new THREE.Mesh(geometry, material);
       geometry.center();
 
-      // Fit camera to model
       const boundingBox = new THREE.Box3().setFromObject(mesh);
       const size = boundingBox.getSize(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
       const fov = camera.fov * (Math.PI / 180);
       const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
-      camera.position.set(0, 0, cameraZ * 1.5);
+      camera.position.set(0, 0, cameraZ * 1.5 * zoomFactor);
       camera.lookAt(new THREE.Vector3(0, 0, 0));
 
       scene.add(mesh);
@@ -235,7 +259,11 @@ const CADModels = () => {
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [previewModel]);
+  }, [previewModel, zoomFactor]);
+
+  // Zoom functions
+  const handleZoomIn = () => setZoomFactor((prev) => prev * 1.2);
+  const handleZoomOut = () => setZoomFactor((prev) => prev / 1.2);
 
   return (
     <div className="container mx-auto px-6 py-20">
@@ -266,7 +294,14 @@ const CADModels = () => {
               >
                 <Icon className={`w-6 h-6 text-${stat.color}-400`} />
               </div>
-              <div className="text-2xl font-bold text-white mb-2">{stat.value}</div>
+              <motion.div
+                initial={{ count: 0 }}
+                animate={{ count: stat.value }}
+                transition={{ duration: 2 }}
+                className="text-2xl font-bold text-white mb-2"
+              >
+                {stat.value}
+              </motion.div>
               <div className="text-gray-400 text-sm">{stat.label}</div>
             </motion.div>
           );
@@ -358,14 +393,6 @@ const CADModels = () => {
                 >
                   <Eye className="w-4 h-4" /> View 3D Model
                 </motion.button>
-
-                <motion.button
-                  onClick={() => setPreviewImage(model.image)}
-                  className="flex-1 flex items-center justify-center gap-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 px-4 py-3 rounded-lg text-sm border border-blue-500/30"
-                >
-                  <Eye className="w-4 h-4" /> View Image
-                </motion.button>
-
                 <motion.a
                   href={model.downloadUrl}
                   download
@@ -382,7 +409,7 @@ const CADModels = () => {
       {/* 3D Viewer Modal */}
       {previewModel && (
         <motion.div
-          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -393,24 +420,36 @@ const CADModels = () => {
             className="w-full h-full"
             onClick={(e) => e.stopPropagation()}
           />
-        </motion.div>
-      )}
 
-      {/* Image Preview Modal */}
-      {previewImage && (
-        <motion.div
-          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setPreviewImage(null)}
-        >
-          <img
-            src={previewImage}
-            alt="Preview"
-            className="max-w-full max-h-full object-contain rounded-lg"
-            onClick={(e) => e.stopPropagation()}
-          />
+          {/* Close Button */}
+          <button
+            className="absolute top-4 right-4 text-white bg-red-600/80 hover:bg-red-600 rounded-full p-2 z-50"
+            onClick={() => setPreviewModel(null)}
+          >
+            ✕
+          </button>
+
+          {/* Zoom Buttons */}
+          <div className="absolute top-1/2 right-4 flex flex-col gap-2 z-50">
+            <button
+              className="bg-white/20 text-white hover:bg-white/40 px-3 py-2 rounded-lg"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleZoomIn();
+              }}
+            >
+              + Zoom
+            </button>
+            <button
+              className="bg-white/20 text-white hover:bg-white/40 px-3 py-2 rounded-lg"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleZoomOut();
+              }}
+            >
+              - Zoom
+            </button>
+          </div>
         </motion.div>
       )}
     </div>

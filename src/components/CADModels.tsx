@@ -9,6 +9,7 @@ const CADModels = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [previewModel, setPreviewModel] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
+  const [loadingModel, setLoadingModel] = useState(false);
   const mountRef = useRef(null);
   const controlsRef = useRef(null);
   const cameraRef = useRef(null);
@@ -179,6 +180,8 @@ const CADModels = () => {
   useEffect(() => {
     if (!previewModel || !mountRef.current) return;
 
+    setLoadingModel(true); // Start loading state
+
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x111827);
 
@@ -204,9 +207,7 @@ const CADModels = () => {
     const light1 = new THREE.DirectionalLight(0xffffff, 1);
     light1.position.set(50, 50, 50);
     scene.add(light1);
-
-    const light2 = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(light2);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 
     const loader = new STLLoader();
     const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
@@ -220,24 +221,30 @@ const CADModels = () => {
         roughness: 0.2,
       });
 
-      loader.load(path, (geometry) => {
-        const mesh = new THREE.Mesh(geometry, material);
-        geometry.center();
-        scene.add(mesh);
-        meshes.push(mesh);
+      loader.load(
+        path,
+        (geometry) => {
+          const mesh = new THREE.Mesh(geometry, material);
+          geometry.center();
+          scene.add(mesh);
+          meshes.push(mesh);
 
-        loadedCount++;
-        if (loadedCount === modelPaths.length) {
-          const groupBox = new THREE.Box3();
-          meshes.forEach((m) => groupBox.expandByObject(m));
-          const size = groupBox.getSize(new THREE.Vector3());
-          const maxDim = Math.max(size.x, size.y, size.z);
-          const fov = camera.fov * (Math.PI / 180);
-          const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
-          camera.position.set(0, 0, cameraZ * 1.5);
-          camera.lookAt(new THREE.Vector3(0, 0, 0));
-        }
-      });
+          loadedCount++;
+          if (loadedCount === modelPaths.length) {
+            const groupBox = new THREE.Box3();
+            meshes.forEach((m) => groupBox.expandByObject(m));
+            const size = groupBox.getSize(new THREE.Vector3());
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const fov = camera.fov * (Math.PI / 180);
+            const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+            camera.position.set(0, 0, cameraZ * 1.5);
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+            setTimeout(() => setLoadingModel(false), 500); // Small delay for smooth fade
+          }
+        },
+        undefined,
+        () => setLoadingModel(false) // On error
+      );
     });
 
     const animate = function () {
@@ -419,7 +426,28 @@ const CADModels = () => {
               className="absolute top-4 right-4 w-8 h-8 text-white cursor-pointer"
               onClick={() => setPreviewModel(null)}
             />
+
+            {/* 3D Canvas */}
             <div ref={mountRef} className="w-full h-full" />
+
+            {/* Loading Spinner */}
+            {loadingModel && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-sm"
+              >
+                <motion.div
+                  className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4"
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                />
+                <p className="text-gray-300 text-sm">Loading 3D Model...</p>
+              </motion.div>
+            )}
+
+            {/* Zoom Buttons */}
             <div className="absolute bottom-4 right-4 flex gap-2">
               <button
                 onClick={zoomIn}

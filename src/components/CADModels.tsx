@@ -27,7 +27,7 @@ const CADModels = () => {
       image: "/3d Pictures/gear profile.png",
       downloadUrl:
         "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
-      modelPath: "/Models/Gear Profile.STL",
+      modelPath: "/Models/Spur Gear profile.STL",
       views: 1247,
       downloads: 89,
     },

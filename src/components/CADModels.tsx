@@ -13,6 +13,7 @@ const CADModels = () => {
   const controlsRef = useRef(null);
   const cameraRef = useRef(null);
 
+  // --- Full CAD Models Array ---
   const cadModels = [
     {
       title: "Pair of Spur Gears",
@@ -177,7 +178,7 @@ const CADModels = () => {
     { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
 
-  // ✅ UPDATED 3D VIEWER (multi-STL support)
+  // --- 3D Viewer ---
   useEffect(() => {
     if (!previewModel || !mountRef.current) return;
 
@@ -215,7 +216,6 @@ const CADModels = () => {
     const meshes = [];
     let loadedCount = 0;
 
-    // Load multiple STL files
     modelPaths.forEach((path, index) => {
       const material = new THREE.MeshStandardMaterial({
         color: new THREE.Color(`hsl(${(index * 60) % 360}, 80%, 60%)`),
@@ -231,7 +231,6 @@ const CADModels = () => {
 
         loadedCount++;
         if (loadedCount === modelPaths.length) {
-          // Fit camera to combined model
           const groupBox = new THREE.Box3();
           meshes.forEach((m) => groupBox.expandByObject(m));
           const size = groupBox.getSize(new THREE.Vector3());
@@ -419,25 +418,21 @@ const CADModels = () => {
           exit={{ opacity: 0 }}
         >
           <div className="relative w-[80vw] h-[80vh] bg-gray-900 rounded-xl p-4">
-            <button
-              className="absolute top-2 right-2 text-white p-2 hover:bg-gray-700 rounded-full"
+            <X
+              className="absolute top-4 right-4 w-8 h-8 text-white cursor-pointer"
               onClick={() => setPreviewModel(null)}
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            <div ref={mountRef} className="w-full h-full rounded-lg overflow-hidden" />
-
+            />
+            <div ref={mountRef} className="w-full h-full" />
             <div className="absolute bottom-4 right-4 flex gap-2">
               <button
                 onClick={zoomIn}
-                className="p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700"
+                className="bg-gray-700/50 text-white p-2 rounded-full hover:bg-gray-600/50"
               >
                 <ZoomIn className="w-5 h-5" />
               </button>
               <button
                 onClick={zoomOut}
-                className="p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700"
+                className="bg-gray-700/50 text-white p-2 rounded-full hover:bg-gray-600/50"
               >
                 <ZoomOut className="w-5 h-5" />
               </button>
@@ -446,7 +441,7 @@ const CADModels = () => {
         </motion.div>
       )}
 
-      {/* Image Preview Modal */}
+      {/* Image Modal */}
       {previewImage && (
         <motion.div
           className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
@@ -454,19 +449,11 @@ const CADModels = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <div className="relative">
-            <button
-              className="absolute top-2 right-2 text-white p-2 hover:bg-gray-700 rounded-full"
-              onClick={() => setPreviewImage(null)}
-            >
-              <X className="w-6 h-6" />
-            </button>
-            <img
-              src={previewImage}
-              alt="Model Preview"
-              className="max-w-[80vw] max-h-[80vh] rounded-lg"
-            />
-          </div>
+          <X
+            className="absolute top-4 right-4 w-8 h-8 text-white cursor-pointer"
+            onClick={() => setPreviewImage(null)}
+          />
+          <img src={previewImage} alt="Preview" className="max-h-[90vh] max-w-[90vw]" />
         </motion.div>
       )}
     </div>

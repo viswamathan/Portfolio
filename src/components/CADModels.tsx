@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Box,
   Download,
@@ -10,9 +10,41 @@ import {
   Award,
   Lightbulb,
   Target,
+  Cube,
+  X,
+  RotateCcw,
+  ZoomIn,
+  Move3D
 } from "lucide-react";
 
+// Declare model-viewer as a custom element
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'model-viewer': any;
+    }
+  }
+}
+
 const CADModels = () => {
+  const [selectedModel, setSelectedModel] = useState<any>(null);
+  const [isModelViewerLoaded, setIsModelViewerLoaded] = useState(false);
+
+  // Load model-viewer script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.type = 'module';
+    script.src = 'https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js';
+    script.onload = () => setIsModelViewerLoaded(true);
+    document.head.appendChild(script);
+
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
+  }, []);
+
   const cadModels = [
     {
       title: "Pair of Spur Gears",
@@ -24,6 +56,7 @@ const CADModels = () => {
       features: ["Parametric Design", "Gear Ratio Analysis", "Motion Study"],
       image:"/3d Pictures/gear profile.png",
       downloadUrl: "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
+      glbUrl: "/Models/gear-profile.glb",
       views: 1247,
       downloads: 89,
     },
@@ -37,6 +70,7 @@ const CADModels = () => {
       features: ["Flow Simulation", "Thermal Analysis", "Parametric Design"],
       image:"/3d Pictures/exhaust manifold.png",
       downloadUrl: "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
+      glbUrl: "/Models/exhaust-manifold.glb",
       views: 500,
       downloads: 25,
     },
@@ -50,6 +84,7 @@ const CADModels = () => {
       features: ["Parametric Design", "Stress Analysis", "Motion Study"],
       image:"/3d Pictures/knuckle joint.png",
       downloadUrl: "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
+      glbUrl: "/Models/knuckle-joint.glb",
       views: 226,
       downloads: 10,
     },
@@ -63,6 +98,7 @@ const CADModels = () => {
       features: ["Parametric Design", "Motion Study", "Torque Analysis"],
       image:"/3d Pictures/universal coupling.png",
       downloadUrl: "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
+      glbUrl: "/Models/universal-coupling.glb",
       views: 189,
       downloads: 15,
     },
@@ -76,6 +112,7 @@ const CADModels = () => {
       features: ["Parametric Design", "Torque Analysis", "Stress Check"],
       image:"/3d Pictures/muff coupling.png",
       downloadUrl:"https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
+      glbUrl: "/Models/muff-coupling.glb",
       views: 189,
       downloads: 15,
     },
@@ -89,6 +126,7 @@ const CADModels = () => {
       features: ["Assembly Modeling", "Motion Simulation", "Tolerance Analysis"],
       image: "/3d Pictures/DOOR LOCK.png",
       downloadUrl: "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
+      glbUrl: "/Models/door-lock.glb",
       views: 312,
       downloads: 22,
     },
@@ -103,6 +141,7 @@ const CADModels = () => {
       features: ["Parametric Design", "Flow Optimization", "Assembly Ready"],
       image: "/3d Pictures/flanged tee pipe fitting.png",
       downloadUrl:"https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
+      glbUrl: "/Models/flanged-tee-pipe.glb",
       views: 278,
       downloads: 18,
     },
@@ -116,6 +155,7 @@ const CADModels = () => {
       features: ["Parametric Design", "Flow Simulation", "Thermal Analysis"],
       image: "/3d Pictures/refrigeration valves.png",
       downloadUrl:"https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
+      glbUrl: "/Models/refrigeration-valves.glb",
       views: 342,
       downloads: 27,
     },
@@ -162,6 +202,144 @@ const CADModels = () => {
     { label: "Categories", value: categories.length - 1, icon: Layers, color: "green" },
     { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
+
+  // 3D Model Viewer Modal Component
+  const ModelViewerModal = ({ model, onClose }) => {
+    if (!model || !isModelViewerLoaded) return null;
+
+    return (
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="bg-gray-900 rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex justify-between items-center p-6 border-b border-gray-800">
+              <div>
+                <h3 className="text-2xl font-bold text-white">{model.title}</h3>
+                <p className="text-gray-400">{model.software} • {model.category}</p>
+              </div>
+              <button
+                onClick={onClose}
+                className="p-2 hover:bg-gray-800 rounded-full transition-colors"
+              >
+                <X className="w-6 h-6 text-gray-400" />
+              </button>
+            </div>
+
+            {/* 3D Model Viewer */}
+            <div className="relative h-96 md:h-[500px] bg-gradient-to-br from-gray-800 to-gray-900">
+              <model-viewer
+                src={model.glbUrl}
+                alt={model.title}
+                auto-rotate
+                camera-controls
+                touch-action="pan-y"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'transparent'
+                }}
+                environment-image="neutral"
+                shadow-intensity="1"
+                camera-orbit="45deg 75deg 2m"
+                min-camera-orbit="auto auto 1m"
+                max-camera-orbit="auto auto 10m"
+                interaction-prompt="auto"
+                ar
+                ar-modes="webxr scene-viewer quick-look"
+              >
+                {/* Loading indicator */}
+                <div slot="progress-bar" className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-gray-800/80 p-4 rounded-lg">
+                    <div className="animate-spin w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full"></div>
+                    <p className="text-white mt-2 text-sm">Loading 3D Model...</p>
+                  </div>
+                </div>
+              </model-viewer>
+
+              {/* Controls Guide */}
+              <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-sm rounded-lg p-3">
+                <h4 className="text-white font-semibold mb-2 text-sm">3D Controls</h4>
+                <div className="space-y-1 text-xs text-gray-300">
+                  <div className="flex items-center gap-2">
+                    <Move3D className="w-3 h-3" />
+                    <span>Drag to rotate</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <ZoomIn className="w-3 h-3" />
+                    <span>Scroll to zoom</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <RotateCcw className="w-3 h-3" />
+                    <span>Auto-rotation enabled</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Model Information */}
+            <div className="p-6 bg-gray-800/50">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="text-lg font-semibold text-purple-400 mb-3">Model Details</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Software:</span>
+                      <span className="text-white">{model.software}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Complexity:</span>
+                      <span className={`px-2 py-1 rounded-full text-xs ${getComplexityColor(model.complexity)}`}>
+                        {model.complexity}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Design Time:</span>
+                      <span className="text-white">{model.designTime}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Category:</span>
+                      <span className="text-white">{model.category}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold text-purple-400 mb-3">Features</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {model.features.map((feature, idx) => (
+                      <span
+                        key={idx}
+                        className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30"
+                      >
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="mt-4">
+                    <p className="text-gray-300 text-sm">{model.description}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
+    );
+  };
 
   return (
     <div className="container mx-auto px-6 py-20">
@@ -293,6 +471,16 @@ const CADModels = () => {
                 >
                   <Eye className="w-4 h-4" /> Preview
                 </motion.button>
+                
+                <motion.button
+                  onClick={() => setSelectedModel(model)}
+                  className="flex-1 flex items-center justify-center gap-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 px-4 py-3 rounded-lg text-sm border border-blue-500/30"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Cube className="w-4 h-4" /> View 3D Model
+                </motion.button>
+                
                 <motion.a
                   href={model.downloadUrl}
                   download
@@ -319,6 +507,12 @@ const CADModels = () => {
           />
         </div>
       )}
+
+      {/* 3D Model Viewer Modal */}
+      <ModelViewerModal 
+        model={selectedModel} 
+        onClose={() => setSelectedModel(null)} 
+      />
 
       {/* Design Philosophy */}
       <div className="bg-gradient-to-r from-purple-900/20 via-blue-900/20 to-purple-900/20 rounded-2xl p-8 border border-purple-500/20">

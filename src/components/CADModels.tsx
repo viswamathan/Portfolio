@@ -5,11 +5,7 @@ import {
   Download,
   Eye,
   Layers,
-  Ruler,
-  Cog,
   Award,
-  Lightbulb,
-  Target,
 } from "lucide-react";
 
 // Three.js imports for STL viewer
@@ -20,6 +16,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 const CADModels = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [previewModel, setPreviewModel] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const mountRef = useRef(null);
 
   const cadModels = [
@@ -117,7 +114,7 @@ const CADModels = () => {
       features: ["Parametric Design", "Flow Optimization", "Assembly Ready"],
       image: "/3d Pictures/flanged tee pipe fitting.png",
       downloadUrl: "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
-      modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
+      modelPath: "/Models/Flanged_Tee_Pipe_Fitting.stl",
       views: 278,
       downloads: 18,
     },
@@ -179,7 +176,7 @@ const CADModels = () => {
   useEffect(() => {
     if (!previewModel || !mountRef.current) return;
 
-    let scene = new THREE.Scene();
+    const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x111827);
 
     const camera = new THREE.PerspectiveCamera(
@@ -188,7 +185,6 @@ const CADModels = () => {
       0.1,
       1000
     );
-    camera.position.set(0, 0, 50);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
@@ -208,10 +204,20 @@ const CADModels = () => {
     scene.add(light2);
 
     const loader = new STLLoader();
-    loader.load(previewModel.modelPath, function (geometry) {
+    loader.load(previewModel.modelPath, (geometry) => {
       const material = new THREE.MeshStandardMaterial({ color: 0x7c3aed, metalness: 0.5, roughness: 0.2 });
       const mesh = new THREE.Mesh(geometry, material);
       geometry.center();
+
+      // Fit camera to model
+      const boundingBox = new THREE.Box3().setFromObject(mesh);
+      const size = boundingBox.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const fov = camera.fov * (Math.PI / 180);
+      const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+      camera.position.set(0, 0, cameraZ * 1.5);
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+
       scene.add(mesh);
     });
 
@@ -223,7 +229,6 @@ const CADModels = () => {
     animate();
 
     const handleResize = () => {
-      if (!mountRef.current) return;
       camera.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
@@ -261,14 +266,7 @@ const CADModels = () => {
               >
                 <Icon className={`w-6 h-6 text-${stat.color}-400`} />
               </div>
-              <motion.div
-                initial={{ count: 0 }}
-                animate={{ count: stat.value }}
-                transition={{ duration: 2 }}
-                className="text-2xl font-bold text-white mb-2"
-              >
-                {stat.value}
-              </motion.div>
+              <div className="text-2xl font-bold text-white mb-2">{stat.value}</div>
               <div className="text-gray-400 text-sm">{stat.label}</div>
             </motion.div>
           );
@@ -337,9 +335,7 @@ const CADModels = () => {
 
             {/* Content */}
             <div className="p-6">
-              <h3 className="text-xl font-bold text-white mb-2">
-                {model.title}
-              </h3>
+              <h3 className="text-xl font-bold text-white mb-2">{model.title}</h3>
               <p className="text-gray-300 text-sm mb-4">{model.description}</p>
 
               {/* Features */}
@@ -362,6 +358,14 @@ const CADModels = () => {
                 >
                   <Eye className="w-4 h-4" /> View 3D Model
                 </motion.button>
+
+                <motion.button
+                  onClick={() => setPreviewImage(model.image)}
+                  className="flex-1 flex items-center justify-center gap-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 px-4 py-3 rounded-lg text-sm border border-blue-500/30"
+                >
+                  <Eye className="w-4 h-4" /> View Image
+                </motion.button>
+
                 <motion.a
                   href={model.downloadUrl}
                   download
@@ -378,7 +382,7 @@ const CADModels = () => {
       {/* 3D Viewer Modal */}
       {previewModel && (
         <motion.div
-          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -386,16 +390,29 @@ const CADModels = () => {
         >
           <div
             ref={mountRef}
-            className="w-full max-w-4xl h-[80vh] rounded-lg"
+            className="w-full h-full"
             onClick={(e) => e.stopPropagation()}
           />
         </motion.div>
       )}
 
-      {/* Design Philosophy */}
-      <div className="bg-gradient-to-r from-purple-900/20 via-blue-900/20 to-purple-900/20 rounded-2xl p-8 border border-purple-500/20">
-        {/* ...existing design philosophy content... */}
-      </div>
+      {/* Image Preview Modal */}
+      {previewImage && (
+        <motion.div
+          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setPreviewImage(null)}
+        >
+          <img
+            src={previewImage}
+            alt="Preview"
+            className="max-w-full max-h-full object-contain rounded-lg"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </motion.div>
+      )}
     </div>
   );
 };

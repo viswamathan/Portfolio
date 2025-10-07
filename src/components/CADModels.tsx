@@ -56,7 +56,7 @@ const CADModels = () => {
       image: "/3d Pictures/knuckle joint.png",
       downloadUrl:
         "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
-      modelPath: "/Models/Knuckle Joint.stl",
+      modelPath: "/Models/KNUCKLE JOINT.stl",
       views: 226,
       downloads: 10,
     },
@@ -131,7 +131,7 @@ const CADModels = () => {
       image: "/3d Pictures/refrigeration valves.png",
       downloadUrl:
         "https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
-      modelPath: "/Models/Refrigeration Valves Assembly.stl",
+      modelPath: "/Models/Refrigeration Valves.stl",
       views: 342,
       downloads: 27,
     },

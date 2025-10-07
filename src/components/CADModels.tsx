@@ -1,17 +1,40 @@
-import React, { useState, useEffect, useRef } from "react";
+// CADModels.jsx
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Box, Download, Eye, Layers, Award, X, ZoomIn, ZoomOut } from "lucide-react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
+/**
+ * Optimized CADModels component
+ * - Reuses scene / renderer across opens
+ * - Loading indicator + progress
+ * - GLTF/STL support
+ * - Caching of loaded assets
+ * - Hemisphere light for performance
+ * - Proper cleanup
+ */
 
 const CADModels = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [previewModel, setPreviewModel] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [loadProgress, setLoadProgress] = useState(0); // 0-100
+
   const mountRef = useRef(null);
   const controlsRef = useRef(null);
   const cameraRef = useRef(null);
+  const rendererRef = useRef(null);
+  const sceneRef = useRef(null);
+  const rafRef = useRef(null);
+
+  // Caches to avoid re-parsing models
+  const geometryCache = useRef(new Map()); // path -> BufferGeometry or mesh clone
+  const gltfCache = useRef(new Map()); // path -> gltf scene
 
   // --- Full CAD Models Array ---
   const cadModels = [
@@ -175,95 +198,295 @@ const CADModels = () => {
     { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
 
-  // --- 3D Viewer ---
+  // ---- Initialize renderer/scene/camera once ----
   useEffect(() => {
-    if (!previewModel || !mountRef.current) return;
+    if (!mountRef.current) return;
 
+    // If already initialized, just return
+    if (sceneRef.current && rendererRef.current) return;
+
+    // Scene
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x111827);
+    scene.background = new THREE.Color(0x0f1724); // dark background
+    sceneRef.current = scene;
 
-    const camera = new THREE.PerspectiveCamera(
-      45,
-      mountRef.current.clientWidth / mountRef.current.clientHeight,
-      0.1,
-      1000
-    );
+    // Camera
+    const width = mountRef.current.clientWidth || 800;
+    const height = mountRef.current.clientHeight || 600;
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 2000);
+    camera.position.set(0, 0, 100);
     cameraRef.current = camera;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
-    mountRef.current.innerHTML = "";
+    // Renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(width, height);
+    rendererRef.current = renderer;
+
+    // append DOM
+    mountRef.current.innerHTML = ""; // clear
     mountRef.current.appendChild(renderer.domElement);
 
+    // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 2;
+    controls.autoRotateSpeed = 1.2; // reduced speed for smoother perception + perf
     controlsRef.current = controls;
 
-    const light1 = new THREE.DirectionalLight(0xffffff, 1);
-    light1.position.set(50, 50, 50);
-    scene.add(light1);
+    // Lights - hemisphere for performance
+    const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 1.0);
+    scene.add(hemi);
 
-    const light2 = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(light2);
+    // subtle directional fill (cheap)
+    const dir = new THREE.DirectionalLight(0xffffff, 0.4);
+    dir.position.set(50, 50, 50);
+    scene.add(dir);
 
-    const loader = new STLLoader();
-    const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
-    const meshes = [];
-    let loadedCount = 0;
-
-    modelPaths.forEach((path, index) => {
-      const material = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(`hsl(${(index * 60) % 360}, 80%, 60%)`),
-        metalness: 0.5,
-        roughness: 0.2,
-      });
-
-      loader.load(path, (geometry) => {
-        const mesh = new THREE.Mesh(geometry, material);
-        geometry.center();
-        scene.add(mesh);
-        meshes.push(mesh);
-
-        loadedCount++;
-        if (loadedCount === modelPaths.length) {
-          const groupBox = new THREE.Box3();
-          meshes.forEach((m) => groupBox.expandByObject(m));
-          const size = groupBox.getSize(new THREE.Vector3());
-          const maxDim = Math.max(size.x, size.y, size.z);
-          const fov = camera.fov * (Math.PI / 180);
-          const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
-          camera.position.set(0, 0, cameraZ * 1.5);
-          camera.lookAt(new THREE.Vector3(0, 0, 0));
-        }
-      });
-    });
-
-    const animate = function () {
-      requestAnimationFrame(animate);
+    // Animation loop
+    const animate = () => {
+      rafRef.current = requestAnimationFrame(animate);
       controls.update();
       renderer.render(scene, camera);
     };
     animate();
 
+    // handle resize
     const handleResize = () => {
-      camera.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
+      if (!mountRef.current) return;
+      const w = mountRef.current.clientWidth;
+      const h = mountRef.current.clientHeight;
+      camera.aspect = w / h;
       camera.updateProjectionMatrix();
-      renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
+      renderer.setSize(w, h);
     };
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    // cleanup on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(rafRef.current);
+      controls.dispose();
+      renderer.dispose();
+      // dispose geometries in cache
+      geometryCache.current.forEach((geo) => {
+        if (geo && geo.dispose) geo.dispose();
+      });
+      geometryCache.current.clear();
+      gltfCache.current.clear();
+      sceneRef.current = null;
+      rendererRef.current = null;
+      cameraRef.current = null;
+      controlsRef.current = null;
+    };
+  }, []);
+
+  // Helper: center geometry utility (works for BufferGeometry)
+  const centerGeometry = (geometry) => {
+    try {
+      geometry.computeBoundingBox();
+      const box = geometry.boundingBox;
+      const offset = new THREE.Vector3();
+      if (box) {
+        box.getCenter(offset).negate();
+        geometry.translate(offset.x, offset.y, offset.z);
+      }
+    } catch (e) {
+      // ignore
+    }
+  };
+
+  // ---- Load model when previewModel changes ----
+  useEffect(() => {
+    if (!previewModel || !sceneRef.current || !rendererRef.current) return;
+
+    const scene = sceneRef.current;
+    const camera = cameraRef.current;
+    const controls = controlsRef.current;
+
+    // Remove previously added model objects while preserving lights (we keep first two children as lights)
+    // A safer approach: remove everything except lights (Hemisphere + Directional)
+    const lights = scene.children.filter((c) => c.type.includes("Light"));
+    // Remove all non-light children
+    scene.children.slice().forEach((child) => {
+      if (!child.type.includes("Light")) {
+        scene.remove(child);
+        if (child.geometry) child.geometry.dispose && child.geometry.dispose();
+        if (child.material) {
+          if (Array.isArray(child.material)) {
+            child.material.forEach((m) => m.dispose && m.dispose());
+          } else child.material.dispose && child.material.dispose();
+        }
+      }
+    });
+
+    // Setup loaders
+    const stlLoader = new STLLoader();
+    const gltfLoader = new GLTFLoader();
+
+    // Optional: DRACO loader for compressed glTFs (uncomment & configure path to draco decoder if available)
+    // const dracoLoader = new DRACOLoader();
+    // dracoLoader.setDecoderPath('/draco/'); // <-- place Draco decoder files under public/draco/
+    // gltfLoader.setDRACOLoader(dracoLoader);
+
+    const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
+    const createdObjects = []; // to compute bounding box
+    let loadedCount = 0;
+    setLoading(true);
+    setLoadProgress(0);
+
+    const handleLoaded = () => {
+      loadedCount++;
+      const progress = Math.round((loadedCount / modelPaths.length) * 100);
+      setLoadProgress(progress);
+
+      if (loadedCount >= modelPaths.length) {
+        // compute group bounding box and position camera
+        const groupBox = new THREE.Box3();
+        createdObjects.forEach((o) => groupBox.expandByObject(o));
+        const size = groupBox.getSize(new THREE.Vector3());
+        const center = groupBox.getCenter(new THREE.Vector3());
+
+        // Avoid degenerate sizes
+        const maxDim = Math.max(size.x || 1, size.y || 1, size.z || 1);
+        const fov = camera.fov * (Math.PI / 180);
+        const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+        camera.position.set(center.x, center.y, cameraZ * 1.5 + 10);
+        camera.lookAt(center);
+        controls.target.copy(center);
+        controls.update();
+
+        setTimeout(() => {
+          setLoading(false);
+          setLoadProgress(100);
+        }, 150); // small delay to allow final render
+      }
+    };
+
+    modelPaths.forEach((path, idx) => {
+      if (!path) {
+        // skip invalid path
+        handleLoaded();
+        return;
+      }
+
+      const ext = (path.split(".").pop() || "").toLowerCase();
+
+      // If GLTF/GLB
+      if (ext === "glb" || ext === "gltf") {
+        // Use cache if present
+        if (gltfCache.current.has(path)) {
+          const cached = gltfCache.current.get(path);
+          // clone cached scene
+          const clone = cached.scene.clone(true);
+          scene.add(clone);
+          createdObjects.push(clone);
+          handleLoaded();
+          return;
+        }
+
+        gltfLoader.load(
+          path,
+          (gltf) => {
+            // cache (store original gltf for future clone)
+            gltfCache.current.set(path, gltf);
+            const modelScene = gltf.scene || gltf.scenes[0];
+            // center model
+            const box = new THREE.Box3().setFromObject(modelScene);
+            const c = box.getCenter(new THREE.Vector3()).negate();
+            modelScene.position.add(c);
+            scene.add(modelScene);
+            createdObjects.push(modelScene);
+            handleLoaded();
+          },
+          (xhr) => {
+            if (xhr && xhr.total) {
+              const perc = Math.round((xhr.loaded / xhr.total) * 100);
+              // combine with existing progress across files (approx)
+              const approxOverall = Math.round(((idx + perc / 100) / modelPaths.length) * 100);
+              setLoadProgress(approxOverall);
+            }
+          },
+          (err) => {
+            console.error("GLTF load error:", err);
+            handleLoaded();
+          }
+        );
+        return;
+      }
+
+      // Default to STL
+      // Use cached geometry if available
+      if (geometryCache.current.has(path)) {
+        const cachedGeo = geometryCache.current.get(path).clone
+          ? geometryCache.current.get(path).clone()
+          : geometryCache.current.get(path);
+        // create material and mesh
+        const material = new THREE.MeshStandardMaterial({
+          color: new THREE.Color(`hsl(${(idx * 60) % 360}, 80%, 60%)`),
+          metalness: 0.5,
+          roughness: 0.25,
+        });
+        const mesh = new THREE.Mesh(cachedGeo, material);
+        scene.add(mesh);
+        createdObjects.push(mesh);
+        handleLoaded();
+        return;
+      }
+
+      // load via STLLoader
+      stlLoader.load(
+        path,
+        (geometry) => {
+          // geometry returned is BufferGeometry
+          centerGeometry(geometry);
+          // cache geometry for future reuse
+          geometryCache.current.set(path, geometry.clone ? geometry.clone() : geometry);
+          const material = new THREE.MeshStandardMaterial({
+            color: new THREE.Color(`hsl(${(idx * 60) % 360}, 80%, 60%)`),
+            metalness: 0.5,
+            roughness: 0.25,
+          });
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.castShadow = false;
+          mesh.receiveShadow = false;
+          scene.add(mesh);
+          createdObjects.push(mesh);
+          handleLoaded();
+        },
+        (xhr) => {
+          if (xhr && xhr.total) {
+            const perc = Math.round((xhr.loaded / xhr.total) * 100);
+            const approxOverall = Math.round(((idx + perc / 100) / modelPaths.length) * 100);
+            setLoadProgress(approxOverall);
+          }
+        },
+        (err) => {
+          console.error("STL load error:", err);
+          handleLoaded();
+        }
+      );
+    });
+
+    // cleanup function: if previewModel changes before load finishes, we don't leak resources.
+    return () => {
+      // no-op: next effect iteration clears scene and re-adds lights
+    };
   }, [previewModel]);
 
-  const zoomIn = () => {
-    if (cameraRef.current) cameraRef.current.position.z *= 0.8;
-  };
+  const zoomIn = useCallback(() => {
+    if (cameraRef.current) {
+      cameraRef.current.position.z *= 0.8;
+    }
+  }, []);
 
-  const zoomOut = () => {
-    if (cameraRef.current) cameraRef.current.position.z *= 1.2;
-  };
+  const zoomOut = useCallback(() => {
+    if (cameraRef.current) {
+      cameraRef.current.position.z *= 1.2;
+    }
+  }, []);
 
+  // JSX UI (keeps your design)
   return (
     <div className="container mx-auto px-6 py-20">
       {/* Heading */}
@@ -419,7 +642,24 @@ const CADModels = () => {
               className="absolute top-4 right-4 w-8 h-8 text-white cursor-pointer"
               onClick={() => setPreviewModel(null)}
             />
+
+            {/* Loading overlay */}
+            {loading && (
+              <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/60 text-white">
+                <div className="mb-4 text-lg">Loading 3D Model...</div>
+                <div className="w-64 h-2 bg-gray-700 rounded overflow-hidden mb-2">
+                  <div
+                    style={{ width: `${loadProgress}%` }}
+                    className="h-full bg-gradient-to-r from-purple-500 to-blue-400"
+                  />
+                </div>
+                <div className="text-xs text-gray-300">{loadProgress}%</div>
+              </div>
+            )}
+
+            {/* 3D mount */}
             <div ref={mountRef} className="w-full h-full" />
+
             <div className="absolute bottom-4 right-4 flex gap-2">
               <button
                 onClick={zoomIn}

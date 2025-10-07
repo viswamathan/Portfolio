@@ -33,7 +33,7 @@ const Achievements = () => {
   ];
 
   const achievements = [
-    { icon: Trophy, title: "Academic Excellence", count: "7.35/10", description: "CGPA in Mechanical Engineering" },
+    { icon: Trophy, title: "Academic Excellence", count: "7.50/10", description: "CGPA in Mechanical Engineering" },
     { icon: Medal, title: "Patents Filed", count: "2", description: "Innovation in mechanical design" },
     { icon: Star, title: "Certifications", count: "10+", description: "Professional and technical certifications" },
     { icon: Award, title: "Projects Completed", count: "5+", description: "Engineering and research projects" },

@@ -27,7 +27,7 @@ const CADModels = () => {
       image: "/3d Pictures/gear profile.png",
       downloadUrl:
         "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
-      modelPath: "/Models/Spur Gears.stl",
+      modelPath: "/Models/Spur Gears.STL",
       views: 1247,
       downloads: 89,
     },
@@ -42,7 +42,7 @@ const CADModels = () => {
       image: "/3d Pictures/exhaust manifold.png",
       downloadUrl:
         "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
-      modelPath: "/Models/Exhaust Manifold.stl",
+      modelPath: "/Models/Exhaust Manifold.STL",
       views: 500,
       downloads: 25,
     },
@@ -72,7 +72,7 @@ const CADModels = () => {
       image: "/3d Pictures/universal coupling.png",
       downloadUrl:
         "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
-      modelPath: "/Models/Universal Coupling.stl",
+      modelPath: "/Models/UNIVERSAL COUPLING.STL",
       views: 189,
       downloads: 15,
     },
@@ -87,7 +87,7 @@ const CADModels = () => {
       image: "/3d Pictures/muff coupling.png",
       downloadUrl:
         "https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
-      modelPath: "/Models/Muff Coupling.stl",
+      modelPath: "/Models/MUFF COUPLING.STL",
       views: 189,
       downloads: 15,
     },

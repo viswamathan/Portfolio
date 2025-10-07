@@ -91,20 +91,20 @@ const CADModels = () => {
     },
     {
       title: "Door Lock Mechanism",
-      description:
-        "Compact and reliable door lock mechanism featuring latch, spring, and handle components. Designed for durability, ease of operation, and smooth locking motion with tolerance-based assembly.",
-      software: "SolidWorks",
-      category: "Assembly",
+      description: "Compact and reliable door lock mechanism featuring latch, spring, and handle components...",
+      software: "SolidWorks",category: "Assembly",
       complexity: "Basic",
       features: ["Assembly Modeling", "Motion Simulation", "Tolerance Analysis"],
       image: "/3d Pictures/DOOR LOCK.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
-      modelPath: "/Models/Door_Lock_Mechanism.stl",
+      downloadUrl: "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
+      modelPaths: [
+        "/Models/Door lock mechanism base.STL",
+        "/Models/Door lock mechanism lock.STL"
+      ],
       views: 312,
-      downloads: 22,
+      downloads: 22
     },
-    {
+  {
       title: "Flanged Tee Pipe Fitting",
       description:
         "Industrial-grade flanged tee pipe fitting designed for fluid distribution systems. Features precise flanges for secure bolted connections and optimized internal geometry for minimal pressure loss.",

@@ -27,7 +27,7 @@ const CADModels = () => {
       image: "/3d Pictures/gear profile.png",
       downloadUrl:
         "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
-      modelPath: "/Models/Spur Gears.STL",
+      modelPath: "/Models/Gear Profile.STL",
       views: 1247,
       downloads: 89,
     },
@@ -42,7 +42,7 @@ const CADModels = () => {
       image: "/3d Pictures/exhaust manifold.png",
       downloadUrl:
         "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
-      modelPath: "/Models/Exhaust Manifold.STL",
+      modelPath: "/Models/Exhaust manifold.STL",
       views: 500,
       downloads: 25,
     },

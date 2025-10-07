@@ -89,23 +89,25 @@ const CADModels = () => {
       views: 189,
       downloads: 15,
     },
-   {
-     title: "Door Lock Mechanism",
-     description: "Compact and reliable door lock mechanism featuring latch, spring, and handle components...",
-     software: "SolidWorks",
-     category: "Assembly",
-     complexity: "Basic",
-     features: ["Assembly Modeling", "Motion Simulation", "Tolerance Analysis"],
-     image: "/3d Pictures/DOOR LOCK.png",
-     downloadUrl: "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
-     modelPaths: [
-       "/Models/Door lock mechanism base.STL",
-       "/Models/Door lock mechanism lock.STL"
-     ],
-     views: 312,
-     downloads: 22
-   },
-  {
+    {
+      title: "Door Lock Mechanism",
+      description:
+        "Compact and reliable door lock mechanism featuring latch, spring, and handle components...",
+      software: "SolidWorks",
+      category: "Assembly",
+      complexity: "Basic",
+      features: ["Assembly Modeling", "Motion Simulation", "Tolerance Analysis"],
+      image: "/3d Pictures/DOOR LOCK.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
+      modelPaths: [
+        "/Models/Door lock mechanism base.STL",
+        "/Models/Door lock mechanism lock.STL",
+      ],
+      views: 312,
+      downloads: 22,
+    },
+    {
       title: "Flanged Tee Pipe Fitting",
       description:
         "Industrial-grade flanged tee pipe fitting designed for fluid distribution systems. Features precise flanges for secure bolted connections and optimized internal geometry for minimal pressure loss.",
@@ -175,7 +177,7 @@ const CADModels = () => {
     { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
 
-  // 3D Viewer
+  // ✅ UPDATED 3D VIEWER (multi-STL support)
   useEffect(() => {
     if (!previewModel || !mountRef.current) return;
 
@@ -209,20 +211,37 @@ const CADModels = () => {
     scene.add(light2);
 
     const loader = new STLLoader();
-    loader.load(previewModel.modelPath, (geometry) => {
-      const material = new THREE.MeshStandardMaterial({ color: 0x7c3aed, metalness: 0.5, roughness: 0.2 });
-      const mesh = new THREE.Mesh(geometry, material);
-      geometry.center();
+    const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
+    const meshes = [];
+    let loadedCount = 0;
 
-      const boundingBox = new THREE.Box3().setFromObject(mesh);
-      const size = boundingBox.getSize(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const fov = camera.fov * (Math.PI / 180);
-      const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
-      camera.position.set(0, 0, cameraZ * 1.5);
-      camera.lookAt(new THREE.Vector3(0, 0, 0));
+    // Load multiple STL files
+    modelPaths.forEach((path, index) => {
+      const material = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(`hsl(${(index * 60) % 360}, 80%, 60%)`),
+        metalness: 0.5,
+        roughness: 0.2,
+      });
 
-      scene.add(mesh);
+      loader.load(path, (geometry) => {
+        const mesh = new THREE.Mesh(geometry, material);
+        geometry.center();
+        scene.add(mesh);
+        meshes.push(mesh);
+
+        loadedCount++;
+        if (loadedCount === modelPaths.length) {
+          // Fit camera to combined model
+          const groupBox = new THREE.Box3();
+          meshes.forEach((m) => groupBox.expandByObject(m));
+          const size = groupBox.getSize(new THREE.Vector3());
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const fov = camera.fov * (Math.PI / 180);
+          const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+          camera.position.set(0, 0, cameraZ * 1.5);
+          camera.lookAt(new THREE.Vector3(0, 0, 0));
+        }
+      });
     });
 
     const animate = function () {
@@ -317,7 +336,7 @@ const CADModels = () => {
               <img
                 src={model.image}
                 alt={model.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute top-4 left-4 flex gap-2">
                 <span className="bg-black/50 px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
@@ -406,20 +425,19 @@ const CADModels = () => {
             >
               <X className="w-6 h-6" />
             </button>
-            <div
-              ref={mountRef}
-              className="w-full h-full"
-            />
+
+            <div ref={mountRef} className="w-full h-full rounded-lg overflow-hidden" />
+
             <div className="absolute bottom-4 right-4 flex gap-2">
               <button
-                className="p-2 bg-gray-700/70 rounded-full hover:bg-gray-600/70 text-white"
                 onClick={zoomIn}
+                className="p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700"
               >
                 <ZoomIn className="w-5 h-5" />
               </button>
               <button
-                className="p-2 bg-gray-700/70 rounded-full hover:bg-gray-600/70 text-white"
                 onClick={zoomOut}
+                className="p-2 bg-gray-800 text-white rounded-full hover:bg-gray-700"
               >
                 <ZoomOut className="w-5 h-5" />
               </button>
@@ -436,17 +454,17 @@ const CADModels = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <div className="relative w-[80vw] h-[80vh] bg-gray-900 rounded-xl flex items-center justify-center">
+          <div className="relative">
             <button
-              className="absolute top-2 right-2 text-white p-2 hover:bg-gray-700 rounded-full z-10"
+              className="absolute top-2 right-2 text-white p-2 hover:bg-gray-700 rounded-full"
               onClick={() => setPreviewImage(null)}
             >
               <X className="w-6 h-6" />
             </button>
             <img
               src={previewImage}
-              alt="Preview"
-              className="max-w-full max-h-full object-contain rounded-lg"
+              alt="Model Preview"
+              className="max-w-[80vw] max-h-[80vh] rounded-lg"
             />
           </div>
         </motion.div>

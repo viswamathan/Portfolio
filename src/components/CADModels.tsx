@@ -137,53 +137,44 @@ const CADModels = () => {
       downloads: 27,
     },
     {
-  title: "Crankshaft Assembly",
-  description:
-    "Precision-engineered crankshaft assembly featuring main and connecting journals with optimized geometry for smooth rotation and efficient power transmission. Designed to ensure durability, balance, and performance under dynamic loads.",
-  software: "SolidWorks",
-  category: "Automotive",
-  complexity: "Intermediate",
-  features: ["3D Modeling", "Dynamic Simulation", "Stress Analysis"],
-  image: "/3d Pictures/crankshaft.png",
-  downloadUrl:
-    "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=sharing",
-  modelPath: "/Models/piston rod.STL",
-  views: 284,
-  downloads: 19,
-},
-
-{
-  title: "Piston Head",
-  description:
-    "High-strength piston head designed for efficient combustion and heat dissipation. Modeled with realistic crown and skirt geometry, optimized for lightweight performance and durability under high pressure.",
-  software: "SolidWorks",
-  category: "Automotive",
-  complexity: "Basic",
-  features: ["Surface Modeling", "Thermal Stress Analysis", "3D Detailing"],
-  image: "/3d Pictures/piston head.png",
-  downloadUrl:
-    "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=sharing",
-  modelPath: "/Models/piston head.STL",
-  views: 356,
-  downloads: 28,
-},
-
-{
-  title: "Connecting Rod (Without Cap)",
-  description:
-    "Lightweight connecting rod designed without cap for simplified design analysis and manufacturing demonstration. Features optimized cross-section for strength-to-weight ratio and fatigue resistance.",
-  software: "SolidWorks",
-  category: "Automotive",
-  complexity: "Intermediate",
-  features: ["3D Modeling", "FEA Simulation", "Mass Optimization"],
-  image: "/3d Pictures/connecting rod.png",
-  downloadUrl:
-    "https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
-  modelPath: "/Models/piston rod.STL",
-  views: 297,
-  downloads: 24,
-},
-
+      title: "Crankshaft Assembly",
+      description:"Precision-engineered crankshaft assembly featuring main and connecting journals with optimized geometry for smooth rotation and efficient power transmission. Designed to ensure durability, balance, and performance under dynamic loads.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Intermediate",
+      features: ["3D Modeling", "Dynamic Simulation", "Stress Analysis"],
+      image: "/3d Pictures/crankshaft.png",
+      downloadUrl:"https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=sharing",
+      modelPath: "/Models/piston rod.STL",
+      views: 284,
+      downloads: 19,
+    },
+    {
+      title: "Piston Head",
+      description:"High-strength piston head designed for efficient combustion and heat dissipation. Modeled with realistic crown and skirt geometry, optimized for lightweight performance and durability under high pressure.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["Surface Modeling", "Thermal Stress Analysis", "3D Detailing"],
+      image: "/3d Pictures/piston head.png",
+      downloadUrl:"https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=sharing",
+      modelPath: "/Models/piston head.STL",
+      views: 356,
+      downloads: 28,
+    },
+    {
+      title: "Connecting Rod (Without Cap)",
+      description:"Lightweight connecting rod designed without cap for simplified design analysis and manufacturing demonstration. Features optimized cross-section for strength-to-weight ratio and fatigue resistance.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Intermediate",
+      features: ["3D Modeling", "FEA Simulation", "Mass Optimization"],
+      image: "/3d Pictures/connecting rod.png",
+      downloadUrl:"https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
+      modelPath: "/Models/piston rod.STL",
+      views: 297,
+      downloads: 24,
+    },
   ];
 
   const categories = [

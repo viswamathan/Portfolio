@@ -136,6 +136,54 @@ const CADModels = () => {
       views: 342,
       downloads: 27,
     },
+    {
+  title: "Crankshaft Assembly",
+  description:
+    "Precision-engineered crankshaft assembly featuring main and connecting journals with optimized geometry for smooth rotation and efficient power transmission. Designed to ensure durability, balance, and performance under dynamic loads.",
+  software: "SolidWorks",
+  category: "Automotive",
+  complexity: "Intermediate",
+  features: ["3D Modeling", "Dynamic Simulation", "Stress Analysis"],
+  image: "/3d Pictures/CRANKSHAFT.png",
+  downloadUrl:
+    "https://drive.google.com/file/d/1CrankshaftFileID/view?usp=sharing",
+  modelPath: "/Models/piston rod.STL",
+  views: 284,
+  downloads: 19,
+},
+
+{
+  title: "Piston Head",
+  description:
+    "High-strength piston head designed for efficient combustion and heat dissipation. Modeled with realistic crown and skirt geometry, optimized for lightweight performance and durability under high pressure.",
+  software: "SolidWorks",
+  category: "Automotive",
+  complexity: "Basic",
+  features: ["Surface Modeling", "Thermal Stress Analysis", "3D Detailing"],
+  image: "/3d Pictures/PISTON HEAD.png",
+  downloadUrl:
+    "https://drive.google.com/file/d/1PistonHeadFileID/view?usp=sharing",
+  modelPath: "/Models/piston head.STL",
+  views: 356,
+  downloads: 28,
+},
+
+{
+  title: "Connecting Rod (Without Cap)",
+  description:
+    "Lightweight connecting rod designed without cap for simplified design analysis and manufacturing demonstration. Features optimized cross-section for strength-to-weight ratio and fatigue resistance.",
+  software: "SolidWorks",
+  category: "Automotive",
+  complexity: "Intermediate",
+  features: ["3D Modeling", "FEA Simulation", "Mass Optimization"],
+  image: "/3d Pictures/CONNECTING ROD.png",
+  downloadUrl:
+    "https://drive.google.com/file/d/1ConnectingRodFileID/view?usp=sharing",
+  modelPath: "/Models/rod piston.STL",
+  views: 297,
+  downloads: 24,
+},
+
   ];
 
   const categories = [

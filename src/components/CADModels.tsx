@@ -104,7 +104,7 @@ const CADModels = () => {
         "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
       modelPath: "/Models/Door lock.STL",
       views: 312,
-      downloads: 22,
+      downloads: 18,
     },
     {
       title: "Flanged Tee Pipe Fitting",
@@ -119,7 +119,7 @@ const CADModels = () => {
         "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
       modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
       views: 278,
-      downloads: 18,
+      downloads: 25,
     },
     {
       title: "Refrigeration Valves Assembly",
@@ -525,3 +525,4 @@ const CADModels = () => {
 };
 
 export default CADModels;
+

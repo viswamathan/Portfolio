@@ -147,7 +147,7 @@ const CADModels = () => {
       downloadUrl:"https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=sharing",
       modelPath: "/Models/piston rod.STL",
       views: 284,
-      downloads: 19,
+      downloads: 39,
     },
     {
       title: "Piston Head",
@@ -173,7 +173,7 @@ const CADModels = () => {
       downloadUrl:"https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
       modelPath: "/Models/piston rod.STL",
       views: 297,
-      downloads: 24,
+      downloads: 30,
     },
   ];
 

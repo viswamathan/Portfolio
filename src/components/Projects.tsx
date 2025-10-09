@@ -486,7 +486,7 @@ const projectCategories: Record<
     intro: 'Advanced Systems combining mechanical design with smart control systems.',
     projects: [
       {
-        title: 'Design and Development of a Modified Solar Dryer Integrated with Thermal Energy Storage',
+        title: 'Design and Development of a Modified Solar Dryer Integrated with Thermal Energy Storage with applicaation of Concave fins',
         description: 'A solar dryer prototype enhanced with copper fins and paraffin wax-based Phase Change Material (PCM) for efficient and continuous food dehydration.',
         problem: 'Conventional solar dryers suffer from poor heat retention, uneven temperature distribution, and dependency on sunlight, leading to incomplete drying and reduced product quality.',
         solution: 'Developed a modified solar dryer with copper fins for improved heat transfer, PCM for thermal energy storage, and a forced-air circulation system to ensure uniform and continuous drying even under low solar radiation.',

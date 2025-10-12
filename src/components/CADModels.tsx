@@ -150,6 +150,37 @@ const CADModels = () => {
       views: 297,
       downloads: 24,
     },
+    {
+  title: "Piston Head",
+  description:
+    "High-strength piston head designed for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high-pressure conditions.",
+  software: "SolidWorks",
+  category: "Automotive",
+  complexity: "Basic",
+  features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
+  image: "/3d Pictures/piston head.png",
+  downloadUrl:
+    "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
+  modelPath: "/Models/piston head.STL.STL",
+  views: 410,
+  downloads: 32,
+},
+{
+  title: "Crankshaft",
+  description:
+    "Precision crankshaft designed for efficient torque transmission and balanced rotation. Engineered for minimal vibration, maximum fatigue resistance, and high-performance automotive engines.",
+  software: "SolidWorks",
+  category: "Automotive",
+  complexity: "Basic",
+  features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+  image: "/3d Pictures/crankshaft.png",
+  downloadUrl:
+    "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
+  modelPath: "/Models/crank shaft.STL",
+  views: 365,
+  downloads: 28,
+},
+
   ];
 
   const categories = [
@@ -486,3 +517,4 @@ const CADModels = () => {
 };
 
 export default CADModels;
+

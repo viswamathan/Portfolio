@@ -14,7 +14,7 @@ const CADModels = () => {
   const controlsRef = useRef(null);
   const cameraRef = useRef(null);
 
-  // --- Full CAD Models Array ---
+  // --- CAD Models Array ---
   const cadModels = [
     {
       title: "Pair of Spur Gears",
@@ -76,7 +76,7 @@ const CADModels = () => {
       views: 189,
       downloads: 15,
     },
-    {
+     {
       title: "Muff Coupling",
       description:
         "Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
@@ -94,7 +94,7 @@ const CADModels = () => {
     {
       title: "Door Lock Mechanism",
       description:
-        "Compact and reliable door lock mechanism featuring latch, spring, and handle components...",
+        "Compact and reliable door lock mechanism featuring latch, spring, and handle components for secure and smooth operation.",
       software: "SolidWorks",
       category: "Assembly",
       complexity: "Basic",
@@ -124,7 +124,7 @@ const CADModels = () => {
     {
       title: "Refrigeration Valves Assembly",
       description:
-        "Precision-designed refrigeration valve assembly used for controlling refrigerant flow in HVAC and cooling systems. Includes service, expansion, and solenoid valves optimized for durability, leak-proof operation, and ease of maintenance.",
+        "Precision-designed refrigeration valve assembly used for controlling refrigerant flow in HVAC and cooling systems. Includes service, expansion, and solenoid valves optimized for durability and leak-proof operation.",
       software: "SolidWorks",
       category: "Thermal Systems",
       complexity: "Basic",
@@ -138,13 +138,15 @@ const CADModels = () => {
     },
     {
       title: "Connecting Rod (Without Cap)",
-      description:"Lightweight connecting rod designed without cap for simplified design analysis and manufacturing demonstration. Features optimized cross-section for strength-to-weight ratio and fatigue resistance.",
+      description:
+        "Lightweight connecting rod designed without cap for simplified design analysis and manufacturing demonstration. Optimized cross-section for strength-to-weight ratio and fatigue resistance.",
       software: "SolidWorks",
       category: "Automotive",
       complexity: "Intermediate",
       features: ["3D Modeling", "FEA Simulation", "Mass Optimization"],
       image: "/3d Pictures/connecting rod.png",
-      downloadUrl:"https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
+      downloadUrl:
+        "https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
       modelPath: "/Models/Connecting Rod.STL",
       views: 297,
       downloads: 24,
@@ -175,8 +177,6 @@ const CADModels = () => {
         return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
       case "Advanced":
         return "bg-orange-500/20 text-orange-400 border-orange-500/30";
-      case "Expert":
-        return "bg-red-500/20 text-red-400 border-red-500/30";
       default:
         return "bg-gray-500/20 text-gray-400 border-gray-500/30";
     }
@@ -189,11 +189,11 @@ const CADModels = () => {
     { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
 
-  // --- 3D Viewer ---
+  // --- 3D Viewer with Auto-Centering and Scaling ---
   useEffect(() => {
     if (!previewModel || !mountRef.current) return;
 
-    setLoadingModel(true); // Start loading state
+    setLoadingModel(true);
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x111827);
@@ -237,8 +237,23 @@ const CADModels = () => {
       loader.load(
         path,
         (geometry) => {
+          // Compute bounding box for centering & scaling
+          geometry.computeBoundingBox();
+          const box = geometry.boundingBox;
+          const size = new THREE.Vector3();
+          box.getSize(size);
+          const center = new THREE.Vector3();
+          box.getCenter(center);
+
+          // Center geometry
+          geometry.translate(-center.x, -center.y, -center.z);
+
+          // Auto-scale model
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const scaleFactor = 5 / maxDim; // Adjust visual size
           const mesh = new THREE.Mesh(geometry, material);
-          geometry.center();
+          mesh.scale.setScalar(scaleFactor);
+
           scene.add(mesh);
           meshes.push(mesh);
 
@@ -246,21 +261,22 @@ const CADModels = () => {
           if (loadedCount === modelPaths.length) {
             const groupBox = new THREE.Box3();
             meshes.forEach((m) => groupBox.expandByObject(m));
-            const size = groupBox.getSize(new THREE.Vector3());
-            const maxDim = Math.max(size.x, size.y, size.z);
+            const groupSize = groupBox.getSize(new THREE.Vector3());
+            const groupMax = Math.max(groupSize.x, groupSize.y, groupSize.z);
             const fov = camera.fov * (Math.PI / 180);
-            const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
-            camera.position.set(0, 0, cameraZ * 1.5);
+            const cameraZ = Math.abs(groupMax / 2 / Math.tan(fov / 2));
+            camera.position.set(0, 0, cameraZ * 2);
             camera.lookAt(new THREE.Vector3(0, 0, 0));
-            setTimeout(() => setLoadingModel(false), 500); // Small delay for smooth fade
+
+            setTimeout(() => setLoadingModel(false), 500);
           }
         },
         undefined,
-        () => setLoadingModel(false) // On error
+        () => setLoadingModel(false)
       );
     });
 
-    const animate = function () {
+    const animate = () => {
       requestAnimationFrame(animate);
       controls.update();
       renderer.render(scene, camera);
@@ -347,7 +363,6 @@ const CADModels = () => {
             whileHover={{ scale: 1.02, y: -5 }}
             className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 shadow-lg"
           >
-            {/* Image */}
             <div className="relative h-64 overflow-hidden">
               <img
                 src={model.image}
@@ -380,12 +395,9 @@ const CADModels = () => {
               </div>
             </div>
 
-            {/* Content */}
             <div className="p-6">
               <h3 className="text-xl font-bold text-white mb-2">{model.title}</h3>
               <p className="text-gray-300 text-sm mb-4">{model.description}</p>
-
-              {/* Features */}
               <div className="flex flex-wrap gap-2 mb-6">
                 {model.features.map((f, idx) => (
                   <span
@@ -397,7 +409,6 @@ const CADModels = () => {
                 ))}
               </div>
 
-              {/* Buttons */}
               <div className="flex gap-3">
                 <motion.button
                   onClick={() => setPreviewModel(model)}
@@ -439,11 +450,8 @@ const CADModels = () => {
               className="absolute top-4 right-4 w-8 h-8 text-white cursor-pointer"
               onClick={() => setPreviewModel(null)}
             />
-
-            {/* 3D Canvas */}
             <div ref={mountRef} className="w-full h-full" />
 
-            {/* Loading Spinner */}
             {loadingModel && (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -460,7 +468,6 @@ const CADModels = () => {
               </motion.div>
             )}
 
-            {/* Zoom Buttons */}
             <div className="absolute bottom-4 right-4 flex gap-2">
               <button
                 onClick={zoomIn}
@@ -499,5 +506,3 @@ const CADModels = () => {
 };
 
 export default CADModels;
-
-

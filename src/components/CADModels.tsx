@@ -14,7 +14,6 @@ const CADModels = () => {
   const controlsRef = useRef(null);
   const cameraRef = useRef(null);
 
-  // --- CAD Models Array ---
   const cadModels = [
     {
       title: "Pair of Spur Gears",
@@ -76,7 +75,7 @@ const CADModels = () => {
       views: 189,
       downloads: 15,
     },
-     {
+    {
       title: "Muff Coupling",
       description:
         "Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
@@ -237,7 +236,6 @@ const CADModels = () => {
       loader.load(
         path,
         (geometry) => {
-          // Compute bounding box for centering & scaling
           geometry.computeBoundingBox();
           const box = geometry.boundingBox;
           const size = new THREE.Vector3();
@@ -245,12 +243,10 @@ const CADModels = () => {
           const center = new THREE.Vector3();
           box.getCenter(center);
 
-          // Center geometry
           geometry.translate(-center.x, -center.y, -center.z);
 
-          // Auto-scale model
           const maxDim = Math.max(size.x, size.y, size.z);
-          const scaleFactor = 5 / maxDim; // Adjust visual size
+          const scaleFactor = 5 / maxDim;
           const mesh = new THREE.Mesh(geometry, material);
           mesh.scale.setScalar(scaleFactor);
 
@@ -363,23 +359,33 @@ const CADModels = () => {
             whileHover={{ scale: 1.02, y: -5 }}
             className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 shadow-lg"
           >
-            <div className="relative h-64 overflow-hidden">
+            {/* Image with loading placeholder */}
+            <div className="relative h-64 overflow-hidden group">
+              <div className="w-full h-full bg-gray-700 animate-pulse absolute inset-0" id={`skeleton-${i}`} />
+
               <img
                 src={model.image}
                 alt={model.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 relative z-10"
+                onLoad={() => {
+                  const skeleton = document.getElementById(`skeleton-${i}`);
+                  if (skeleton) skeleton.style.display = "none";
+                }}
+                onError={() => {
+                  const skeleton = document.getElementById(`skeleton-${i}`);
+                  if (skeleton) skeleton.style.display = "none";
+                }}
               />
-              <div className="absolute top-4 left-4 flex gap-2">
+
+              <div className="absolute top-4 left-4 flex gap-2 z-20">
                 <span className="bg-black/50 px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
-                  <Eye className="w-3 h-3" />
-                  {model.views}
+                  <Eye className="w-3 h-3" /> {model.views}
                 </span>
                 <span className="bg-black/50 px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
-                  <Download className="w-3 h-3" />
-                  {model.downloads}
+                  <Download className="w-3 h-3" /> {model.downloads}
                 </span>
               </div>
-              <div className="absolute top-4 right-4">
+              <div className="absolute top-4 right-4 z-20">
                 <span
                   className={`px-3 py-1 rounded-full text-xs border ${getComplexityColor(
                     model.complexity
@@ -388,7 +394,7 @@ const CADModels = () => {
                   {model.complexity}
                 </span>
               </div>
-              <div className="absolute bottom-4 left-4">
+              <div className="absolute bottom-4 left-4 z-20">
                 <span className="bg-purple-600/80 px-3 py-1 rounded-full text-xs text-white">
                   {model.software}
                 </span>
@@ -414,92 +420,66 @@ const CADModels = () => {
                   onClick={() => setPreviewModel(model)}
                   className="flex-1 flex items-center justify-center gap-2 bg-purple-600/20 hover:bg-purple-600/30 text-purple-400 px-4 py-3 rounded-lg text-sm border border-purple-500/30"
                 >
-                  <Eye className="w-4 h-4" /> View 3D Model
+                  <Eye className="w-4 h-4" /> Preview
                 </motion.button>
-
-                <motion.button
-                  onClick={() => setPreviewImage(model.image)}
+                <a
+                  href={model.downloadUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 px-4 py-3 rounded-lg text-sm border border-blue-500/30"
                 >
-                  <Eye className="w-4 h-4" /> View Image
-                </motion.button>
-
-                <motion.a
-                  href={model.downloadUrl}
-                  download
-                  className="flex-1 flex items-center justify-center gap-2 bg-gray-700/50 hover:bg-gray-600/50 text-gray-300 px-4 py-3 rounded-lg text-sm border border-gray-600/50"
-                >
-                  <Download className="w-4 h-4" /> STEP
-                </motion.a>
+                  <Download className="w-4 h-4" /> Download
+                </a>
               </div>
             </div>
           </motion.div>
         ))}
       </div>
 
-      {/* 3D Viewer Modal */}
+      {/* 3D Preview Modal */}
       {previewModel && (
-        <motion.div
-          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <div className="relative w-[80vw] h-[80vh] bg-gray-900 rounded-xl p-4">
-            <X
-              className="absolute top-4 right-4 w-8 h-8 text-white cursor-pointer"
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            className="bg-gray-900 rounded-2xl max-w-4xl w-full p-6 relative"
+          >
+            <button
               onClick={() => setPreviewModel(null)}
-            />
-            <div ref={mountRef} className="w-full h-full" />
+              className="absolute top-4 right-4 text-gray-300 hover:text-white"
+            >
+              <X className="w-6 h-6" />
+            </button>
 
-            {loadingModel && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-sm"
-              >
-                <motion.div
-                  className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mb-4"
-                  animate={{ rotate: 360 }}
-                  transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-                />
-                <p className="text-gray-300 text-sm">Loading 3D Model...</p>
-              </motion.div>
-            )}
+            <h3 className="text-2xl font-bold text-white mb-4">{previewModel.title}</h3>
+            <p className="text-gray-300 mb-4">{previewModel.description}</p>
 
-            <div className="absolute bottom-4 right-4 flex gap-2">
+            <div className="relative w-full h-96 bg-gray-800 rounded-lg">
+              {loadingModel && (
+                <div className="absolute inset-0 flex items-center justify-center z-10">
+                  <span className="text-white text-lg">Loading 3D Model...</span>
+                </div>
+              )}
+              <div ref={mountRef} className="w-full h-full rounded-lg" />
+            </div>
+
+            <div className="flex justify-end gap-3 mt-4">
               <button
                 onClick={zoomIn}
-                className="bg-gray-700/50 text-white p-2 rounded-full hover:bg-gray-600/50"
+                className="px-4 py-2 bg-green-600/20 text-green-400 rounded-lg hover:bg-green-600/30 border border-green-500/30"
               >
-                <ZoomIn className="w-5 h-5" />
+                Zoom In
               </button>
               <button
                 onClick={zoomOut}
-                className="bg-gray-700/50 text-white p-2 rounded-full hover:bg-gray-600/50"
+                className="px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 border border-red-500/30"
               >
-                <ZoomOut className="w-5 h-5" />
+                Zoom Out
               </button>
             </div>
-          </div>
-        </motion.div>
-      )}
-
-      {/* Image Modal */}
-      {previewImage && (
-        <motion.div
-          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <X
-            className="absolute top-4 right-4 w-8 h-8 text-white cursor-pointer"
-            onClick={() => setPreviewImage(null)}
-          />
-          <img src={previewImage} alt="Preview" className="max-h-[90vh] max-w-[90vw]" />
-        </motion.div>
+          </motion.div>
+        </div>
       )}
     </div>
   );

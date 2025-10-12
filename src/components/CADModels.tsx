@@ -161,7 +161,7 @@ const CADModels = () => {
   image: "/3d Pictures/piston head.png",
   downloadUrl:
     "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
-  modelPath: "/Models/piston head.STL.STL",
+  modelPath: "/Models/piston head.STL",
   views: 410,
   downloads: 32,
 },
@@ -517,4 +517,5 @@ const CADModels = () => {
 };
 
 export default CADModels;
+
 

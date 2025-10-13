@@ -1,15 +1,6 @@
-import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import {
-  Box,
-  Download,
-  Eye,
-  Layers,
-  Award,
-  X,
-  ZoomIn,
-  ZoomOut,
-} from "lucide-react";
+import { Box, Download, Eye, Layers, Award, X, ZoomIn, ZoomOut } from "lucide-react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -17,70 +8,74 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 const CADModels = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [previewModel, setPreviewModel] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const [loadingModel, setLoadingModel] = useState(false);
   const mountRef = useRef(null);
   const controlsRef = useRef(null);
   const cameraRef = useRef(null);
-  const rendererRef = useRef(null);
-  const sceneRef = useRef(null);
-  const meshesRef = useRef([]);
 
-  // ✅ Pre-cache STL models
-  const stlCache = useMemo(() => new Map(), []);
-
-  // Model Data (Static)
-  const cadModels = useMemo(
-    () => [
-      {
-        title: "Pair of Spur Gears",
-        description:
-          "Precision-engineered spur gear pair with optimized module and pressure angle for smooth torque transmission and minimal vibration under varying loads.",
-        software: "SolidWorks",
-        category: "Mechanical Parts",
-        complexity: "Intermediate",
-        features: ["Parametric Design", "Gear Ratio Analysis", "Motion Study"],
-        image: "/3d Pictures/gear profile.png",
-        downloadUrl:
-          "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
-        modelPath: "/Models/Spur Gear profile.STL",
-      },
-      {
-        title: "Exhaust Manifold",
-        description:
-          "Optimized exhaust manifold designed for efficient gas flow and reduced backpressure.",
-        software: "SolidWorks",
-        category: "Automotive",
-        complexity: "Advanced",
-        image: "/3d Pictures/exhaust manifold.png",
-        downloadUrl:
-          "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
-        modelPath: "/Models/Exhaust manifold.STL",
-      },
-      {
-        title: "Knuckle Joint",
-        description:
-          "Robust knuckle joint for heavy load applications allowing angular movement.",
-        software: "SolidWorks",
-        category: "Mechanical Parts",
-        complexity: "Intermediate",
-        image: "/3d Pictures/knuckle joint.png",
-        downloadUrl:
-          "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
-        modelPath: "/Models/KNUCKLE JOINT.STL",
-      },
-      {
-        title: "Universal Coupling",
-        description:
-          "Coupling enabling torque transmission between shafts at varying angles.",
-        software: "SolidWorks",
-        category: "Industrial",
-        complexity: "Beginner",
-        image: "/3d Pictures/universal coupling.png",
-        downloadUrl:
-          "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
-        modelPath: "/Models/UNIVERSAL COUPLING.STL",
-      },
-          {
+  const cadModels = [
+    {
+      title: "Pair of Spur Gears",
+      description:
+        "Precision-engineered spur gear pair with optimized module and pressure angle for smooth torque transmission and minimal vibration under varying loads.",
+      software: "SolidWorks",
+      category: "Mechanical Parts",
+      complexity: "Intermediate",
+      features: ["Parametric Design", "Gear Ratio Analysis", "Motion Study"],
+      image: "/3d Pictures/gear profile.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
+      modelPath: "/Models/Spur Gear profile.STL",
+      views: 1247,
+      downloads: 89,
+    },
+    {
+      title: "Exhaust Manifold",
+      description:
+        "Optimized exhaust manifold designed for efficient gas flow, reduced backpressure, and improved engine performance. Features smooth flow paths and minimized thermal stresses for durability.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Advanced",
+      features: ["Flow Simulation", "Thermal Analysis", "Parametric Design"],
+      image: "/3d Pictures/exhaust manifold.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
+      modelPath: "/Models/Exhaust manifold.STL",
+      views: 500,
+      downloads: 25,
+    },
+    {
+      title: "Knuckle Joint",
+      description:
+        "Robust knuckle joint designed for heavy load applications, ensuring secure connections while allowing limited angular movement. Suitable for linkages in structural and mechanical systems.",
+      software: "SolidWorks",
+      category: "Mechanical Parts",
+      complexity: "Intermediate",
+      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+      image: "/3d Pictures/knuckle joint.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
+      modelPath: "/Models/KNUCKLE JOINT.STL",
+      views: 226,
+      downloads: 10,
+    },
+    {
+      title: "Universal Coupling",
+      description:
+        "Precision universal coupling enabling torque transmission between shafts at varying angles. Designed to minimize backlash and maintain smooth power delivery in dynamic conditions.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Beginner",
+      features: ["Parametric Design", "Motion Study", "Torque Analysis"],
+      image: "/3d Pictures/universal coupling.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
+      modelPath: "/Models/UNIVERSAL COUPLING.STL",
+      views: 189,
+      downloads: 15,
+    },
+    {
       title: "Muff Coupling",
       description:
         "Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
@@ -186,9 +181,7 @@ const CADModels = () => {
   downloads: 28,
 },
 
-    ],
-    []
-  );
+  ];
 
   const categories = [
     "All",
@@ -201,13 +194,10 @@ const CADModels = () => {
     "Aerospace",
   ];
 
-  const filteredModels = useMemo(
-    () =>
-      activeCategory === "All"
-        ? cadModels
-        : cadModels.filter((m) => m.category === activeCategory),
-    [activeCategory, cadModels]
-  );
+  const filteredModels =
+    activeCategory === "All"
+      ? cadModels
+      : cadModels.filter((m) => m.category === activeCategory);
 
   const getComplexityColor = (complexity) => {
     switch (complexity) {
@@ -222,16 +212,21 @@ const CADModels = () => {
     }
   };
 
-  // === 3D VIEWER (Optimized) ===
+  const stats = [
+    { label: "Total Models", value: cadModels.length, icon: Box, color: "purple" },
+    { label: "Downloads", value: "2.5K+", icon: Download, color: "blue" },
+    { label: "Categories", value: categories.length - 1, icon: Layers, color: "green" },
+    { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
+  ];
+
+  // --- 3D Viewer with Auto-Centering and Scaling ---
   useEffect(() => {
     if (!previewModel || !mountRef.current) return;
 
     setLoadingModel(true);
 
-    // Scene + Renderer Setup
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x111827);
-    sceneRef.current = scene;
 
     const camera = new THREE.PerspectiveCamera(
       45,
@@ -241,139 +236,104 @@ const CADModels = () => {
     );
     cameraRef.current = camera;
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      powerPreference: "high-performance",
-      alpha: false,
-    });
-    renderer.setPixelRatio(window.devicePixelRatio * 0.8);
-    renderer.setSize(
-      mountRef.current.clientWidth,
-      mountRef.current.clientHeight
-    );
-    renderer.outputEncoding = THREE.sRGBEncoding;
-    rendererRef.current = renderer;
-
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.innerHTML = "";
     mountRef.current.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.08;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 1.5;
+    controls.autoRotateSpeed = 2;
     controlsRef.current = controls;
 
-    // Lights
+    const light1 = new THREE.DirectionalLight(0xffffff, 1);
+    light1.position.set(50, 50, 50);
+    scene.add(light1);
     scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-    dirLight.position.set(10, 10, 10);
-    scene.add(dirLight);
 
     const loader = new STLLoader();
-    const path = previewModel.modelPath;
+    const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
+    const meshes = [];
+    let loadedCount = 0;
 
-    // Load with Cache
-    const loadModel = (url) =>
-      new Promise((resolve, reject) => {
-        if (stlCache.has(url)) {
-          resolve(stlCache.get(url));
-          return;
-        }
-        loader.load(
-          url,
-          (geometry) => {
-            stlCache.set(url, geometry);
-            resolve(geometry);
-          },
-          undefined,
-          reject
-        );
+    modelPaths.forEach((path, index) => {
+      const material = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(`hsl(${(index * 60) % 360}, 80%, 60%)`),
+        metalness: 0.5,
+        roughness: 0.2,
       });
 
-    loadModel(path)
-      .then((geometry) => {
-        geometry.computeBoundingBox();
-        const box = geometry.boundingBox;
-        const size = new THREE.Vector3();
-        box.getSize(size);
-        const center = new THREE.Vector3();
-        box.getCenter(center);
+      loader.load(
+        path,
+        (geometry) => {
+          geometry.computeBoundingBox();
+          const box = geometry.boundingBox;
+          const size = new THREE.Vector3();
+          box.getSize(size);
+          const center = new THREE.Vector3();
+          box.getCenter(center);
 
-        geometry.translate(-center.x, -center.y, -center.z);
+          geometry.translate(-center.x, -center.y, -center.z);
 
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const scaleFactor = 5 / maxDim;
-        const material = new THREE.MeshStandardMaterial({
-          color: 0x7dd3fc,
-          metalness: 0.6,
-          roughness: 0.3,
-        });
-        const mesh = new THREE.Mesh(geometry, material);
-        mesh.scale.setScalar(scaleFactor);
-        scene.add(mesh);
-        meshesRef.current.push(mesh);
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const scaleFactor = 5 / maxDim;
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.scale.setScalar(scaleFactor);
 
-        const cameraZ =
-          (maxDim / 2 / Math.tan((camera.fov * Math.PI) / 360)) * 2;
-        camera.position.set(0, 0, cameraZ);
-        camera.lookAt(0, 0, 0);
+          scene.add(mesh);
+          meshes.push(mesh);
 
-        setLoadingModel(false);
-      })
-      .catch(() => setLoadingModel(false));
+          loadedCount++;
+          if (loadedCount === modelPaths.length) {
+            const groupBox = new THREE.Box3();
+            meshes.forEach((m) => groupBox.expandByObject(m));
+            const groupSize = groupBox.getSize(new THREE.Vector3());
+            const groupMax = Math.max(groupSize.x, groupSize.y, groupSize.z);
+            const fov = camera.fov * (Math.PI / 180);
+            const cameraZ = Math.abs(groupMax / 2 / Math.tan(fov / 2));
+            camera.position.set(0, 0, cameraZ * 2);
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-    // Animation loop
-    let frameId;
+            setTimeout(() => setLoadingModel(false), 500);
+          }
+        },
+        undefined,
+        () => setLoadingModel(false)
+      );
+    });
+
     const animate = () => {
+      requestAnimationFrame(animate);
       controls.update();
       renderer.render(scene, camera);
-      frameId = requestAnimationFrame(animate);
     };
     animate();
 
-    // Optimized Resize Handler (Debounced)
     const handleResize = () => {
-      if (!mountRef.current) return;
-      camera.aspect =
-        mountRef.current.clientWidth / mountRef.current.clientHeight;
+      camera.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(
-        mountRef.current.clientWidth,
-        mountRef.current.clientHeight
-      );
+      renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     };
     window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [previewModel]);
 
-    // Cleanup
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.removeEventListener("resize", handleResize);
-      controls.dispose();
-      renderer.dispose();
-      meshesRef.current.forEach((m) => {
-        m.geometry.dispose();
-        m.material.dispose();
-      });
-      scene.clear();
-    };
-  }, [previewModel, stlCache]);
-
-  const zoomIn = useCallback(() => {
+  const zoomIn = () => {
     if (cameraRef.current) cameraRef.current.position.z *= 0.8;
-  }, []);
+  };
 
-  const zoomOut = useCallback(() => {
+  const zoomOut = () => {
     if (cameraRef.current) cameraRef.current.position.z *= 1.2;
-  }, []);
+  };
 
   return (
     <div className="container mx-auto px-6 py-20">
-      {/* Header */}
+      {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        className="text-4xl font-bold mb-6 text-center text-white"
+        className="text-4xl font-bold mb-4 text-center"
       >
         CAD Model{" "}
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
@@ -381,13 +341,35 @@ const CADModels = () => {
         </span>
       </motion.h2>
 
+      {/* Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        {stats.map((stat, i) => {
+          const Icon = stat.icon;
+          return (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              className="bg-gray-800/50 rounded-xl p-6 text-center border border-gray-700/50"
+            >
+              <div
+                className={`w-12 h-12 bg-${stat.color}-500/20 rounded-full flex items-center justify-center mx-auto mb-4`}
+              >
+                <Icon className={`w-6 h-6 text-${stat.color}-400`} />
+              </div>
+              <div className="text-2xl font-bold text-white mb-2">{stat.value}</div>
+              <div className="text-gray-400 text-sm">{stat.label}</div>
+            </motion.div>
+          );
+        })}
+      </div>
+
       {/* Category Filter */}
       <div className="mb-12 flex flex-wrap justify-center gap-3">
         {categories.map((cat) => (
           <motion.button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
+            className={`px-6 py-3 rounded-full text-sm font-medium transition-all relative ${
               activeCategory === cat
                 ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
                 : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50"
@@ -400,22 +382,41 @@ const CADModels = () => {
         ))}
       </div>
 
-      {/* Grid */}
+      {/* Models Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
         {filteredModels.map((model, i) => (
           <motion.div
             key={i}
-            whileHover={{ scale: 1.02, y: -4 }}
-            className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50"
+            whileHover={{ scale: 1.02, y: -5 }}
+            className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 shadow-lg"
           >
-            <div className="relative h-64 overflow-hidden">
+            {/* Image with loading placeholder */}
+            <div className="relative h-64 overflow-hidden group">
+              <div className="w-full h-full bg-gray-700 animate-pulse absolute inset-0" id={`skeleton-${i}`} />
+
               <img
                 src={model.image}
                 alt={model.title}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 relative z-10"
+                onLoad={() => {
+                  const skeleton = document.getElementById(`skeleton-${i}`);
+                  if (skeleton) skeleton.style.display = "none";
+                }}
+                onError={() => {
+                  const skeleton = document.getElementById(`skeleton-${i}`);
+                  if (skeleton) skeleton.style.display = "none";
+                }}
               />
-              <div className="absolute top-3 right-3">
+
+              <div className="absolute top-4 left-4 flex gap-2 z-20">
+                <span className="bg-black/50 px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
+                  <Eye className="w-3 h-3" /> {model.views}
+                </span>
+                <span className="bg-black/50 px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
+                  <Download className="w-3 h-3" /> {model.downloads}
+                </span>
+              </div>
+              <div className="absolute top-4 right-4 z-20">
                 <span
                   className={`px-3 py-1 rounded-full text-xs border ${getComplexityColor(
                     model.complexity
@@ -424,12 +425,27 @@ const CADModels = () => {
                   {model.complexity}
                 </span>
               </div>
+              <div className="absolute bottom-4 left-4 z-20">
+                <span className="bg-purple-600/80 px-3 py-1 rounded-full text-xs text-white">
+                  {model.software}
+                </span>
+              </div>
             </div>
+
             <div className="p-6">
-              <h3 className="text-xl font-bold text-white mb-2">
-                {model.title}
-              </h3>
+              <h3 className="text-xl font-bold text-white mb-2">{model.title}</h3>
               <p className="text-gray-300 text-sm mb-4">{model.description}</p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {model.features.map((f, idx) => (
+                  <span
+                    key={idx}
+                    className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full text-xs border border-purple-500/30"
+                  >
+                    {f}
+                  </span>
+                ))}
+              </div>
+
               <div className="flex gap-3">
                 <motion.button
                   onClick={() => setPreviewModel(model)}
@@ -466,9 +482,10 @@ const CADModels = () => {
             >
               <X className="w-6 h-6" />
             </button>
-            <h3 className="text-2xl font-bold text-white mb-4">
-              {previewModel.title}
-            </h3>
+
+            <h3 className="text-2xl font-bold text-white mb-4">{previewModel.title}</h3>
+            <p className="text-gray-300 mb-4">{previewModel.description}</p>
+
             <div className="relative w-full h-96 bg-gray-800 rounded-lg">
               {loadingModel && (
                 <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -477,18 +494,19 @@ const CADModels = () => {
               )}
               <div ref={mountRef} className="w-full h-full rounded-lg" />
             </div>
+
             <div className="flex justify-end gap-3 mt-4">
               <button
                 onClick={zoomIn}
                 className="px-4 py-2 bg-green-600/20 text-green-400 rounded-lg hover:bg-green-600/30 border border-green-500/30"
               >
-                <ZoomIn className="inline w-4 h-4 mr-1" /> Zoom In
+                Zoom In
               </button>
               <button
                 onClick={zoomOut}
                 className="px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 border border-red-500/30"
               >
-                <ZoomOut className="inline w-4 h-4 mr-1" /> Zoom Out
+                Zoom Out
               </button>
             </div>
           </motion.div>
@@ -499,3 +517,4 @@ const CADModels = () => {
 };
 
 export default CADModels;
+

@@ -17,11 +17,11 @@ const CADModels = () => {
     {
       title: "Pair of Spur Gears",
       description:
-        "Precision-engineered spur gear pair with optimized module and pressure angle for smooth torque transmission and minimal vibration under varying loads.",
+        "Precision-engineered spur gear pair optimized for smooth torque transmission and minimal vibration. Ideal for mechanical assemblies.",
       software: "SolidWorks",
       category: "Mechanical Parts",
       complexity: "Intermediate",
-      features: ["Parametric Design", "Gear Ratio Analysis", "Motion Study"],
+      features: ["Parametric Design", "Dynamic Gear Ratio Analysis", "Smooth Motion Simulation"],
       image: "/3d Pictures/gear profile.png",
       downloadUrl:
         "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
@@ -32,11 +32,11 @@ const CADModels = () => {
     {
       title: "Exhaust Manifold",
       description:
-        "Optimized exhaust manifold designed for efficient gas flow, reduced backpressure, and improved engine performance. Features smooth flow paths and minimized thermal stresses for durability.",
+        "Optimized exhaust manifold for efficient gas flow, reduced backpressure, and improved engine performance. Minimizes thermal stresses for durability.",
       software: "SolidWorks",
       category: "Automotive",
       complexity: "Advanced",
-      features: ["Flow Simulation", "Thermal Analysis", "Parametric Design"],
+      features: ["Flow Simulation", "Thermal Analysis", "Parametric Geometry"],
       image: "/3d Pictures/exhaust manifold.png",
       downloadUrl:
         "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
@@ -47,11 +47,11 @@ const CADModels = () => {
     {
       title: "Knuckle Joint",
       description:
-        "Robust knuckle joint designed for heavy load applications, ensuring secure connections while allowing limited angular movement. Suitable for linkages in structural and mechanical systems.",
+        "Robust knuckle joint designed for heavy loads. Ensures secure connections while allowing limited angular motion, suitable for structural linkages.",
       software: "SolidWorks",
       category: "Mechanical Parts",
       complexity: "Intermediate",
-      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+      features: ["Parametric Design", "Stress Analysis", "Angular Motion Study"],
       image: "/3d Pictures/knuckle joint.png",
       downloadUrl:
         "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
@@ -62,11 +62,11 @@ const CADModels = () => {
     {
       title: "Universal Coupling",
       description:
-        "Precision universal coupling enabling torque transmission between shafts at varying angles. Designed to minimize backlash and maintain smooth power delivery in dynamic conditions.",
+        "Precision universal coupling enabling torque transmission between shafts at varying angles. Designed to minimize backlash and maintain smooth power delivery.",
       software: "SolidWorks",
       category: "Industrial",
       complexity: "Beginner",
-      features: ["Parametric Design", "Motion Study", "Torque Analysis"],
+      features: ["Parametric Design", "Motion Study", "Torque Optimization"],
       image: "/3d Pictures/universal coupling.png",
       downloadUrl:
         "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
@@ -77,7 +77,7 @@ const CADModels = () => {
     {
       title: "Muff Coupling",
       description:
-        "Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
+        "Efficient muff coupling for rigid torque transmission between co-axial shafts. Features hollow sleeve with key and keyway for secure operation.",
       software: "SolidWorks",
       category: "Industrial",
       complexity: "Basic",
@@ -92,7 +92,7 @@ const CADModels = () => {
     {
       title: "Door Lock Mechanism",
       description:
-        "Compact and reliable door lock mechanism featuring latch, spring, and handle components for secure and smooth operation.",
+        "Compact, reliable door lock mechanism with latch, spring, and handle components for secure and smooth operation.",
       software: "SolidWorks",
       category: "Assembly",
       complexity: "Basic",
@@ -103,6 +103,81 @@ const CADModels = () => {
       modelPath: "/Models/Door lock.STL",
       views: 312,
       downloads: 18,
+    },
+    {
+      title: "Flanged Tee Pipe Fitting",
+      description:
+        "Industrial flanged tee pipe fitting for fluid systems. Precise flanges for secure bolted connections, optimized internal geometry for minimal pressure loss.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Intermediate",
+      features: ["Parametric Design", "Flow Optimization", "Assembly Ready"],
+      image: "/3d Pictures/flanged tee pipe fitting.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
+      modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
+      views: 278,
+      downloads: 25,
+    },
+    {
+      title: "Refrigeration Valves Assembly",
+      description:
+        "Precision refrigeration valve assembly controlling refrigerant flow in HVAC systems. Optimized for durability and leak-proof operation.",
+      software: "SolidWorks",
+      category: "Thermal Systems",
+      complexity: "Basic",
+      features: ["Parametric Design", "Flow Simulation", "Thermal Analysis"],
+      image: "/3d Pictures/refrigeration valves.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
+      modelPath: "/Models/Refrigeration Valves.STL",
+      views: 342,
+      downloads: 27,
+    },
+    {
+      title: "Connecting Rod (Without Cap)",
+      description:
+        "Lightweight connecting rod designed without cap for simplified analysis and manufacturing demo. Optimized for strength-to-weight ratio and fatigue resistance.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Intermediate",
+      features: ["3D Modeling", "FEA Simulation", "Mass Optimization"],
+      image: "/3d Pictures/connecting rod.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
+      modelPath: "/Models/Connecting Rod.STL",
+      views: 297,
+      downloads: 24,
+    },
+    {
+      title: "Piston Head",
+      description:
+        "High-strength piston head for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high pressure.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
+      image: "/3d Pictures/piston head.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
+      modelPath: "/Models/piston head.STL",
+      views: 410,
+      downloads: 32,
+    },
+    {
+      title: "Crankshaft",
+      description:
+        "Precision crankshaft for efficient torque transmission and balanced rotation. Engineered for minimal vibration and high-performance engines.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+      image: "/3d Pictures/crankshaft.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
+      modelPath: "/Models/crank shaft.STL",
+      views: 365,
+      downloads: 28,
     },
   ];
 
@@ -142,35 +217,14 @@ const CADModels = () => {
     { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
 
-  // === Updated 3D Viewer ===
+  // 3D Viewer
   useEffect(() => {
     if (!previewModel || !mountRef.current) return;
+
     setLoadingModel(true);
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x1a1a1a);
-
-    // Gradient background using a big plane behind model
-    const gradientTexture = new THREE.CanvasTexture(
-      (() => {
-        const canvas = document.createElement("canvas");
-        canvas.width = 16;
-        canvas.height = 256;
-        const ctx = canvas.getContext("2d");
-        const gradient = ctx.createLinearGradient(0, 0, 0, 256);
-        gradient.addColorStop(0, "#101018");
-        gradient.addColorStop(1, "#2a2f38");
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, 16, 256);
-        return canvas;
-      })()
-    );
-    const backgroundPlane = new THREE.Mesh(
-      new THREE.PlaneGeometry(200, 200),
-      new THREE.MeshBasicMaterial({ map: gradientTexture, side: THREE.BackSide })
-    );
-    backgroundPlane.position.z = -50;
-    scene.add(backgroundPlane);
+    scene.background = new THREE.Color(0x111827);
 
     const camera = new THREE.PerspectiveCamera(
       45,
@@ -191,45 +245,43 @@ const CADModels = () => {
     controls.autoRotateSpeed = 2;
     controlsRef.current = controls;
 
-    // Lights
-    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.0);
-    hemiLight.position.set(0, 200, 0);
-    scene.add(hemiLight);
-
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-    dirLight.position.set(50, 50, 100);
-    scene.add(dirLight);
+    const light1 = new THREE.DirectionalLight(0xffffff, 1.2);
+    light1.position.set(50, 50, 50);
+    scene.add(light1);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
 
     const loader = new STLLoader();
+    const material = new THREE.MeshStandardMaterial({
+      color: 0x7f8c8d,
+      metalness: 0.7,
+      roughness: 0.3,
+      emissive: 0x111111,
+    });
+
     loader.load(
       previewModel.modelPath,
       (geometry) => {
         geometry.computeBoundingBox();
         const box = geometry.boundingBox;
-        const size = new THREE.Vector3();
-        box.getSize(size);
         const center = new THREE.Vector3();
         box.getCenter(center);
         geometry.translate(-center.x, -center.y, -center.z);
 
+        const size = new THREE.Vector3();
+        box.getSize(size);
         const maxDim = Math.max(size.x, size.y, size.z);
-        const scaleFactor = 20 / maxDim;
-        const material = new THREE.MeshStandardMaterial({
-          color: 0x9ca3af,
-          metalness: 0.4,
-          roughness: 0.4,
-        });
+        const scaleFactor = 5 / maxDim;
+
         const mesh = new THREE.Mesh(geometry, material);
         mesh.scale.setScalar(scaleFactor);
         scene.add(mesh);
 
-        // Auto-fit camera
         const fov = camera.fov * (Math.PI / 180);
-        const distance = maxDim / (2 * Math.tan(fov / 2));
-        camera.position.set(0, 0, distance * 2.5);
+        const cameraZ = Math.abs(Math.max(size.x, size.y, size.z) / 2 / Math.tan(fov / 2));
+        camera.position.set(0, 0, cameraZ * 2);
         camera.lookAt(0, 0, 0);
 
-        setLoadingModel(false);
+        setTimeout(() => setLoadingModel(false), 500);
       },
       undefined,
       () => setLoadingModel(false)
@@ -254,7 +306,6 @@ const CADModels = () => {
   const zoomIn = () => {
     if (cameraRef.current) cameraRef.current.position.z *= 0.8;
   };
-
   const zoomOut = () => {
     if (cameraRef.current) cameraRef.current.position.z *= 1.2;
   };
@@ -322,18 +373,38 @@ const CADModels = () => {
             whileHover={{ scale: 1.02, y: -5 }}
             className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 shadow-lg"
           >
+            {/* Image with loading placeholder */}
             <div className="relative h-64 overflow-hidden group">
+              <div className="w-full h-full bg-gray-700 animate-pulse absolute inset-0" id={`skeleton-${i}`} />
+
               <img
                 src={model.image}
                 alt={model.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 relative z-10"
+                onLoad={() => document.getElementById(`skeleton-${i}`)?.style.display = "none"}
+                onError={() => document.getElementById(`skeleton-${i}`)?.style.display = "none"}
               />
+
               <div className="absolute top-4 left-4 flex gap-2 z-20">
                 <span className="bg-black/50 px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
                   <Eye className="w-3 h-3" /> {model.views}
                 </span>
                 <span className="bg-black/50 px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
                   <Download className="w-3 h-3" /> {model.downloads}
+                </span>
+              </div>
+              <div className="absolute top-4 right-4 z-20">
+                <span
+                  className={`px-3 py-1 rounded-full text-xs border ${getComplexityColor(
+                    model.complexity
+                  )}`}
+                >
+                  {model.complexity}
+                </span>
+              </div>
+              <div className="absolute bottom-4 left-4 z-20">
+                <span className="bg-purple-600/80 px-3 py-1 rounded-full text-xs text-white">
+                  {model.software}
                 </span>
               </div>
             </div>
@@ -392,7 +463,7 @@ const CADModels = () => {
             <h3 className="text-2xl font-bold text-white mb-4">{previewModel.title}</h3>
             <p className="text-gray-300 mb-4">{previewModel.description}</p>
 
-            <div className="relative w-full h-96 bg-gray-800 rounded-lg overflow-hidden">
+            <div className="relative w-full h-96 bg-gray-800 rounded-lg">
               {loadingModel && (
                 <div className="absolute inset-0 flex items-center justify-center z-10">
                   <span className="text-white text-lg">Loading 3D Model...</span>
@@ -404,15 +475,15 @@ const CADModels = () => {
             <div className="flex justify-end gap-3 mt-4">
               <button
                 onClick={zoomIn}
-                className="px-4 py-2 bg-green-600/20 text-green-400 rounded-lg hover:bg-green-600/30 border border-green-500/30"
+                className="px-4 py-2 bg-green-600/20 text-green-400 rounded-lg hover:bg-green-600/30 border border-green-500/30 flex items-center gap-1"
               >
-                <ZoomIn className="inline w-4 h-4 mr-1" /> Zoom In
+                <ZoomIn className="w-4 h-4" />
               </button>
               <button
                 onClick={zoomOut}
-                className="px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 border border-red-500/30"
+                className="px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 border border-red-500/30 flex items-center gap-1"
               >
-                <ZoomOut className="inline w-4 h-4 mr-1" /> Zoom Out
+                <ZoomOut className="w-4 h-4" />
               </button>
             </div>
           </motion.div>

@@ -8,7 +8,6 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 const CADModels = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [previewModel, setPreviewModel] = useState(null);
-  const [previewImage, setPreviewImage] = useState(null);
   const [loadingModel, setLoadingModel] = useState(false);
   const mountRef = useRef(null);
   const controlsRef = useRef(null);
@@ -18,11 +17,11 @@ const CADModels = () => {
     {
       title: "Pair of Spur Gears",
       description:
-        "Precision-engineered spur gear pair with optimized module and pressure angle for smooth torque transmission and minimal vibration under varying loads.",
+        "Precision-engineered spur gear pair optimized for smooth torque transmission and minimal vibration. Ideal for mechanical assemblies.",
       software: "SolidWorks",
       category: "Mechanical Parts",
       complexity: "Intermediate",
-      features: ["Parametric Design", "Gear Ratio Analysis", "Motion Study"],
+      features: ["Parametric Design", "Dynamic Gear Ratio Analysis", "Smooth Motion Simulation"],
       image: "/3d Pictures/gear profile.png",
       downloadUrl:
         "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
@@ -33,11 +32,11 @@ const CADModels = () => {
     {
       title: "Exhaust Manifold",
       description:
-        "Optimized exhaust manifold designed for efficient gas flow, reduced backpressure, and improved engine performance. Features smooth flow paths and minimized thermal stresses for durability.",
+        "Optimized exhaust manifold for efficient gas flow, reduced backpressure, and improved engine performance. Minimizes thermal stresses for durability.",
       software: "SolidWorks",
       category: "Automotive",
       complexity: "Advanced",
-      features: ["Flow Simulation", "Thermal Analysis", "Parametric Design"],
+      features: ["Flow Simulation", "Thermal Analysis", "Parametric Geometry"],
       image: "/3d Pictures/exhaust manifold.png",
       downloadUrl:
         "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
@@ -48,11 +47,11 @@ const CADModels = () => {
     {
       title: "Knuckle Joint",
       description:
-        "Robust knuckle joint designed for heavy load applications, ensuring secure connections while allowing limited angular movement. Suitable for linkages in structural and mechanical systems.",
+        "Robust knuckle joint designed for heavy loads. Ensures secure connections while allowing limited angular motion, suitable for structural linkages.",
       software: "SolidWorks",
       category: "Mechanical Parts",
       complexity: "Intermediate",
-      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+      features: ["Parametric Design", "Stress Analysis", "Angular Motion Study"],
       image: "/3d Pictures/knuckle joint.png",
       downloadUrl:
         "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
@@ -63,11 +62,11 @@ const CADModels = () => {
     {
       title: "Universal Coupling",
       description:
-        "Precision universal coupling enabling torque transmission between shafts at varying angles. Designed to minimize backlash and maintain smooth power delivery in dynamic conditions.",
+        "Precision universal coupling enabling torque transmission between shafts at varying angles. Designed to minimize backlash and maintain smooth power delivery.",
       software: "SolidWorks",
       category: "Industrial",
       complexity: "Beginner",
-      features: ["Parametric Design", "Motion Study", "Torque Analysis"],
+      features: ["Parametric Design", "Motion Study", "Torque Optimization"],
       image: "/3d Pictures/universal coupling.png",
       downloadUrl:
         "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
@@ -78,7 +77,7 @@ const CADModels = () => {
     {
       title: "Muff Coupling",
       description:
-        "Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
+        "Efficient muff coupling for rigid torque transmission between co-axial shafts. Features hollow sleeve with key and keyway for secure operation.",
       software: "SolidWorks",
       category: "Industrial",
       complexity: "Basic",
@@ -93,7 +92,7 @@ const CADModels = () => {
     {
       title: "Door Lock Mechanism",
       description:
-        "Compact and reliable door lock mechanism featuring latch, spring, and handle components for secure and smooth operation.",
+        "Compact, reliable door lock mechanism with latch, spring, and handle components for secure and smooth operation.",
       software: "SolidWorks",
       category: "Assembly",
       complexity: "Basic",
@@ -108,7 +107,7 @@ const CADModels = () => {
     {
       title: "Flanged Tee Pipe Fitting",
       description:
-        "Industrial-grade flanged tee pipe fitting designed for fluid distribution systems. Features precise flanges for secure bolted connections and optimized internal geometry for minimal pressure loss.",
+        "Industrial flanged tee pipe fitting for fluid systems. Precise flanges for secure bolted connections, optimized internal geometry for minimal pressure loss.",
       software: "SolidWorks",
       category: "Industrial",
       complexity: "Intermediate",
@@ -123,7 +122,7 @@ const CADModels = () => {
     {
       title: "Refrigeration Valves Assembly",
       description:
-        "Precision-designed refrigeration valve assembly used for controlling refrigerant flow in HVAC and cooling systems. Includes service, expansion, and solenoid valves optimized for durability and leak-proof operation.",
+        "Precision refrigeration valve assembly controlling refrigerant flow in HVAC systems. Optimized for durability and leak-proof operation.",
       software: "SolidWorks",
       category: "Thermal Systems",
       complexity: "Basic",
@@ -138,7 +137,7 @@ const CADModels = () => {
     {
       title: "Connecting Rod (Without Cap)",
       description:
-        "Lightweight connecting rod designed without cap for simplified design analysis and manufacturing demonstration. Optimized cross-section for strength-to-weight ratio and fatigue resistance.",
+        "Lightweight connecting rod designed without cap for simplified analysis and manufacturing demo. Optimized for strength-to-weight ratio and fatigue resistance.",
       software: "SolidWorks",
       category: "Automotive",
       complexity: "Intermediate",
@@ -151,36 +150,35 @@ const CADModels = () => {
       downloads: 24,
     },
     {
-  title: "Piston Head",
-  description:
-    "High-strength piston head designed for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high-pressure conditions.",
-  software: "SolidWorks",
-  category: "Automotive",
-  complexity: "Basic",
-  features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
-  image: "/3d Pictures/piston head.png",
-  downloadUrl:
-    "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
-  modelPath: "/Models/piston head.STL",
-  views: 410,
-  downloads: 32,
-},
-{
-  title: "Crankshaft",
-  description:
-    "Precision crankshaft designed for efficient torque transmission and balanced rotation. Engineered for minimal vibration, maximum fatigue resistance, and high-performance automotive engines.",
-  software: "SolidWorks",
-  category: "Automotive",
-  complexity: "Basic",
-  features: ["Parametric Design", "Stress Analysis", "Motion Study"],
-  image: "/3d Pictures/crankshaft.png",
-  downloadUrl:
-    "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
-  modelPath: "/Models/crank shaft.STL",
-  views: 365,
-  downloads: 28,
-},
-
+      title: "Piston Head",
+      description:
+        "High-strength piston head for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high pressure.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
+      image: "/3d Pictures/piston head.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
+      modelPath: "/Models/piston head.STL",
+      views: 410,
+      downloads: 32,
+    },
+    {
+      title: "Crankshaft",
+      description:
+        "Precision crankshaft for efficient torque transmission and balanced rotation. Engineered for minimal vibration and high-performance engines.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+      image: "/3d Pictures/crankshaft.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
+      modelPath: "/Models/crank shaft.STL",
+      views: 365,
+      downloads: 28,
+    },
   ];
 
   const categories = [
@@ -219,7 +217,7 @@ const CADModels = () => {
     { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
 
-  // --- 3D Viewer with Auto-Centering and Scaling ---
+  // 3D Viewer
   useEffect(() => {
     if (!previewModel || !mountRef.current) return;
 
@@ -247,61 +245,47 @@ const CADModels = () => {
     controls.autoRotateSpeed = 2;
     controlsRef.current = controls;
 
-    const light1 = new THREE.DirectionalLight(0xffffff, 1);
+    const light1 = new THREE.DirectionalLight(0xffffff, 1.2);
     light1.position.set(50, 50, 50);
     scene.add(light1);
-    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
 
     const loader = new STLLoader();
-    const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
-    const meshes = [];
-    let loadedCount = 0;
-
-    modelPaths.forEach((path, index) => {
-      const material = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(`hsl(${(index * 60) % 360}, 80%, 60%)`),
-        metalness: 0.5,
-        roughness: 0.2,
-      });
-
-      loader.load(
-        path,
-        (geometry) => {
-          geometry.computeBoundingBox();
-          const box = geometry.boundingBox;
-          const size = new THREE.Vector3();
-          box.getSize(size);
-          const center = new THREE.Vector3();
-          box.getCenter(center);
-
-          geometry.translate(-center.x, -center.y, -center.z);
-
-          const maxDim = Math.max(size.x, size.y, size.z);
-          const scaleFactor = 5 / maxDim;
-          const mesh = new THREE.Mesh(geometry, material);
-          mesh.scale.setScalar(scaleFactor);
-
-          scene.add(mesh);
-          meshes.push(mesh);
-
-          loadedCount++;
-          if (loadedCount === modelPaths.length) {
-            const groupBox = new THREE.Box3();
-            meshes.forEach((m) => groupBox.expandByObject(m));
-            const groupSize = groupBox.getSize(new THREE.Vector3());
-            const groupMax = Math.max(groupSize.x, groupSize.y, groupSize.z);
-            const fov = camera.fov * (Math.PI / 180);
-            const cameraZ = Math.abs(groupMax / 2 / Math.tan(fov / 2));
-            camera.position.set(0, 0, cameraZ * 2);
-            camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-            setTimeout(() => setLoadingModel(false), 500);
-          }
-        },
-        undefined,
-        () => setLoadingModel(false)
-      );
+    const material = new THREE.MeshStandardMaterial({
+      color: 0x7f8c8d,
+      metalness: 0.7,
+      roughness: 0.3,
+      emissive: 0x111111,
     });
+
+    loader.load(
+      previewModel.modelPath,
+      (geometry) => {
+        geometry.computeBoundingBox();
+        const box = geometry.boundingBox;
+        const center = new THREE.Vector3();
+        box.getCenter(center);
+        geometry.translate(-center.x, -center.y, -center.z);
+
+        const size = new THREE.Vector3();
+        box.getSize(size);
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scaleFactor = 5 / maxDim;
+
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.scale.setScalar(scaleFactor);
+        scene.add(mesh);
+
+        const fov = camera.fov * (Math.PI / 180);
+        const cameraZ = Math.abs(Math.max(size.x, size.y, size.z) / 2 / Math.tan(fov / 2));
+        camera.position.set(0, 0, cameraZ * 2);
+        camera.lookAt(0, 0, 0);
+
+        setTimeout(() => setLoadingModel(false), 500);
+      },
+      undefined,
+      () => setLoadingModel(false)
+    );
 
     const animate = () => {
       requestAnimationFrame(animate);
@@ -322,7 +306,6 @@ const CADModels = () => {
   const zoomIn = () => {
     if (cameraRef.current) cameraRef.current.position.z *= 0.8;
   };
-
   const zoomOut = () => {
     if (cameraRef.current) cameraRef.current.position.z *= 1.2;
   };
@@ -398,14 +381,8 @@ const CADModels = () => {
                 src={model.image}
                 alt={model.title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 relative z-10"
-                onLoad={() => {
-                  const skeleton = document.getElementById(`skeleton-${i}`);
-                  if (skeleton) skeleton.style.display = "none";
-                }}
-                onError={() => {
-                  const skeleton = document.getElementById(`skeleton-${i}`);
-                  if (skeleton) skeleton.style.display = "none";
-                }}
+                onLoad={() => document.getElementById(`skeleton-${i}`)?.style.display = "none"}
+                onError={() => document.getElementById(`skeleton-${i}`)?.style.display = "none"}
               />
 
               <div className="absolute top-4 left-4 flex gap-2 z-20">
@@ -498,15 +475,15 @@ const CADModels = () => {
             <div className="flex justify-end gap-3 mt-4">
               <button
                 onClick={zoomIn}
-                className="px-4 py-2 bg-green-600/20 text-green-400 rounded-lg hover:bg-green-600/30 border border-green-500/30"
+                className="px-4 py-2 bg-green-600/20 text-green-400 rounded-lg hover:bg-green-600/30 border border-green-500/30 flex items-center gap-1"
               >
-                Zoom In
+                <ZoomIn className="w-4 h-4" />
               </button>
               <button
                 onClick={zoomOut}
-                className="px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 border border-red-500/30"
+                className="px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 border border-red-500/30 flex items-center gap-1"
               >
-                Zoom Out
+                <ZoomOut className="w-4 h-4" />
               </button>
             </div>
           </motion.div>
@@ -517,5 +494,3 @@ const CADModels = () => {
 };
 
 export default CADModels;
-
-

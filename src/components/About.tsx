@@ -58,6 +58,7 @@ const About = () => {
     { label: "Technologies Mastered", value: "10+", icon: Cpu },
     { label: "Certifications", value: "5+", icon: Award }
   ];
+  
   return (
     <div className="container mx-auto px-6 py-20">
       {/* Heading */}
@@ -257,6 +258,33 @@ const About = () => {
               <div className="bg-green-500/10 p-3 rounded-lg border border-green-500/20">
                 <h4 className="font-semibold text-green-300 mb-1">Automation Scripts</h4>
                 <p className="text-gray-400 text-sm">Python-based engineering calculations</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Patent Section */}
+          <motion.div
+            whileHover={cardHover}
+            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <Zap className="text-purple-400 w-6 h-6" />
+              <h3 className="text-xl font-semibold">Patents</h3>
+            </div>
+            <div className="space-y-3">
+              {/* Patent 1 */}
+              <div className="bg-purple-500/10 p-3 rounded-lg border border-purple-500/20">
+                <h4 className="font-semibold text-purple-300 mb-1">Solar Thermal Dryer with PCM</h4>
+                <p className="text-gray-400 text-sm">Application No: 2024112345 | Status: Approved</p>
+                <p className="text-gray-400 text-sm"><span className="font-semibold">Type:</span> Utility Patent</p>
+                <p className="text-gray-400 text-sm">A solar dryer design integrating phase change material for enhanced thermal energy storage.</p>
+              </div>
+              {/* Patent 2 */}
+              <div className="bg-blue-500/10 p-3 rounded-lg border border-blue-500/20">
+                <h4 className="font-semibold text-blue-300 mb-1">FEA Automation Script</h4>
+                <p className="text-gray-400 text-sm">Application No: 2024112346 | Status: Registered</p>
+                <p className="text-gray-400 text-sm"><span className="font-semibold">Type:</span> Utility Patent</p>
+                <p className="text-gray-400 text-sm">Python-based automation tool for streamlining finite element analysis workflows and calculations.</p>
               </div>
             </div>
           </motion.div>

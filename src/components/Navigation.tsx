@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Home, User, Briefcase, Wrench, FolderOpen, Phone, Award } from 'lucide-react';
+import { Menu, X, Home, User, Briefcase, Wrench, FolderOpen, Phone } from 'lucide-react';
 
 interface NavigationProps {
   activeSection: number;
@@ -8,8 +8,8 @@ interface NavigationProps {
   setMenuOpen: (open: boolean) => void;
   scrollToSection: (index: number) => void;
   scrollY: number;
-  currentPage: 'portfolio' | 'cad-models' | 'achievements' | 'certifications';
-  navigateToPage: (page: 'portfolio' | 'cad-models' | 'achievements' | 'certifications') => void;
+  currentPage: 'portfolio' | 'cad-models' | 'achievements';
+  navigateToPage: (page: 'portfolio' | 'cad-models' | 'achievements') => void;
 }
 
 const Navigation: React.FC<NavigationProps> = ({
@@ -34,7 +34,6 @@ const Navigation: React.FC<NavigationProps> = ({
     { name: 'Portfolio', page: 'portfolio', icon: Home },
     { name: 'CAD Models', page: 'cad-models', icon: FolderOpen },
     { name: 'Achievements', page: 'achievements', icon: Briefcase },
-    { name: 'Certifications', page: 'certifications', icon: Award }, // New Page Added
   ];
 
   const navVariants = {

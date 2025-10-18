@@ -16,7 +16,6 @@ import Achievements from './components/Achievements';
 import Navigation from './components/Navigation';
 import ParticleBackground from './components/ParticleBackground';
 import ScrollProgress from './components/ScrollProgress';
-import Certifications from './components/Certifications';
 
 export default function App() {
   const sections = useRef<(HTMLElement | null)[]>([]);
@@ -25,9 +24,9 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [currentPage, setCurrentPage] = useState<'portfolio' | 'cad-models' | 'achievements' | 'certifications'>('portfolio');
+  const [currentPage, setCurrentPage] = useState<'portfolio' | 'cad-models' | 'achievements'>('portfolio');
 
-  // Resize & scroll tracking
+  // ✅ Resize & scroll tracking
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     const handleScroll = () => setScrollY(window.scrollY);
@@ -45,7 +44,7 @@ export default function App() {
     };
   }, []);
 
-  // Section intersection observers
+  // ✅ Section intersection observers
   const sectionRefs = [0, 1, 2, 3, 4, 5].map(index => {
     const { ref, inView } = useInView({
       threshold: isMobile ? 0.2 : 0.4,
@@ -69,8 +68,14 @@ export default function App() {
 
   const pageVariants = {
     initial: { opacity: 0 },
-    animate: { opacity: 1, transition: { duration: 0.4, ease: 'easeOut' } },
-    exit: { opacity: 0, transition: { duration: 0.3 } }
+    animate: {
+      opacity: 1,
+      transition: { duration: 0.4, ease: 'easeOut' }
+    },
+    exit: {
+      opacity: 0,
+      transition: { duration: 0.3 }
+    }
   };
 
   return (
@@ -88,8 +93,10 @@ export default function App() {
               exit="exit"
               className="relative"
             >
+              {/* Particle Background */}
               <ParticleBackground />
 
+              {/* Navigation */}
               <Navigation
                 activeSection={activeSection}
                 isMenuOpen={isMenuOpen}
@@ -100,6 +107,7 @@ export default function App() {
                 navigateToPage={setCurrentPage}
               />
 
+              {/* Main Content */}
               <main className="relative">
                 {currentPage === 'portfolio' ? (
                   [Hero, About, Experience, Skills, Projects, Contact].map((Component, index) => (
@@ -109,7 +117,11 @@ export default function App() {
                         sections.current[index] = el;
                         if (sectionRefs[index]) sectionRefs[index](el);
                       }}
-                      className={`relative ${index === 0 ? 'min-h-screen' : 'min-h-screen py-12 sm:py-16 lg:py-20'}`}
+                      className={`relative ${
+                        index === 0
+                          ? 'min-h-screen'
+                          : 'min-h-screen py-12 sm:py-16 lg:py-20'
+                      }`}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -138,22 +150,16 @@ export default function App() {
                   >
                     <Achievements />
                   </motion.section>
-                ) : currentPage === 'certifications' ? (
-                  <motion.section
-                    className="relative min-h-screen py-12 sm:py-16 lg:py-20"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, ease: 'easeOut' }}
-                  >
-                    <Certifications />
-                  </motion.section>
                 ) : null}
 
+                {/* Engineering Calculator */}
                 <EngineeringCalculator />
               </main>
 
+              {/* Scroll Progress */}
               <ScrollProgress activeSection={activeSection} scrollToSection={scrollToSection} />
 
+              {/* Floating Action Button */}
               <motion.div
                 className="fixed bottom-6 right-6 z-40"
                 initial={{ scale: 0, rotate: -180 }}

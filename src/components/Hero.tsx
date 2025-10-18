@@ -259,7 +259,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
             <motion.img
               src="/viswa.jpeg"
               alt="Viswa M - Mechanical Engineer"
-              className="mx-auto mb-6 w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 rounded-full object-cover shadow-2xl border-4 border-purple-500/50"
+              className="mx-auto mb-6 w-40 h-40 sm:w-44 sm:h-44 lg:w-48 lg:h-48 rounded-full object-cover shadow-2xl border-4 border-purple-500/50"
               whileHover={{ 
                 scale: 1.1,
                 boxShadow: "0 0 30px rgba(139, 92, 246, 0.6)"

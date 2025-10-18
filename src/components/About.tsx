@@ -16,10 +16,6 @@ import {
   User,
   Briefcase
 } from "lucide-react";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 
 const About = () => {
@@ -69,7 +65,7 @@ const About = () => {
         About <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Me</span>
       </motion.h2>
 
-      {/* Intro - completely white text */}
+      {/* Intro */}
       <motion.div
         {...fadeInUp}
         className="text-white text-lg leading-relaxed max-w-4xl mx-auto bg-gray-900/40 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-purple-500/20 mb-16"
@@ -92,7 +88,7 @@ const About = () => {
         whileInView="whileInView"
         className="grid md:grid-cols-2 gap-10 mt-16"
       >
-        {/* Summary & Technicals */}
+        {/* Left Column: Summary, Technical, Research */}
         <motion.div variants={fadeInUp} className="space-y-8">
           {/* Professional Summary */}
           <motion.div
@@ -140,22 +136,10 @@ const About = () => {
             </div>
             <ul className="space-y-4">
               {[
-                {
-                  title: "Renewable Energy Systems",
-                  desc: "Solar thermal, energy storage, and sustainable design",
-                },
-                {
-                  title: "Advanced Materials",
-                  desc: "Composites, failure analysis, lightweight structures",
-                },
-                {
-                  title: "AI in Engineering",
-                  desc: "Predictive maintenance, ML-driven optimization",
-                },
-                {
-                  title: "Thermal Management",
-                  desc: "Heat transfer, cooling systems, HVAC design",
-                },
+                { title: "Renewable Energy Systems", desc: "Solar thermal, energy storage, and sustainable design" },
+                { title: "Advanced Materials", desc: "Composites, failure analysis, lightweight structures" },
+                { title: "AI in Engineering", desc: "Predictive maintenance, ML-driven optimization" },
+                { title: "Thermal Management", desc: "Heat transfer, cooling systems, HVAC design" },
               ].map((item, idx) => (
                 <motion.li
                   key={idx}
@@ -164,9 +148,7 @@ const About = () => {
                 >
                   <div className="w-2 h-2 bg-purple-400 rounded-full mt-2"></div>
                   <div>
-                    <h4 className="font-semibold text-purple-300">
-                      {item.title}
-                    </h4>
+                    <h4 className="font-semibold text-purple-300">{item.title}</h4>
                     <p className="text-gray-400 text-sm">{item.desc}</p>
                   </div>
                 </motion.li>
@@ -175,11 +157,8 @@ const About = () => {
           </motion.div>
         </motion.div>
 
-        {/* Education Timeline & Achievement Highlights */}
-        <motion.div
-          variants={fadeInUp}
-          className="space-y-8"
-        >
+        {/* Right Column: Education, Achievements, Focus */}
+        <motion.div variants={fadeInUp} className="space-y-8">
           {/* Education Timeline */}
           <motion.div
             whileHover={cardHover}
@@ -261,34 +240,50 @@ const About = () => {
               </div>
             </div>
           </motion.div>
+        </motion.div>
+      </motion.div>
 
-          {/* Patent Section */}
+      {/* ---------------- Patent Section ---------------- */}
+      <motion.div
+        variants={fadeInUp}
+        className="mt-20"
+      >
+        <h2 className="text-3xl font-bold text-center mb-10 text-white">
+          Patents
+        </h2>
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Patent 1 */}
           <motion.div
             whileHover={cardHover}
-            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
+            className="bg-gray-900/60 rounded-2xl p-6 border border-purple-500/20 shadow-lg"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <Zap className="text-purple-400 w-6 h-6" />
-              <h3 className="text-xl font-semibold">Patents</h3>
-            </div>
-            <div className="space-y-3">
-              {/* Patent 1 */}
-              <div className="bg-purple-500/10 p-3 rounded-lg border border-purple-500/20">
-                <h4 className="font-semibold text-purple-300 mb-1">Solar Thermal Dryer with PCM</h4>
-                <p className="text-gray-400 text-sm">Application No: 2024112345 | Status: Approved</p>
-                <p className="text-gray-400 text-sm"><span className="font-semibold">Type:</span> Utility Patent</p>
-                <p className="text-gray-400 text-sm">A solar dryer design integrating phase change material for enhanced thermal energy storage.</p>
-              </div>
-              {/* Patent 2 */}
-              <div className="bg-blue-500/10 p-3 rounded-lg border border-blue-500/20">
-                <h4 className="font-semibold text-blue-300 mb-1">FEA Automation Script</h4>
-                <p className="text-gray-400 text-sm">Application No: 2024112346 | Status: Registered</p>
-                <p className="text-gray-400 text-sm"><span className="font-semibold">Type:</span> Utility Patent</p>
-                <p className="text-gray-400 text-sm">Python-based automation tool for streamlining finite element analysis workflows and calculations.</p>
-              </div>
-            </div>
+            <img
+              src="/images/solar-dryer-patent.png"
+              alt="Solar Dryer Patent"
+              className="w-full h-40 object-cover rounded-lg mb-4"
+            />
+            <h4 className="font-semibold text-purple-300 mb-1">Solar Thermal Dryer with PCM</h4>
+            <p className="text-gray-400 text-sm mb-1">Application No: 2024112345 | Status: Approved</p>
+            <p className="text-gray-400 text-sm mb-2"><span className="font-semibold">Type:</span> Utility Patent</p>
+            <p className="text-gray-400 text-sm">A solar dryer integrating phase change material for enhanced thermal energy storage.</p>
           </motion.div>
-        </motion.div>
+
+          {/* Patent 2 */}
+          <motion.div
+            whileHover={cardHover}
+            className="bg-gray-900/60 rounded-2xl p-6 border border-purple-500/20 shadow-lg"
+          >
+            <img
+              src="/images/fea-automation-patent.png"
+              alt="FEA Automation Patent"
+              className="w-full h-40 object-cover rounded-lg mb-4"
+            />
+            <h4 className="font-semibold text-blue-300 mb-1">FEA Automation Script</h4>
+            <p className="text-gray-400 text-sm mb-1">Application No: 2024112346 | Status: Registered</p>
+            <p className="text-gray-400 text-sm mb-2"><span className="font-semibold">Type:</span> Utility Patent</p>
+            <p className="text-gray-400 text-sm">Python-based automation tool for streamlining finite element analysis workflows and calculations.</p>
+          </motion.div>
+        </div>
       </motion.div>
     </div>
   );

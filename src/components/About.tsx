@@ -245,15 +245,15 @@ const About = () => {
             className="bg-gray-900/70 rounded-2xl p-6 border border-purple-500/20 shadow-lg"
           >
             <img
-              src="/images/solar-dryer-patent.png"
+              src="SOLAR DRYER MODAL.jpeg"
               alt="Solar Dryer Patent"
               className="w-full h-40 object-cover rounded-lg mb-4"
             />
             <h4 className="font-semibold text-purple-300 mb-1">
-              Solar Thermal Dryer with PCM
+              Modified Solar Dryer Integrated with Thermal Energy Storage with Concave fins
             </h4>
             <p className="text-gray-400 text-sm mb-1">
-              Application No: 2024112345 | Status: Approved
+              Application No: 202541021927 | Status: Pending
             </p>
             <p className="text-gray-400 text-sm mb-2">
               <span className="font-semibold">Type:</span> Utility Patent
@@ -273,15 +273,15 @@ const About = () => {
               alt="FEA Automation Patent"
               className="w-full h-40 object-cover rounded-lg mb-4"
             />
-            <h4 className="font-semibold text-blue-300 mb-1">FEA Automation Script</h4>
+            <h4 className="font-semibold text-blue-300 mb-1">Multi Purpose Knife</h4>
             <p className="text-gray-400 text-sm mb-1">
-              Application No: 2024112346 | Status: Registered
+              Application No: 2024112346 | Status: Approved
             </p>
             <p className="text-gray-400 text-sm mb-2">
-              <span className="font-semibold">Type:</span> Utility Patent
+              <span className="font-semibold">Type:</span> Design Patent
             </p>
             <p className="text-gray-400 text-sm">
-              Python-based automation tool for streamlining finite element analysis workflows and calculations.
+               Innovative knife designed for multiple functions including cutting, peeling, and slicing, enhancing convenience and efficiency in the kitchen.
             </p>
           </motion.div>
         </div>

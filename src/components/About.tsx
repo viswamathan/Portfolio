@@ -264,18 +264,22 @@ const About = () => {
               className="bg-gray-900/70 rounded-2xl p-6 border border-purple-500/20 shadow-lg cursor-pointer"
               onClick={() => setModalImage(patent.img)}
             >
-              <img
-                src={patent.img}
-                alt={patent.title}
-                className="w-full h-40 object-cover rounded-lg mb-4"
-              />
-              <h4 className="font-semibold text-purple-300 mb-1">{patent.title}</h4>
-              <p className="text-gray-400 text-sm mb-1">
-                Application No: {patent.appNo} | Status: {patent.status}
-              </p>
-              <p className="text-gray-400 text-sm mb-2">
-                <span className="font-semibold">Type:</span> {patent.type}
-              </p>
+              <div className="w-full h-40 flex justify-center items-center mb-4 bg-gray-800 rounded-lg">
+                <img
+                  src={patent.img}
+                  alt={patent.title}
+                  className="max-h-full max-w-full object-contain rounded-lg"
+                />
+              </div>
+              <h4 className="font-semibold text-purple-300 mb-2">{patent.title}</h4>
+              <div className="flex flex-wrap gap-2 mb-2">
+                <span className="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full">
+                  {patent.type}
+                </span>
+                <span className="px-2 py-1 bg-green-500/20 text-green-300 text-xs rounded-full">
+                  {patent.status}
+                </span>
+              </div>
               <p className="text-gray-400 text-sm">{patent.desc}</p>
             </motion.div>
           ))}

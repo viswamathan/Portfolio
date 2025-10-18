@@ -410,7 +410,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
           className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
         >
           <motion.a
-            href="/VISWA M.pdf"
+            href="/VISWA M RESUME.pdf"
             target="_blank"
             className="group relative bg-gradient-to-r from-purple-600 to-blue-600 text-white px-5 py-2.5 rounded-full font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl text-sm"
             whileHover={{ scale: 1.05, y: -2 }}

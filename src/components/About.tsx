@@ -13,7 +13,7 @@ import "react-vertical-timeline-component/style.min.css";
 
 const About = () => {
   const [activeTab, setActiveTab] = useState("summary");
-  const [modalImage, setModalImage] = useState(null); // For lightbox
+  const [modalImage, setModalImage] = useState(null); // Lightbox
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -34,7 +34,7 @@ const About = () => {
     transition: { type: "spring", stiffness: 300 },
   };
 
-  // Patent data
+  // Patent Data
   const patents = [
     {
       img: "SOLAR DRYER MODAL.jpeg",
@@ -42,7 +42,7 @@ const About = () => {
       appNo: "202541021927",
       status: "Pending",
       type: "Utility Patent",
-      desc: "A solar dryer integrating phase change material for enhanced thermal energy storage."
+      desc: "A solar dryer integrating phase change material for enhanced thermal energy storage and efficiency improvement."
     },
     {
       img: "Multi Purpose Knife.png",
@@ -50,7 +50,7 @@ const About = () => {
       appNo: "2024112346",
       status: "Approved",
       type: "Design Patent",
-      desc: "Innovative knife designed for multiple functions including cutting, peeling, and slicing, enhancing convenience and efficiency in the kitchen."
+      desc: "Innovative multi-functional knife for cutting, peeling, and slicing, enhancing convenience and efficiency in the kitchen."
     }
   ];
 
@@ -67,7 +67,7 @@ const About = () => {
         </span>
       </motion.h2>
 
-      {/* Intro */}
+      {/* Intro Section */}
       <motion.div
         {...fadeInUp}
         className="text-white text-lg leading-relaxed max-w-4xl mx-auto bg-gray-900/40 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-purple-500/20 mb-16"
@@ -83,7 +83,7 @@ const About = () => {
         </p>
       </motion.div>
 
-      {/* Two-column content */}
+      {/* Two-column layout */}
       <motion.div
         variants={staggerContainer}
         initial="initial"
@@ -93,10 +93,7 @@ const About = () => {
         {/* Left Column */}
         <motion.div variants={fadeInUp} className="space-y-8">
           {/* Professional Summary */}
-          <motion.div
-            whileHover={cardHover}
-            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
-          >
+          <motion.div whileHover={cardHover} className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all">
             <div className="flex items-center gap-3 mb-4">
               <Tool className="text-purple-400 w-6 h-6" />
               <h3 className="text-xl font-semibold">Professional Summary</h3>
@@ -110,10 +107,7 @@ const About = () => {
           </motion.div>
 
           {/* Technical Focus */}
-          <motion.div
-            whileHover={cardHover}
-            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
-          >
+          <motion.div whileHover={cardHover} className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all">
             <div className="flex items-center gap-3 mb-4">
               <Cpu className="text-purple-400 w-6 h-6" />
               <h3 className="text-xl font-semibold">Technical Focus</h3>
@@ -128,32 +122,19 @@ const About = () => {
           </motion.div>
 
           {/* Research Interests */}
-          <motion.div
-            whileHover={cardHover}
-            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
-          >
+          <motion.div whileHover={cardHover} className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all">
             <div className="flex items-center gap-3 mb-4">
               <Microscope className="text-purple-400 w-6 h-6" />
               <h3 className="text-xl font-semibold">Research Interests</h3>
             </div>
             <ul className="space-y-4">
               {[
-                {
-                  title: "Renewable Energy Systems",
-                  desc: "Solar thermal, energy storage, and sustainable design",
-                },
-                {
-                  title: "Advanced Materials",
-                  desc: "Composites, failure analysis, lightweight structures",
-                },
+                { title: "Renewable Energy Systems", desc: "Solar thermal, energy storage, and sustainable design" },
+                { title: "Advanced Materials", desc: "Composites, failure analysis, lightweight structures" },
                 { title: "AI in Engineering", desc: "Predictive maintenance, ML-driven optimization" },
                 { title: "Thermal Management", desc: "Heat transfer, cooling systems, HVAC design" },
               ].map((item, idx) => (
-                <motion.li
-                  key={idx}
-                  whileHover={{ x: 10 }}
-                  className="flex items-start gap-3"
-                >
+                <motion.li key={idx} whileHover={{ x: 10 }} className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-purple-400 rounded-full mt-2"></div>
                   <div>
                     <h4 className="font-semibold text-purple-300">{item.title}</h4>
@@ -168,10 +149,7 @@ const About = () => {
         {/* Right Column */}
         <motion.div variants={fadeInUp} className="space-y-8">
           {/* Education */}
-          <motion.div
-            whileHover={cardHover}
-            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
-          >
+          <motion.div whileHover={cardHover} className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all">
             <div className="flex items-center gap-3 mb-4">
               <GraduationCap className="text-purple-400 w-6 h-6" />
               <h3 className="text-xl font-semibold">Education</h3>
@@ -196,10 +174,7 @@ const About = () => {
           </motion.div>
 
           {/* Achievements */}
-          <motion.div
-            whileHover={cardHover}
-            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
-          >
+          <motion.div whileHover={cardHover} className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all">
             <div className="flex items-center gap-3 mb-4">
               <Award className="text-purple-400 w-6 h-6" />
               <h3 className="text-xl font-semibold">Key Achievements</h3>
@@ -219,11 +194,8 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Current Projects */}
-          <motion.div
-            whileHover={cardHover}
-            className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
-          >
+          {/* Current Focus Areas */}
+          <motion.div whileHover={cardHover} className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all">
             <div className="flex items-center gap-3 mb-4">
               <Briefcase className="text-purple-400 w-6 h-6" />
               <h3 className="text-xl font-semibold">Current Focus Areas</h3>
@@ -246,59 +218,81 @@ const About = () => {
         </motion.div>
       </motion.div>
 
-      {/* ---------------- Patent Section ---------------- */}
+      {/* ---------------- Enhanced Patent Section ---------------- */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mt-20 py-12 px-6 bg-gray-800/80 rounded-3xl shadow-xl border border-purple-500/30"
+        className="mt-24 py-16 px-8 bg-gradient-to-br from-gray-900/80 to-gray-800/60 rounded-3xl shadow-2xl border border-purple-500/30 backdrop-blur-md"
       >
-        <h2 className="text-3xl font-bold text-center mb-10 text-white">
-          Patents
+        <h2 className="text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-orange-400 drop-shadow-md">
+          Patents & Innovations
         </h2>
-        <div className="grid md:grid-cols-2 gap-8">
+
+        <div className="grid md:grid-cols-2 gap-10">
           {patents.map((patent, idx) => (
             <motion.div
               key={idx}
-              whileHover={cardHover}
-              className="bg-gray-900/70 rounded-2xl p-6 border border-purple-500/20 shadow-lg cursor-pointer"
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="relative group overflow-hidden bg-gray-900/70 border border-purple-500/20 rounded-2xl shadow-lg hover:shadow-purple-500/30 hover:border-purple-400/40 transition-all cursor-pointer"
               onClick={() => setModalImage(patent.img)}
             >
-              <div className="w-full h-40 flex justify-center items-center mb-4 bg-gray-800 rounded-lg">
+              <div className="relative w-full h-48 overflow-hidden rounded-t-2xl bg-gray-800 flex items-center justify-center">
                 <img
                   src={patent.img}
                   alt={patent.title}
-                  className="max-h-full max-w-full object-contain rounded-lg"
+                  className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <h4 className="font-semibold text-purple-300 mb-2">{patent.title}</h4>
-              <div className="flex flex-wrap gap-2 mb-2">
-                <span className="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full">
-                  {patent.type}
-                </span>
-                <span className="px-2 py-1 bg-green-500/20 text-green-300 text-xs rounded-full">
-                  {patent.status}
-                </span>
+
+              <div className="p-6">
+                <h4 className="font-semibold text-purple-300 text-lg mb-2 group-hover:text-purple-400 transition-colors">
+                  {patent.title}
+                </h4>
+
+                <div className="flex flex-wrap gap-2 mb-3">
+                  <span className="px-3 py-1 text-xs font-semibold rounded-full bg-blue-500/20 text-blue-300">
+                    {patent.type}
+                  </span>
+                  <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-500/20 text-green-300">
+                    {patent.status}
+                  </span>
+                </div>
+
+                <div className="space-y-1 mb-3 text-sm text-gray-400">
+                  <p>
+                    <span className="text-gray-300 font-medium">Application No:</span>{" "}
+                    {patent.appNo}
+                  </p>
+                </div>
+
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {patent.desc}
+                </p>
               </div>
-              <p className="text-gray-400 text-sm">{patent.desc}</p>
+
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 via-pink-500/10 to-orange-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </motion.div>
           ))}
         </div>
-      </motion.div>
 
-      {/* Lightbox Modal */}
-      {modalImage && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"
-          onClick={() => setModalImage(null)}
-        >
-          <img
-            src={modalImage}
-            alt="Full View"
-            className="max-h-[90%] max-w-[90%] rounded-xl shadow-2xl"
-          />
-        </div>
-      )}
+        {modalImage && (
+          <div
+            className="fixed inset-0 bg-black/80 flex justify-center items-center z-50"
+            onClick={() => setModalImage(null)}
+          >
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              src={modalImage}
+              alt="Patent View"
+              className="max-h-[90%] max-w-[90%] rounded-2xl shadow-2xl border border-purple-500/30"
+            />
+          </div>
+        )}
+      </motion.div>
     </div>
   );
 };

@@ -8,18 +8,14 @@ import {
   Microscope,
   GraduationCap,
   Target,
-  Zap,
   Award,
   ChevronRight,
-  MapPin,
-  Calendar,
-  User,
   Briefcase
 } from "lucide-react";
 import "react-vertical-timeline-component/style.min.css";
 
 const About = () => {
-  const [activeTab, setActiveTab] = useState('summary');
+  const [activeTab, setActiveTab] = useState("summary");
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -40,21 +36,6 @@ const About = () => {
     transition: { type: "spring", stiffness: 300 },
   };
 
-  const personalInfo = {
-    location: "Coimbatore, Tamil Nadu, India",
-    age: "20 years",
-    languages: ["Tamil", "English"],
-    interests: ["Renewable Energy", "AI in Engineering", "Sustainable Design"],
-    currentFocus: "Advanced FEA & CFD Analysis"
-  };
-
-  const quickStats = [
-    { label: "Years of Study", value: "3+", icon: BookOpen },
-    { label: "Projects Completed", value: "15+", icon: Target },
-    { label: "Technologies Mastered", value: "10+", icon: Cpu },
-    { label: "Certifications", value: "5+", icon: Award }
-  ];
-  
   return (
     <div className="container mx-auto px-6 py-20">
       {/* Heading */}
@@ -62,7 +43,10 @@ const About = () => {
         {...fadeInUp}
         className="text-4xl md:text-5xl font-bold mb-12 text-center"
       >
-        About <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Me</span>
+        About{" "}
+        <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+          Me
+        </span>
       </motion.h2>
 
       {/* Intro */}
@@ -88,7 +72,7 @@ const About = () => {
         whileInView="whileInView"
         className="grid md:grid-cols-2 gap-10 mt-16"
       >
-        {/* Left Column: Summary, Technical, Research */}
+        {/* Left Column */}
         <motion.div variants={fadeInUp} className="space-y-8">
           {/* Professional Summary */}
           <motion.div
@@ -136,8 +120,14 @@ const About = () => {
             </div>
             <ul className="space-y-4">
               {[
-                { title: "Renewable Energy Systems", desc: "Solar thermal, energy storage, and sustainable design" },
-                { title: "Advanced Materials", desc: "Composites, failure analysis, lightweight structures" },
+                {
+                  title: "Renewable Energy Systems",
+                  desc: "Solar thermal, energy storage, and sustainable design",
+                },
+                {
+                  title: "Advanced Materials",
+                  desc: "Composites, failure analysis, lightweight structures",
+                },
                 { title: "AI in Engineering", desc: "Predictive maintenance, ML-driven optimization" },
                 { title: "Thermal Management", desc: "Heat transfer, cooling systems, HVAC design" },
               ].map((item, idx) => (
@@ -157,9 +147,9 @@ const About = () => {
           </motion.div>
         </motion.div>
 
-        {/* Right Column: Education, Achievements, Focus */}
+        {/* Right Column */}
         <motion.div variants={fadeInUp} className="space-y-8">
-          {/* Education Timeline */}
+          {/* Education */}
           <motion.div
             whileHover={cardHover}
             className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
@@ -187,7 +177,7 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Key Achievements */}
+          {/* Achievements */}
           <motion.div
             whileHover={cardHover}
             className="bg-gradient-to-br from-gray-900/70 to-gray-800/50 p-6 rounded-2xl border border-purple-500/20 hover:shadow-purple-500/30 hover:shadow-lg transition-all"
@@ -197,22 +187,17 @@ const About = () => {
               <h3 className="text-xl font-semibold">Key Achievements</h3>
             </div>
             <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <ChevronRight className="w-4 h-4 text-purple-400" />
-                <span className="text-gray-300">Certified SolidWorks Associate (CSWA)</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <ChevronRight className="w-4 h-4 text-purple-400" />
-                <span className="text-gray-300">NIOT Research Internship Completion</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <ChevronRight className="w-4 h-4 text-purple-400" />
-                <span className="text-gray-300">15+ Engineering Projects Completed</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <ChevronRight className="w-4 h-4 text-purple-400" />
-                <span className="text-gray-300">Advanced FEA & CFD Specialization</span>
-              </div>
+              {[
+                "Certified SolidWorks Associate (CSWA)",
+                "NIOT Research Internship Completion",
+                "15+ Engineering Projects Completed",
+                "Advanced FEA & CFD Specialization",
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-3">
+                  <ChevronRight className="w-4 h-4 text-purple-400" />
+                  <span className="text-gray-300">{item}</span>
+                </div>
+              ))}
             </div>
           </motion.div>
 
@@ -245,8 +230,10 @@ const About = () => {
 
       {/* ---------------- Patent Section ---------------- */}
       <motion.div
-        variants={fadeInUp}
-        className="mt-20"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mt-20 py-12 px-6 bg-gray-800/80 rounded-3xl shadow-xl border border-purple-500/30"
       >
         <h2 className="text-3xl font-bold text-center mb-10 text-white">
           Patents
@@ -255,23 +242,31 @@ const About = () => {
           {/* Patent 1 */}
           <motion.div
             whileHover={cardHover}
-            className="bg-gray-900/60 rounded-2xl p-6 border border-purple-500/20 shadow-lg"
+            className="bg-gray-900/70 rounded-2xl p-6 border border-purple-500/20 shadow-lg"
           >
             <img
               src="/images/solar-dryer-patent.png"
               alt="Solar Dryer Patent"
               className="w-full h-40 object-cover rounded-lg mb-4"
             />
-            <h4 className="font-semibold text-purple-300 mb-1">Solar Thermal Dryer with PCM</h4>
-            <p className="text-gray-400 text-sm mb-1">Application No: 2024112345 | Status: Approved</p>
-            <p className="text-gray-400 text-sm mb-2"><span className="font-semibold">Type:</span> Utility Patent</p>
-            <p className="text-gray-400 text-sm">A solar dryer integrating phase change material for enhanced thermal energy storage.</p>
+            <h4 className="font-semibold text-purple-300 mb-1">
+              Solar Thermal Dryer with PCM
+            </h4>
+            <p className="text-gray-400 text-sm mb-1">
+              Application No: 2024112345 | Status: Approved
+            </p>
+            <p className="text-gray-400 text-sm mb-2">
+              <span className="font-semibold">Type:</span> Utility Patent
+            </p>
+            <p className="text-gray-400 text-sm">
+              A solar dryer integrating phase change material for enhanced thermal energy storage.
+            </p>
           </motion.div>
 
           {/* Patent 2 */}
           <motion.div
             whileHover={cardHover}
-            className="bg-gray-900/60 rounded-2xl p-6 border border-purple-500/20 shadow-lg"
+            className="bg-gray-900/70 rounded-2xl p-6 border border-purple-500/20 shadow-lg"
           >
             <img
               src="/images/fea-automation-patent.png"
@@ -279,9 +274,15 @@ const About = () => {
               className="w-full h-40 object-cover rounded-lg mb-4"
             />
             <h4 className="font-semibold text-blue-300 mb-1">FEA Automation Script</h4>
-            <p className="text-gray-400 text-sm mb-1">Application No: 2024112346 | Status: Registered</p>
-            <p className="text-gray-400 text-sm mb-2"><span className="font-semibold">Type:</span> Utility Patent</p>
-            <p className="text-gray-400 text-sm">Python-based automation tool for streamlining finite element analysis workflows and calculations.</p>
+            <p className="text-gray-400 text-sm mb-1">
+              Application No: 2024112346 | Status: Registered
+            </p>
+            <p className="text-gray-400 text-sm mb-2">
+              <span className="font-semibold">Type:</span> Utility Patent
+            </p>
+            <p className="text-gray-400 text-sm">
+              Python-based automation tool for streamlining finite element analysis workflows and calculations.
+            </p>
           </motion.div>
         </div>
       </motion.div>

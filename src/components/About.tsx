@@ -269,7 +269,7 @@ const About = () => {
             className="bg-gray-900/70 rounded-2xl p-6 border border-purple-500/20 shadow-lg"
           >
             <img
-              src="/images/fea-automation-patent.png"
+              src="Multi Purpose Knife.png"
               alt="FEA Automation Patent"
               className="w-full h-40 object-cover rounded-lg mb-4"
             />

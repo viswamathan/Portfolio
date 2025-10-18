@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import {
   PenTool as Tool,
   Cpu,
-  BookOpen,
   Microscope,
   GraduationCap,
-  Target,
   Award,
   ChevronRight,
   Briefcase
@@ -16,6 +13,7 @@ import "react-vertical-timeline-component/style.min.css";
 
 const About = () => {
   const [activeTab, setActiveTab] = useState("summary");
+  const [modalImage, setModalImage] = useState(null); // For lightbox
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -35,6 +33,26 @@ const About = () => {
     scale: 1.03,
     transition: { type: "spring", stiffness: 300 },
   };
+
+  // Patent data
+  const patents = [
+    {
+      img: "SOLAR DRYER MODAL.jpeg",
+      title: "Modified Solar Dryer Integrated with Thermal Energy Storage with Concave fins",
+      appNo: "202541021927",
+      status: "Pending",
+      type: "Utility Patent",
+      desc: "A solar dryer integrating phase change material for enhanced thermal energy storage."
+    },
+    {
+      img: "Multi Purpose Knife.png",
+      title: "Multi Purpose Knife",
+      appNo: "2024112346",
+      status: "Approved",
+      type: "Design Patent",
+      desc: "Innovative knife designed for multiple functions including cutting, peeling, and slicing, enhancing convenience and efficiency in the kitchen."
+    }
+  ];
 
   return (
     <div className="container mx-auto px-6 py-20">
@@ -239,53 +257,44 @@ const About = () => {
           Patents
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
-          {/* Patent 1 */}
-          <motion.div
-            whileHover={cardHover}
-            className="bg-gray-900/70 rounded-2xl p-6 border border-purple-500/20 shadow-lg"
-          >
-            <img
-              src="SOLAR DRYER MODAL.jpeg"
-              alt="Solar Dryer Patent"
-              className="w-full h-40 object-cover rounded-lg mb-4"
-            />
-            <h4 className="font-semibold text-purple-300 mb-1">
-              Modified Solar Dryer Integrated with Thermal Energy Storage with Concave fins
-            </h4>
-            <p className="text-gray-400 text-sm mb-1">
-              Application No: 202541021927 | Status: Pending
-            </p>
-            <p className="text-gray-400 text-sm mb-2">
-              <span className="font-semibold">Type:</span> Utility Patent
-            </p>
-            <p className="text-gray-400 text-sm">
-              A solar dryer integrating phase change material for enhanced thermal energy storage.
-            </p>
-          </motion.div>
-
-          {/* Patent 2 */}
-          <motion.div
-            whileHover={cardHover}
-            className="bg-gray-900/70 rounded-2xl p-6 border border-purple-500/20 shadow-lg"
-          >
-            <img
-              src="Multi Purpose Knife.png"
-              alt="FEA Automation Patent"
-              className="w-full h-40 object-cover rounded-lg mb-4"
-            />
-            <h4 className="font-semibold text-blue-300 mb-1">Multi Purpose Knife</h4>
-            <p className="text-gray-400 text-sm mb-1">
-              Application No: 2024112346 | Status: Approved
-            </p>
-            <p className="text-gray-400 text-sm mb-2">
-              <span className="font-semibold">Type:</span> Design Patent
-            </p>
-            <p className="text-gray-400 text-sm">
-               Innovative knife designed for multiple functions including cutting, peeling, and slicing, enhancing convenience and efficiency in the kitchen.
-            </p>
-          </motion.div>
+          {patents.map((patent, idx) => (
+            <motion.div
+              key={idx}
+              whileHover={cardHover}
+              className="bg-gray-900/70 rounded-2xl p-6 border border-purple-500/20 shadow-lg cursor-pointer"
+              onClick={() => setModalImage(patent.img)}
+            >
+              <img
+                src={patent.img}
+                alt={patent.title}
+                className="w-full h-40 object-cover rounded-lg mb-4"
+              />
+              <h4 className="font-semibold text-purple-300 mb-1">{patent.title}</h4>
+              <p className="text-gray-400 text-sm mb-1">
+                Application No: {patent.appNo} | Status: {patent.status}
+              </p>
+              <p className="text-gray-400 text-sm mb-2">
+                <span className="font-semibold">Type:</span> {patent.type}
+              </p>
+              <p className="text-gray-400 text-sm">{patent.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </motion.div>
+
+      {/* Lightbox Modal */}
+      {modalImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"
+          onClick={() => setModalImage(null)}
+        >
+          <img
+            src={modalImage}
+            alt="Full View"
+            className="max-h-[90%] max-w-[90%] rounded-xl shadow-2xl"
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Box, Download, Eye, Layers, Award, X } from "lucide-react";
+import { Box, Download, Eye, Layers, Award, X, ZoomIn, ZoomOut } from "lucide-react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -8,6 +8,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 const CADModels = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [previewModel, setPreviewModel] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const [loadingModel, setLoadingModel] = useState(false);
   const mountRef = useRef(null);
   const controlsRef = useRef(null);
@@ -150,49 +151,51 @@ const CADModels = () => {
       downloads: 24,
     },
     {
-      title: "Piston Head",
-      description:
-        "High-strength piston head designed for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high-pressure conditions.",
-      software: "SolidWorks",
-      category: "Automotive",
-      complexity: "Basic",
-      features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
-      image: "/3d Pictures/piston head.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
-      modelPath: "/Models/piston head.STL",
-      views: 410,
-      downloads: 32,
-    },
-    {
-      title: "Crankshaft",
-      description:
-        "Precision crankshaft designed for efficient torque transmission and balanced rotation. Engineered for minimal vibration, maximum fatigue resistance, and high-performance automotive engines.",
-      software: "SolidWorks",
-      category: "Automotive",
-      complexity: "Basic",
-      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
-      image: "/3d Pictures/crankshaft.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
-      modelPath: "/Models/crank shaft.STL",
-      views: 365,
-      downloads: 28,
-    },
-    {
-      title: "Stuffing Box",
-      description:
-        "A sealing assembly designed to prevent fluid leakage around rotating shafts in pumps and valves. Modeled and assembled in SolidWorks with precise dimensional accuracy and material differentiation.",
-      software: "SolidWorks",
-      category: "Mechanical Parts",
-      complexity: "Intermediate",
-      features: ["3D Assembly Modeling","Material Visualization","Sectional & Isometric Views","Mating Constraints"],
-      image: "/3d Pictures/stuffingbox.png",
-      downloadUrl:"https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
-      modelPath: "/Models/Stuffing Box.STL",
-      views: 248,
-      downloads: 19,
-    },
+  title: "Piston Head",
+  description:
+    "High-strength piston head designed for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high-pressure conditions.",
+  software: "SolidWorks",
+  category: "Automotive",
+  complexity: "Basic",
+  features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
+  image: "/3d Pictures/piston head.png",
+  downloadUrl:
+    "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
+  modelPath: "/Models/piston head.STL",
+  views: 410,
+  downloads: 32,
+},
+{
+  title: "Crankshaft",
+  description:
+    "Precision crankshaft designed for efficient torque transmission and balanced rotation. Engineered for minimal vibration, maximum fatigue resistance, and high-performance automotive engines.",
+  software: "SolidWorks",
+  category: "Automotive",
+  complexity: "Basic",
+  features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+  image: "/3d Pictures/crankshaft.png",
+  downloadUrl:
+    "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
+  modelPath: "/Models/crank shaft.STL",
+  views: 365,
+  downloads: 28,
+},
+{
+  title: "Stuffing Box",
+  description:
+    "A sealing assembly designed to prevent fluid leakage around rotating shafts in pumps and valves. Modeled and assembled in SolidWorks with precise dimensional accuracy and material differentiation.",
+  software: "SolidWorks",
+  category: "Mechanical Parts",
+  complexity: "Intermediate",
+  features: ["3D Assembly Modeling","Material Visualization","Sectional & Isometric Views","Mating Constraints"],
+  image: "/3d Pictures/stuffingbox.png",
+  downloadUrl:"https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+  modelPath: "/Models/Stuffing Box.STL",
+  views: 248,
+  downloads: 19,
+},
+
+
   ];
 
   const categories = [
@@ -231,104 +234,88 @@ const CADModels = () => {
     { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
 
-  // --- 3D Viewer with Realistic Lighting, Shadows, and Environment ---
+  // --- 3D Viewer with Auto-Centering and Scaling ---
   useEffect(() => {
     if (!previewModel || !mountRef.current) return;
 
     setLoadingModel(true);
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0f172a);
+    scene.background = new THREE.Color(0x111827);
 
     const camera = new THREE.PerspectiveCamera(
-      50,
+      45,
       mountRef.current.clientWidth / mountRef.current.clientHeight,
       0.1,
-      2000
+      1000
     );
     cameraRef.current = camera;
-    camera.position.set(5, 5, 10);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.outputEncoding = THREE.sRGBEncoding;
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     mountRef.current.innerHTML = "";
     mountRef.current.appendChild(renderer.domElement);
 
-    // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.1;
-    controls.enablePan = false;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 1;
+    controls.autoRotateSpeed = 2;
     controlsRef.current = controls;
 
-    // Lighting
-    const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
-    keyLight.position.set(10, 10, 10);
-    keyLight.castShadow = true;
-    scene.add(keyLight);
+    const light1 = new THREE.DirectionalLight(0xffffff, 1);
+    light1.position.set(50, 50, 50);
+    scene.add(light1);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 
-    const fillLight = new THREE.DirectionalLight(0xffffff, 0.6);
-    fillLight.position.set(-10, 5, 5);
-    scene.add(fillLight);
-
-    const rimLight = new THREE.DirectionalLight(0xffffff, 0.4);
-    rimLight.position.set(0, 10, -10);
-    scene.add(rimLight);
-
-    scene.add(new THREE.AmbientLight(0xffffff, 0.3));
-
-    // Ground
-    const groundGeo = new THREE.PlaneGeometry(200, 200);
-    const groundMat = new THREE.ShadowMaterial({ opacity: 0.3 });
-    const ground = new THREE.Mesh(groundGeo, groundMat);
-    ground.rotation.x = -Math.PI / 2;
-    ground.position.y = -1.5;
-    ground.receiveShadow = true;
-    scene.add(ground);
-
-    // Load model
     const loader = new STLLoader();
+    const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
     const meshes = [];
-    loader.load(previewModel.modelPath, (geometry) => {
-      geometry.computeBoundingBox();
-      const box = geometry.boundingBox;
-      const size = new THREE.Vector3();
-      box.getSize(size);
-      const center = new THREE.Vector3();
-      box.getCenter(center);
-      geometry.translate(-center.x, -center.y, -center.z);
+    let loadedCount = 0;
 
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const scaleFactor = 4 / maxDim;
-      const material = new THREE.MeshPhysicalMaterial({
-        color: 0x8888ff,
-        metalness: 0.8,
+    modelPaths.forEach((path, index) => {
+      const material = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(`hsl(${(index * 60) % 360}, 80%, 60%)`),
+        metalness: 0.5,
         roughness: 0.2,
-        clearcoat: 0.5,
       });
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.scale.setScalar(scaleFactor);
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-      scene.add(mesh);
-      meshes.push(mesh);
 
-      const groupBox = new THREE.Box3();
-      meshes.forEach((m) => groupBox.expandByObject(m));
-      const groupSize = groupBox.getSize(new THREE.Vector3());
-      const groupMax = Math.max(groupSize.x, groupSize.y, groupSize.z);
-      const fov = camera.fov * (Math.PI / 180);
-      const cameraZ = Math.abs(groupMax / 2 / Math.tan(fov / 2));
-      camera.position.set(0, groupMax / 4, cameraZ * 1.5);
-      controls.target.set(0, 0, 0);
-      controls.update();
+      loader.load(
+        path,
+        (geometry) => {
+          geometry.computeBoundingBox();
+          const box = geometry.boundingBox;
+          const size = new THREE.Vector3();
+          box.getSize(size);
+          const center = new THREE.Vector3();
+          box.getCenter(center);
 
-      setTimeout(() => setLoadingModel(false), 500);
+          geometry.translate(-center.x, -center.y, -center.z);
+
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const scaleFactor = 5 / maxDim;
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.scale.setScalar(scaleFactor);
+
+          scene.add(mesh);
+          meshes.push(mesh);
+
+          loadedCount++;
+          if (loadedCount === modelPaths.length) {
+            const groupBox = new THREE.Box3();
+            meshes.forEach((m) => groupBox.expandByObject(m));
+            const groupSize = groupBox.getSize(new THREE.Vector3());
+            const groupMax = Math.max(groupSize.x, groupSize.y, groupSize.z);
+            const fov = camera.fov * (Math.PI / 180);
+            const cameraZ = Math.abs(groupMax / 2 / Math.tan(fov / 2));
+            camera.position.set(0, 0, cameraZ * 2);
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+            setTimeout(() => setLoadingModel(false), 500);
+          }
+        },
+        undefined,
+        () => setLoadingModel(false)
+      );
     });
 
     const animate = () => {
@@ -344,12 +331,7 @@ const CADModels = () => {
       renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
     };
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      renderer.dispose();
-      scene.clear();
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, [previewModel]);
 
   const zoomIn = () => {
@@ -362,6 +344,7 @@ const CADModels = () => {
 
   return (
     <div className="container mx-auto px-6 py-20">
+      {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -388,54 +371,112 @@ const CADModels = () => {
               >
                 <Icon className={`w-6 h-6 text-${stat.color}-400`} />
               </div>
-              <h3 className="text-xl font-bold">{stat.value}</h3>
-              <p className="text-gray-400">{stat.label}</p>
+              <div className="text-2xl font-bold text-white mb-2">{stat.value}</div>
+              <div className="text-gray-400 text-sm">{stat.label}</div>
             </motion.div>
           );
         })}
       </div>
 
       {/* Category Filter */}
-      <div className="flex flex-wrap justify-center mb-10 gap-3">
-        {categories.map((cat, i) => (
-          <button
-            key={i}
+      <div className="mb-12 flex flex-wrap justify-center gap-3">
+        {categories.map((cat) => (
+          <motion.button
+            key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-2 rounded-full border ${
+            className={`px-6 py-3 rounded-full text-sm font-medium transition-all relative ${
               activeCategory === cat
-                ? "bg-blue-500 text-white border-blue-500"
-                : "bg-gray-800 text-gray-300 border-gray-700"
-            } transition-all`}
+                ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
+                : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50"
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             {cat}
-          </button>
+          </motion.button>
         ))}
       </div>
 
       {/* Models Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
         {filteredModels.map((model, i) => (
           <motion.div
             key={i}
-            whileHover={{ scale: 1.03 }}
-            className="bg-gray-900 rounded-xl overflow-hidden shadow-lg border border-gray-700/50 cursor-pointer"
-            onClick={() => setPreviewModel(model)}
+            whileHover={{ scale: 1.02, y: -5 }}
+            className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 shadow-lg"
           >
-            <img
-              src={model.image}
-              alt={model.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-xl font-semibold mb-2">{model.title}</h3>
-              <p className="text-gray-400 text-sm mb-2">{model.software}</p>
-              <span
-                className={`px-2 py-1 rounded-full border text-xs font-medium ${getComplexityColor(
-                  model.complexity
-                )}`}
-              >
-                {model.complexity}
-              </span>
+            {/* Image with loading placeholder */}
+            <div className="relative h-64 overflow-hidden group">
+              <div className="w-full h-full bg-gray-700 animate-pulse absolute inset-0" id={`skeleton-${i}`} />
+
+              <img
+                src={model.image}
+                alt={model.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 relative z-10"
+                onLoad={() => {
+                  const skeleton = document.getElementById(`skeleton-${i}`);
+                  if (skeleton) skeleton.style.display = "none";
+                }}
+                onError={() => {
+                  const skeleton = document.getElementById(`skeleton-${i}`);
+                  if (skeleton) skeleton.style.display = "none";
+                }}
+              />
+
+              <div className="absolute top-4 left-4 flex gap-2 z-20">
+                <span className="bg-black/50 px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
+                  <Eye className="w-3 h-3" /> {model.views}
+                </span>
+                <span className="bg-black/50 px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
+                  <Download className="w-3 h-3" /> {model.downloads}
+                </span>
+              </div>
+              <div className="absolute top-4 right-4 z-20">
+                <span
+                  className={`px-3 py-1 rounded-full text-xs border ${getComplexityColor(
+                    model.complexity
+                  )}`}
+                >
+                  {model.complexity}
+                </span>
+              </div>
+              <div className="absolute bottom-4 left-4 z-20">
+                <span className="bg-purple-600/80 px-3 py-1 rounded-full text-xs text-white">
+                  {model.software}
+                </span>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <h3 className="text-xl font-bold text-white mb-2">{model.title}</h3>
+              <p className="text-gray-300 text-sm mb-4">{model.description}</p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {model.features.map((f, idx) => (
+                  <span
+                    key={idx}
+                    className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full text-xs border border-purple-500/30"
+                  >
+                    {f}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex gap-3">
+                <motion.button
+                  onClick={() => setPreviewModel(model)}
+                  className="flex-1 flex items-center justify-center gap-2 bg-purple-600/20 hover:bg-purple-600/30 text-purple-400 px-4 py-3 rounded-lg text-sm border border-purple-500/30"
+                >
+                  <Eye className="w-4 h-4" /> Preview
+                </motion.button>
+                <a
+                  href={model.downloadUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 px-4 py-3 rounded-lg text-sm border border-blue-500/30"
+                >
+                  <Download className="w-4 h-4" /> Download
+                </a>
+              </div>
             </div>
           </motion.div>
         ))}
@@ -443,11 +484,12 @@ const CADModels = () => {
 
       {/* 3D Preview Modal */}
       {previewModel && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="relative w-11/12 md:w-4/5 lg:w-3/5 h-3/4 bg-gray-900 rounded-xl p-4"
+            exit={{ scale: 0.8, opacity: 0 }}
+            className="bg-gray-900 rounded-2xl max-w-4xl w-full p-6 relative"
           >
             <button
               onClick={() => setPreviewModel(null)}
@@ -456,29 +498,31 @@ const CADModels = () => {
               <X className="w-6 h-6" />
             </button>
 
-            <h3 className="text-2xl font-bold mb-2">{previewModel.title}</h3>
-            <p className="text-gray-400 mb-4">{previewModel.description}</p>
+            <h3 className="text-2xl font-bold text-white mb-4">{previewModel.title}</h3>
+            <p className="text-gray-300 mb-4">{previewModel.description}</p>
 
-            <div className="absolute top-20 left-4 flex gap-2 z-50">
+            <div className="relative w-full h-96 bg-gray-800 rounded-lg">
+              {loadingModel && (
+                <div className="absolute inset-0 flex items-center justify-center z-10">
+                  <span className="text-white text-lg">Loading 3D Model...</span>
+                </div>
+              )}
+              <div ref={mountRef} className="w-full h-full rounded-lg" />
+            </div>
+
+            <div className="flex justify-end gap-3 mt-4">
               <button
                 onClick={zoomIn}
-                className="bg-gray-800/50 p-2 rounded-full hover:bg-gray-700/80"
+                className="px-4 py-2 bg-green-600/20 text-green-400 rounded-lg hover:bg-green-600/30 border border-green-500/30"
               >
-                <Eye className="w-5 h-5" />
+                Zoom In
               </button>
               <button
                 onClick={zoomOut}
-                className="bg-gray-800/50 p-2 rounded-full hover:bg-gray-700/80"
+                className="px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 border border-red-500/30"
               >
-                <Box className="w-5 h-5" />
+                Zoom Out
               </button>
-            </div>
-
-            <div
-              ref={mountRef}
-              className="w-full h-full bg-gray-800 rounded-xl flex items-center justify-center"
-            >
-              {loadingModel && <p className="text-gray-400">Loading model...</p>}
             </div>
           </motion.div>
         </div>
@@ -488,3 +532,5 @@ const CADModels = () => {
 };
 
 export default CADModels;
+
+

@@ -180,6 +180,21 @@ const CADModels = () => {
   views: 365,
   downloads: 28,
 },
+{
+  title: "Stuffing Box",
+  description:
+    "A sealing assembly designed to prevent fluid leakage around rotating shafts in pumps and valves. Modeled and assembled in SolidWorks with precise dimensional accuracy and material differentiation.",
+  software: "SolidWorks",
+  category: "Mechanical Parts",
+  complexity: "Intermediate",
+  features: ["3D Assembly Modeling","Material Visualization","Sectional & Isometric Views","Mating Constraints"],
+  image: "/3d Pictures/stuffingbox.png",
+  downloadUrl:"https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+  modelPath: "/Models/Stuffing Box.STL",
+  views: 248,
+  downloads: 19,
+},
+
 
   ];
 
@@ -517,5 +532,6 @@ const CADModels = () => {
 };
 
 export default CADModels;
+
 
 

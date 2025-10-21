@@ -23,8 +23,7 @@ const CADModels = () => {
       complexity: "Intermediate",
       features: ["Parametric Design", "Gear Ratio Analysis", "Motion Study"],
       image: "/3d Pictures/gear profile.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
+      downloadUrl: "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
       modelPath: "/Models/Spur Gear profile.STL",
       views: 1247,
       downloads: 89,
@@ -38,8 +37,7 @@ const CADModels = () => {
       complexity: "Advanced",
       features: ["Flow Simulation", "Thermal Analysis", "Parametric Design"],
       image: "/3d Pictures/exhaust manifold.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
+      downloadUrl: "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
       modelPath: "/Models/Exhaust manifold.STL",
       views: 500,
       downloads: 25,
@@ -53,8 +51,7 @@ const CADModels = () => {
       complexity: "Intermediate",
       features: ["Parametric Design", "Stress Analysis", "Motion Study"],
       image: "/3d Pictures/knuckle joint.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
+      downloadUrl: "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
       modelPath: "/Models/KNUCKLE JOINT.STL",
       views: 226,
       downloads: 10,
@@ -68,8 +65,7 @@ const CADModels = () => {
       complexity: "Beginner",
       features: ["Parametric Design", "Motion Study", "Torque Analysis"],
       image: "/3d Pictures/universal coupling.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
+      downloadUrl: "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
       modelPath: "/Models/UNIVERSAL COUPLING.STL",
       views: 189,
       downloads: 15,
@@ -83,8 +79,7 @@ const CADModels = () => {
       complexity: "Basic",
       features: ["Parametric Design", "Torque Analysis", "Stress Check"],
       image: "/3d Pictures/muff coupling.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
+      downloadUrl: "https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
       modelPath: "/Models/MUFF COUPLING.STL",
       views: 189,
       downloads: 15,
@@ -98,8 +93,7 @@ const CADModels = () => {
       complexity: "Basic",
       features: ["Assembly Modeling", "Motion Simulation", "Tolerance Analysis"],
       image: "/3d Pictures/DOOR LOCK.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=drive_link",
+      downloadUrl: "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
       modelPath: "/Models/Door lock.STL",
       views: 312,
       downloads: 18,
@@ -113,8 +107,7 @@ const CADModels = () => {
       complexity: "Intermediate",
       features: ["Parametric Design", "Flow Optimization", "Assembly Ready"],
       image: "/3d Pictures/flanged tee pipe fitting.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
+      downloadUrl: "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
       modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
       views: 278,
       downloads: 25,
@@ -128,8 +121,7 @@ const CADModels = () => {
       complexity: "Basic",
       features: ["Parametric Design", "Flow Simulation", "Thermal Analysis"],
       image: "/3d Pictures/refrigeration valves.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
+      downloadUrl: "https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
       modelPath: "/Models/Refrigeration Valves.STL",
       views: 342,
       downloads: 27,
@@ -143,8 +135,7 @@ const CADModels = () => {
       complexity: "Intermediate",
       features: ["3D Modeling", "FEA Simulation", "Mass Optimization"],
       image: "/3d Pictures/connecting rod.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
+      downloadUrl: "https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
       modelPath: "/Models/Connecting Rod.STL",
       views: 297,
       downloads: 24,
@@ -158,8 +149,7 @@ const CADModels = () => {
       complexity: "Basic",
       features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
       image: "/3d Pictures/piston head.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
+      downloadUrl: "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
       modelPath: "/Models/piston head.STL",
       views: 410,
       downloads: 32,
@@ -173,8 +163,7 @@ const CADModels = () => {
       complexity: "Basic",
       features: ["Parametric Design", "Stress Analysis", "Motion Study"],
       image: "/3d Pictures/crankshaft.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
+      downloadUrl: "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
       modelPath: "/Models/crank shaft.STL",
       views: 365,
       downloads: 28,
@@ -200,12 +189,7 @@ const CADModels = () => {
       software: "SolidWorks",
       category: "Robotics",
       complexity: "Advanced",
-      features: [
-        "Servo-Driven Mechanism",
-        "Adjustable Finger Design",
-        "3D Parametric Modeling",
-        "Motion Study Simulation"
-      ],
+      features: ["Servo-Driven Mechanism","Adjustable Finger Design","3D Parametric Modeling","Motion Study Simulation"],
       image: "/3d Pictures/Robotic Gripper.png",
       downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
       modelPath: "/Models/Robotic Gripper.STL",
@@ -215,14 +199,7 @@ const CADModels = () => {
   ];
 
   const categories = [
-    "All",
-    "Assembly",
-    "Mechanical Parts",
-    "Automotive",
-    "Industrial",
-    "Thermal Systems",
-    "Robotics",
-    "Aerospace",
+    "All","Assembly","Mechanical Parts","Automotive","Industrial","Thermal Systems","Robotics","Aerospace",
   ];
 
   const filteredModels =
@@ -232,14 +209,10 @@ const CADModels = () => {
 
   const getComplexityColor = (complexity) => {
     switch (complexity) {
-      case "Beginner":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
-      case "Intermediate":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
-      case "Advanced":
-        return "bg-orange-500/20 text-orange-400 border-orange-500/30";
-      default:
-        return "bg-gray-500/20 text-gray-400 border-gray-500/30";
+      case "Beginner": return "bg-green-500/20 text-green-400 border-green-500/30";
+      case "Intermediate": return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
+      case "Advanced": return "bg-orange-500/20 text-orange-400 border-orange-500/30";
+      default: return "bg-gray-500/20 text-gray-400 border-gray-500/30";
     }
   };
 
@@ -250,15 +223,13 @@ const CADModels = () => {
     { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
 
-  // --- 3D Viewer with Auto-Centering and Scaling ---
+  // 3D Viewer Effect
   useEffect(() => {
     if (!previewModel || !mountRef.current) return;
-
     setLoadingModel(true);
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x111827);
-
     const camera = new THREE.PerspectiveCamera(
       45,
       mountRef.current.clientWidth / mountRef.current.clientHeight,
@@ -284,61 +255,30 @@ const CADModels = () => {
     scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 
     const loader = new STLLoader();
-    const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
-    const meshes = [];
-    let loadedCount = 0;
-
-    modelPaths.forEach((path, index) => {
-      const material = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(`hsl(${(index * 60) % 360}, 80%, 60%)`),
-        metalness: 0.5,
-        roughness: 0.2,
-      });
-
-      loader.load(
-        path,
-        (geometry) => {
-          geometry.computeBoundingBox();
-          const box = geometry.boundingBox;
-          const size = new THREE.Vector3();
-          box.getSize(size);
-          const center = new THREE.Vector3();
-          box.getCenter(center);
-
-          geometry.translate(-center.x, -center.y, -center.z);
-
-          const maxDim = Math.max(size.x, size.y, size.z);
-          const scaleFactor = 5 / maxDim;
-          const mesh = new THREE.Mesh(geometry, material);
-          mesh.scale.setScalar(scaleFactor);
-
-          scene.add(mesh);
-          meshes.push(mesh);
-
-          loadedCount++;
-          if (loadedCount === modelPaths.length) {
-            const groupBox = new THREE.Box3();
-            meshes.forEach((m) => groupBox.expandByObject(m));
-            const groupSize = groupBox.getSize(new THREE.Vector3());
-            const groupMax = Math.max(groupSize.x, groupSize.y, groupSize.z);
-            const fov = camera.fov * (Math.PI / 180);
-            const cameraZ = Math.abs(groupMax / 2 / Math.tan(fov / 2));
-            camera.position.set(0, 0, cameraZ * 2);
-            camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-            setTimeout(() => setLoadingModel(false), 500);
-          }
-        },
-        undefined,
-        () => setLoadingModel(false)
+    loader.load(previewModel.modelPath, (geometry) => {
+      geometry.computeBoundingBox();
+      const box = geometry.boundingBox;
+      const size = new THREE.Vector3();
+      box.getSize(size);
+      const center = new THREE.Vector3();
+      box.getCenter(center);
+      geometry.translate(-center.x, -center.y, -center.z);
+      const maxDim = Math.max(size.x, size.y, size.z);
+      const scaleFactor = 5 / maxDim;
+      const mesh = new THREE.Mesh(
+        geometry,
+        new THREE.MeshStandardMaterial({ color: 0x6699ff, metalness: 0.5, roughness: 0.2 })
       );
+      mesh.scale.setScalar(scaleFactor);
+      scene.add(mesh);
+      const fov = camera.fov * (Math.PI / 180);
+      const cameraZ = Math.abs(Math.max(size.x, size.y, size.z) / 2 / Math.tan(fov / 2));
+      camera.position.set(0, 0, cameraZ * 2);
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+      setLoadingModel(false);
     });
 
-    const animate = () => {
-      requestAnimationFrame(animate);
-      controls.update();
-      renderer.render(scene, camera);
-    };
+    const animate = () => { requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); };
     animate();
 
     const handleResize = () => {
@@ -350,13 +290,8 @@ const CADModels = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [previewModel]);
 
-  const zoomIn = () => {
-    if (cameraRef.current) cameraRef.current.position.z *= 0.8;
-  };
-
-  const zoomOut = () => {
-    if (cameraRef.current) cameraRef.current.position.z *= 1.2;
-  };
+  const zoomIn = () => { if (cameraRef.current) cameraRef.current.position.z *= 0.8; };
+  const zoomOut = () => { if (cameraRef.current) cameraRef.current.position.z *= 1.2; };
 
   return (
     <div className="container mx-auto px-6 py-20">
@@ -366,10 +301,7 @@ const CADModels = () => {
         whileInView={{ opacity: 1, y: 0 }}
         className="text-4xl font-bold mb-4 text-center"
       >
-        CAD Model{" "}
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
-          Showcase
-        </span>
+        CAD Model <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">Showcase</span>
       </motion.h2>
 
       {/* Stats */}
@@ -377,14 +309,8 @@ const CADModels = () => {
         {stats.map((stat, i) => {
           const Icon = stat.icon;
           return (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.05 }}
-              className="bg-gray-800/50 rounded-xl p-6 text-center border border-gray-700/50"
-            >
-              <div
-                className={`w-12 h-12 bg-${stat.color}-500/20 rounded-full flex items-center justify-center mx-auto mb-4`}
-              >
+            <motion.div key={i} whileHover={{ scale: 1.05 }} className="bg-gray-800/50 rounded-xl p-6 text-center border border-gray-700/50">
+              <div className={`w-12 h-12 bg-${stat.color}-500/20 rounded-full flex items-center justify-center mx-auto mb-4`}>
                 <Icon className={`w-6 h-6 text-${stat.color}-400`} />
               </div>
               <div className="text-2xl font-bold text-white mb-2">{stat.value}</div>
@@ -400,11 +326,7 @@ const CADModels = () => {
           <motion.button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-6 py-3 rounded-full text-sm font-medium transition-all relative ${
-              activeCategory === cat
-                ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
-                : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50"
-            }`}
+            className={`px-6 py-3 rounded-full text-sm font-medium transition-all relative ${activeCategory === cat ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg" : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50"}`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -416,78 +338,42 @@ const CADModels = () => {
       {/* Models Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
         {filteredModels.map((model, i) => (
-          <motion.div
-            key={i}
-            whileHover={{ scale: 1.02, y: -5 }}
-            className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 shadow-lg"
-          >
-            <img
-              src={model.image}
-              alt={model.title}
-              className="w-full h-72 object-cover cursor-pointer"
-              onClick={() => setPreviewModel(model)}
-            />
+          <motion.div key={i} whileHover={{ scale: 1.02, y: -5 }} className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 shadow-lg">
+            <img src={model.image} alt={model.title} className="w-full h-72 object-cover" />
             <div className="p-6">
-              <div
-                className={`inline-block px-3 py-1 mb-3 text-xs font-semibold rounded-full border ${getComplexityColor(
-                  model.complexity
-                )}`}
-              >
-                {model.complexity}
-              </div>
+              <div className={`inline-block px-3 py-1 mb-3 text-xs font-semibold rounded-full border ${getComplexityColor(model.complexity)}`}>{model.complexity}</div>
               <h3 className="text-xl font-bold mb-2">{model.title}</h3>
               <p className="text-gray-400 text-sm mb-4">{model.description}</p>
-              <div className="flex justify-between items-center">
-                <a
-                  href={model.downloadUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-400 text-sm font-medium hover:underline flex items-center gap-1"
-                >
+              <div className="flex justify-between items-center mb-4">
+                <a href={model.downloadUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 text-sm font-medium hover:underline flex items-center gap-1">
                   Download <Download className="w-4 h-4" />
                 </a>
-                <span className="text-gray-400 text-sm">
-                  {model.views} Views | {model.downloads} Downloads
-                </span>
+                <span className="text-gray-400 text-sm">{model.views} Views | {model.downloads} Downloads</span>
               </div>
+              <button onClick={() => setPreviewModel(model)} className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium flex items-center gap-2">
+                <Eye className="w-4 h-4" /> Preview
+              </button>
             </div>
           </motion.div>
         ))}
       </div>
 
-      {/* 3D Preview Modal */}
+      {/* 3D Viewer Modal */}
       {previewModel && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
-          <div className="bg-gray-900 rounded-2xl w-full max-w-6xl h-[80vh] relative overflow-hidden">
-            <button
-              onClick={() => setPreviewModel(null)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-red-600/30 hover:bg-red-600/50"
-            >
-              <X className="w-5 h-5 text-white" />
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-900 rounded-2xl w-full max-w-5xl relative p-4">
+            <button onClick={() => setPreviewModel(null)} className="absolute top-4 right-4 text-gray-400 hover:text-white">
+              <X className="w-6 h-6" />
             </button>
-
-            {loadingModel && (
-              <div className="absolute inset-0 flex items-center justify-center z-50">
-                <p className="text-white text-lg">Loading 3D Model...</p>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-bold text-white">{previewModel.title}</h3>
+              <div className="flex gap-2">
+                <button onClick={zoomIn} className="px-3 py-1 bg-gray-800 rounded-lg text-white text-sm">Zoom In</button>
+                <button onClick={zoomOut} className="px-3 py-1 bg-gray-800 rounded-lg text-white text-sm">Zoom Out</button>
               </div>
-            )}
-
-            <div ref={mountRef} className="w-full h-full"></div>
-
-            {/* Zoom Controls */}
-            <div className="absolute bottom-4 right-4 flex gap-3">
-              <button
-                onClick={zoomIn}
-                className="p-3 bg-green-600/20 text-green-400 rounded-lg hover:bg-green-600/30 border border-green-500/30 flex items-center justify-center"
-              >
-                <ZoomIn className="w-5 h-5" />
-              </button>
-              <button
-                onClick={zoomOut}
-                className="p-3 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 border border-red-500/30 flex items-center justify-center"
-              >
-                <ZoomOut className="w-5 h-5" />
-              </button>
+            </div>
+            <div ref={mountRef} className="w-full h-[600px] relative flex items-center justify-center">
+              {loadingModel && <p className="text-white absolute">Loading Model...</p>}
             </div>
           </div>
         </div>

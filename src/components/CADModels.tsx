@@ -194,6 +194,26 @@ const CADModels = () => {
   views: 248,
   downloads: 19,
 },
+    {
+  title: "Servo-Driven Robotic Gripper",
+  description:
+    "An intelligent robotic gripper actuated by servo motors for precise object handling. Designed in SolidWorks with adjustable finger mechanisms, torque-based control, and lightweight aluminum structure for automation and pick-and-place applications.",
+  software: "SolidWorks",
+  category: "Robotics",
+  complexity: "Advanced",
+  features: [
+    "Servo-Driven Mechanism",
+    "Adjustable Finger Design",
+    "3D Parametric Modeling",
+    "Motion Study Simulation"
+  ],
+  image: "/3d Pictures/Robotic Gripper.png",
+  downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+  modelPath: "/Models/Robotic Gripper.STL",
+  views: 312,
+  downloads: 27,
+},
+
 
 
   ];
@@ -532,5 +552,6 @@ const CADModels = () => {
 };
 
 export default CADModels;
+
 
 

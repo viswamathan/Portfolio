@@ -23,7 +23,7 @@ const CADModels = () => {
   const cameraRef = useRef(null);
   const controlsRef = useRef(null);
 
-  const cadModels = [
+    const cadModels = [
     {
       title: "Pair of Spur Gears",
       description:
@@ -221,7 +221,7 @@ const CADModels = () => {
   modelPath: "/Models/Robotic Gripper.STL",
   views: 312,
   downloads: 27,
-},  i want this in above code
+},
   ];
 
   const categories = [

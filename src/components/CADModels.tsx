@@ -8,6 +8,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 const CADModels = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [previewModel, setPreviewModel] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const [loadingModel, setLoadingModel] = useState(false);
   const mountRef = useRef(null);
   const controlsRef = useRef(null);
@@ -45,21 +46,176 @@ const CADModels = () => {
       downloads: 25,
     },
     {
-      title: "Servo-Driven Robotic Gripper",
+      title: "Knuckle Joint",
       description:
-        "An intelligent robotic gripper actuated by servo motors for precise object handling. Designed in SolidWorks with adjustable finger mechanisms, torque-based control, and lightweight aluminum structure for automation and pick-and-place applications.",
+        "Robust knuckle joint designed for heavy load applications, ensuring secure connections while allowing limited angular movement. Suitable for linkages in structural and mechanical systems.",
       software: "SolidWorks",
-      category: "Robotics",
-      complexity: "Advanced",
-      features: ["Servo-Driven Mechanism", "Adjustable Finger Design", "3D Parametric Modeling", "Motion Study Simulation"],
-      image: "/3d Pictures/Robotic Gripper.png",
+      category: "Mechanical Parts",
+      complexity: "Intermediate",
+      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+      image: "/3d Pictures/knuckle joint.png",
       downloadUrl:
-        "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
-      modelPath: "/Models/Robotic Gripper.STL",
+        "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
+      modelPath: "/Models/KNUCKLE JOINT.STL",
+      views: 226,
+      downloads: 10,
+    },
+    {
+      title: "Universal Coupling",
+      description:
+        "Precision universal coupling enabling torque transmission between shafts at varying angles. Designed to minimize backlash and maintain smooth power delivery in dynamic conditions.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Beginner",
+      features: ["Parametric Design", "Motion Study", "Torque Analysis"],
+      image: "/3d Pictures/universal coupling.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
+      modelPath: "/Models/UNIVERSAL COUPLING.STL",
+      views: 189,
+      downloads: 15,
+    },
+    {
+      title: "Muff Coupling",
+      description:
+        "Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Basic",
+      features: ["Parametric Design", "Torque Analysis", "Stress Check"],
+      image: "/3d Pictures/muff coupling.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
+      modelPath: "/Models/MUFF COUPLING.STL",
+      views: 189,
+      downloads: 15,
+    },
+    {
+      title: "Door Lock Mechanism",
+      description:
+        "Compact and reliable door lock mechanism featuring latch, spring, and handle components for secure and smooth operation.",
+      software: "SolidWorks",
+      category: "Assembly",
+      complexity: "Basic",
+      features: ["Assembly Modeling", "Motion Simulation", "Tolerance Analysis"],
+      image: "/3d Pictures/DOOR LOCK.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
+      modelPath: "/Models/Door lock.STL",
       views: 312,
+      downloads: 18,
+    },
+    {
+      title: "Flanged Tee Pipe Fitting",
+      description:
+        "Industrial-grade flanged tee pipe fitting designed for fluid distribution systems. Features precise flanges for secure bolted connections and optimized internal geometry for minimal pressure loss.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Intermediate",
+      features: ["Parametric Design", "Flow Optimization", "Assembly Ready"],
+      image: "/3d Pictures/flanged tee pipe fitting.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
+      modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
+      views: 278,
+      downloads: 25,
+    },
+    {
+      title: "Refrigeration Valves Assembly",
+      description:
+        "Precision-designed refrigeration valve assembly used for controlling refrigerant flow in HVAC and cooling systems. Includes service, expansion, and solenoid valves optimized for durability and leak-proof operation.",
+      software: "SolidWorks",
+      category: "Thermal Systems",
+      complexity: "Basic",
+      features: ["Parametric Design", "Flow Simulation", "Thermal Analysis"],
+      image: "/3d Pictures/refrigeration valves.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
+      modelPath: "/Models/Refrigeration Valves.STL",
+      views: 342,
       downloads: 27,
     },
-    // Add all other models here as needed...
+    {
+      title: "Connecting Rod (Without Cap)",
+      description:
+        "Lightweight connecting rod designed without cap for simplified design analysis and manufacturing demonstration. Optimized cross-section for strength-to-weight ratio and fatigue resistance.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Intermediate",
+      features: ["3D Modeling", "FEA Simulation", "Mass Optimization"],
+      image: "/3d Pictures/connecting rod.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
+      modelPath: "/Models/Connecting Rod.STL",
+      views: 297,
+      downloads: 24,
+    },
+    {
+  title: "Piston Head",
+  description:
+    "High-strength piston head designed for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high-pressure conditions.",
+  software: "SolidWorks",
+  category: "Automotive",
+  complexity: "Basic",
+  features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
+  image: "/3d Pictures/piston head.png",
+  downloadUrl:
+    "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
+  modelPath: "/Models/piston head.STL",
+  views: 410,
+  downloads: 32,
+},
+{
+  title: "Crankshaft",
+  description:
+    "Precision crankshaft designed for efficient torque transmission and balanced rotation. Engineered for minimal vibration, maximum fatigue resistance, and high-performance automotive engines.",
+  software: "SolidWorks",
+  category: "Automotive",
+  complexity: "Basic",
+  features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+  image: "/3d Pictures/crankshaft.png",
+  downloadUrl:
+    "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
+  modelPath: "/Models/crank shaft.STL",
+  views: 365,
+  downloads: 28,
+},
+{
+  title: "Stuffing Box",
+  description:
+    "A sealing assembly designed to prevent fluid leakage around rotating shafts in pumps and valves. Modeled and assembled in SolidWorks with precise dimensional accuracy and material differentiation.",
+  software: "SolidWorks",
+  category: "Mechanical Parts",
+  complexity: "Intermediate",
+  features: ["3D Assembly Modeling","Material Visualization","Sectional & Isometric Views","Mating Constraints"],
+  image: "/3d Pictures/stuffingbox.png",
+  downloadUrl:"https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+  modelPath: "/Models/Stuffing Box.STL",
+  views: 248,
+  downloads: 19,
+},
+    {
+  title: "Servo-Driven Robotic Gripper",
+  description:
+    "An intelligent robotic gripper actuated by servo motors for precise object handling. Designed in SolidWorks with adjustable finger mechanisms, torque-based control, and lightweight aluminum structure for automation and pick-and-place applications.",
+  software: "SolidWorks",
+  category: "Robotics",
+  complexity: "Advanced",
+  features: [
+    "Servo-Driven Mechanism",
+    "Adjustable Finger Design",
+    "3D Parametric Modeling",
+    "Motion Study Simulation"
+  ],
+  image: "/3d Pictures/Robotic Gripper.png",
+  downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+  modelPath: "/Models/Robotic Gripper.STL",
+  views: 312,
+  downloads: 27,
+},
+
+
+
   ];
 
   const categories = [
@@ -132,42 +288,55 @@ const CADModels = () => {
     scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 
     const loader = new STLLoader();
+    const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
+    const meshes = [];
+    let loadedCount = 0;
 
-    loader.load(
-      previewModel.modelPath,
-      (geometry) => {
-        geometry.computeBoundingBox();
-        const box = geometry.boundingBox;
-        const size = new THREE.Vector3();
-        box.getSize(size);
-        const center = new THREE.Vector3();
-        box.getCenter(center);
+    modelPaths.forEach((path, index) => {
+      const material = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(`hsl(${(index * 60) % 360}, 80%, 60%)`),
+        metalness: 0.5,
+        roughness: 0.2,
+      });
 
-        geometry.translate(-center.x, -center.y, -center.z);
+      loader.load(
+        path,
+        (geometry) => {
+          geometry.computeBoundingBox();
+          const box = geometry.boundingBox;
+          const size = new THREE.Vector3();
+          box.getSize(size);
+          const center = new THREE.Vector3();
+          box.getCenter(center);
 
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const scaleFactor = 5 / maxDim;
+          geometry.translate(-center.x, -center.y, -center.z);
 
-        const material = new THREE.MeshStandardMaterial({
-          color: 0x00bfff,
-          metalness: 0.5,
-          roughness: 0.2,
-        });
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const scaleFactor = 5 / maxDim;
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.scale.setScalar(scaleFactor);
 
-        const mesh = new THREE.Mesh(geometry, material);
-        mesh.scale.setScalar(scaleFactor);
-        scene.add(mesh);
+          scene.add(mesh);
+          meshes.push(mesh);
 
-        const fov = camera.fov * (Math.PI / 180);
-        const cameraZ = Math.abs(Math.max(size.x, size.y, size.z) / 2 / Math.tan(fov / 2));
-        camera.position.set(0, 0, cameraZ * 2);
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
+          loadedCount++;
+          if (loadedCount === modelPaths.length) {
+            const groupBox = new THREE.Box3();
+            meshes.forEach((m) => groupBox.expandByObject(m));
+            const groupSize = groupBox.getSize(new THREE.Vector3());
+            const groupMax = Math.max(groupSize.x, groupSize.y, groupSize.z);
+            const fov = camera.fov * (Math.PI / 180);
+            const cameraZ = Math.abs(groupMax / 2 / Math.tan(fov / 2));
+            camera.position.set(0, 0, cameraZ * 2);
+            camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-        setLoadingModel(false);
-      },
-      undefined,
-      () => setLoadingModel(false)
-    );
+            setTimeout(() => setLoadingModel(false), 500);
+          }
+        },
+        undefined,
+        () => setLoadingModel(false)
+      );
+    });
 
     const animate = () => {
       requestAnimationFrame(animate);
@@ -256,34 +425,77 @@ const CADModels = () => {
             whileHover={{ scale: 1.02, y: -5 }}
             className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 shadow-lg"
           >
-            <img
-              src={model.image}
-              alt={model.title}
-              className="w-full h-72 object-cover cursor-pointer"
-              onClick={() => setPreviewModel(model)}
-            />
-            <div className="p-6">
-              <div
-                className={`inline-block px-3 py-1 mb-3 text-xs font-semibold rounded-full border ${getComplexityColor(
-                  model.complexity
-                )}`}
-              >
-                {model.complexity}
+            {/* Image with loading placeholder */}
+            <div className="relative h-64 overflow-hidden group">
+              <div className="w-full h-full bg-gray-700 animate-pulse absolute inset-0" id={`skeleton-${i}`} />
+
+              <img
+                src={model.image}
+                alt={model.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 relative z-10"
+                onLoad={() => {
+                  const skeleton = document.getElementById(`skeleton-${i}`);
+                  if (skeleton) skeleton.style.display = "none";
+                }}
+                onError={() => {
+                  const skeleton = document.getElementById(`skeleton-${i}`);
+                  if (skeleton) skeleton.style.display = "none";
+                }}
+              />
+
+              <div className="absolute top-4 left-4 flex gap-2 z-20">
+                <span className="bg-black/50 px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
+                  <Eye className="w-3 h-3" /> {model.views}
+                </span>
+                <span className="bg-black/50 px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
+                  <Download className="w-3 h-3" /> {model.downloads}
+                </span>
               </div>
-              <h3 className="text-xl font-bold mb-2">{model.title}</h3>
-              <p className="text-gray-400 text-sm mb-4">{model.description}</p>
-              <div className="flex justify-between items-center">
+              <div className="absolute top-4 right-4 z-20">
+                <span
+                  className={`px-3 py-1 rounded-full text-xs border ${getComplexityColor(
+                    model.complexity
+                  )}`}
+                >
+                  {model.complexity}
+                </span>
+              </div>
+              <div className="absolute bottom-4 left-4 z-20">
+                <span className="bg-purple-600/80 px-3 py-1 rounded-full text-xs text-white">
+                  {model.software}
+                </span>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <h3 className="text-xl font-bold text-white mb-2">{model.title}</h3>
+              <p className="text-gray-300 text-sm mb-4">{model.description}</p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {model.features.map((f, idx) => (
+                  <span
+                    key={idx}
+                    className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full text-xs border border-purple-500/30"
+                  >
+                    {f}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex gap-3">
+                <motion.button
+                  onClick={() => setPreviewModel(model)}
+                  className="flex-1 flex items-center justify-center gap-2 bg-purple-600/20 hover:bg-purple-600/30 text-purple-400 px-4 py-3 rounded-lg text-sm border border-purple-500/30"
+                >
+                  <Eye className="w-4 h-4" /> Preview
+                </motion.button>
                 <a
                   href={model.downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-400 text-sm font-medium hover:underline flex items-center gap-1"
+                  className="flex-1 flex items-center justify-center gap-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 px-4 py-3 rounded-lg text-sm border border-blue-500/30"
                 >
-                  Download <Download className="w-4 h-4" />
+                  <Download className="w-4 h-4" /> Download
                 </a>
-                <span className="text-gray-400 text-sm">
-                  {model.views} Views | {model.downloads} Downloads
-                </span>
               </div>
             </div>
           </motion.div>
@@ -292,39 +504,47 @@ const CADModels = () => {
 
       {/* 3D Preview Modal */}
       {previewModel && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
-          <div className="bg-gray-900 rounded-2xl w-full max-w-6xl h-[80vh] relative overflow-hidden">
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            className="bg-gray-900 rounded-2xl max-w-4xl w-full p-6 relative"
+          >
             <button
               onClick={() => setPreviewModel(null)}
-              className="absolute top-4 right-4 p-2 rounded-full bg-red-600/30 hover:bg-red-600/50"
+              className="absolute top-4 right-4 text-gray-300 hover:text-white"
             >
-              <X className="w-5 h-5 text-white" />
+              <X className="w-6 h-6" />
             </button>
 
-            {loadingModel && (
-              <div className="absolute inset-0 flex items-center justify-center z-50">
-                <p className="text-white text-lg">Loading 3D Model...</p>
-              </div>
-            )}
+            <h3 className="text-2xl font-bold text-white mb-4">{previewModel.title}</h3>
+            <p className="text-gray-300 mb-4">{previewModel.description}</p>
 
-            <div ref={mountRef} className="w-full h-full"></div>
+            <div className="relative w-full h-96 bg-gray-800 rounded-lg">
+              {loadingModel && (
+                <div className="absolute inset-0 flex items-center justify-center z-10">
+                  <span className="text-white text-lg">Loading 3D Model...</span>
+                </div>
+              )}
+              <div ref={mountRef} className="w-full h-full rounded-lg" />
+            </div>
 
-            {/* Zoom Controls */}
-            <div className="absolute bottom-4 right-4 flex gap-3">
+            <div className="flex justify-end gap-3 mt-4">
               <button
                 onClick={zoomIn}
-                className="p-3 bg-green-600/20 text-green-400 rounded-lg hover:bg-green-600/30 border border-green-500/30 flex items-center justify-center"
+                className="px-4 py-2 bg-green-600/20 text-green-400 rounded-lg hover:bg-green-600/30 border border-green-500/30"
               >
-                <ZoomIn className="w-5 h-5" />
+                Zoom In
               </button>
               <button
                 onClick={zoomOut}
-                className="p-3 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 border border-red-500/30 flex items-center justify-center"
+                className="px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 border border-red-500/30"
               >
-                <ZoomOut className="w-5 h-5" />
+                Zoom Out
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
     </div>
@@ -332,3 +552,5 @@ const CADModels = () => {
 };
 
 export default CADModels;
+
+

@@ -75,9 +75,6 @@ const stats = [
 const CADModels = () => {
   const [selectedModel, setSelectedModel] = useState(null);
   const [filter, setFilter] = useState("All");
-  const viewerRef = useRef();
-  const cameraRef = useRef();
-  const controlsRef = useRef();
 
   const filteredModels =
     filter === "All"
@@ -85,65 +82,35 @@ const CADModels = () => {
       : cadModels.filter((m) => m.category === filter);
 
   // Viewer setup
+  const viewerRef = useRef();
+
   useEffect(() => {
     if (!selectedModel) return;
-
-    while (viewerRef.current.firstChild) {
-      viewerRef.current.removeChild(viewerRef.current.firstChild);
-    }
-
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf9fafb);
-
     const camera = new THREE.PerspectiveCamera(
       60,
       viewerRef.current.clientWidth / viewerRef.current.clientHeight,
       0.1,
-      2000
+      1000
     );
-    cameraRef.current = camera;
-
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(viewerRef.current.clientWidth, viewerRef.current.clientHeight);
+    renderer.setSize(
+      viewerRef.current.clientWidth,
+      viewerRef.current.clientHeight
+    );
     viewerRef.current.appendChild(renderer.domElement);
 
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-    dirLight.position.set(100, 100, 100);
-    scene.add(ambientLight, dirLight);
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controlsRef.current = controls;
-
-    // Load and fit STL
     const loader = new STLLoader();
     loader.load("/models/sample.stl", (geometry) => {
-      geometry.center();
-      geometry.computeBoundingBox();
-
-      const boundingBox = geometry.boundingBox;
-      const size = new THREE.Vector3();
-      boundingBox.getSize(size);
-      const maxDim = Math.max(size.x, size.y, size.z);
-      const scaleFactor = 50 / maxDim;
-
-      const material = new THREE.MeshStandardMaterial({
-        color: 0x0077ff,
-        metalness: 0.3,
-        roughness: 0.7,
-      });
-
+      const material = new THREE.MeshStandardMaterial({ color: 0x0077ff });
       const mesh = new THREE.Mesh(geometry, material);
-      mesh.scale.setScalar(scaleFactor);
+      geometry.center();
       scene.add(mesh);
-
-      const center = new THREE.Vector3();
-      boundingBox.getCenter(center);
-      controls.target.copy(center);
-      camera.position.copy(center.clone().add(new THREE.Vector3(0, 0, maxDim * 1.5)));
-      camera.lookAt(center);
+      camera.position.set(0, 0, 70);
+      const controls = new OrbitControls(camera, renderer.domElement);
+      const light = new THREE.DirectionalLight(0xffffff, 2);
+      light.position.set(50, 50, 50);
+      scene.add(light);
 
       const animate = () => {
         requestAnimationFrame(animate);
@@ -153,28 +120,12 @@ const CADModels = () => {
       animate();
     });
 
-    const handleResize = () => {
-      camera.aspect =
-        viewerRef.current.clientWidth / viewerRef.current.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(viewerRef.current.clientWidth, viewerRef.current.clientHeight);
-    };
-    window.addEventListener("resize", handleResize);
-
     return () => {
-      window.removeEventListener("resize", handleResize);
       while (viewerRef.current.firstChild) {
         viewerRef.current.removeChild(viewerRef.current.firstChild);
       }
     };
   }, [selectedModel]);
-
-  // Zoom Controls
-  const handleZoom = (zoomIn) => {
-    const camera = cameraRef.current;
-    if (zoomIn) camera.position.multiplyScalar(0.8);
-    else camera.position.multiplyScalar(1.2);
-  };
 
   return (
     <div className="p-8 bg-gray-50 min-h-screen">
@@ -225,25 +176,31 @@ const CADModels = () => {
             className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition relative"
             whileHover={{ scale: 1.03 }}
           >
+            {/* Image with badges */}
             <div className="relative">
               <img
                 src={model.image}
                 alt={model.title}
                 className="w-full h-56 object-cover"
               />
+              {/* View badge */}
               <div className="absolute top-3 left-3 bg-black/60 text-white text-xs px-3 py-1 rounded-full flex items-center gap-1">
                 <Eye className="w-4 h-4" /> {model.viewCount}
               </div>
+              {/* Download badge */}
               <div className="absolute top-3 right-3 bg-black/60 text-white text-xs px-3 py-1 rounded-full flex items-center gap-1">
                 <Download className="w-4 h-4" /> {model.downloadCount}
               </div>
             </div>
 
+            {/* Card content */}
             <div className="p-5">
               <h3 className="text-lg font-semibold text-gray-800 mb-1">
                 {model.title}
               </h3>
-              <p className="text-sm text-gray-600 mb-3">{model.description}</p>
+              <p className="text-sm text-gray-600 mb-3">
+                {model.description}
+              </p>
               <div className="flex flex-wrap gap-2 mb-3">
                 {model.features.map((f, i) => (
                   <span
@@ -277,7 +234,7 @@ const CADModels = () => {
       {/* 3D Viewer Modal */}
       {selectedModel && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl w-[90%] h-[80%] p-4 relative flex flex-col">
+          <div className="bg-white rounded-xl w-[90%] h-[80%] p-4 relative">
             <button
               onClick={() => setSelectedModel(null)}
               className="absolute top-4 right-4 text-gray-600 hover:text-red-500"
@@ -289,23 +246,8 @@ const CADModels = () => {
             </h2>
             <div
               ref={viewerRef}
-              className="flex-1 rounded-lg border bg-gray-100"
+              className="w-full h-full rounded-lg border bg-gray-100"
             />
-            {/* Zoom Controls */}
-            <div className="flex justify-center gap-4 mt-4">
-              <button
-                onClick={() => handleZoom(true)}
-                className="flex items-center gap-1 bg-blue-600 text-white px-3 py-2 rounded-lg text-sm"
-              >
-                <ZoomIn className="w-4 h-4" /> Zoom In
-              </button>
-              <button
-                onClick={() => handleZoom(false)}
-                className="flex items-center gap-1 bg-blue-600 text-white px-3 py-2 rounded-lg text-sm"
-              >
-                <ZoomOut className="w-4 h-4" /> Zoom Out
-              </button>
-            </div>
           </div>
         </div>
       )}

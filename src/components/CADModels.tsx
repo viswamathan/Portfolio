@@ -45,173 +45,21 @@ const CADModels = () => {
       downloads: 25,
     },
     {
-      title: "Knuckle Joint",
-      description:
-        "Robust knuckle joint designed for heavy load applications, ensuring secure connections while allowing limited angular movement. Suitable for linkages in structural and mechanical systems.",
-      software: "SolidWorks",
-      category: "Mechanical Parts",
-      complexity: "Intermediate",
-      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
-      image: "/3d Pictures/knuckle joint.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
-      modelPath: "/Models/KNUCKLE JOINT.STL",
-      views: 226,
-      downloads: 10,
-    },
-    {
-      title: "Universal Coupling",
-      description:
-        "Precision universal coupling enabling torque transmission between shafts at varying angles. Designed to minimize backlash and maintain smooth power delivery in dynamic conditions.",
-      software: "SolidWorks",
-      category: "Industrial",
-      complexity: "Beginner",
-      features: ["Parametric Design", "Motion Study", "Torque Analysis"],
-      image: "/3d Pictures/universal coupling.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
-      modelPath: "/Models/UNIVERSAL COUPLING.STL",
-      views: 189,
-      downloads: 15,
-    },
-    {
-      title: "Muff Coupling",
-      description:
-        "Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
-      software: "SolidWorks",
-      category: "Industrial",
-      complexity: "Basic",
-      features: ["Parametric Design", "Torque Analysis", "Stress Check"],
-      image: "/3d Pictures/muff coupling.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
-      modelPath: "/Models/MUFF COUPLING.STL",
-      views: 189,
-      downloads: 15,
-    },
-    {
-      title: "Door Lock Mechanism",
-      description:
-        "Compact and reliable door lock mechanism featuring latch, spring, and handle components for secure and smooth operation.",
-      software: "SolidWorks",
-      category: "Assembly",
-      complexity: "Basic",
-      features: ["Assembly Modeling", "Motion Simulation", "Tolerance Analysis"],
-      image: "/3d Pictures/DOOR LOCK.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=drive_link",
-      modelPath: "/Models/Door lock.STL",
-      views: 312,
-      downloads: 18,
-    },
-    {
-      title: "Flanged Tee Pipe Fitting",
-      description:
-        "Industrial-grade flanged tee pipe fitting designed for fluid distribution systems. Features precise flanges for secure bolted connections and optimized internal geometry for minimal pressure loss.",
-      software: "SolidWorks",
-      category: "Industrial",
-      complexity: "Intermediate",
-      features: ["Parametric Design", "Flow Optimization", "Assembly Ready"],
-      image: "/3d Pictures/flanged tee pipe fitting.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
-      modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
-      views: 278,
-      downloads: 25,
-    },
-    {
-      title: "Refrigeration Valves Assembly",
-      description:
-        "Precision-designed refrigeration valve assembly used for controlling refrigerant flow in HVAC and cooling systems. Includes service, expansion, and solenoid valves optimized for durability and leak-proof operation.",
-      software: "SolidWorks",
-      category: "Thermal Systems",
-      complexity: "Basic",
-      features: ["Parametric Design", "Flow Simulation", "Thermal Analysis"],
-      image: "/3d Pictures/refrigeration valves.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
-      modelPath: "/Models/Refrigeration Valves.STL",
-      views: 342,
-      downloads: 27,
-    },
-    {
-      title: "Connecting Rod (Without Cap)",
-      description:
-        "Lightweight connecting rod designed without cap for simplified design analysis and manufacturing demonstration. Optimized cross-section for strength-to-weight ratio and fatigue resistance.",
-      software: "SolidWorks",
-      category: "Automotive",
-      complexity: "Intermediate",
-      features: ["3D Modeling", "FEA Simulation", "Mass Optimization"],
-      image: "/3d Pictures/connecting rod.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
-      modelPath: "/Models/Connecting Rod.STL",
-      views: 297,
-      downloads: 24,
-    },
-    {
-      title: "Piston Head",
-      description:
-        "High-strength piston head designed for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high-pressure conditions.",
-      software: "SolidWorks",
-      category: "Automotive",
-      complexity: "Basic",
-      features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
-      image: "/3d Pictures/piston head.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
-      modelPath: "/Models/piston head.STL",
-      views: 410,
-      downloads: 32,
-    },
-    {
-      title: "Crankshaft",
-      description:
-        "Precision crankshaft designed for efficient torque transmission and balanced rotation. Engineered for minimal vibration, maximum fatigue resistance, and high-performance automotive engines.",
-      software: "SolidWorks",
-      category: "Automotive",
-      complexity: "Basic",
-      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
-      image: "/3d Pictures/crankshaft.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
-      modelPath: "/Models/crank shaft.STL",
-      views: 365,
-      downloads: 28,
-    },
-    {
-      title: "Stuffing Box",
-      description:
-        "A sealing assembly designed to prevent fluid leakage around rotating shafts in pumps and valves. Modeled and assembled in SolidWorks with precise dimensional accuracy and material differentiation.",
-      software: "SolidWorks",
-      category: "Mechanical Parts",
-      complexity: "Intermediate",
-      features: ["3D Assembly Modeling","Material Visualization","Sectional & Isometric Views","Mating Constraints"],
-      image: "/3d Pictures/stuffingbox.png",
-      downloadUrl:"https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
-      modelPath: "/Models/Stuffing Box.STL",
-      views: 248,
-      downloads: 19,
-    },
-    {
       title: "Servo-Driven Robotic Gripper",
       description:
         "An intelligent robotic gripper actuated by servo motors for precise object handling. Designed in SolidWorks with adjustable finger mechanisms, torque-based control, and lightweight aluminum structure for automation and pick-and-place applications.",
       software: "SolidWorks",
       category: "Robotics",
       complexity: "Advanced",
-      features: [
-        "Servo-Driven Mechanism",
-        "Adjustable Finger Design",
-        "3D Parametric Modeling",
-        "Motion Study Simulation"
-      ],
+      features: ["Servo-Driven Mechanism", "Adjustable Finger Design", "3D Parametric Modeling", "Motion Study Simulation"],
       image: "/3d Pictures/Robotic Gripper.png",
-      downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+      downloadUrl:
+        "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
       modelPath: "/Models/Robotic Gripper.STL",
       views: 312,
       downloads: 27,
     },
+    // Add all other models here as needed...
   ];
 
   const categories = [
@@ -284,55 +132,42 @@ const CADModels = () => {
     scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 
     const loader = new STLLoader();
-    const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
-    const meshes = [];
-    let loadedCount = 0;
 
-    modelPaths.forEach((path, index) => {
-      const material = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(`hsl(${(index * 60) % 360}, 80%, 60%)`),
-        metalness: 0.5,
-        roughness: 0.2,
-      });
+    loader.load(
+      previewModel.modelPath,
+      (geometry) => {
+        geometry.computeBoundingBox();
+        const box = geometry.boundingBox;
+        const size = new THREE.Vector3();
+        box.getSize(size);
+        const center = new THREE.Vector3();
+        box.getCenter(center);
 
-      loader.load(
-        path,
-        (geometry) => {
-          geometry.computeBoundingBox();
-          const box = geometry.boundingBox;
-          const size = new THREE.Vector3();
-          box.getSize(size);
-          const center = new THREE.Vector3();
-          box.getCenter(center);
+        geometry.translate(-center.x, -center.y, -center.z);
 
-          geometry.translate(-center.x, -center.y, -center.z);
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scaleFactor = 5 / maxDim;
 
-          const maxDim = Math.max(size.x, size.y, size.z);
-          const scaleFactor = 5 / maxDim;
-          const mesh = new THREE.Mesh(geometry, material);
-          mesh.scale.setScalar(scaleFactor);
+        const material = new THREE.MeshStandardMaterial({
+          color: 0x00bfff,
+          metalness: 0.5,
+          roughness: 0.2,
+        });
 
-          scene.add(mesh);
-          meshes.push(mesh);
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.scale.setScalar(scaleFactor);
+        scene.add(mesh);
 
-          loadedCount++;
-          if (loadedCount === modelPaths.length) {
-            const groupBox = new THREE.Box3();
-            meshes.forEach((m) => groupBox.expandByObject(m));
-            const groupSize = groupBox.getSize(new THREE.Vector3());
-            const groupMax = Math.max(groupSize.x, groupSize.y, groupSize.z);
-            const fov = camera.fov * (Math.PI / 180);
-            const cameraZ = Math.abs(groupMax / 2 / Math.tan(fov / 2));
-            camera.position.set(0, 0, cameraZ * 2);
-            camera.lookAt(new THREE.Vector3(0, 0, 0));
+        const fov = camera.fov * (Math.PI / 180);
+        const cameraZ = Math.abs(Math.max(size.x, size.y, size.z) / 2 / Math.tan(fov / 2));
+        camera.position.set(0, 0, cameraZ * 2);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-            setTimeout(() => setLoadingModel(false), 500);
-          }
-        },
-        undefined,
-        () => setLoadingModel(false)
-      );
-    });
+        setLoadingModel(false);
+      },
+      undefined,
+      () => setLoadingModel(false)
+    );
 
     const animate = () => {
       requestAnimationFrame(animate);

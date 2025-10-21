@@ -197,15 +197,9 @@ const CADModels = () => {
       software: "SolidWorks",
       category: "Mechanical Parts",
       complexity: "Intermediate",
-      features: [
-        "3D Assembly Modeling",
-        "Material Visualization",
-        "Sectional & Isometric Views",
-        "Mating Constraints",
-      ],
+      features: ["3D Assembly Modeling", "Material Visualization", "Sectional & Isometric Views", "Mating Constraints"],
       image: "/3d Pictures/stuffingbox.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+      downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
       modelPath: "/Models/Stuffing Box.STL",
       views: 248,
       downloads: 19,
@@ -224,8 +218,7 @@ const CADModels = () => {
         "Motion Study Simulation",
       ],
       image: "/3d Pictures/Robotic Gripper.png",
-      downloadUrl:
-        "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+      downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
       modelPath: "/Models/Robotic Gripper.STL",
       views: 312,
       downloads: 27,
@@ -261,8 +254,6 @@ const CADModels = () => {
         return "bg-gray-100 text-gray-800 border-gray-200";
     }
   };
-
-  const filteredFeatures = (features) => features.slice(0, 4);
 
   const stats = [
     { label: "Total Models", value: cadModels.length, icon: Box },
@@ -413,31 +404,31 @@ const CADModels = () => {
         {filteredModels.map((model) => (
           <motion.div
             key={model.title}
-            className="bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"
-            whileHover={{ scale: 1.05 }}
+            className="relative bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 group"
+            whileHover={{ scale: 1.03 }}
           >
-            <img
-              src={model.image}
-              alt={model.title}
-              className="w-full h-64 object-cover"
-            />
+            <div className="relative">
+              <img
+                src={model.image}
+                alt={model.title}
+                className="w-full h-72 object-cover"
+              />
+              {/* View / Download badges */}
+              <div className="absolute top-3 left-3 flex flex-col gap-2">
+                <span className="flex items-center gap-1 px-2 py-1 bg-blue-600 rounded-full text-white font-semibold text-xs shadow-lg">
+                  <Eye className="w-3 h-3" /> {model.views}
+                </span>
+                <span className="flex items-center gap-1 px-2 py-1 bg-green-600 rounded-full text-white font-semibold text-xs shadow-lg">
+                  <Download className="w-3 h-3" /> {model.downloads}
+                </span>
+              </div>
+            </div>
+
             <div className="p-6">
               <h3 className="text-2xl font-semibold text-white mb-3">
                 {model.title}
               </h3>
               <p className="text-gray-400 text-sm mb-4">{model.description}</p>
-
-              {/* Feature badges */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {filteredFeatures(model.features).map((f) => (
-                  <span
-                    key={f}
-                    className="px-3 py-1 text-xs rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow"
-                  >
-                    {f}
-                  </span>
-                ))}
-              </div>
 
               {/* Complexity & Software */}
               <div className="flex justify-between items-center mb-4">
@@ -478,16 +469,6 @@ const CADModels = () => {
                   <Download className="w-5 h-5" /> Download
                 </a>
               </div>
-
-              {/* Views & Downloads */}
-              <div className="flex justify-between items-center text-gray-300 text-sm mt-2">
-                <span className="flex items-center gap-1">
-                  <Eye className="w-4 h-4" /> {model.views}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Download className="w-4 h-4" /> {model.downloads}
-                </span>
-              </div>
             </div>
           </motion.div>
         ))}
@@ -495,11 +476,11 @@ const CADModels = () => {
 
       {/* 3D Preview Modal */}
       {previewModel && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
-          <div className="relative bg-gray-900 w-full max-w-5xl h-[700px] rounded-lg p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4">
+          <div className="relative bg-gray-900 w-full max-w-6xl h-[750px] rounded-lg p-4 shadow-2xl">
             <button
               onClick={() => setPreviewModel(null)}
-              className="absolute top-3 right-3 text-white p-2"
+              className="absolute top-3 right-3 text-white p-3 rounded-full bg-red-600 hover:bg-red-500 transition"
             >
               <X />
             </button>
@@ -529,11 +510,11 @@ const CADModels = () => {
 
       {/* Image Preview Modal */}
       {previewImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
-          <div className="relative bg-gray-900 w-full max-w-3xl rounded-lg p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4">
+          <div className="relative bg-gray-900 w-full max-w-4xl rounded-lg p-4 shadow-2xl">
             <button
               onClick={() => setPreviewImage(null)}
-              className="absolute top-3 right-3 text-white p-2"
+              className="absolute top-3 right-3 text-white p-3 rounded-full bg-red-600 hover:bg-red-500 transition"
             >
               <X />
             </button>

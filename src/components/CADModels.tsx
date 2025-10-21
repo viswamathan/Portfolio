@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import {
-  Box,
-  Download,
   Eye,
-  Layers,
-  Award,
+  Download,
+  Image as ImageIcon,
   X,
   ZoomIn,
   ZoomOut,
-  Image as ImageIcon,
 } from "lucide-react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
@@ -21,8 +17,8 @@ const CADModels = () => {
   const [previewImage, setPreviewImage] = useState(null);
   const [loadingModel, setLoadingModel] = useState(false);
   const mountRef = useRef(null);
-  const controlsRef = useRef(null);
   const cameraRef = useRef(null);
+  const controlsRef = useRef(null);
 
   const cadModels = [
     {
@@ -197,9 +193,15 @@ const CADModels = () => {
       software: "SolidWorks",
       category: "Mechanical Parts",
       complexity: "Intermediate",
-      features: ["3D Assembly Modeling", "Material Visualization", "Sectional & Isometric Views", "Mating Constraints"],
+      features: [
+        "3D Assembly Modeling",
+        "Material Visualization",
+        "Sectional & Isometric Views",
+        "Mating Constraints",
+      ],
       image: "/3d Pictures/stuffingbox.png",
-      downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+      downloadUrl:
+        "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
       modelPath: "/Models/Stuffing Box.STL",
       views: 248,
       downloads: 19,
@@ -218,7 +220,8 @@ const CADModels = () => {
         "Motion Study Simulation",
       ],
       image: "/3d Pictures/Robotic Gripper.png",
-      downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+      downloadUrl:
+        "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
       modelPath: "/Models/Robotic Gripper.STL",
       views: 312,
       downloads: 27,
@@ -243,26 +246,19 @@ const CADModels = () => {
   const getComplexityColor = (complexity) => {
     switch (complexity) {
       case "Beginner":
-        return "bg-green-100 text-green-800 border-green-200";
+        return "bg-gray-100 text-gray-800";
       case "Intermediate":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200";
+        return "bg-gray-200 text-gray-900";
       case "Advanced":
-        return "bg-red-100 text-red-800 border-red-200";
+        return "bg-gray-300 text-gray-900";
       case "Basic":
-        return "bg-blue-100 text-blue-800 border-blue-200";
+        return "bg-gray-100 text-gray-800";
       default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
+        return "bg-gray-100 text-gray-800";
     }
   };
 
-  const stats = [
-    { label: "Total Models", value: cadModels.length, icon: Box },
-    { label: "Downloads", value: "2.5K+", icon: Download },
-    { label: "Categories", value: categories.length - 1, icon: Layers },
-    { label: "Design Hours", value: "1000+", icon: Award },
-  ];
-
-  // --- 3D Viewer effect ---
+  // 3D preview setup...
   useEffect(() => {
     if (!previewModel || !mountRef.current) return;
     setLoadingModel(true);
@@ -353,34 +349,14 @@ const CADModels = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [previewModel]);
 
-  const zoomIn = () => {
-    if (cameraRef.current) cameraRef.current.position.z *= 0.8;
-  };
-  const zoomOut = () => {
-    if (cameraRef.current) cameraRef.current.position.z *= 1.2;
-  };
+  const zoomIn = () => cameraRef.current && (cameraRef.current.position.z *= 0.8);
+  const zoomOut = () => cameraRef.current && (cameraRef.current.position.z *= 1.2);
 
   return (
     <div className="container mx-auto px-6 py-10">
       <h2 className="text-4xl font-bold text-white mb-10 text-center">
         CAD Models Gallery
       </h2>
-
-      {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-        {stats.map((stat) => (
-          <div
-            key={stat.label}
-            className="flex items-center gap-3 p-5 rounded-xl border border-gray-700 hover:shadow-xl transition duration-300"
-          >
-            <stat.icon className="w-8 h-8 text-white" />
-            <div>
-              <p className="text-white text-lg font-bold">{stat.value}</p>
-              <p className="text-gray-400 text-sm">{stat.label}</p>
-            </div>
-          </div>
-        ))}
-      </div>
 
       {/* Categories */}
       <div className="flex flex-wrap justify-center gap-4 mb-10">
@@ -390,8 +366,8 @@ const CADModels = () => {
             onClick={() => setActiveCategory(cat)}
             className={`px-6 py-2 rounded-full font-semibold transition duration-300 ${
               activeCategory === cat
-                ? "bg-blue-500 text-white shadow-lg"
-                : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                ? "bg-gray-800 text-white shadow-lg"
+                : "bg-gray-700 text-gray-300 hover:bg-gray-600"
             }`}
           >
             {cat}
@@ -399,78 +375,82 @@ const CADModels = () => {
         ))}
       </div>
 
-      {/* Model Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Horizontal Model Cards */}
+      <div className="flex flex-col gap-6">
         {filteredModels.map((model) => (
-          <motion.div
+          <div
             key={model.title}
-            className="relative bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 group"
-            whileHover={{ scale: 1.03 }}
+            className="flex bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"
           >
-            <div className="relative">
+            <div className="relative w-1/3">
               <img
                 src={model.image}
                 alt={model.title}
-                className="w-full h-72 object-cover"
+                className="w-full h-full object-cover"
               />
-              {/* View / Download badges */}
               <div className="absolute top-3 left-3 flex flex-col gap-2">
-                <span className="flex items-center gap-1 px-2 py-1 bg-blue-600 rounded-full text-white font-semibold text-xs shadow-lg">
+                <span className="flex items-center gap-1 px-2 py-1 bg-gray-800 rounded-full text-white text-xs">
                   <Eye className="w-3 h-3" /> {model.views}
                 </span>
-                <span className="flex items-center gap-1 px-2 py-1 bg-green-600 rounded-full text-white font-semibold text-xs shadow-lg">
+                <span className="flex items-center gap-1 px-2 py-1 bg-gray-800 rounded-full text-white text-xs">
                   <Download className="w-3 h-3" /> {model.downloads}
                 </span>
               </div>
             </div>
-
-            <div className="p-6">
-              <h3 className="text-2xl font-semibold text-white mb-3">
-                {model.title}
-              </h3>
-              <p className="text-gray-400 text-sm mb-4">{model.description}</p>
-
-              {/* Complexity & Software */}
-              <div className="flex justify-between items-center mb-4">
-                <span
-                  className={`text-xs px-3 py-1 border rounded-full font-semibold ${getComplexityColor(
-                    model.complexity
-                  )} shadow-sm`}
-                >
-                  {model.complexity}
-                </span>
-                <span className="text-gray-400 text-sm font-semibold">
-                  {model.software}
-                </span>
-              </div>
-
-              {/* Buttons */}
-              <div className="flex justify-between items-center mb-4 gap-2">
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setPreviewImage(model.image)}
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-semibold transition"
-                  >
-                    <ImageIcon className="w-5 h-5" /> Photo
-                  </button>
-                  <button
-                    onClick={() => setPreviewModel(model)}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-semibold transition"
-                  >
-                    <Eye className="w-5 h-5" /> 3D Model
-                  </button>
+            <div className="w-2/3 p-6 flex flex-col justify-between">
+              <div>
+                <h3 className="text-2xl font-semibold text-white mb-2">
+                  {model.title}
+                </h3>
+                <p className="text-gray-400 text-sm mb-2">{model.description}</p>
+                {/* Features */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {model.features.map((f, idx) => (
+                    <span
+                      key={idx}
+                      className="text-xs px-2 py-1 bg-gray-700 text-white rounded-full"
+                    >
+                      {f}
+                    </span>
+                  ))}
                 </div>
+                <div className="flex gap-2 mb-4">
+                  <span
+                    className={`text-xs px-3 py-1 rounded-full font-semibold ${getComplexityColor(
+                      model.complexity
+                    )}`}
+                  >
+                    {model.complexity}
+                  </span>
+                  <span className="text-gray-400 text-sm font-semibold">
+                    {model.software}
+                  </span>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <button
+                  onClick={() => setPreviewImage(model.image)}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-semibold transition text-sm"
+                >
+                  <ImageIcon className="w-4 h-4" /> Photo
+                </button>
+                <button
+                  onClick={() => setPreviewModel(model)}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-semibold transition text-sm"
+                >
+                  <Eye className="w-4 h-4" /> 3D Model
+                </button>
                 <a
                   href={model.downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-500 rounded-lg text-white font-semibold transition"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-semibold transition text-sm"
                 >
-                  <Download className="w-5 h-5" /> Download
+                  <Download className="w-4 h-4" /> Download
                 </a>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -488,13 +468,13 @@ const CADModels = () => {
             <div className="absolute bottom-5 left-5 flex gap-3">
               <button
                 onClick={zoomIn}
-                className="px-4 py-2 bg-blue-600 rounded-lg text-white flex items-center gap-1"
+                className="px-4 py-2 bg-gray-700 rounded-lg text-white flex items-center gap-1"
               >
                 <ZoomIn /> Zoom In
               </button>
               <button
                 onClick={zoomOut}
-                className="px-4 py-2 bg-blue-600 rounded-lg text-white flex items-center gap-1"
+                className="px-4 py-2 bg-gray-700 rounded-lg text-white flex items-center gap-1"
               >
                 <ZoomOut /> Zoom Out
               </button>

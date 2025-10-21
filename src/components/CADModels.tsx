@@ -151,71 +151,68 @@ const CADModels = () => {
       downloads: 24,
     },
     {
-  title: "Piston Head",
-  description:
-    "High-strength piston head designed for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high-pressure conditions.",
-  software: "SolidWorks",
-  category: "Automotive",
-  complexity: "Basic",
-  features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
-  image: "/3d Pictures/piston head.png",
-  downloadUrl:
-    "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
-  modelPath: "/Models/piston head.STL",
-  views: 410,
-  downloads: 32,
-},
-{
-  title: "Crankshaft",
-  description:
-    "Precision crankshaft designed for efficient torque transmission and balanced rotation. Engineered for minimal vibration, maximum fatigue resistance, and high-performance automotive engines.",
-  software: "SolidWorks",
-  category: "Automotive",
-  complexity: "Basic",
-  features: ["Parametric Design", "Stress Analysis", "Motion Study"],
-  image: "/3d Pictures/crankshaft.png",
-  downloadUrl:
-    "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
-  modelPath: "/Models/crank shaft.STL",
-  views: 365,
-  downloads: 28,
-},
-{
-  title: "Stuffing Box",
-  description:
-    "A sealing assembly designed to prevent fluid leakage around rotating shafts in pumps and valves. Modeled and assembled in SolidWorks with precise dimensional accuracy and material differentiation.",
-  software: "SolidWorks",
-  category: "Mechanical Parts",
-  complexity: "Intermediate",
-  features: ["3D Assembly Modeling","Material Visualization","Sectional & Isometric Views","Mating Constraints"],
-  image: "/3d Pictures/stuffingbox.png",
-  downloadUrl:"https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
-  modelPath: "/Models/Stuffing Box.STL",
-  views: 248,
-  downloads: 19,
-},
+      title: "Piston Head",
+      description:
+        "High-strength piston head designed for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high-pressure conditions.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
+      image: "/3d Pictures/piston head.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
+      modelPath: "/Models/piston head.STL",
+      views: 410,
+      downloads: 32,
+    },
     {
-  title: "Servo-Driven Robotic Gripper",
-  description:
-    "An intelligent robotic gripper actuated by servo motors for precise object handling. Designed in SolidWorks with adjustable finger mechanisms, torque-based control, and lightweight aluminum structure for automation and pick-and-place applications.",
-  software: "SolidWorks",
-  category: "Robotics",
-  complexity: "Advanced",
-  features: [
-    "Servo-Driven Mechanism",
-    "Adjustable Finger Design",
-    "3D Parametric Modeling",
-    "Motion Study Simulation"
-  ],
-  image: "/3d Pictures/Robotic Gripper.png",
-  downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
-  modelPath: "/Models/Robotic Gripper.STL",
-  views: 312,
-  downloads: 27,
-},
-
-
-
+      title: "Crankshaft",
+      description:
+        "Precision crankshaft designed for efficient torque transmission and balanced rotation. Engineered for minimal vibration, maximum fatigue resistance, and high-performance automotive engines.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+      image: "/3d Pictures/crankshaft.png",
+      downloadUrl:
+        "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
+      modelPath: "/Models/crank shaft.STL",
+      views: 365,
+      downloads: 28,
+    },
+    {
+      title: "Stuffing Box",
+      description:
+        "A sealing assembly designed to prevent fluid leakage around rotating shafts in pumps and valves. Modeled and assembled in SolidWorks with precise dimensional accuracy and material differentiation.",
+      software: "SolidWorks",
+      category: "Mechanical Parts",
+      complexity: "Intermediate",
+      features: ["3D Assembly Modeling","Material Visualization","Sectional & Isometric Views","Mating Constraints"],
+      image: "/3d Pictures/stuffingbox.png",
+      downloadUrl:"https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+      modelPath: "/Models/Stuffing Box.STL",
+      views: 248,
+      downloads: 19,
+    },
+    {
+      title: "Servo-Driven Robotic Gripper",
+      description:
+        "An intelligent robotic gripper actuated by servo motors for precise object handling. Designed in SolidWorks with adjustable finger mechanisms, torque-based control, and lightweight aluminum structure for automation and pick-and-place applications.",
+      software: "SolidWorks",
+      category: "Robotics",
+      complexity: "Advanced",
+      features: [
+        "Servo-Driven Mechanism",
+        "Adjustable Finger Design",
+        "3D Parametric Modeling",
+        "Motion Study Simulation"
+      ],
+      image: "/3d Pictures/Robotic Gripper.png",
+      downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+      modelPath: "/Models/Robotic Gripper.STL",
+      views: 312,
+      downloads: 27,
+    },
   ];
 
   const categories = [
@@ -483,10 +480,16 @@ const CADModels = () => {
 
               <div className="flex gap-3">
                 <motion.button
+                  onClick={() => setPreviewImage(model)}
+                  className="flex-1 flex items-center justify-center gap-2 bg-green-600/20 hover:bg-green-600/30 text-green-400 px-4 py-3 rounded-lg text-sm border border-green-500/30"
+                >
+                  <Eye className="w-4 h-4" /> View Photo
+                </motion.button>
+                <motion.button
                   onClick={() => setPreviewModel(model)}
                   className="flex-1 flex items-center justify-center gap-2 bg-purple-600/20 hover:bg-purple-600/30 text-purple-400 px-4 py-3 rounded-lg text-sm border border-purple-500/30"
                 >
-                  <Eye className="w-4 h-4" /> Preview
+                  <Box className="w-4 h-4" /> 3D View
                 </motion.button>
                 <a
                   href={model.downloadUrl}
@@ -513,7 +516,7 @@ const CADModels = () => {
           >
             <button
               onClick={() => setPreviewModel(null)}
-              className="absolute top-4 right-4 text-gray-300 hover:text-white"
+              className="absolute top-4 right-4 text-gray-300 hover:text-white z-10"
             >
               <X className="w-6 h-6" />
             </button>
@@ -532,17 +535,58 @@ const CADModels = () => {
 
             <div className="flex justify-end gap-3 mt-4">
               <button
-                onClick={zoomIn}
-                className="px-4 py-2 bg-green-600/20 text-green-400 rounded-lg hover:bg-green-600/30 border border-green-500/30"
+                onClick={zoomOut}
+                className="flex items-center gap-2 px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 border border-red-500/30"
               >
-                Zoom In
+                <ZoomOut className="w-4 h-4" /> Zoom Out
               </button>
               <button
-                onClick={zoomOut}
-                className="px-4 py-2 bg-red-600/20 text-red-400 rounded-lg hover:bg-red-600/30 border border-red-500/30"
+                onClick={zoomIn}
+                className="flex items-center gap-2 px-4 py-2 bg-green-600/20 text-green-400 rounded-lg hover:bg-green-600/30 border border-green-500/30"
               >
-                Zoom Out
+                <ZoomIn className="w-4 h-4" /> Zoom In
               </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Image Preview Modal */}
+      {previewImage && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            className="bg-gray-900 rounded-2xl max-w-4xl w-full p-6 relative"
+          >
+            <button
+              onClick={() => setPreviewImage(null)}
+              className="absolute top-4 right-4 text-gray-300 hover:text-white z-10"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <h3 className="text-2xl font-bold text-white mb-4">{previewImage.title}</h3>
+            <p className="text-gray-300 mb-4">{previewImage.description}</p>
+
+            <div className="relative w-full h-96 bg-gray-800 rounded-lg overflow-hidden">
+              <img
+                src={previewImage.image}
+                alt={previewImage.title}
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2 mt-4">
+              {previewImage.features.map((f, idx) => (
+                <span
+                  key={idx}
+                  className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
+                >
+                  {f}
+                </span>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -552,5 +596,3 @@ const CADModels = () => {
 };
 
 export default CADModels;
-
-

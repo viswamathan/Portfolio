@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { 
   Box, Download, Eye, Layers, Award, X, ZoomIn, ZoomOut, 
-  Search, RefreshCw, Grid3x3, EyeOff 
+  Search, RefreshCw, Grid3x3 
 } from "lucide-react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
@@ -60,7 +60,7 @@ const StatCard = ({ stat }) => {
 };
 
 // Reusable Model Card Component
-const ModelCard = ({ model, onViewPhoto, onView3D, loadingImages, modelErrors }) => {
+const ModelCard = ({ model, onViewPhoto, onView3D }) => {
   const getComplexityColor = (complexity) => {
     switch (complexity) {
       case "Beginner": return "bg-green-500/20 text-green-400 border-green-500/30";
@@ -75,24 +75,13 @@ const ModelCard = ({ model, onViewPhoto, onView3D, loadingImages, modelErrors })
       whileHover={{ scale: 1.02, y: -5 }}
       className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 shadow-lg hover:border-purple-500/30 transition-colors"
     >
-      {/* Image with enhanced loading */}
+      {/* Image Thumbnail */}
       <div className="relative h-64 overflow-hidden group">
-        {loadingImages[model.title] !== false && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-700 z-10">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500"></div>
-          </div>
-        )}
-        {modelErrors[model.title] ? (
-          <div className="w-full h-full flex items-center justify-center bg-gray-600 text-gray-400">
-            <EyeOff className="w-12 h-12" />
-          </div>
-        ) : (
-          <img
-            src={model.image}
-            alt={model.title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-        )}
+        <img
+          src={model.image}
+          alt={model.title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
 
         <div className="absolute top-4 left-4 flex gap-2 z-20">
           <span className="bg-black/50 px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
@@ -170,8 +159,6 @@ const CADModels = () => {
   const [previewModel, setPreviewModel] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [loadingModel, setLoadingModel] = useState(false);
-  const [loadingImages, setLoadingImages] = useState({});
-  const [modelErrors, setModelErrors] = useState({});
   const [autoRotate, setAutoRotate] = useState(true);
   const [wireframe, setWireframe] = useState(false);
   
@@ -195,7 +182,167 @@ const CADModels = () => {
       views: 1247,
       downloads: 89,
     },
-    // ... (include all your other models here)
+    {
+      title: "Exhaust Manifold",
+      description: "Optimized exhaust manifold designed for efficient gas flow, reduced backpressure, and improved engine performance. Features smooth flow paths and minimized thermal stresses for durability.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Advanced",
+      features: ["Flow Simulation", "Thermal Analysis", "Parametric Design"],
+      image: "/3d Pictures/exhaust manifold.png",
+      downloadUrl: "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
+      modelPath: "/Models/Exhaust manifold.STL",
+      views: 500,
+      downloads: 25,
+    },
+    {
+      title: "Knuckle Joint",
+      description: "Robust knuckle joint designed for heavy load applications, ensuring secure connections while allowing limited angular movement. Suitable for linkages in structural and mechanical systems.",
+      software: "SolidWorks",
+      category: "Mechanical Parts",
+      complexity: "Intermediate",
+      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+      image: "/3d Pictures/knuckle joint.png",
+      downloadUrl: "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
+      modelPath: "/Models/KNUCKLE JOINT.STL",
+      views: 226,
+      downloads: 10,
+    },
+    {
+      title: "Universal Coupling",
+      description: "Precision universal coupling enabling torque transmission between shafts at varying angles. Designed to minimize backlash and maintain smooth power delivery in dynamic conditions.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Beginner",
+      features: ["Parametric Design", "Motion Study", "Torque Analysis"],
+      image: "/3d Pictures/universal coupling.png",
+      downloadUrl: "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
+      modelPath: "/Models/UNIVERSAL COUPLING.STL",
+      views: 189,
+      downloads: 15,
+    },
+    {
+      title: "Muff Coupling",
+      description: "Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Basic",
+      features: ["Parametric Design", "Torque Analysis", "Stress Check"],
+      image: "/3d Pictures/muff coupling.png",
+      downloadUrl: "https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
+      modelPath: "/Models/MUFF COUPLING.STL",
+      views: 189,
+      downloads: 15,
+    },
+    {
+      title: "Door Lock Mechanism",
+      description: "Compact and reliable door lock mechanism featuring latch, spring, and handle components for secure and smooth operation.",
+      software: "SolidWorks",
+      category: "Assembly",
+      complexity: "Basic",
+      features: ["Assembly Modeling", "Motion Simulation", "Tolerance Analysis"],
+      image: "/3d Pictures/DOOR LOCK.png",
+      downloadUrl: "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
+      modelPath: "/Models/Door lock.STL",
+      views: 312,
+      downloads: 18,
+    },
+    {
+      title: "Flanged Tee Pipe Fitting",
+      description: "Industrial-grade flanged tee pipe fitting designed for fluid distribution systems. Features precise flanges for secure bolted connections and optimized internal geometry for minimal pressure loss.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Intermediate",
+      features: ["Parametric Design", "Flow Optimization", "Assembly Ready"],
+      image: "/3d Pictures/flanged tee pipe fitting.png",
+      downloadUrl: "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
+      modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
+      views: 278,
+      downloads: 25,
+    },
+    {
+      title: "Refrigeration Valves Assembly",
+      description: "Precision-designed refrigeration valve assembly used for controlling refrigerant flow in HVAC and cooling systems. Includes service, expansion, and solenoid valves optimized for durability and leak-proof operation.",
+      software: "SolidWorks",
+      category: "Thermal Systems",
+      complexity: "Basic",
+      features: ["Parametric Design", "Flow Simulation", "Thermal Analysis"],
+      image: "/3d Pictures/refrigeration valves.png",
+      downloadUrl: "https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
+      modelPath: "/Models/Refrigeration Valves.STL",
+      views: 342,
+      downloads: 27,
+    },
+    {
+      title: "Connecting Rod (Without Cap)",
+      description: "Lightweight connecting rod designed without cap for simplified design analysis and manufacturing demonstration. Optimized cross-section for strength-to-weight ratio and fatigue resistance.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Intermediate",
+      features: ["3D Modeling", "FEA Simulation", "Mass Optimization"],
+      image: "/3d Pictures/connecting rod.png",
+      downloadUrl: "https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
+      modelPath: "/Models/Connecting Rod.STL",
+      views: 297,
+      downloads: 24,
+    },
+    {
+      title: "Piston Head",
+      description: "High-strength piston head designed for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high-pressure conditions.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
+      image: "/3d Pictures/piston head.png",
+      downloadUrl: "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
+      modelPath: "/Models/piston head.STL",
+      views: 410,
+      downloads: 32,
+    },
+    {
+      title: "Crankshaft",
+      description: "Precision crankshaft designed for efficient torque transmission and balanced rotation. Engineered for minimal vibration, maximum fatigue resistance, and high-performance automotive engines.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+      image: "/3d Pictures/crankshaft.png",
+      downloadUrl: "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
+      modelPath: "/Models/crank shaft.STL",
+      views: 365,
+      downloads: 28,
+    },
+    {
+      title: "Stuffing Box",
+      description: "A sealing assembly designed to prevent fluid leakage around rotating shafts in pumps and valves. Modeled and assembled in SolidWorks with precise dimensional accuracy and material differentiation.",
+      software: "SolidWorks",
+      category: "Mechanical Parts",
+      complexity: "Intermediate",
+      features: ["3D Assembly Modeling","Material Visualization","Sectional & Isometric Views","Mating Constraints"],
+      image: "/3d Pictures/stuffingbox.png",
+      downloadUrl:"https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+      modelPath: "/Models/Stuffing Box.STL",
+      views: 248,
+      downloads: 19,
+    },
+    {
+      title: "Servo-Driven Robotic Gripper",
+      description: "An intelligent robotic gripper actuated by servo motors for precise object handling. Designed in SolidWorks with adjustable finger mechanisms, torque-based control, and lightweight aluminum structure for automation and pick-and-place applications.",
+      software: "SolidWorks",
+      category: "Robotics",
+      complexity: "Advanced",
+      features: [
+        "Servo-Driven Mechanism",
+        "Adjustable Finger Design",
+        "3D Parametric Modeling",
+        "Motion Study Simulation"
+      ],
+      image: "/3d Pictures/Robotic Gripper.png",
+      downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+      modelPath: "/Models/Robotic Gripper.STL",
+      views: 312,
+      downloads: 27,
+    },
   ];
 
   const categories = [
@@ -271,15 +418,6 @@ const CADModels = () => {
   // Event handlers
   const handleCategoryChange = useCallback((category) => {
     setActiveCategory(category);
-  }, []);
-
-  const handleImageLoad = useCallback((modelId) => {
-    setLoadingImages(prev => ({ ...prev, [modelId]: false }));
-  }, []);
-
-  const handleImageError = useCallback((modelId) => {
-    setLoadingImages(prev => ({ ...prev, [modelId]: false }));
-    setModelErrors(prev => ({ ...prev, [modelId]: true }));
   }, []);
 
   const zoomIn = () => {
@@ -533,8 +671,6 @@ const CADModels = () => {
                 model={model}
                 onViewPhoto={setPreviewImage}
                 onView3D={setPreviewModel}
-                loadingImages={loadingImages}
-                modelErrors={modelErrors}
               />
             ))}
           </div>

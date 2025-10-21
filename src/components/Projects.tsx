@@ -14,14 +14,16 @@ import {
   Play,
   FileText,
   ExternalLink,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 
 /**
  * Enhanced Projects Component
- * - Consistent button colors (purple theme)
- * - Removed duplicate image viewing functionality
- * - Improved modal interactions
- * - Cleaner code structure
+ * - Improved card layouts and alignments
+ * - Better visual hierarchy and spacing
+ * - Enhanced image gallery organization
+ * - Consistent button styling and positioning
  */
 
 /* ----------------------------- Modal Components ---------------------------- */
@@ -171,17 +173,13 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
                   onClick={() => setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))}
                   className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 rounded-full transition-colors"
                 >
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
+                  <ChevronLeft className="w-6 h-6 text-white" />
                 </button>
                 <button
                   onClick={() => setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))}
                   className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 rounded-full transition-colors"
                 >
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
+                  <ChevronRight className="w-6 h-6 text-white" />
                 </button>
               </>
             )}
@@ -265,23 +263,23 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
   const images = [project.image1, project.image2].filter(Boolean) as string[];
 
   // Consolidated button style for consistency
-  const buttonStyle = "flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium";
+  const buttonStyle = "flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium flex-1 min-w-[140px]";
 
   return (
     <motion.div
       whileHover={{ scale: 1.02, y: -5 }}
-      className="bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-2xl"
+      className="bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col h-full"
     >
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-1">
         {/* Header */}
         <div className="flex justify-between items-start mb-4">
-          <div>
+          <div className="flex-1">
             <h3 className="text-2xl font-bold text-purple-400 mb-2">{project.title}</h3>
-            <p className="text-gray-300 text-sm">{project.description}</p>
+            <p className="text-gray-300 text-sm leading-relaxed">{project.description}</p>
           </div>
           <motion.button
             onClick={() => onViewGallery(project)}
-            className="p-2 bg-purple-600/20 hover:bg-purple-600/40 rounded-lg transition-colors"
+            className="p-2 bg-purple-600/20 hover:bg-purple-600/40 rounded-lg transition-colors ml-4 flex-shrink-0"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -290,131 +288,145 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
         </div>
 
         {/* Project Details Grid */}
-        {(project.problem || project.solution || project.impact) && (
-          <div className="grid gap-3 mb-6">
-            {project.problem && (
-              <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
-                <h4 className="font-semibold text-red-400 text-sm mb-1">Challenge</h4>
-                <p className="text-gray-300 text-xs">{project.problem}</p>
-              </div>
-            )}
-            {project.solution && (
-              <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
-                <h4 className="font-semibold text-blue-400 text-sm mb-1">Solution</h4>
-                <p className="text-gray-300 text-xs">{project.solution}</p>
-              </div>
-            )}
-            {project.impact && (
-              <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
-                <h4 className="font-semibold text-green-400 text-sm mb-1">Impact</h4>
-                <p className="text-gray-300 text-xs">{project.impact}</p>
-              </div>
-            )}
-          </div>
-        )}
+        <div className="flex-1">
+          {(project.problem || project.solution || project.impact) && (
+            <div className="grid gap-3 mb-6">
+              {project.problem && (
+                <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+                  <h4 className="font-semibold text-red-400 text-sm mb-1">Challenge</h4>
+                  <p className="text-gray-300 text-xs leading-relaxed">{project.problem}</p>
+                </div>
+              )}
+              {project.solution && (
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
+                  <h4 className="font-semibold text-blue-400 text-sm mb-1">Solution</h4>
+                  <p className="text-gray-300 text-xs leading-relaxed">{project.solution}</p>
+                </div>
+              )}
+              {project.impact && (
+                <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
+                  <h4 className="font-semibold text-green-400 text-sm mb-1">Impact</h4>
+                  <p className="text-gray-300 text-xs leading-relaxed">{project.impact}</p>
+                </div>
+              )}
+            </div>
+          )}
 
-        {/* Technologies */}
-        {project.technologies && (
+          {/* Technologies */}
+          {project.technologies && (
+            <div className="mb-6">
+              <h4 className="font-semibold text-purple-300 mb-2 text-sm">Technologies Used:</h4>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech: string, index: number) => (
+                  <motion.span
+                    key={index}
+                    className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30"
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    {tech}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Enhanced Image Gallery */}
+        {images.length > 0 && (
           <div className="mb-6">
-            <h4 className="font-semibold text-purple-300 mb-2 text-sm">Technologies Used:</h4>
-            <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech: string, index: number) => (
-                <motion.span
-                  key={index}
-                  className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {tech}
-                </motion.span>
+            <div className="flex justify-between items-center mb-3">
+              <h4 className="font-semibold text-purple-300 text-sm">Project Visuals:</h4>
+              <span className="text-gray-400 text-xs">{images.length} images</span>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {images.map((img, idx) => (
+                <div key={idx} className="relative group">
+                  <motion.div
+                    className="relative w-full h-40 rounded-lg overflow-hidden border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
+                    whileHover={{ scale: 1.03 }}
+                    onClick={() => onViewImage(img, project.title)}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`${project.title} - View ${idx + 1}`} 
+                      className="w-full h-full object-cover" 
+                    />
+
+                    {/* Overlay with view button */}
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <motion.button
+                        className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <Eye className="w-4 h-4 text-white" />
+                      </motion.button>
+                    </div>
+
+                    {/* Image Label */}
+                    <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
+                      View {idx + 1}
+                    </div>
+                  </motion.div>
+                </div>
               ))}
             </div>
           </div>
         )}
 
-        {/* Enhanced Image Gallery - Simplified */}
-        {images.length > 0 && (
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            {images.map((img, idx) => (
-              <div key={idx} className="relative group">
-                <motion.div
-                  className="relative w-full h-40 rounded-lg overflow-hidden border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
-                  whileHover={{ scale: 1.03 }}
-                  onClick={() => onViewImage(img, project.title)}
-                >
-                  <img src={img} alt={`${project.title} - View ${idx + 1}`} className="w-full h-full object-cover" />
+        {/* Enhanced Actions - Consistent Layout */}
+        <div className="mt-auto">
+          <div className="flex flex-wrap gap-3 justify-center">
+            {project.report && (
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href={project.report}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonStyle}
+              >
+                <FileText className="w-4 h-4" />
+                <span>Report</span>
+              </motion.a>
+            )}
 
-                  {/* Overlay with single view button */}
-                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <motion.button
-                      className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <Eye className="w-4 h-4 text-white" />
-                    </motion.button>
-                  </div>
+            {project.simulations && (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => onViewSimulation(project.simulations, project.title)}
+                className={buttonStyle}
+              >
+                <Play className="w-4 h-4" />
+                <span>Simulation</span>
+              </motion.button>
+            )}
 
-                  {/* Image Label */}
-                  <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
-                    View {idx + 1}
-                  </div>
-                </motion.div>
-              </div>
-            ))}
-          </div>
-        )}
+            {project.githubUrl && (
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonStyle}
+              >
+                <Github className="w-4 h-4" />
+                <span>Code</span>
+              </motion.a>
+            )}
 
-        {/* Enhanced Actions - Consistent Colors */}
-        <div className="flex flex-wrap gap-3">
-          {project.report && (
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={project.report}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonStyle}
-            >
-              <FileText className="w-4 h-4" />
-              <span>Technical Report</span>
-            </motion.a>
-          )}
-
-          {project.simulations && (
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => onViewSimulation(project.simulations, project.title)}
+              onClick={() => onViewGallery(project)}
               className={buttonStyle}
             >
-              <Play className="w-4 h-4" />
-              <span>View Simulation</span>
+              <ExternalLink className="w-4 h-4" />
+              <span>Gallery</span>
             </motion.button>
-          )}
-
-          {project.githubUrl && (
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonStyle}
-            >
-              <Github className="w-4 h-4" />
-              <span>Source Code</span>
-            </motion.a>
-          )}
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => onViewGallery(project)}
-            className={buttonStyle}
-          >
-            <ExternalLink className="w-4 h-4" />
-            <span>Full Gallery</span>
-          </motion.button>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -519,96 +531,129 @@ const Projects: React.FC = () => {
 
   // Consolidated button style for category buttons
   const categoryButtonStyle = (isActive: boolean) => 
-    `flex items-center gap-2 px-6 py-3 rounded-full transition-all ${
+    `flex items-center gap-3 px-6 py-3 rounded-full transition-all font-medium ${
       isActive 
-        ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white' 
-        : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700'
+        ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg' 
+        : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700 hover:text-white'
     }`;
 
   const renderSoftwareProject = (project: any, idx: number) => {
     const images = [project.image1, project.image2].filter(Boolean) as string[];
-    const buttonStyle = "flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium";
+    const buttonStyle = "flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium flex-1 min-w-[140px]";
 
     return (
       <motion.div
         key={idx}
         whileHover={{ scale: 1.02 }}
-        className="bg-gray-800/50 rounded-lg overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 p-6"
+        className="bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 p-6 flex flex-col h-full"
       >
-        <h3 className="text-2xl font-bold text-purple-400 mb-4">{project.title}</h3>
-        <p className="text-gray-300 mb-6">{project.description}</p>
-
-        <div className="mb-6">
-          <h4 className="font-semibold text-purple-300 mb-2">Technologies Used:</h4>
-          <div className="flex flex-wrap gap-2">
-            {project.technologies.map((tech: string, index: number) => (
-              <span key={index} className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm">
-                {tech}
-              </span>
-            ))}
+        {/* Header */}
+        <div className="flex justify-between items-start mb-4">
+          <div className="flex-1">
+            <h3 className="text-2xl font-bold text-purple-400 mb-2">{project.title}</h3>
+            <p className="text-gray-300 leading-relaxed">{project.description}</p>
           </div>
+          <motion.button
+            onClick={() => openGallery(project)}
+            className="p-2 bg-purple-600/20 hover:bg-purple-600/40 rounded-lg transition-colors ml-4 flex-shrink-0"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <ZoomIn className="w-5 h-5 text-purple-400" />
+          </motion.button>
         </div>
 
-        {images.length > 0 && (
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            {images.map((img, idxImg) => (
-              <div key={idxImg} className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-purple-500/30">
-                <motion.img
-                  whileHover={{ scale: 1.05 }}
-                  src={img}
-                  alt={`${project.title} - View ${idxImg + 1}`}
-                  className="w-full h-full object-cover cursor-pointer"
-                  onClick={() => openLightbox(img, project.title)}
-                />
-                <button
-                  onClick={() => openLightbox(img, project.title)}
-                  className="absolute top-2 right-2 p-2 bg-black/50 rounded-full hover:bg-purple-600 transition-colors"
+        {/* Content Area */}
+        <div className="flex-1">
+          {/* Technologies */}
+          <div className="mb-6">
+            <h4 className="font-semibold text-purple-300 mb-3">Technologies Used:</h4>
+            <div className="flex flex-wrap gap-2">
+              {project.technologies.map((tech: string, index: number) => (
+                <span
+                  key={index}
+                  className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
                 >
-                  <Eye className="w-5 h-5 text-white" />
-                </button>
-              </div>
-            ))}
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
-        )}
 
-        <div className="flex flex-wrap gap-4">
-          {project.githubUrl && (
-            <motion.a
+          {/* Images */}
+          {images.length > 0 && (
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-3">
+                <h4 className="font-semibold text-purple-300">Project Visuals:</h4>
+                <span className="text-gray-400 text-sm">{images.length} images</span>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {images.map((img, idxImg) => (
+                  <div key={idxImg} className="relative group">
+                    <motion.img
+                      whileHover={{ scale: 1.05 }}
+                      src={img}
+                      alt={`${project.title} - View ${idxImg + 1}`}
+                      className="w-full h-48 object-cover rounded-lg border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
+                      onClick={() => openLightbox(img, project.title)}
+                    />
+                    <button
+                      onClick={() => openLightbox(img, project.title)}
+                      className="absolute top-2 right-2 p-2 bg-black/50 rounded-full hover:bg-purple-600 transition-colors opacity-0 group-hover:opacity-100"
+                    >
+                      <Eye className="w-4 h-4 text-white" />
+                    </button>
+                    <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
+                      View {idxImg + 1}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Actions */}
+        <div className="mt-auto">
+          <div className="flex flex-wrap gap-3 justify-center">
+            {project.githubUrl && (
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonStyle}
+              >
+                <Github className="w-4 h-4" />
+                <span>GitHub</span>
+              </motion.a>
+            )}
+
+            {project.report && (
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href={project.report}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonStyle}
+              >
+                <FileText className="w-4 h-4" />
+                <span>Report</span>
+              </motion.a>
+            )}
+
+            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={() => openGallery(project)}
               className={buttonStyle}
             >
-              <Github className="w-4 h-4" />
-              <span>View on GitHub</span>
-            </motion.a>
-          )}
-
-          {project.report && (
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={project.report}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonStyle}
-            >
-              <FileText className="w-4 h-4" />
-              <span>Technical Report</span>
-            </motion.a>
-          )}
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => openGallery(project)}
-            className={buttonStyle}
-          >
-            <ExternalLink className="w-4 h-4" />
-            <span>Full Gallery</span>
-          </motion.button>
+              <ExternalLink className="w-4 h-4" />
+              <span>Gallery</span>
+            </motion.button>
+          </div>
         </div>
       </motion.div>
     );
@@ -625,6 +670,7 @@ const Projects: React.FC = () => {
         Featured Projects
       </motion.h2>
 
+      {/* Category Navigation */}
       <div className="flex justify-center mb-12 space-x-4">
         {Object.entries(projectCategories).map(([key, category]) => {
           const Icon = category.icon;
@@ -643,14 +689,16 @@ const Projects: React.FC = () => {
         })}
       </div>
 
+      {/* Category Description */}
       <motion.p 
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
-        className="text-center text-gray-300 mb-12 max-w-3xl mx-auto"
+        className="text-center text-gray-300 mb-12 max-w-3xl mx-auto text-lg leading-relaxed"
       >
         {projectCategories[activeCategory].intro}
       </motion.p>
 
+      {/* Projects Grid */}
       <div className="grid gap-8 md:grid-cols-2">
         {activeCategory === 'software'
           ? projectCategories[activeCategory].projects.map((project, index) => renderSoftwareProject(project, index))
@@ -665,6 +713,7 @@ const Projects: React.FC = () => {
             ))}
       </div>
 
+      {/* Modals */}
       <SimulationModal 
         isOpen={!!modalSimulations} 
         onClose={closeSimulationModal} 

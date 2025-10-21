@@ -9,6 +9,7 @@ import {
   X,
   ZoomIn,
   ZoomOut,
+  Image as ImageIcon,
 } from "lucide-react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
@@ -17,12 +18,12 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 const CADModels = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [previewModel, setPreviewModel] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const [loadingModel, setLoadingModel] = useState(false);
   const mountRef = useRef(null);
   const controlsRef = useRef(null);
   const cameraRef = useRef(null);
 
-  // --- CAD Models Data ---
   const cadModels = [
     {
       title: "Pair of Spur Gears",
@@ -231,7 +232,6 @@ const CADModels = () => {
     },
   ];
 
-  // --- Categories ---
   const categories = [
     "All",
     "Assembly",
@@ -250,17 +250,19 @@ const CADModels = () => {
   const getComplexityColor = (complexity) => {
     switch (complexity) {
       case "Beginner":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
+        return "bg-green-100 text-green-800 border-green-200";
       case "Intermediate":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
+        return "bg-yellow-100 text-yellow-800 border-yellow-200";
       case "Advanced":
-        return "bg-orange-500/20 text-orange-400 border-orange-500/30";
+        return "bg-red-100 text-red-800 border-red-200";
       case "Basic":
-        return "bg-blue-500/20 text-blue-400 border-blue-500/30";
+        return "bg-blue-100 text-blue-800 border-blue-200";
       default:
-        return "bg-gray-500/20 text-gray-400 border-gray-500/30";
+        return "bg-gray-100 text-gray-800 border-gray-200";
     }
   };
+
+  const filteredFeatures = (features) => features.slice(0, 4);
 
   const stats = [
     { label: "Total Models", value: cadModels.length, icon: Box },
@@ -269,7 +271,7 @@ const CADModels = () => {
     { label: "Design Hours", value: "1000+", icon: Award },
   ];
 
-  // --- 3D Viewer ---
+  // --- 3D Viewer effect ---
   useEffect(() => {
     if (!previewModel || !mountRef.current) return;
     setLoadingModel(true);
@@ -360,24 +362,29 @@ const CADModels = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [previewModel]);
 
-  const zoomIn = () => cameraRef.current && (cameraRef.current.position.z *= 0.8);
-  const zoomOut = () =>
-    cameraRef.current && (cameraRef.current.position.z *= 1.2);
+  const zoomIn = () => {
+    if (cameraRef.current) cameraRef.current.position.z *= 0.8;
+  };
+  const zoomOut = () => {
+    if (cameraRef.current) cameraRef.current.position.z *= 1.2;
+  };
 
   return (
     <div className="container mx-auto px-6 py-10">
-      <h2 className="text-3xl font-bold text-white mb-8">CAD Models Gallery</h2>
+      <h2 className="text-4xl font-bold text-white mb-10 text-center">
+        CAD Models Gallery
+      </h2>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className={`flex items-center gap-3 p-4 rounded-lg border border-gray-700`}
+            className="flex items-center gap-3 p-5 rounded-xl border border-gray-700 hover:shadow-xl transition duration-300"
           >
-            <stat.icon className="w-6 h-6 text-white" />
+            <stat.icon className="w-8 h-8 text-white" />
             <div>
-              <p className="text-white font-semibold">{stat.value}</p>
+              <p className="text-white text-lg font-bold">{stat.value}</p>
               <p className="text-gray-400 text-sm">{stat.label}</p>
             </div>
           </div>
@@ -385,15 +392,15 @@ const CADModels = () => {
       </div>
 
       {/* Categories */}
-      <div className="flex flex-wrap gap-3 mb-8">
+      <div className="flex flex-wrap justify-center gap-4 mb-10">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-2 rounded-full border ${
+            className={`px-6 py-2 rounded-full font-semibold transition duration-300 ${
               activeCategory === cat
-                ? "bg-blue-500 text-white"
-                : "bg-gray-800 text-gray-300"
+                ? "bg-blue-500 text-white shadow-lg"
+                : "bg-gray-800 text-gray-300 hover:bg-gray-700"
             }`}
           >
             {cat}
@@ -402,66 +409,78 @@ const CADModels = () => {
       </div>
 
       {/* Model Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredModels.map((model) => (
           <motion.div
             key={model.title}
-            className="bg-gray-900 rounded-lg shadow-lg overflow-hidden cursor-pointer flex flex-col"
-            whileHover={{ scale: 1.03 }}
+            className="bg-gray-900 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"
+            whileHover={{ scale: 1.05 }}
           >
             <img
               src={model.image}
               alt={model.title}
-              className="w-full h-48 object-cover"
+              className="w-full h-64 object-cover"
             />
-            <div className="p-4 flex flex-col flex-1">
-              <h3 className="text-xl font-semibold text-white mb-2">
+            <div className="p-6">
+              <h3 className="text-2xl font-semibold text-white mb-3">
                 {model.title}
               </h3>
-              <p className="text-gray-400 text-sm mb-2">{model.description}</p>
-              <div className="flex flex-wrap gap-2 mb-2">
-                {model.features.map((f) => (
+              <p className="text-gray-400 text-sm mb-4">{model.description}</p>
+
+              {/* Feature badges */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {filteredFeatures(model.features).map((f) => (
                   <span
                     key={f}
-                    className="px-2 py-1 text-xs bg-gray-800 text-gray-200 rounded"
+                    className="px-3 py-1 text-xs rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow"
                   >
                     {f}
                   </span>
                 ))}
               </div>
-              <div className="flex justify-between items-center mb-3">
+
+              {/* Complexity & Software */}
+              <div className="flex justify-between items-center mb-4">
                 <span
-                  className={`text-xs px-2 py-1 border rounded ${getComplexityColor(
+                  className={`text-xs px-3 py-1 border rounded-full font-semibold ${getComplexityColor(
                     model.complexity
-                  )}`}
+                  )} shadow-sm`}
                 >
                   {model.complexity}
                 </span>
-                <span className="text-gray-400 text-xs">{model.software}</span>
+                <span className="text-gray-400 text-sm font-semibold">
+                  {model.software}
+                </span>
               </div>
 
-              {/* View / Download */}
-              <div className="flex justify-between items-center mt-auto">
-                <button
-                  onClick={() => setPreviewModel(model)}
-                  className="flex items-center gap-1 px-3 py-1 bg-blue-600 rounded text-white text-sm"
-                >
-                  <Eye className="w-4 h-4" />
-                  Preview
-                </button>
+              {/* Buttons */}
+              <div className="flex justify-between items-center mb-4 gap-2">
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setPreviewImage(model.image)}
+                    className="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-white font-semibold transition"
+                  >
+                    <ImageIcon className="w-5 h-5" /> Photo
+                  </button>
+                  <button
+                    onClick={() => setPreviewModel(model)}
+                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-semibold transition"
+                  >
+                    <Eye className="w-5 h-5" /> 3D Model
+                  </button>
+                </div>
                 <a
                   href={model.downloadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 px-3 py-1 bg-green-600 rounded text-white text-sm"
+                  className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-500 rounded-lg text-white font-semibold transition"
                 >
-                  <Download className="w-4 h-4" />
-                  Download
+                  <Download className="w-5 h-5" /> Download
                 </a>
               </div>
 
-              {/* Views / Downloads stats */}
-              <div className="flex justify-between items-center mt-2 text-gray-400 text-xs">
+              {/* Views & Downloads */}
+              <div className="flex justify-between items-center text-gray-300 text-sm mt-2">
                 <span className="flex items-center gap-1">
                   <Eye className="w-4 h-4" /> {model.views}
                 </span>
@@ -476,37 +495,53 @@ const CADModels = () => {
 
       {/* 3D Preview Modal */}
       {previewModel && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4">
-          <div className="relative bg-gray-900 w-full max-w-4xl h-[600px] rounded-lg p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+          <div className="relative bg-gray-900 w-full max-w-5xl h-[700px] rounded-lg p-4">
             <button
               onClick={() => setPreviewModel(null)}
-              className="absolute top-2 right-2 text-white p-2"
+              className="absolute top-3 right-3 text-white p-2"
             >
               <X />
             </button>
-
             <div ref={mountRef} className="w-full h-full rounded"></div>
-
-            <div className="absolute bottom-4 left-4 flex gap-2">
+            <div className="absolute bottom-5 left-5 flex gap-3">
               <button
                 onClick={zoomIn}
-                className="px-3 py-1 bg-blue-600 rounded text-white"
+                className="px-4 py-2 bg-blue-600 rounded-lg text-white flex items-center gap-1"
               >
-                <ZoomIn />
+                <ZoomIn /> Zoom In
               </button>
               <button
                 onClick={zoomOut}
-                className="px-3 py-1 bg-blue-600 rounded text-white"
+                className="px-4 py-2 bg-blue-600 rounded-lg text-white flex items-center gap-1"
               >
-                <ZoomOut />
+                <ZoomOut /> Zoom Out
               </button>
             </div>
-
             {loadingModel && (
-              <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+              <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-lg">
                 Loading Model...
               </p>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Image Preview Modal */}
+      {previewImage && (
+        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+          <div className="relative bg-gray-900 w-full max-w-3xl rounded-lg p-4">
+            <button
+              onClick={() => setPreviewImage(null)}
+              className="absolute top-3 right-3 text-white p-2"
+            >
+              <X />
+            </button>
+            <img
+              src={previewImage}
+              alt="Preview"
+              className="w-full h-auto rounded-lg"
+            />
           </div>
         </div>
       )}
@@ -515,4 +550,3 @@ const CADModels = () => {
 };
 
 export default CADModels;
-

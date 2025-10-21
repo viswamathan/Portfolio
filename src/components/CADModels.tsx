@@ -263,10 +263,10 @@ const CADModels = () => {
   };
 
   const stats = [
-    { label: "Total Models", value: cadModels.length, icon: Box, color: "purple" },
-    { label: "Downloads", value: "2.5K+", icon: Download, color: "blue" },
-    { label: "Categories", value: categories.length - 1, icon: Layers, color: "green" },
-    { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
+    { label: "Total Models", value: cadModels.length, icon: Box },
+    { label: "Downloads", value: "2.5K+", icon: Download },
+    { label: "Categories", value: categories.length - 1, icon: Layers },
+    { label: "Design Hours", value: "1000+", icon: Award },
   ];
 
   // --- 3D Viewer ---
@@ -360,12 +360,9 @@ const CADModels = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [previewModel]);
 
-  const zoomIn = () => {
-    if (cameraRef.current) cameraRef.current.position.z *= 0.8;
-  };
-  const zoomOut = () => {
-    if (cameraRef.current) cameraRef.current.position.z *= 1.2;
-  };
+  const zoomIn = () => cameraRef.current && (cameraRef.current.position.z *= 0.8);
+  const zoomOut = () =>
+    cameraRef.current && (cameraRef.current.position.z *= 1.2);
 
   return (
     <div className="container mx-auto px-6 py-10">
@@ -409,16 +406,15 @@ const CADModels = () => {
         {filteredModels.map((model) => (
           <motion.div
             key={model.title}
-            className="bg-gray-900 rounded-lg shadow-lg overflow-hidden cursor-pointer"
+            className="bg-gray-900 rounded-lg shadow-lg overflow-hidden cursor-pointer flex flex-col"
             whileHover={{ scale: 1.03 }}
           >
             <img
               src={model.image}
               alt={model.title}
               className="w-full h-48 object-cover"
-              onClick={() => setPreviewModel(model)}
             />
-            <div className="p-4">
+            <div className="p-4 flex flex-col flex-1">
               <h3 className="text-xl font-semibold text-white mb-2">
                 {model.title}
               </h3>
@@ -433,7 +429,7 @@ const CADModels = () => {
                   </span>
                 ))}
               </div>
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center mb-3">
                 <span
                   className={`text-xs px-2 py-1 border rounded ${getComplexityColor(
                     model.complexity
@@ -442,6 +438,36 @@ const CADModels = () => {
                   {model.complexity}
                 </span>
                 <span className="text-gray-400 text-xs">{model.software}</span>
+              </div>
+
+              {/* View / Download */}
+              <div className="flex justify-between items-center mt-auto">
+                <button
+                  onClick={() => setPreviewModel(model)}
+                  className="flex items-center gap-1 px-3 py-1 bg-blue-600 rounded text-white text-sm"
+                >
+                  <Eye className="w-4 h-4" />
+                  Preview
+                </button>
+                <a
+                  href={model.downloadUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 px-3 py-1 bg-green-600 rounded text-white text-sm"
+                >
+                  <Download className="w-4 h-4" />
+                  Download
+                </a>
+              </div>
+
+              {/* Views / Downloads stats */}
+              <div className="flex justify-between items-center mt-2 text-gray-400 text-xs">
+                <span className="flex items-center gap-1">
+                  <Eye className="w-4 h-4" /> {model.views}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Download className="w-4 h-4" /> {model.downloads}
+                </span>
               </div>
             </div>
           </motion.div>
@@ -489,3 +515,4 @@ const CADModels = () => {
 };
 
 export default CADModels;
+

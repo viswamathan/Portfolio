@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+"use client"
+
+import type React from "react"
+import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import {
-  Rocket,
   Code,
-  Layers,
-  TrendingUp,
   X,
   Cog,
   Cpu,
@@ -17,19 +17,12 @@ import {
   ChevronLeft,
   ChevronRight,
   Calendar,
-  Clock,
-  Users,
   Target,
   Award,
   Sparkles,
-  Star,
-  Heart,
-  Download,
-  Share2,
   Maximize2,
   Minimize2,
-  RotateCcw,
-} from 'lucide-react';
+} from "lucide-react"
 
 /**
  * Enhanced Projects Component with Premium Gallery & Sophisticated Cards
@@ -42,16 +35,16 @@ import {
 /* ----------------------------- Enhanced Modal Components ---------------------------- */
 
 type SimulationModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  simulations: string[];
-  title?: string;
-};
+  isOpen: boolean
+  onClose: () => void
+  simulations: string[]
+  title?: string
+}
 
 const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simulations, title }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0)
 
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
     <motion.div
@@ -64,7 +57,7 @@ const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simu
         <div className="sticky top-0 bg-gray-900/80 backdrop-blur-md p-6 flex justify-between items-center border-b border-purple-500/20">
           <div>
             <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              {title || 'Simulation View'}
+              {title || "Simulation View"}
             </h3>
             <p className="text-gray-400 text-sm mt-1">
               {currentIndex + 1} of {simulations.length}
@@ -72,28 +65,28 @@ const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simu
           </div>
           <div className="flex items-center gap-3">
             <div className="flex gap-2">
-              <button 
-                onClick={() => setCurrentIndex(prev => prev === 0 ? simulations.length - 1 : prev - 1)}
+              <button
+                onClick={() => setCurrentIndex((prev) => (prev === 0 ? simulations.length - 1 : prev - 1))}
                 className="p-3 bg-purple-600/20 hover:bg-purple-600/40 rounded-full transition-all border border-purple-500/30"
               >
                 <ChevronLeft className="w-5 h-5 text-purple-400" />
               </button>
-              <button 
-                onClick={() => setCurrentIndex(prev => prev === simulations.length - 1 ? 0 : prev + 1)}
+              <button
+                onClick={() => setCurrentIndex((prev) => (prev === simulations.length - 1 ? 0 : prev + 1))}
                 className="p-3 bg-purple-600/20 hover:bg-purple-600/40 rounded-full transition-all border border-purple-500/30"
               >
                 <ChevronRight className="w-5 h-5 text-purple-400" />
               </button>
             </div>
-            <button 
-              onClick={onClose} 
+            <button
+              onClick={onClose}
               className="p-3 bg-red-600/20 hover:bg-red-600/40 rounded-full transition-all border border-red-500/30 group"
             >
               <X className="w-5 h-5 text-red-400 group-hover:scale-110 transition-transform" />
             </button>
           </div>
         </div>
-        
+
         <div className="p-8 flex items-center justify-center min-h-[400px]">
           <AnimatePresence mode="wait">
             <motion.div
@@ -105,7 +98,7 @@ const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simu
               className="flex justify-center"
             >
               <img
-                src={simulations[currentIndex]}
+                src={simulations[currentIndex] || "/placeholder.svg"}
                 alt={`Simulation ${currentIndex + 1}`}
                 className="max-w-full max-h-[60vh] rounded-xl border-2 border-purple-500/30 shadow-2xl"
               />
@@ -122,12 +115,16 @@ const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simu
                   key={index}
                   onClick={() => setCurrentIndex(index)}
                   className={`w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
-                    currentIndex === index 
-                      ? 'border-purple-500 scale-110 shadow-lg shadow-purple-500/25' 
-                      : 'border-gray-600 hover:border-purple-400/50 hover:scale-105'
+                    currentIndex === index
+                      ? "border-purple-500 scale-110 shadow-lg shadow-purple-500/25"
+                      : "border-gray-600 hover:border-purple-400/50 hover:scale-105"
                   }`}
                 >
-                  <img src={sim} alt={`Thumb ${index + 1}`} className="w-full h-full object-cover" />
+                  <img
+                    src={sim || "/placeholder.svg"}
+                    alt={`Thumb ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
                 </button>
               ))}
             </div>
@@ -135,18 +132,18 @@ const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simu
         )}
       </div>
     </motion.div>
-  );
-};
+  )
+}
 
 type ImageModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  image: string;
-  title?: string;
-};
+  isOpen: boolean
+  onClose: () => void
+  image: string
+  title?: string
+}
 
 const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image, title }) => {
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
     <motion.div
@@ -156,67 +153,64 @@ const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image, title }
       className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 p-4"
       onClick={onClose}
     >
-      <div
-        className="relative max-w-7xl w-full max-h-[90vh] flex flex-col"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="relative max-w-7xl w-full max-h-[90vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
         <div className="flex justify-between items-center mb-6 p-4 bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-t-2xl backdrop-blur-md border-b border-purple-500/30">
           {title && (
             <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               {title}
             </h3>
           )}
-          <button 
-            onClick={onClose} 
+          <button
+            onClick={onClose}
             className="p-3 bg-red-600/20 hover:bg-red-600/40 rounded-xl transition-all border border-red-500/30 group"
           >
             <X className="w-6 h-6 text-red-400 group-hover:scale-110 transition-transform" />
           </button>
         </div>
         <div className="flex-1 flex items-center justify-center bg-gradient-to-br from-gray-900 to-black rounded-b-2xl p-8">
-          <motion.img 
+          <motion.img
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            src={image} 
-            alt="Project View" 
-            className="max-w-full max-h-full object-contain rounded-xl shadow-2xl border-2 border-purple-500/20" 
+            src={image}
+            alt="Project View"
+            className="max-w-full max-h-full object-contain rounded-xl shadow-2xl border-2 border-purple-500/20"
           />
         </div>
       </div>
     </motion.div>
-  );
-};
+  )
+}
 
 type ProjectGalleryModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  project: any | null;
-};
+  isOpen: boolean
+  onClose: () => void
+  project: any | null
+}
 
 const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClose, project }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
 
-  if (!isOpen || !project) return null;
+  if (!isOpen || !project) return null
 
-  const images = [project.image1, project.image2].filter(Boolean) as string[];
+  const images = [project.image1, project.image2].filter(Boolean) as string[]
 
   const toggleFullscreen = () => {
-    setIsFullscreen(!isFullscreen);
-  };
+    setIsFullscreen(!isFullscreen)
+  }
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className={`fixed inset-0 bg-black/95 z-50 ${isFullscreen ? '' : 'p-4 flex items-center justify-center'}`}
+      className={`fixed inset-0 bg-black/95 z-50 ${isFullscreen ? "" : "p-4 flex items-center justify-center"}`}
       onClick={onClose}
     >
       <div
         className={`relative bg-gradient-to-br from-gray-900 to-black border border-purple-500/20 shadow-2xl ${
-          isFullscreen ? 'w-full h-full' : 'max-w-7xl w-full max-h-[95vh] rounded-3xl'
+          isFullscreen ? "w-full h-full" : "max-w-7xl w-full max-h-[95vh] rounded-3xl"
         }`}
         onClick={(e) => e.stopPropagation()}
       >
@@ -230,7 +224,10 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
               {project.technologies && (
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech: string, idx: number) => (
-                    <span key={idx} className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30">
+                    <span
+                      key={idx}
+                      className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
+                    >
                       {tech}
                     </span>
                   ))}
@@ -238,7 +235,7 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
               )}
             </div>
             <div className="flex items-center gap-3">
-              <button 
+              <button
                 onClick={toggleFullscreen}
                 className="p-3 bg-blue-600/20 hover:bg-blue-600/40 rounded-xl transition-all border border-blue-500/30 group"
               >
@@ -248,8 +245,8 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
                   <Maximize2 className="w-5 h-5 text-blue-400 group-hover:scale-110 transition-transform" />
                 )}
               </button>
-              <button 
-                onClick={onClose} 
+              <button
+                onClick={onClose}
                 className="p-3 bg-red-600/20 hover:bg-red-600/40 rounded-xl transition-all border border-red-500/30 group"
               >
                 <X className="w-5 h-5 text-red-400 group-hover:scale-110 transition-transform" />
@@ -278,14 +275,14 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
                     </div>
                   )}
                   <img
-                    src={images[currentImageIndex]}
+                    src={images[currentImageIndex] || "/placeholder.svg"}
                     alt={`${project.title} - View ${currentImageIndex + 1}`}
                     className={`max-w-full max-h-[50vh] object-contain rounded-xl shadow-2xl border-2 border-purple-500/30 transition-opacity duration-300 ${
-                      imageLoaded ? 'opacity-100' : 'opacity-0'
+                      imageLoaded ? "opacity-100" : "opacity-0"
                     }`}
                     onLoad={() => setImageLoaded(true)}
                   />
-                  
+
                   {/* Enhanced Navigation Arrows */}
                   {images.length > 1 && (
                     <>
@@ -320,19 +317,25 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
                     <button
                       key={index}
                       onClick={() => {
-                        setCurrentImageIndex(index);
-                        setImageLoaded(false);
+                        setCurrentImageIndex(index)
+                        setImageLoaded(false)
                       }}
                       className={`relative w-24 h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 group ${
-                        currentImageIndex === index 
-                          ? 'border-purple-500 scale-110 shadow-lg shadow-purple-500/25' 
-                          : 'border-gray-600 hover:border-purple-400/50 hover:scale-105'
+                        currentImageIndex === index
+                          ? "border-purple-500 scale-110 shadow-lg shadow-purple-500/25"
+                          : "border-gray-600 hover:border-purple-400/50 hover:scale-105"
                       }`}
                     >
-                      <img src={img} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
-                      <div className={`absolute inset-0 bg-purple-500/20 transition-opacity ${
-                        currentImageIndex === index ? 'opacity-100' : 'opacity-0 group-hover:opacity-50'
-                      }`} />
+                      <img
+                        src={img || "/placeholder.svg"}
+                        alt={`Thumbnail ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                      <div
+                        className={`absolute inset-0 bg-purple-500/20 transition-opacity ${
+                          currentImageIndex === index ? "opacity-100" : "opacity-0 group-hover:opacity-50"
+                        }`}
+                      />
                     </button>
                   ))}
                 </div>
@@ -432,19 +435,19 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
         </div>
       </div>
     </motion.div>
-  );
-};
+  )
+}
 
 /* --------------------------- Premium Project Card -------------------------- */
 
 const PremiumProjectCard: React.FC<{
-  project: any;
-  onViewGallery: (project: any) => void;
-  onViewImage: (image: string, title?: string) => void;
-  onViewSimulation: (sims: string[], title?: string) => void;
+  project: any
+  onViewGallery: (project: any) => void
+  onViewImage: (image: string, title?: string) => void
+  onViewSimulation: (sims: string[], title?: string) => void
 }> = ({ project, onViewGallery, onViewImage, onViewSimulation }) => {
-  const images = [project.image1, project.image2].filter(Boolean) as string[];
-  const [isHovered, setIsHovered] = useState(false);
+  const images = [project.image1, project.image2].filter(Boolean) as string[]
+  const [isHovered, setIsHovered] = useState(false)
 
   return (
     <motion.div
@@ -455,7 +458,7 @@ const PremiumProjectCard: React.FC<{
     >
       {/* Background Glow Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
+
       {/* Header with Gradient */}
       <div className="relative p-6 pb-4">
         <div className="flex justify-between items-start mb-4">
@@ -507,10 +510,7 @@ const PremiumProjectCard: React.FC<{
         {/* Feature Highlights */}
         <div className="space-y-3 mb-6 flex-1">
           {project.problem && (
-            <motion.div 
-              className="flex items-start gap-3 text-sm"
-              whileHover={{ x: 4 }}
-            >
+            <motion.div className="flex items-start gap-3 text-sm" whileHover={{ x: 4 }}>
               <div className="w-2 h-2 bg-red-400 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <span className="text-red-400 font-medium">Challenge: </span>
@@ -518,12 +518,9 @@ const PremiumProjectCard: React.FC<{
               </div>
             </motion.div>
           )}
-          
+
           {project.impact && (
-            <motion.div 
-              className="flex items-start gap-3 text-sm"
-              whileHover={{ x: 4 }}
-            >
+            <motion.div className="flex items-start gap-3 text-sm" whileHover={{ x: 4 }}>
               <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <span className="text-green-400 font-medium">Impact: </span>
@@ -551,9 +548,9 @@ const PremiumProjectCard: React.FC<{
                   className="relative group/image rounded-xl overflow-hidden border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
                   onClick={() => onViewImage(img, project.title)}
                 >
-                  <img 
-                    src={img} 
-                    alt={`${project.title} - View ${idx + 1}`} 
+                  <img
+                    src={img || "/placeholder.svg"}
+                    alt={`${project.title} - View ${idx + 1}`}
                     className="w-full h-32 object-cover transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/image:opacity-100 transition-opacity duration-300">
@@ -629,108 +626,131 @@ const PremiumProjectCard: React.FC<{
       {/* Hover Border Effect */}
       <div className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-purple-500/0 via-pink-500/0 to-purple-500/0 group-hover:from-purple-500/20 group-hover:via-pink-500/20 group-hover:to-purple-500/20 transition-all duration-500 pointer-events-none" />
     </motion.div>
-  );
-};
+  )
+}
 
 /* ----------------------------- Project Data -------------------------------- */
 
 const projectCategories = {
   mechanical: {
     icon: Cog,
-    title: 'Mechanical Engineering',
-    intro: 'Advanced mechanical engineering projects showcasing design optimization, structural analysis, and innovative solutions using cutting-edge simulation tools.',
+    title: "Mechanical Engineering",
+    intro:
+      "Advanced mechanical engineering projects showcasing design optimization, structural analysis, and innovative solutions using cutting-edge simulation tools.",
     projects: [
       {
-        title: 'Flat Sprocket Analysis',
-        description: 'Comprehensive structural analysis and optimization of a flat sprocket using advanced FEA techniques to enhance durability and performance.',
-        problem: 'Traditional sprocket designs showing premature wear and structural weaknesses under high loads in industrial applications.',
-        solution: 'Implemented optimized geometry and material distribution through FEA-driven design iterations and stress analysis.',
-        impact: '40% increase in durability and 25% reduction in material usage while maintaining performance standards.',
-        technologies: ['SolidWorks', 'ANSYS', 'Finite Element Analysis', 'Material Science', 'Structural Optimization'],
-        image1: '/images/SPROCKET STRESS.jpg',
-        image2: '/images/SPROCKET DEFORM.jpg',
-        report: '/reports/Structural Failure Analysis and Optimization of a Flat Sprocket Using Finite Element Analysis.pdf',
-        simulations: ['/simulations/deform.gif', '/simulations/stress.gif'],
+        title: "Flat Sprocket Analysis",
+        description:
+          "Comprehensive structural analysis and optimization of a flat sprocket using advanced FEA techniques to enhance durability and performance.",
+        problem:
+          "Traditional sprocket designs showing premature wear and structural weaknesses under high loads in industrial applications.",
+        solution:
+          "Implemented optimized geometry and material distribution through FEA-driven design iterations and stress analysis.",
+        impact:
+          "40% increase in durability and 25% reduction in material usage while maintaining performance standards.",
+        technologies: ["SolidWorks", "ANSYS", "Finite Element Analysis", "Material Science", "Structural Optimization"],
+        image1: "/images/SPROCKET STRESS.jpg",
+        image2: "/images/SPROCKET DEFORM.jpg",
+        report:
+          "/reports/Structural Failure Analysis and Optimization of a Flat Sprocket Using Finite Element Analysis.pdf",
+        simulations: ["/simulations/deform.gif", "/simulations/stress.gif"],
       },
       {
-        title: 'Piston Head Optimization',
-        description: 'Advanced thermal and structural FEA simulation of piston head to identify hotspots and optimize for durability and material efficiency.',
-        problem: 'Piston head faces extreme thermal and pressure cycles causing fatigue and deformation in high-performance engines.',
-        solution: 'Conducted integrated thermal-structural FEA to analyze temperature distribution and stress concentrations.',
-        impact: 'Achieved 40% durability improvement and 25% material reduction through optimized design parameters.',
-        technologies: ['ANSYS Mechanical', 'SolidWorks', 'Thermal Analysis', 'FEA', 'Computational Fluid Dynamics'],
-        image1: '/images/PISTON 1.png',
-        image2: '/images/PISTON 2.png',
-        report: '/reports/Thermo-Structural Analysis of Piston Head Using ANSYS Mechanical.pdf',
-        simulations: ['/simulations/head deform.gif', '/simulations/head stress.gif', '/simulations/head temparature.gif'],
+        title: "Piston Head Optimization",
+        description:
+          "Advanced thermal and structural FEA simulation of piston head to identify hotspots and optimize for durability and material efficiency.",
+        problem:
+          "Piston head faces extreme thermal and pressure cycles causing fatigue and deformation in high-performance engines.",
+        solution:
+          "Conducted integrated thermal-structural FEA to analyze temperature distribution and stress concentrations.",
+        impact: "Achieved 40% durability improvement and 25% material reduction through optimized design parameters.",
+        technologies: ["ANSYS Mechanical", "SolidWorks", "Thermal Analysis", "FEA", "Computational Fluid Dynamics"],
+        image1: "/images/PISTON 1.png",
+        image2: "/images/PISTON 2.png",
+        report: "/reports/Thermo-Structural Analysis of Piston Head Using ANSYS Mechanical.pdf",
+        simulations: [
+          "/simulations/head deform.gif",
+          "/simulations/head stress.gif",
+          "/simulations/head temparature.gif",
+        ],
       },
     ],
   },
   software: {
     icon: Code,
-    title: 'Software Development',
-    intro: 'Innovative software solutions and applications built with modern technologies to solve real-world problems efficiently.',
+    title: "Software Development",
+    intro:
+      "Innovative software solutions and applications built with modern technologies to solve real-world problems efficiently.",
     projects: [
       {
-        title: 'Petrol Management System',
-        description: 'Comprehensive fuel management solution for petrol stations with real-time inventory tracking, sales monitoring, and automated reporting.',
-        problem: 'Manual fuel tracking leading to inventory discrepancies, sales errors, and inefficient reporting in petrol stations.',
-        solution: 'Developed an integrated management system with automated tracking, real-time analytics, and comprehensive reporting.',
-        impact: 'Improved inventory accuracy by 95%, reduced manual errors by 80%, and enhanced operational efficiency.',
-        technologies: ['Python', 'MySQL', 'Tkinter', 'Matplotlib', 'Pandas', 'NumPy'],
-        githubUrl: 'https://github.com/viswamathan/PETROL-MANAGEMENT-PROJECT-USING-PYTHON-AND-SQL',
-        image1: 'https://tse1.mm.bing.net/th/id/OIP.MiI4dSBh7VjBXlCSkD6uDwHaD5?pid=Api&P=0&h=180',
-        image2: 'https://tse1.mm.bing.net/th/id/OIP.cjsy2jUvC0aT29PsC8kRRAHaEK?pid=Api&P=0&h=180',
-        report: '/reports/automation-report.pdf',
+        title: "Petrol Management System",
+        description:
+          "Comprehensive fuel management solution for petrol stations with real-time inventory tracking, sales monitoring, and automated reporting.",
+        problem:
+          "Manual fuel tracking leading to inventory discrepancies, sales errors, and inefficient reporting in petrol stations.",
+        solution:
+          "Developed an integrated management system with automated tracking, real-time analytics, and comprehensive reporting.",
+        impact:
+          "Improved inventory accuracy by 95%, reduced manual errors by 80%, and enhanced operational efficiency.",
+        technologies: ["Python", "MySQL", "Tkinter", "Matplotlib", "Pandas", "NumPy"],
+        githubUrl: "https://github.com/viswamathan/PETROL-MANAGEMENT-PROJECT-USING-PYTHON-AND-SQL",
+        image1: "https://tse1.mm.bing.net/th/id/OIP.MiI4dSBh7VjBXlCSkD6uDwHaD5?pid=Api&P=0&h=180",
+        image2: "https://tse1.mm.bing.net/th/id/OIP.cjsy2jUvC0aT29PsC8kRRAHaEK?pid=Api&P=0&h=180",
+        report: "/reports/automation-report.pdf",
       },
     ],
   },
   hybrid: {
     icon: Cpu,
-    title: 'Hybrid Systems',
-    intro: 'Advanced systems combining mechanical engineering with smart automation and control systems for innovative solutions.',
+    title: "Hybrid Systems",
+    intro:
+      "Advanced systems combining mechanical engineering with smart automation and control systems for innovative solutions.",
     projects: [
       {
-        title: 'Modified Solar Dryer with Thermal Storage',
-        description: 'Innovative solar dryer prototype enhanced with copper fins and PCM for efficient, continuous food dehydration with thermal energy storage.',
-        problem: 'Traditional solar dryers suffer from inconsistent performance, heat loss, and dependency on direct sunlight.',
-        solution: 'Integrated copper fins for enhanced heat transfer and paraffin wax PCM for continuous thermal energy storage.',
-        impact: '30-40% faster drying, 11°C higher temperature maintenance, and consistent performance in varying weather.',
-        technologies: ['SolidWorks', 'Copper Fins', 'Phase Change Material', 'Thermal Analysis', 'Forced Convection'],
-        image1: 'SOLAR DRYER PROTOTYPE.jpeg',
-        image2: 'SOLAR DRYER MODAL.jpeg',
-        report: '/reports/Modified Solar Dryer Report.pdf',
+        title: "Modified Solar Dryer with Thermal Storage",
+        description:
+          "Innovative solar dryer prototype enhanced with copper fins and PCM for efficient, continuous food dehydration with thermal energy storage.",
+        problem:
+          "Traditional solar dryers suffer from inconsistent performance, heat loss, and dependency on direct sunlight.",
+        solution:
+          "Integrated copper fins for enhanced heat transfer and paraffin wax PCM for continuous thermal energy storage.",
+        impact:
+          "30-40% faster drying, 11°C higher temperature maintenance, and consistent performance in varying weather.",
+        technologies: ["SolidWorks", "Copper Fins", "Phase Change Material", "Thermal Analysis", "Forced Convection"],
+        image1: "SOLAR DRYER PROTOTYPE.jpeg",
+        image2: "SOLAR DRYER MODAL.jpeg",
+        report: "/reports/Modified Solar Dryer Report.pdf",
       },
     ],
   },
-};
+}
 
 /* ------------------------------- Main Page --------------------------------- */
 
 const Projects: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<'mechanical' | 'software' | 'hybrid'>('mechanical');
-  const [modalSimulations, setModalSimulations] = useState<{simulations: string[], title?: string} | null>(null);
-  const [lightboxImage, setLightboxImage] = useState<{ image: string; title?: string } | null>(null);
-  const [galleryProject, setGalleryProject] = useState<any | null>(null);
+  const [activeCategory, setActiveCategory] = useState<"mechanical" | "software" | "hybrid">("mechanical")
+  const [modalSimulations, setModalSimulations] = useState<{ simulations: string[]; title?: string } | null>(null)
+  const [lightboxImage, setLightboxImage] = useState<{ image: string; title?: string } | null>(null)
+  const [galleryProject, setGalleryProject] = useState<any | null>(null)
 
-  const handleViewSimulation = (simulations: string[], title?: string) => setModalSimulations({simulations, title});
-  const closeSimulationModal = () => setModalSimulations(null);
+  const handleViewSimulation = (simulations: string[], title?: string) => setModalSimulations({ simulations, title })
+  const closeSimulationModal = () => setModalSimulations(null)
 
-  const openLightbox = (image: string, title?: string) => setLightboxImage({ image, title });
-  const closeLightbox = () => setLightboxImage(null);
+  const openLightbox = (image: string, title?: string) => setLightboxImage({ image, title })
+  const closeLightbox = () => setLightboxImage(null)
 
-  const openGallery = (project: any) => setGalleryProject(project);
-  const closeGallery = () => setGalleryProject(null);
+  const openGallery = (project: any) => setGalleryProject(project)
+  const closeGallery = () => setGalleryProject(null)
 
-  const categoryButtonStyle = (isActive: boolean) => 
+  const categoryButtonStyle = (isActive: boolean) =>
     `flex items-center gap-3 px-8 py-4 rounded-2xl transition-all duration-300 font-semibold text-lg ${
-      isActive 
-        ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-2xl shadow-purple-500/25' 
-        : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/80 hover:text-white shadow-lg hover:shadow-purple-500/10'
-    }`;
+      isActive
+        ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-2xl shadow-purple-500/25"
+        : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/80 hover:text-white shadow-lg hover:shadow-purple-500/10"
+    }`
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 py-12">
+    <div className="min-h-screen bg-slate-950 py-12">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -749,14 +769,14 @@ const Projects: React.FC = () => {
         </motion.div>
 
         {/* Enhanced Category Navigation */}
-        <motion.div 
+        <motion.div
           className="flex justify-center mb-16 gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
           {Object.entries(projectCategories).map(([key, category]) => {
-            const Icon = category.icon;
+            const Icon = category.icon
             return (
               <motion.button
                 key={key}
@@ -768,12 +788,12 @@ const Projects: React.FC = () => {
                 <Icon className="w-6 h-6" />
                 <span>{category.title}</span>
               </motion.button>
-            );
+            )
           })}
         </motion.div>
 
         {/* Category Description */}
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           className="text-center text-gray-300 mb-16 max-w-4xl mx-auto text-lg leading-relaxed bg-gray-800/30 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50"
@@ -782,10 +802,7 @@ const Projects: React.FC = () => {
         </motion.p>
 
         {/* Projects Grid */}
-        <motion.div 
-          className="grid gap-8 md:grid-cols-2 xl:grid-cols-2"
-          layout
-        >
+        <motion.div className="grid gap-8 md:grid-cols-2 xl:grid-cols-2" layout>
           {projectCategories[activeCategory].projects.map((project, index) => (
             <PremiumProjectCard
               key={index}
@@ -798,9 +815,9 @@ const Projects: React.FC = () => {
         </motion.div>
 
         {/* Enhanced Modals */}
-        <SimulationModal 
-          isOpen={!!modalSimulations} 
-          onClose={closeSimulationModal} 
+        <SimulationModal
+          isOpen={!!modalSimulations}
+          onClose={closeSimulationModal}
           simulations={modalSimulations?.simulations || []}
           title={modalSimulations?.title ? `${modalSimulations.title} - Simulations` : undefined}
         />
@@ -808,18 +825,14 @@ const Projects: React.FC = () => {
         <ImageModal
           isOpen={!!lightboxImage}
           onClose={closeLightbox}
-          image={lightboxImage?.image || ''}
+          image={lightboxImage?.image || ""}
           title={lightboxImage?.title}
         />
 
-        <ProjectGalleryModal 
-          isOpen={!!galleryProject} 
-          onClose={closeGallery} 
-          project={galleryProject} 
-        />
+        <ProjectGalleryModal isOpen={!!galleryProject} onClose={closeGallery} project={galleryProject} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Projects;
+export default Projects

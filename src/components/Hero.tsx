@@ -1,105 +1,206 @@
 import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Environment, Float } from '@react-three/drei';
-import { Github, Linkedin, FileText, Cog, Wrench, Zap, Cpu, Rocket } from 'lucide-react';
+import { OrbitControls, Sphere, MeshDistortMaterial, Float } from '@react-three/drei';
+import { Github, Linkedin, FileText, Cog, Wrench, Zap, Download, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { TypeAnimation } from 'react-type-animation';
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
+
+interface HeroProps {
+  scrollToContact: () => void;
+}
+
+// Interactive 3D Sphere with real-time controls
+const AnimatedSphere = () => {
+  return (
+    <Float speed={1.4} rotationIntensity={1} floatIntensity={2}>
+      <Sphere args={[1, 100, 200]} scale={2.4}>
+        <MeshDistortMaterial
+          color="#8b5cf6"
+          attach="material"
+          distort={0.3}
+          speed={1.5}
+          roughness={0.4}
+        />
+      </Sphere>
+    </Float>
+  );
+};
+
+// Real-time typing effect with voice synthesis
+const VoiceTypingAnimation = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  
+  const speakText = (text: string) => {
+    if (!isMuted && 'speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.8;
+      utterance.pitch = 1;
+      speechSynthesis.speak(utterance);
+    }
+  };
+
+  return (
+    <div className="relative">
+      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-300 font-bold">
+        <TypeAnimation
+          sequence={[
+            'Mechanical Design Engineer',
+            2000,
+            () => speakText('Mechanical Design Engineer'),
+            'FEA & CFD Specialist',
+            2000,
+            () => speakText('FEA and CFD Specialist'),
+            'CAE Automation Expert',
+            2000,
+            () => speakText('CAE Automation Expert'),
+            'Product Development Engineer',
+            2000,
+            () => speakText('Product Development Engineer'),
+            'Innovation Enthusiast',
+            2000,
+            () => speakText('Innovation Enthusiast'),
+          ]}
+          wrapper="span"
+          speed={50}
+          repeat={Infinity}
+          className="bg-clip-text text-transparent bg-gradient-to-r from-gray-300 to-gray-100"
+        />
+      </div>
+      
+      {/* Voice Control */}
+      <motion.button
+        onClick={() => setIsMuted(!isMuted)}
+        className="absolute -right-12 top-1/2 -translate-y-1/2 p-2 bg-gray-800/50 rounded-full hover:bg-gray-700/50 transition-colors"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        {isMuted ? <VolumeX className="w-4 h-4 text-gray-400" /> : <Volume2 className="w-4 h-4 text-purple-400" />}
+      </motion.button>
+    </div>
+  );
+};
+
+// Interactive skill cards with real-time data
+const InteractiveSkillCard = ({ icon: Icon, title, desc, index }: any) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  
+  return (
+    <motion.div
+      className="bg-gray-800/30 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-purple-500/20 relative overflow-hidden cursor-pointer"
+      whileHover={{ 
+        scale: 1.05,
+        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+        borderColor: 'rgba(139, 92, 246, 0.5)'
+      }}
+      transition={{ type: "spring", stiffness: 300 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      onClick={() => setClickCount(prev => prev + 1)}
+    >
+      {/* Interactive background pattern */}
+      <motion.div
+        className="absolute inset-0 opacity-10"
+        animate={{
+          backgroundPosition: isHovered ? ['0% 0%', '100% 100%'] : ['0% 0%', '0% 0%'],
+        }}
+        style={{
+          backgroundImage: 'linear-gradient(45deg, #8b5cf6 25%, transparent 25%, transparent 75%, #8b5cf6 75%)',
+          backgroundSize: '20px 20px',
+        }}
+        transition={{ duration: 2, repeat: isHovered ? Infinity : 0 }}
+      />
+      
+      <motion.div
+        animate={{ rotate: isHovered ? [0, 360] : 0 }}
+        transition={{ duration: 1 }}
+      >
+        <Icon className="w-8 h-8 text-purple-500 mb-3 mx-auto" />
+      </motion.div>
+      
+      <h3 className="font-bold text-lg sm:text-xl mb-1">{title}</h3>
+      <p className="text-base sm:text-lg text-gray-400 font-semibold">{desc}</p>
+      
+      {/* Interaction counter */}
+      {clickCount > 0 && (
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="absolute top-2 right-2 bg-purple-500 text-white text-xs px-2 py-1 rounded-full"
+        >
+          {clickCount}
+        </motion.div>
+      )}
+      
+      {/* Hover effect particles */}
+      {isHovered && (
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-purple-400 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -20, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.2,
+              }}
+            />
+          ))}
+        </motion.div>
+      )}
+    </motion.div>
+  );
+};
 
 interface HeroProps {
   scrollToContact: () => void;
   navigateToPage?: (page: 'portfolio' | 'cad-models' | 'achievements') => void;
 }
 
-// Premium 3D Mechanical Elements
-const MechanicalElements = () => {
-  return (
-    <group>
-      {/* Floating Gear System */}
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-        <mesh position={[2, 1, -2]} rotation={[0.5, 0.5, 0]}>
-          <torusGeometry args={[0.8, 0.2, 16, 32]} />
-          <meshStandardMaterial 
-            color="#8b5cf6" 
-            metalness={0.8} 
-            roughness={0.2}
-            emissive="#4c1d95"
-            emissiveIntensity={0.3}
-          />
-        </mesh>
-      </Float>
-
-      {/* Engineering Piston */}
-      <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.8}>
-        <group position={[-2, -1, -1]}>
-          <mesh rotation={[Math.PI / 2, 0, 0]}>
-            <cylinderGeometry args={[0.3, 0.3, 1.5, 32]} />
-            <meshStandardMaterial 
-              color="#06b6d4" 
-              metalness={0.7} 
-              roughness={0.3}
-            />
-          </mesh>
-          <mesh position={[0, 0.9, 0]}>
-            <boxGeometry args={[0.8, 0.4, 0.8]} />
-            <meshStandardMaterial 
-              color="#3b82f6" 
-              metalness={0.6} 
-              roughness={0.4}
-            />
-          </mesh>
-        </group>
-      </Float>
-
-      {/* CAD Wireframe Cube */}
-      <Float speed={1.8} rotationIntensity={0.4} floatIntensity={1.2}>
-        <mesh position={[1, -2, -3]}>
-          <boxGeometry args={[1.2, 1.2, 1.2]} />
-          <meshStandardMaterial 
-            color="#10b981"
-            wireframe
-            transparent
-            opacity={0.6}
-            emissive="#065f46"
-            emissiveIntensity={0.4}
-          />
-        </mesh>
-      </Float>
-    </group>
-  );
-};
-
 const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
-  const [isMuted, setIsMuted] = useState(true);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const [downloadProgress, setDownloadProgress] = useState(0);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+        staggerChildren: 0.3,
+        delayChildren: 0.2
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99]
+        ease: "easeOut"
       }
     }
   };
 
   const floatingVariants = {
     animate: {
-      y: [0, -15, 0],
-      rotate: [0, 5, 0],
+      y: [0, -20, 0],
       transition: {
         duration: 6,
         repeat: Infinity,
@@ -108,72 +209,37 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
     }
   };
 
-  const handlePlaySound = () => {
-    if (audioRef.current) {
-      if (isMuted) {
-        audioRef.current.volume = 0.1;
-        audioRef.current.play();
-      } else {
-        audioRef.current.pause();
-      }
-      setIsMuted(!isMuted);
-    }
+  // Enhanced download with progress simulation
+  const handleDownload = () => {
+    setIsDownloading(true);
+    setDownloadProgress(0);
+    
+    const interval = setInterval(() => {
+      setDownloadProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setIsDownloading(false);
+          // Actual download
+          window.open('/VISWA M.pdf', '_blank');
+          return 100;
+        }
+        return prev + 10;
+      });
+    }, 200);
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
-      {/* Hidden Audio Element */}
-      <audio ref={audioRef} loop>
-        <source src="/mechanical-ambient.mp3" type="audio/mpeg" />
-      </audio>
-
-      {/* Premium 3D Background */}
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* 3D Background */}
       <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
+        <Canvas camera={{ position: [0, 0, 5] }}>
           <Suspense fallback={null}>
-            <ambientLight intensity={0.4} />
-            <directionalLight position={[10, 10, 5]} intensity={1.2} color="#8b5cf6" />
-            <pointLight position={[-10, -10, -10]} intensity={0.8} color="#3b82f6" />
-            <spotLight position={[0, 5, 0]} intensity={0.5} color="#06b6d4" angle={0.3} />
-            
-            <MechanicalElements />
-            
-            <Environment preset="city" />
-            <OrbitControls 
-              enableZoom={false} 
-              enablePan={false} 
-              enableRotate={true} 
-              autoRotate 
-              autoRotateSpeed={0.8}
-              maxPolarAngle={Math.PI / 2}
-              minPolarAngle={Math.PI / 3}
-            />
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[10, 10, 5]} intensity={1} />
+            <AnimatedSphere />
+            <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} autoRotate autoRotateSpeed={0.5} />
           </Suspense>
         </Canvas>
-      </div>
-
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-purple-400 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0, 1, 0],
-              scale: [0, 1, 0],
-            }}
-            transition={{
-              duration: Math.random() * 3 + 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
       </div>
 
       {/* Content */}
@@ -183,364 +249,194 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
         animate="visible"
         className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
       >
-        {/* Premium Profile Section */}
-        <motion.div variants={itemVariants} className="mb-12">
+        {/* Profile Section */}
+        <motion.div variants={itemVariants} className="mb-8">
           <motion.div
             variants={floatingVariants}
             animate="animate"
             className="relative inline-block"
           >
-            <div className="relative">
-              <motion.img
-                src="/viswa.jpeg"
-                alt="Viswa M - Mechanical Engineer"
-                className="mx-auto mb-6 w-32 h-32 sm:w-36 sm:h-36 lg:w-40 lg:h-40 rounded-full object-cover shadow-2xl border-4 border-purple-500/70 backdrop-blur-sm"
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 0 40px rgba(139, 92, 246, 0.8)",
-                  borderColor: "rgba(139, 92, 246, 0.9)"
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              />
-              
-              {/* Animated Badge */}
-              <motion.div
-                className="absolute -bottom-2 -right-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg"
-                animate={{
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Cpu className="w-3 h-3 inline mr-1" />
-                ENGINEER
-              </motion.div>
-
-              {/* Floating Icons */}
-              <motion.div
-                className="absolute -top-4 -left-4 w-10 h-10 bg-gradient-to-br from-purple-500/30 to-blue-500/30 backdrop-blur-sm rounded-full flex items-center justify-center border border-purple-400/50 shadow-lg"
-                animate={{
-                  rotate: [0, 180, 360],
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{ duration: 4, repeat: Infinity }}
-              >
-                <Cog className="w-5 h-5 text-purple-300" />
-              </motion.div>
-              
-              <motion.div
-                className="absolute -bottom-4 -left-4 w-10 h-10 bg-gradient-to-br from-blue-500/30 to-cyan-500/30 backdrop-blur-sm rounded-full flex items-center justify-center border border-blue-400/50 shadow-lg"
-                animate={{
-                  rotate: [360, 180, 0],
-                  scale: [1.2, 1, 1.2],
-                }}
-                transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-              >
-                <Wrench className="w-5 h-5 text-blue-300" />
-              </motion.div>
-
-              <motion.div
-                className="absolute -top-4 -right-4 w-10 h-10 bg-gradient-to-br from-cyan-500/30 to-emerald-500/30 backdrop-blur-sm rounded-full flex items-center justify-center border border-cyan-400/50 shadow-lg"
-                animate={{
-                  rotate: [0, -180, -360],
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{ duration: 5, repeat: Infinity, delay: 2 }}
-              >
-                <Zap className="w-5 h-5 text-cyan-300" />
-              </motion.div>
-            </div>
+            <motion.img
+              src="/viswa.jpeg"
+              alt="Viswa M - Mechanical Engineer"
+              className="mx-auto mb-6 w-40 h-40 sm:w-44 sm:h-44 lg:w-48 lg:h-48 rounded-full object-cover shadow-2xl border-4 border-purple-500/50"
+              whileHover={{ 
+                scale: 1.1,
+                boxShadow: "0 0 30px rgba(139, 92, 246, 0.6)"
+              }}
+              transition={{ type: "spring", stiffness: 300 }}
+            />
+            
+            {/* Floating Mechanical Elements around Profile */}
+            <motion.div
+              className="absolute -top-4 -right-4 w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center border border-purple-500/30"
+              animate={{
+                rotate: [0, 180, 360],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{ duration: 4, repeat: Infinity }}
+            >
+              <Cog className="w-4 h-4 text-purple-400" />
+            </motion.div>
+            <motion.div
+              className="absolute -bottom-4 -left-4 w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center border border-blue-500/30"
+              animate={{
+                rotate: [360, 180, 0],
+                scale: [1.2, 1, 1.2],
+              }}
+              transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+            >
+              <Wrench className="w-4 h-4 text-blue-400" />
+            </motion.div>
           </motion.div>
         </motion.div>
 
-        {/* Premium Title Section */}
+        {/* Main Title */}
         <motion.div variants={itemVariants} className="mb-8">
           <motion.h1 
-            className="font-bold mb-4 tracking-tight"
+            className="font-bold mb-4"
             whileHover={{ scale: 1.02 }}
           >
-            <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-light">
+            <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
               Hi, I'm{' '}
             </span>
             <motion.span 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-purple-300 via-pink-300 to-cyan-300 font-medium"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-blue-500"
               animate={{
                 backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
               }}
-              transition={{ duration: 6, repeat: Infinity }}
-              style={{ backgroundSize: '200% 200%' }}
+              transition={{ duration: 5, repeat: Infinity }}
             >
               Viswa M
             </motion.span>
           </motion.h1>
         </motion.div>
 
-        {/* Enhanced Animated Subtitle */}
+        {/* Animated Subtitle */}
         <motion.div 
           variants={itemVariants}
-          className="mb-12 h-16 sm:h-20 flex items-center justify-center relative"
+          className="mb-8 h-12 sm:h-14 flex items-center justify-center"
         >
-          <div className="relative">
-            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-200 font-medium tracking-wide">
-              <TypeAnimation
-                sequence={[
-                  'Mechanical Design Engineer',
-                  2500,
-                  'FEA & CFD Specialist',
-                  2500,
-                  'CAE Automation Expert',
-                  2500,
-                  'Product Development Lead',
-                  2500,
-                  'Innovation Catalyst',
-                  2500,
-                ]}
-                wrapper="span"
-                speed={65}
-                repeat={Infinity}
-                className="bg-clip-text text-transparent bg-gradient-to-r from-gray-200 to-gray-100"
-              />
-            </div>
-            
-            {/* Sound Control */}
-            <motion.button
-              onClick={handlePlaySound}
-              className="absolute -right-12 top-1/2 -translate-y-1/2 p-3 bg-gray-800/40 backdrop-blur-sm rounded-full hover:bg-gray-700/60 transition-all duration-300 border border-gray-600/50"
-              whileHover={{ scale: 1.1, rotate: 15 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              {isMuted ? (
-                <Zap className="w-5 h-5 text-gray-400" />
-              ) : (
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <Zap className="w-5 h-5 text-purple-400" />
-                </motion.div>
-              )}
-            </motion.button>
+          <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-300 font-bold">
+            <TypeAnimation
+              sequence={[
+                'Mechanical Design Engineer',
+                2000,
+                'FEA & CFD Specialist',
+                2000,
+                'CAE Automation Expert',
+                2000,
+                'Product Development Engineer',
+                2000,
+                'Innovation Enthusiast',
+                2000,
+              ]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+              className="bg-clip-text text-transparent bg-gradient-to-r from-gray-300 to-gray-100"
+            />
           </div>
         </motion.div>
         
-        {/* Premium Expertise Grid */}
+        {/* Expertise Cards */}
         <motion.div
           variants={itemVariants}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16 max-w-5xl mx-auto"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto"
         >
           {[
-            { 
-              icon: Cog, 
-              title: 'CAD Design', 
-              desc: 'SolidWorks, CATIA',
-              gradient: 'from-purple-500/20 to-purple-600/20',
-              border: 'border-purple-500/30'
-            },
-            { 
-              icon: Zap, 
-              title: 'FEA/CFD', 
-              desc: 'ANSYS, Simulation',
-              gradient: 'from-blue-500/20 to-blue-600/20',
-              border: 'border-blue-500/30'
-            },
-            { 
-              icon: Cpu, 
-              title: 'Automation', 
-              desc: 'Python, MATLAB',
-              gradient: 'from-cyan-500/20 to-cyan-600/20',
-              border: 'border-cyan-500/30'
-            },
-            { 
-              icon: Rocket, 
-              title: 'Innovation', 
-              desc: 'R&D, Optimization',
-              gradient: 'from-emerald-500/20 to-emerald-600/20',
-              border: 'border-emerald-500/30'
-            }
+            { icon: Cog, title: 'Design', desc: 'SolidWorks, CATIA' },
+            { icon: Zap, title: 'Analysis', desc: 'ANSYS, FEA, CFD' },
+            { icon: Wrench, title: 'Automation', desc: 'Python, MATLAB' },
+            { icon: FileText, title: 'Innovation', desc: 'R&D, Optimization' }
           ].map((item, index) => (
             <motion.div
               key={item.title}
-              className={`bg-gradient-to-br ${item.gradient} backdrop-blur-lg p-8 rounded-2xl border ${item.border} relative overflow-hidden group cursor-pointer shadow-2xl`}
+              className="bg-gray-800/30 backdrop-blur-sm p-6 sm:p-8 rounded-xl border border-purple-500/20 relative overflow-hidden"
               whileHover={{ 
                 scale: 1.05,
-                y: -5,
-                transition: { type: "spring", stiffness: 400, damping: 25 }
+                backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                borderColor: 'rgba(139, 92, 246, 0.5)'
               }}
-              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              {/* Animated Background */}
-              <motion.div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100"
-                initial={false}
-                transition={{ duration: 0.6 }}
-                style={{
-                  background: `linear-gradient(45deg, transparent 30%, ${item.border.split('-')[1]}-500/10 50%, transparent 70%)`,
-                  backgroundSize: '200% 200%',
-                }}
-                animate={{
-                  backgroundPosition: ['0% 0%', '200% 200%'],
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              />
-              
-              <motion.div
-                className="relative z-10"
-                whileHover={{ scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <item.icon className="w-10 h-10 mb-4 mx-auto text-white" />
-              </motion.div>
-              
-              <h3 className="font-bold text-xl mb-2 text-white relative z-10">{item.title}</h3>
-              <p className="text-gray-200 font-medium text-lg relative z-10">{item.desc}</p>
-
-              {/* Hover Effect */}
-              <motion.div
-                className="absolute inset-0 border-2 border-transparent group-hover:border-white/20 rounded-2xl"
-                initial={false}
-                transition={{ duration: 0.4 }}
-              />
+              <item.icon className="w-8 h-8 text-purple-500 mb-3 mx-auto" />
+              <h3 className="font-bold text-lg sm:text-xl mb-1">{item.title}</h3>
+              <p className="text-base sm:text-lg text-gray-400 font-semibold">{item.desc}</p>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Enhanced Description */}
+        {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-gray-300 text-xl sm:text-2xl max-w-4xl mx-auto mb-16 leading-relaxed font-light tracking-wide bg-gray-800/30 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 shadow-2xl"
+          className="text-gray-400 text-lg sm:text-xl max-w-3xl mx-auto mb-12 leading-relaxed font-semibold"
         >
-          <span className="text-purple-300 font-medium">Visionary mechanical engineer</span> specializing in 
-          advanced CAD design, computational analysis, and engineering automation. Bridging traditional 
-          mechanical excellence with cutting-edge digital innovation to create transformative solutions 
-          for complex engineering challenges.
+          Passionate mechanical engineer specializing in advanced CAD design, FEA/CFD analysis, 
+          and engineering automation. I bridge traditional mechanical engineering with cutting-edge 
+          technology to create innovative solutions.
         </motion.p>
 
-        {/* Premium Social Links */}
+        {/* Social Links */}
         <motion.div
           variants={itemVariants}
-          className="flex justify-center items-center space-x-8 mb-16"
+          className="flex justify-center items-center space-x-8 mb-12"
         >
           {[
-            { 
-              icon: Github, 
-              href: "https://github.com/viswamathan", 
-              label: "GitHub",
-              color: "hover:text-purple-300"
-            },
-            { 
-              icon: Linkedin, 
-              href: "https://www.linkedin.com/in/viswa-m-91b544258/", 
-              label: "LinkedIn",
-              color: "hover:text-blue-300"
-            },
-            { 
-              icon: FileText, 
-              href: "/VISWA M RESUME.pdf", 
-              label: "Resume",
-              color: "hover:text-emerald-300"
-            }
+            { icon: Github, href: "https://github.com/viswamathan", label: "GitHub" },
+            { icon: Linkedin, href: "https://www.linkedin.com/in/viswa-m-91b544258/", label: "LinkedIn" }
           ].map((social, index) => (
             <motion.a
               key={social.label}
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group relative bg-gray-800/40 backdrop-blur-sm p-5 rounded-2xl hover:bg-gray-700/60 transition-all duration-500 border border-gray-600/50 ${social.color}`}
-              whileHover={{ 
-                scale: 1.15, 
-                y: -8,
-                rotate: [0, -5, 5, 0]
-              }}
-              whileTap={{ scale: 0.9 }}
-              animate={{
-                boxShadow: [
-                  "0 0 0 0px rgba(139, 92, 246, 0)",
-                  "0 0 0 3px rgba(139, 92, 246, 0.4)",
-                  "0 0 0 0px rgba(139, 92, 246, 0)"
-                ]
-              }}
-              transition={{ 
-                duration: 3, 
-                repeat: Infinity,
-                delay: index * 1.5,
-                ease: "easeInOut"
-              }}
+              className="group relative bg-gray-800/50 backdrop-blur-sm p-4 rounded-full hover:bg-gray-700/50 transition-all duration-300"
+              whileHover={{ scale: 1.1, y: -5 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <social.icon className="w-7 h-7 text-white transition-colors duration-300" />
-              
-              {/* Tooltip */}
+              <social.icon className="w-6 h-6 text-white group-hover:text-purple-400 transition-colors" />
               <motion.div
-                className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-gray-900/90 backdrop-blur-sm text-white px-3 py-2 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap border border-gray-600/50"
-                initial={{ scale: 0.8 }}
-                whileHover={{ scale: 1 }}
-              >
-                {social.label}
-                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-900/90 rotate-45 border-l border-t border-gray-600/50"></div>
-              </motion.div>
+                className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity"
+                whileHover={{ scale: 1.1 }}
+              />
             </motion.a>
           ))}
         </motion.div>
 
-        {/* Premium Call to Action Buttons */}
+        {/* Call to Action Buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row justify-center items-center space-y-6 sm:space-y-0 sm:space-x-8"
+          className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
         >
           <motion.a
             href="/VISWA M RESUME.pdf"
             target="_blank"
-            className="group relative bg-gradient-to-r from-purple-600 via-purple-700 to-blue-600 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-500 flex items-center gap-3 shadow-2xl hover:shadow-3xl text-lg min-w-[240px] justify-center"
-            whileHover={{ 
-              scale: 1.05, 
-              y: -3,
-              background: ["linear-gradient(45deg, #7c3aed, #4f46e5, #3730a3)", "linear-gradient(45deg, #3730a3, #7c3aed, #4f46e5)", "linear-gradient(45deg, #4f46e5, #3730a3, #7c3aed)"]
-            }}
+            className="group relative bg-gradient-to-r from-purple-600 to-blue-600 text-white px-5 py-2.5 rounded-full font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl text-sm"
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            animate={{
-              backgroundSize: ['200% 200%', '200% 200%', '200% 200%'],
-            }}
-            transition={{ 
-              background: { duration: 3, repeat: Infinity },
-              scale: { type: "spring", stiffness: 400, damping: 25 }
-            }}
           >
-            <FileText className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+            <FileText className="w-4 h-4 group-hover:rotate-12 transition-transform" />
             <span>Download Portfolio</span>
-            <motion.div
-              className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-30 group-hover:opacity-70 transition-opacity duration-500"
-              animate={{
-                scale: [1, 1.1, 1],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
           </motion.a>
 
           <motion.button
-            onClick={() => navigateToPage && navigateToPage('cad-models')}
-            className="group relative bg-gradient-to-r from-emerald-500 via-teal-600 to-cyan-600 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-500 flex items-center gap-3 shadow-2xl hover:shadow-3xl text-lg min-w-[240px] justify-center"
-            whileHover={{ 
-              scale: 1.05, 
-              y: -3,
-            }}
+            onClick={() => navigateToPage('cad-models')}
+            className="group relative bg-gradient-to-r from-green-600 to-teal-600 text-white px-5 py-2.5 rounded-full font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl text-sm"
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Cog className="w-6 h-6 group-hover:rotate-90 transition-transform duration-500" />
-            <span>Explore CAD Gallery</span>
+            <Cog className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+            <span>View CAD Models</span>
           </motion.button>
 
           <motion.button
             onClick={scrollToContact}
-            className="group relative border-2 border-purple-400/50 text-purple-300 hover:text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-500 backdrop-blur-lg hover:bg-purple-600/20 text-lg min-w-[240px] justify-center hover:border-purple-300/70 shadow-2xl"
-            whileHover={{ 
-              scale: 1.05, 
-              y: -3,
-              borderColor: "rgba(192, 132, 252, 0.8)"
-            }}
+            className="group relative border-2 border-purple-600/50 text-purple-400 hover:text-white px-5 py-2.5 rounded-full font-medium transition-all duration-300 backdrop-blur-sm hover:bg-purple-600/20 text-sm flex items-center gap-2"
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="flex items-center gap-2">
-              <Rocket className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              Start Collaboration
-            </span>
+            <span>Let's Connect</span>
           </motion.button>
         </motion.div>
       </motion.div>

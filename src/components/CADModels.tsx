@@ -2,9 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Box, Download, Eye, Layers, Award, X, ZoomIn, ZoomOut, 
-  Search, Filter, SortAsc, Info, Clock, FileText, Users,
-  ChevronLeft, ChevronRight, Play, Pause, Share2, Bookmark,
-  Cpu, Zap, Settings, Factory, Car, Robot, Thermometer
+  Search, Filter, SortAsc, Info, 
+  ChevronLeft, ChevronRight, Play, Pause
 } from "lucide-react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
@@ -19,8 +18,7 @@ const CADModels = () => {
   const [sortBy, setSortBy] = useState("popularity");
   const [autoRotate, setAutoRotate] = useState(true);
   const [currentModelIndex, setCurrentModelIndex] = useState(0);
-  const [showInfoPanel, setShowInfoPanel] = useState(true);
-  const [bookmarkedModels, setBookmarkedModels] = useState(new Set());
+  const [showInfoPanel, setShowInfoPanel] = useState(false);
   
   const mountRef = useRef(null);
   const controlsRef = useRef(null);
@@ -28,16 +26,6 @@ const CADModels = () => {
   const sceneRef = useRef(null);
   const rendererRef = useRef(null);
   const animationRef = useRef(null);
-
-  const categoryIcons = {
-    "Mechanical Parts": Settings,
-    "Automotive": Car,
-    "Industrial": Factory,
-    "Assembly": Cpu,
-    "Thermal Systems": Thermometer,
-    "Robotics": Robot,
-    "Aerospace": Zap
-  };
 
   const cadModels = [
     {
@@ -47,107 +35,215 @@ const CADModels = () => {
       software: "SolidWorks",
       category: "Mechanical Parts",
       complexity: "Intermediate",
-      features: ["Parametric Design", "Gear Ratio Analysis", "Motion Study", "FEA Ready"],
+      features: ["Parametric Design", "Gear Ratio Analysis", "Motion Study"],
       image: "/3d Pictures/gear profile.png",
       downloadUrl: "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
       modelPath: "/Models/Spur Gear profile.STL",
       views: 1247,
       downloads: 89,
       fileSize: "4.2 MB",
-      lastUpdated: "2023-10-15",
-      designTime: "12 hours",
-      triangles: "45K",
-      materials: ["Steel", "Alloy"],
-      tags: ["Transmission", "Mechanical", "Precision"]
+      lastUpdated: "2023-10-15"
     },
     {
       id: 2,
       title: "Exhaust Manifold",
-      description: "Optimized exhaust manifold designed for efficient gas flow, reduced backpressure, and improved engine performance. Features smooth flow paths and minimized thermal stresses.",
+      description: "Optimized exhaust manifold designed for efficient gas flow, reduced backpressure, and improved engine performance. Features smooth flow paths and minimized thermal stresses for durability.",
       software: "SolidWorks",
       category: "Automotive",
       complexity: "Advanced",
-      features: ["Flow Simulation", "Thermal Analysis", "Parametric Design", "CFD Ready"],
+      features: ["Flow Simulation", "Thermal Analysis", "Parametric Design"],
       image: "/3d Pictures/exhaust manifold.png",
       downloadUrl: "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
       modelPath: "/Models/Exhaust manifold.STL",
       views: 500,
       downloads: 25,
       fileSize: "6.7 MB",
-      lastUpdated: "2023-09-22",
-      designTime: "18 hours",
-      triangles: "78K",
-      materials: ["Stainless Steel", "Cast Iron"],
-      tags: ["Automotive", "Performance", "Thermal"]
+      lastUpdated: "2023-09-22"
     },
     {
       id: 3,
-      title: "Robotic Gripper Assembly",
-      description: "Advanced servo-driven robotic gripper with adjustable finger mechanisms for precise object handling in industrial automation applications.",
+      title: "Knuckle Joint",
+      description: "Robust knuckle joint designed for heavy load applications, ensuring secure connections while allowing limited angular movement. Suitable for linkages in structural and mechanical systems.",
+      software: "SolidWorks",
+      category: "Mechanical Parts",
+      complexity: "Intermediate",
+      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+      image: "/3d Pictures/knuckle joint.png",
+      downloadUrl: "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
+      modelPath: "/Models/KNUCKLE JOINT.STL",
+      views: 226,
+      downloads: 10,
+      fileSize: "3.1 MB",
+      lastUpdated: "2023-08-30"
+    },
+    {
+      id: 4,
+      title: "Universal Coupling",
+      description: "Precision universal coupling enabling torque transmission between shafts at varying angles. Designed to minimize backlash and maintain smooth power delivery in dynamic conditions.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Beginner",
+      features: ["Parametric Design", "Motion Study", "Torque Analysis"],
+      image: "/3d Pictures/universal coupling.png",
+      downloadUrl: "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
+      modelPath: "/Models/UNIVERSAL COUPLING.STL",
+      views: 189,
+      downloads: 15,
+      fileSize: "2.8 MB",
+      lastUpdated: "2023-07-18"
+    },
+    {
+      id: 5,
+      title: "Muff Coupling",
+      description: "Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Basic",
+      features: ["Parametric Design", "Torque Analysis", "Stress Check"],
+      image: "/3d Pictures/muff coupling.png",
+      downloadUrl: "https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
+      modelPath: "/Models/MUFF COUPLING.STL",
+      views: 189,
+      downloads: 15,
+      fileSize: "2.5 MB",
+      lastUpdated: "2023-06-12"
+    },
+    {
+      id: 6,
+      title: "Door Lock Mechanism",
+      description: "Compact and reliable door lock mechanism featuring latch, spring, and handle components for secure and smooth operation.",
+      software: "SolidWorks",
+      category: "Assembly",
+      complexity: "Basic",
+      features: ["Assembly Modeling", "Motion Simulation", "Tolerance Analysis"],
+      image: "/3d Pictures/DOOR LOCK.png",
+      downloadUrl: "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
+      modelPath: "/Models/Door lock.STL",
+      views: 312,
+      downloads: 18,
+      fileSize: "5.3 MB",
+      lastUpdated: "2023-05-25"
+    },
+    {
+      id: 7,
+      title: "Flanged Tee Pipe Fitting",
+      description: "Industrial-grade flanged tee pipe fitting designed for fluid distribution systems. Features precise flanges for secure bolted connections and optimized internal geometry for minimal pressure loss.",
+      software: "SolidWorks",
+      category: "Industrial",
+      complexity: "Intermediate",
+      features: ["Parametric Design", "Flow Optimization", "Assembly Ready"],
+      image: "/3d Pictures/flanged tee pipe fitting.png",
+      downloadUrl: "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
+      modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
+      views: 278,
+      downloads: 25,
+      fileSize: "4.8 MB",
+      lastUpdated: "2023-04-17"
+    },
+    {
+      id: 8,
+      title: "Refrigeration Valves Assembly",
+      description: "Precision-designed refrigeration valve assembly used for controlling refrigerant flow in HVAC and cooling systems. Includes service, expansion, and solenoid valves optimized for durability and leak-proof operation.",
+      software: "SolidWorks",
+      category: "Thermal Systems",
+      complexity: "Basic",
+      features: ["Parametric Design", "Flow Simulation", "Thermal Analysis"],
+      image: "/3d Pictures/refrigeration valves.png",
+      downloadUrl: "https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
+      modelPath: "/Models/Refrigeration Valves.STL",
+      views: 342,
+      downloads: 27,
+      fileSize: "7.2 MB",
+      lastUpdated: "2023-03-09"
+    },
+    {
+      id: 9,
+      title: "Connecting Rod (Without Cap)",
+      description: "Lightweight connecting rod designed without cap for simplified design analysis and manufacturing demonstration. Optimized cross-section for strength-to-weight ratio and fatigue resistance.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Intermediate",
+      features: ["3D Modeling", "FEA Simulation", "Mass Optimization"],
+      image: "/3d Pictures/connecting rod.png",
+      downloadUrl: "https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
+      modelPath: "/Models/Connecting Rod.STL",
+      views: 297,
+      downloads: 24,
+      fileSize: "3.9 MB",
+      lastUpdated: "2023-02-14"
+    },
+    {
+      id: 10,
+      title: "Piston Head",
+      description: "High-strength piston head designed for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high-pressure conditions.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["3D Modeling", "FEA Analysis", "Thermal Simulation"],
+      image: "/3d Pictures/piston head.png",
+      downloadUrl: "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
+      modelPath: "/Models/piston head.STL",
+      views: 410,
+      downloads: 32,
+      fileSize: "4.5 MB",
+      lastUpdated: "2023-01-28"
+    },
+    {
+      id: 11,
+      title: "Crankshaft",
+      description: "Precision crankshaft designed for efficient torque transmission and balanced rotation. Engineered for minimal vibration, maximum fatigue resistance, and high-performance automotive engines.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["Parametric Design", "Stress Analysis", "Motion Study"],
+      image: "/3d Pictures/crankshaft.png",
+      downloadUrl: "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
+      modelPath: "/Models/crank shaft.STL",
+      views: 365,
+      downloads: 28,
+      fileSize: "5.1 MB",
+      lastUpdated: "2022-12-05"
+    },
+    {
+      id: 12,
+      title: "Stuffing Box",
+      description: "A sealing assembly designed to prevent fluid leakage around rotating shafts in pumps and valves. Modeled and assembled in SolidWorks with precise dimensional accuracy and material differentiation.",
+      software: "SolidWorks",
+      category: "Mechanical Parts",
+      complexity: "Intermediate",
+      features: ["3D Assembly Modeling","Material Visualization","Sectional & Isometric Views","Mating Constraints"],
+      image: "/3d Pictures/stuffingbox.png",
+      downloadUrl:"https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+      modelPath: "/Models/Stuffing Box.STL",
+      views: 248,
+      downloads: 19,
+      fileSize: "6.3 MB",
+      lastUpdated: "2022-11-19"
+    },
+    {
+      id: 13,
+      title: "Servo-Driven Robotic Gripper",
+      description: "An intelligent robotic gripper actuated by servo motors for precise object handling. Designed in SolidWorks with adjustable finger mechanisms, torque-based control, and lightweight aluminum structure for automation and pick-and-place applications.",
       software: "SolidWorks",
       category: "Robotics",
       complexity: "Advanced",
-      features: ["Servo Mechanism", "Motion Study", "Assembly Modeling", "Force Analysis"],
+      features: ["Servo-Driven Mechanism", "Adjustable Finger Design", "3D Parametric Modeling", "Motion Study Simulation"],
       image: "/3d Pictures/Robotic Gripper.png",
       downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
       modelPath: "/Models/Robotic Gripper.STL",
       views: 312,
       downloads: 27,
       fileSize: "8.5 MB",
-      lastUpdated: "2023-11-30",
-      designTime: "24 hours",
-      triangles: "92K",
-      materials: ["Aluminum", "Plastic", "Steel"],
-      tags: ["Automation", "Robotics", "Precision"]
+      lastUpdated: "2022-10-30"
     },
-    {
-      id: 4,
-      title: "Turbofan Engine Blade",
-      description: "High-performance turbofan engine blade designed for optimal aerodynamic efficiency and structural integrity under extreme conditions.",
-      software: "CATIA",
-      category: "Aerospace",
-      complexity: "Expert",
-      features: ["Aerodynamic Analysis", "Thermal Simulation", "Composite Materials", "FEA Optimized"],
-      image: "/3d Pictures/turbofan-blade.png",
-      downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
-      modelPath: "/Models/Turbofan Blade.STL",
-      views: 890,
-      downloads: 67,
-      fileSize: "12.3 MB",
-      lastUpdated: "2023-11-15",
-      designTime: "32 hours",
-      triangles: "156K",
-      materials: ["Titanium Alloy", "Composite"],
-      tags: ["Aerospace", "High-Performance", "Aerodynamic"]
-    },
-    {
-      id: 5,
-      title: "Hydraulic Cylinder Assembly",
-      description: "Complete hydraulic cylinder assembly with precision-machined components for heavy-duty industrial applications.",
-      software: "SolidWorks",
-      category: "Industrial",
-      complexity: "Intermediate",
-      features: ["Fluid Dynamics", "Pressure Analysis", "Assembly Modeling", "Tolerance Stack"],
-      image: "/3d Pictures/hydraulic-cylinder.png",
-      downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
-      modelPath: "/Models/Hydraulic Cylinder.STL",
-      views: 423,
-      downloads: 38,
-      fileSize: "7.8 MB",
-      lastUpdated: "2023-10-28",
-      designTime: "16 hours",
-      triangles: "68K",
-      materials: ["Chromed Steel", "Brass", "Rubber"],
-      tags: ["Hydraulic", "Industrial", "Heavy-Duty"]
-    }
   ];
 
   const categories = [
     "All",
+    "Assembly",
     "Mechanical Parts",
     "Automotive",
     "Industrial",
-    "Assembly",
     "Thermal Systems",
     "Robotics",
     "Aerospace",
@@ -162,9 +258,6 @@ const CADModels = () => {
         model.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         model.features.some(feature => 
           feature.toLowerCase().includes(searchQuery.toLowerCase())
-        ) ||
-        model.tags.some(tag => 
-          tag.toLowerCase().includes(searchQuery.toLowerCase())
         ))
     )
     .sort((a, b) => {
@@ -174,7 +267,7 @@ const CADModels = () => {
         case "downloads":
           return b.downloads - a.downloads;
         case "complexity":
-          const complexityOrder = { "Basic": 0, "Intermediate": 1, "Advanced": 2, "Expert": 3 };
+          const complexityOrder = { "Basic": 0, "Beginner": 1, "Intermediate": 2, "Advanced": 3 };
           return complexityOrder[b.complexity] - complexityOrder[a.complexity];
         case "newest":
           return new Date(b.lastUpdated) - new Date(a.lastUpdated);
@@ -186,51 +279,26 @@ const CADModels = () => {
   const getComplexityColor = (complexity) => {
     switch (complexity) {
       case "Basic":
-        return "from-green-500 to-emerald-500";
+        return "bg-green-500/20 text-green-400 border-green-500/30";
+      case "Beginner":
+        return "bg-blue-500/20 text-blue-400 border-blue-500/30";
       case "Intermediate":
-        return "from-blue-500 to-cyan-500";
+        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
       case "Advanced":
-        return "from-purple-500 to-pink-500";
-      case "Expert":
-        return "from-orange-500 to-red-500";
+        return "bg-red-500/20 text-red-400 border-red-500/30";
       default:
-        return "from-gray-500 to-gray-600";
-    }
-  };
-
-  const getComplexityBg = (complexity) => {
-    switch (complexity) {
-      case "Basic":
-        return "bg-gradient-to-r from-green-500/20 to-emerald-500/20 border-green-500/30";
-      case "Intermediate":
-        return "bg-gradient-to-r from-blue-500/20 to-cyan-500/20 border-blue-500/30";
-      case "Advanced":
-        return "bg-gradient-to-r from-purple-500/20 to-pink-500/20 border-purple-500/30";
-      case "Expert":
-        return "bg-gradient-to-r from-orange-500/20 to-red-500/20 border-orange-500/30";
-      default:
-        return "bg-gradient-to-r from-gray-500/20 to-gray-600/20 border-gray-500/30";
+        return "bg-gray-500/20 text-gray-400 border-gray-500/30";
     }
   };
 
   const stats = [
-    { label: "Premium Models", value: cadModels.length, icon: Box, color: "from-purple-500 to-pink-500" },
-    { label: "Total Downloads", value: cadModels.reduce((sum, model) => sum + model.downloads, 0), icon: Download, color: "from-blue-500 to-cyan-500" },
-    { label: "Categories", value: categories.length - 1, icon: Layers, color: "from-green-500 to-emerald-500" },
-    { label: "Design Hours", value: cadModels.reduce((sum, model) => sum + parseInt(model.designTime), 0) + "+", icon: Award, color: "from-orange-500 to-red-500" },
+    { label: "Total Models", value: cadModels.length, icon: Box, color: "purple" },
+    { label: "Downloads", value: cadModels.reduce((sum, model) => sum + model.downloads, 0), icon: Download, color: "blue" },
+    { label: "Categories", value: categories.length - 1, icon: Layers, color: "green" },
+    { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
 
-  const toggleBookmark = (modelId) => {
-    const newBookmarks = new Set(bookmarkedModels);
-    if (newBookmarks.has(modelId)) {
-      newBookmarks.delete(modelId);
-    } else {
-      newBookmarks.add(modelId);
-    }
-    setBookmarkedModels(newBookmarks);
-  };
-
-  // Enhanced 3D Viewer
+  // Enhanced 3D Viewer with better controls and error handling
   const init3DViewer = useCallback(() => {
     if (!previewModel || !mountRef.current) return;
 
@@ -248,18 +316,23 @@ const CADModels = () => {
     }
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0f172a);
+    scene.background = new THREE.Color(0x111827);
     sceneRef.current = scene;
 
+    // Square aspect ratio for viewer
     const viewerSize = Math.min(mountRef.current.clientWidth, mountRef.current.clientHeight);
     
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(
+      45,
+      1, // Square aspect ratio
+      0.1,
+      1000
+    );
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ 
       antialias: true,
-      alpha: true,
-      powerPreference: "high-performance"
+      alpha: true
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(viewerSize, viewerSize);
@@ -279,28 +352,35 @@ const CADModels = () => {
     controls.maxDistance = 50;
     controlsRef.current = controls;
 
-    // Premium lighting setup
+    // Enhanced lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     directionalLight.position.set(50, 50, 50);
     directionalLight.castShadow = true;
+    directionalLight.shadow.mapSize.width = 2048;
+    directionalLight.shadow.mapSize.height = 2048;
     scene.add(directionalLight);
 
     const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
     fillLight.position.set(-50, 50, -50);
     scene.add(fillLight);
 
-    const rimLight = new THREE.DirectionalLight(0xffffff, 0.4);
-    rimLight.position.set(0, -50, -50);
-    scene.add(rimLight);
-
     const loader = new STLLoader();
     const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
+    const meshes = [];
+    let loadedCount = 0;
 
-    const loadModel = (path) => {
+    const loadModel = (path, index) => {
       return new Promise((resolve, reject) => {
+        const material = new THREE.MeshStandardMaterial({
+          color: new THREE.Color(`hsl(${(index * 60) % 360}, 80%, 60%)`),
+          metalness: 0.7,
+          roughness: 0.3,
+          flatShading: false,
+        });
+
         loader.load(
           path,
           (geometry) => {
@@ -308,43 +388,57 @@ const CADModels = () => {
             geometry.computeBoundingBox();
             
             const box = geometry.boundingBox;
+            const size = new THREE.Vector3();
+            box.getSize(size);
             const center = new THREE.Vector3();
             box.getCenter(center);
+
             geometry.translate(-center.x, -center.y, -center.z);
 
-            const material = new THREE.MeshPhysicalMaterial({
-              color: new THREE.Color(0x3b82f6),
-              metalness: 0.8,
-              roughness: 0.2,
-              clearcoat: 1.0,
-              clearcoatRoughness: 0.1,
-              reflectivity: 1.0,
-            });
-
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const scaleFactor = 5 / maxDim;
             const mesh = new THREE.Mesh(geometry, material);
+            mesh.scale.setScalar(scaleFactor);
             mesh.castShadow = true;
             mesh.receiveShadow = true;
 
             scene.add(mesh);
+            meshes.push(mesh);
+
             resolve(mesh);
           },
-          undefined,
-          reject
+          (progress) => {
+            // Progress callback if needed
+          },
+          (error) => {
+            console.error(`Error loading model: ${path}`, error);
+            reject(error);
+          }
         );
       });
     };
 
-    Promise.all(modelPaths.map(loadModel))
-      .then((meshes) => {
+    // Load all models
+    Promise.all(modelPaths.map((path, index) => loadModel(path, index)))
+      .then(() => {
+        // Center and scale all models together
         const groupBox = new THREE.Box3();
         meshes.forEach((m) => groupBox.expandByObject(m));
         
         const groupSize = groupBox.getSize(new THREE.Vector3());
+        const groupCenter = groupBox.getCenter(new THREE.Vector3());
+        
+        // Reposition all meshes to center
+        meshes.forEach(mesh => {
+          mesh.position.sub(groupCenter);
+        });
+
         const groupMax = Math.max(groupSize.x, groupSize.y, groupSize.z);
         const fov = camera.fov * (Math.PI / 180);
         const cameraZ = Math.abs(groupMax / 2 / Math.tan(fov / 2));
         
-        camera.position.set(0, groupMax * 0.1, cameraZ * 1.8);
+        // Perfectly center the camera
+        camera.position.set(0, 0, cameraZ * 1.5);
         camera.lookAt(new THREE.Vector3(0, 0, 0));
         controls.update();
 
@@ -364,6 +458,7 @@ const CADModels = () => {
 
     const handleResize = () => {
       if (!mountRef.current) return;
+      
       const viewerSize = Math.min(mountRef.current.clientWidth, mountRef.current.clientHeight);
       renderer.setSize(viewerSize, viewerSize);
     };
@@ -383,11 +478,13 @@ const CADModels = () => {
     return cleanup;
   }, [init3DViewer]);
 
+  // Clean up Three.js resources
   useEffect(() => {
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      
       if (rendererRef.current) {
         rendererRef.current.dispose();
       }
@@ -395,560 +492,527 @@ const CADModels = () => {
   }, []);
 
   const zoomIn = () => {
-    if (cameraRef.current) cameraRef.current.position.multiplyScalar(0.8);
+    if (cameraRef.current) {
+      cameraRef.current.position.multiplyScalar(0.8);
+    }
   };
 
   const zoomOut = () => {
-    if (cameraRef.current) cameraRef.current.position.multiplyScalar(1.2);
+    if (cameraRef.current) {
+      cameraRef.current.position.multiplyScalar(1.2);
+    }
   };
 
   const toggleAutoRotate = () => {
     setAutoRotate(!autoRotate);
-    if (controlsRef.current) controlsRef.current.autoRotate = !autoRotate;
+    if (controlsRef.current) {
+      controlsRef.current.autoRotate = !autoRotate;
+    }
   };
 
   const navigateModels = (direction) => {
     const currentIndex = filteredModels.findIndex(model => model.id === previewModel.id);
-    let newIndex = direction === 'next' 
-      ? (currentIndex + 1) % filteredModels.length
-      : (currentIndex - 1 + filteredModels.length) % filteredModels.length;
+    let newIndex;
+    
+    if (direction === 'next') {
+      newIndex = (currentIndex + 1) % filteredModels.length;
+    } else {
+      newIndex = (currentIndex - 1 + filteredModels.length) % filteredModels.length;
+    }
     
     setPreviewModel(filteredModels[newIndex]);
     setCurrentModelIndex(newIndex);
   };
 
+  const handleKeyDown = (e) => {
+    if (!previewModel) return;
+    
+    switch(e.key) {
+      case 'Escape':
+        setPreviewModel(null);
+        setPreviewImage(null);
+        break;
+      case 'ArrowLeft':
+        navigateModels('prev');
+        break;
+      case 'ArrowRight':
+        navigateModels('next');
+        break;
+      case '+':
+        zoomIn();
+        break;
+      case '-':
+        zoomOut();
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [previewModel, filteredModels]);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-20">
-        {/* Premium Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-full mb-6">
-            <Zap className="w-4 h-4 text-yellow-400" />
-            <span className="text-sm text-gray-300">Premium CAD Collection</span>
-          </div>
-          <h1 className="text-4xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent">
-            Engineering
-            <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Masterpieces
-            </span>
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Discover our curated collection of high-precision 3D models designed for professional 
-            engineering applications and advanced manufacturing processes.
-          </p>
-        </motion.div>
+    <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-20">
+      {/* Heading */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        className="text-center mb-12"
+      >
+        <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          CAD Model{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+            Showcase
+          </span>
+        </h2>
+        <p className="text-gray-400 max-w-2xl mx-auto">
+          Explore our collection of precision-engineered 3D models for engineering, design, and manufacturing applications.
+        </p>
+      </motion.div>
 
-        {/* Premium Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16">
-          {stats.map((stat, i) => {
-            const Icon = stat.icon;
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 text-center border border-white/10 hover:border-white/20 transition-all duration-300"
-              >
-                <div className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg`}>
-                  <Icon className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-2xl font-bold text-white mb-2">{stat.value}</div>
-                <div className="text-gray-400 text-sm">{stat.label}</div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Search and Filter Bar */}
-        <div className="mb-12 p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10">
-          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-            <div className="flex-1 max-w-2xl">
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder="Search models by name, features, or tags..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
-                />
-              </div>
-            </div>
-            
-            <div className="flex gap-4">
-              <div className="relative">
-                <Filter className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="pl-12 pr-8 py-4 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none backdrop-blur-sm"
-                >
-                  <option value="popularity">Most Popular</option>
-                  <option value="downloads">Most Downloads</option>
-                  <option value="complexity">Complexity</option>
-                  <option value="newest">Newest</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          {/* Category Filter */}
-          <div className="flex flex-wrap gap-3 mt-6">
-            {categories.map((cat) => {
-              const Icon = categoryIcons[cat] || Layers;
-              return (
-                <motion.button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all relative backdrop-blur-sm ${
-                    activeCategory === cat
-                      ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg shadow-blue-500/25"
-                      : "bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Icon className="w-4 h-4" />
-                  {cat}
-                </motion.button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Premium Models Grid */}
-        {filteredModels.length === 0 ? (
-          <div className="text-center py-20">
-            <div className="w-24 h-24 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <Search className="w-10 h-10 text-gray-400" />
-            </div>
-            <p className="text-gray-400 text-xl mb-2">No models found</p>
-            <p className="text-gray-500">Try adjusting your search or filter criteria</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-20">
-            {filteredModels.map((model, i) => {
-              const CategoryIcon = categoryIcons[model.category] || Settings;
-              return (
-                <motion.div
-                  key={model.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  whileHover={{ scale: 1.02, y: -8 }}
-                  className="group bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-500 shadow-2xl"
-                >
-                  {/* Premium Image Header */}
-                  <div className="relative h-60 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
-                    <img
-                      src={model.image}
-                      alt={model.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    
-                    {/* Premium Badges */}
-                    <div className="absolute top-4 left-4 flex flex-col gap-2 z-20">
-                      <span className="bg-gradient-to-r from-blue-500/90 to-purple-500/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs text-white font-medium flex items-center gap-1.5 shadow-lg">
-                        <Eye className="w-3 h-3" /> {model.views.toLocaleString()}
-                      </span>
-                      <span className="bg-gradient-to-r from-green-500/90 to-emerald-500/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs text-white font-medium flex items-center gap-1.5 shadow-lg">
-                        <Download className="w-3 h-3" /> {model.downloads}
-                      </span>
-                    </div>
-                    
-                    <div className="absolute top-4 right-4 flex flex-col gap-2 z-20 items-end">
-                      <span className={`px-3 py-1.5 rounded-full text-xs text-white font-medium border backdrop-blur-sm ${getComplexityBg(model.complexity)}`}>
-                        {model.complexity}
-                      </span>
-                      <button
-                        onClick={() => toggleBookmark(model.id)}
-                        className={`p-2 rounded-full backdrop-blur-sm transition-all ${
-                          bookmarkedModels.has(model.id)
-                            ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
-                            : "bg-white/10 text-gray-300 border-white/20 hover:bg-white/20"
-                        } border`}
-                      >
-                        <Bookmark className={`w-4 h-4 ${bookmarkedModels.has(model.id) ? "fill-current" : ""}`} />
-                      </button>
-                    </div>
-
-                    <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2">
-                      <div className="bg-gradient-to-r from-purple-500/90 to-pink-500/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs text-white font-medium flex items-center gap-1.5 shadow-lg">
-                        <CategoryIcon className="w-3 h-3" />
-                        {model.software}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Premium Content */}
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-xl font-bold text-white line-clamp-1 flex-1">{model.title}</h3>
-                    </div>
-                    
-                    <p className="text-gray-300 text-sm mb-4 line-clamp-2 leading-relaxed">{model.description}</p>
-                    
-                    {/* Technical Specs */}
-                    <div className="grid grid-cols-3 gap-3 mb-4">
-                      <div className="text-center p-2 bg-white/5 rounded-lg">
-                        <FileText className="w-4 h-4 text-blue-400 mx-auto mb-1" />
-                        <div className="text-xs text-gray-400">Size</div>
-                        <div className="text-sm text-white font-medium">{model.fileSize}</div>
-                      </div>
-                      <div className="text-center p-2 bg-white/5 rounded-lg">
-                        <Cpu className="w-4 h-4 text-green-400 mx-auto mb-1" />
-                        <div className="text-xs text-gray-400">Triangles</div>
-                        <div className="text-sm text-white font-medium">{model.triangles}</div>
-                      </div>
-                      <div className="text-center p-2 bg-white/5 rounded-lg">
-                        <Clock className="w-4 h-4 text-purple-400 mx-auto mb-1" />
-                        <div className="text-xs text-gray-400">Design Time</div>
-                        <div className="text-sm text-white font-medium">{model.designTime}</div>
-                      </div>
-                    </div>
-
-                    {/* Features */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {model.features.slice(0, 2).map((f, idx) => (
-                        <span
-                          key={idx}
-                          className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 px-3 py-1.5 rounded-full text-xs border border-blue-500/30 backdrop-blur-sm"
-                        >
-                          {f}
-                        </span>
-                      ))}
-                      {model.features.length > 2 && (
-                        <span className="bg-white/10 text-gray-300 px-3 py-1.5 rounded-full text-xs border border-white/10 backdrop-blur-sm">
-                          +{model.features.length - 2}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Premium Action Buttons */}
-                    <div className="flex gap-3">
-                      <motion.button
-                        onClick={() => setPreviewImage(model)}
-                        className="flex-1 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-xl text-sm font-medium border border-white/10 backdrop-blur-sm transition-all duration-300"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <Eye className="w-4 h-4" /> Preview
-                      </motion.button>
-                      <motion.button
-                        onClick={() => setPreviewModel(model)}
-                        className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-4 py-3 rounded-xl text-sm font-medium shadow-lg shadow-blue-500/25 transition-all duration-300"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <Box className="w-4 h-4" /> 3D View
-                      </motion.button>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        )}
-
-        {/* Premium 3D Viewer Modal */}
-        <AnimatePresence>
-          {previewModel && (
+      {/* Stats */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
+        {stats.map((stat, i) => {
+          const Icon = stat.icon;
+          return (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-              onClick={() => setPreviewModel(null)}
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              className="bg-gray-800/50 rounded-xl p-4 sm:p-6 text-center border border-gray-700/50"
             >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-gradient-to-br from-slate-900 to-purple-900 rounded-3xl max-w-7xl w-full max-h-[95vh] overflow-hidden flex flex-col border border-white/10 shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
+              <div
+                className={`w-10 h-10 sm:w-12 sm:h-12 bg-${stat.color}-500/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4`}
               >
-                {/* Premium Header */}
-                <div className="flex justify-between items-center p-6 border-b border-white/10 bg-white/5 backdrop-blur-sm">
-                  <div className="flex items-center gap-4">
-                    <div className={`w-3 h-8 bg-gradient-to-b ${getComplexityColor(previewModel.complexity)} rounded-full`} />
-                    <div>
-                      <h3 className="text-2xl font-bold text-white">{previewModel.title}</h3>
-                      <p className="text-gray-400 flex items-center gap-2">
-                        <span>{previewModel.category}</span>
-                        <span>•</span>
-                        <span>{previewModel.software}</span>
-                        <span>•</span>
-                        <span>{previewModel.triangles} triangles</span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setShowInfoPanel(!showInfoPanel)}
-                      className="p-3 text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-all duration-300"
-                      title="Model Information"
-                    >
-                      <Info className="w-5 h-5" />
-                    </button>
-                    <button
-                      onClick={() => setPreviewModel(null)}
-                      className="p-3 text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-all duration-300"
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
-                  </div>
+                <Icon className={`w-5 h-5 sm:w-6 sm:h-6 text-${stat.color}-400`} />
+              </div>
+              <div className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">{stat.value}</div>
+              <div className="text-gray-400 text-xs sm:text-sm">{stat.label}</div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Search and Filter Bar */}
+      <div className="mb-8 flex flex-col sm:flex-row gap-4 justify-between items-stretch sm:items-center">
+        <div className="relative flex-1 max-w-md">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <input
+            type="text"
+            placeholder="Search models..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 bg-gray-800/50 border border-gray-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+        </div>
+        
+        <div className="flex gap-3">
+          <div className="relative">
+            <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="pl-10 pr-8 py-2 bg-gray-800/50 border border-gray-700/50 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500 appearance-none"
+            >
+              <option value="popularity">Most Popular</option>
+              <option value="downloads">Most Downloads</option>
+              <option value="complexity">Complexity</option>
+              <option value="newest">Newest</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      {/* Category Filter */}
+      <div className="mb-12 flex flex-wrap justify-center gap-2 sm:gap-3">
+        {categories.map((cat) => (
+          <motion.button
+            key={cat}
+            onClick={() => setActiveCategory(cat)}
+            className={`px-4 py-2 sm:px-6 sm:py-3 rounded-full text-xs sm:text-sm font-medium transition-all relative ${
+              activeCategory === cat
+                ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
+                : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50"
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {cat}
+          </motion.button>
+        ))}
+      </div>
+
+      {/* Models Grid */}
+      {filteredModels.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-gray-400 text-lg">No models found matching your criteria.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-16">
+          {filteredModels.map((model, i) => (
+            <motion.div
+              key={model.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700/50 shadow-lg"
+            >
+              {/* Image with loading placeholder */}
+              <div className="relative h-48 sm:h-64 overflow-hidden group">
+                <div className="w-full h-full bg-gray-700 animate-pulse absolute inset-0" id={`skeleton-${model.id}`} />
+
+                <img
+                  src={model.image}
+                  alt={model.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 relative z-10"
+                  onLoad={() => {
+                    const skeleton = document.getElementById(`skeleton-${model.id}`);
+                    if (skeleton) skeleton.style.display = "none";
+                  }}
+                  onError={() => {
+                    const skeleton = document.getElementById(`skeleton-${model.id}`);
+                    if (skeleton) skeleton.style.display = "none";
+                  }}
+                />
+
+                <div className="absolute top-3 left-3 flex flex-col gap-2 z-20">
+                  <span className="bg-black/70 backdrop-blur-sm px-2 py-1 rounded text-xs text-white flex items-center gap-1">
+                    <Eye className="w-3 h-3" /> {model.views}
+                  </span>
+                  <span className="bg-black/70 backdrop-blur-sm px-2 py-1 rounded text-xs text-white flex items-center gap-1">
+                    <Download className="w-3 h-3" /> {model.downloads}
+                  </span>
                 </div>
+                <div className="absolute top-3 right-3 z-20">
+                  <span
+                    className={`px-2 py-1 rounded text-xs border ${getComplexityColor(
+                      model.complexity
+                    )}`}
+                  >
+                    {model.complexity}
+                  </span>
+                </div>
+                <div className="absolute bottom-3 left-3 z-20">
+                  <span className="bg-purple-600/80 backdrop-blur-sm px-2 py-1 rounded text-xs text-white">
+                    {model.software}
+                  </span>
+                </div>
+              </div>
 
-                <div className="flex flex-1 overflow-hidden">
-                  {/* 3D Viewer */}
-                  <div className={`${showInfoPanel ? 'w-2/3' : 'w-full'} relative flex items-center justify-center p-8`}>
-                    {loadingModel && (
-                      <div className="absolute inset-0 flex items-center justify-center z-10 bg-black/80 rounded-2xl">
-                        <div className="text-center">
-                          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                          <span className="text-white text-lg font-medium">Loading Premium Model...</span>
-                        </div>
-                      </div>
-                    )}
-                    <div 
-                      ref={mountRef} 
-                      className="w-96 h-96 max-w-full max-h-full flex items-center justify-center rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 shadow-2xl"
-                    />
-                    
-                    {/* Premium Controls */}
-                    <div className="absolute bottom-6 left-6 flex gap-3">
-                      <button
-                        onClick={zoomIn}
-                        className="p-3 bg-white/10 hover:bg-white/20 text-white rounded-xl border border-white/10 backdrop-blur-sm transition-all duration-300 shadow-lg"
-                        title="Zoom In"
-                      >
-                        <ZoomIn className="w-5 h-5" />
-                      </button>
-                      <button
-                        onClick={zoomOut}
-                        className="p-3 bg-white/10 hover:bg-white/20 text-white rounded-xl border border-white/10 backdrop-blur-sm transition-all duration-300 shadow-lg"
-                        title="Zoom Out"
-                      >
-                        <ZoomOut className="w-5 h-5" />
-                      </button>
-                      <button
-                        onClick={toggleAutoRotate}
-                        className={`p-3 backdrop-blur-sm text-white rounded-xl border transition-all duration-300 shadow-lg ${
-                          autoRotate 
-                            ? "bg-green-500/20 hover:bg-green-500/30 border-green-500/30" 
-                            : "bg-white/10 hover:bg-white/20 border-white/10"
-                        }`}
-                        title={autoRotate ? "Pause Rotation" : "Auto Rotate"}
-                      >
-                        {autoRotate ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-                      </button>
-                    </div>
-
-                    {/* Navigation */}
-                    {filteredModels.length > 1 && (
-                      <>
-                        <button
-                          onClick={() => navigateModels('prev')}
-                          className="absolute left-6 top-1/2 transform -translate-y-1/2 p-4 bg-white/10 hover:bg-white/20 text-white rounded-xl border border-white/10 backdrop-blur-sm transition-all duration-300 shadow-lg"
-                        >
-                          <ChevronLeft className="w-6 h-6" />
-                        </button>
-                        <button
-                          onClick={() => navigateModels('next')}
-                          className="absolute right-6 top-1/2 transform -translate-y-1/2 p-4 bg-white/10 hover:bg-white/20 text-white rounded-xl border border-white/10 backdrop-blur-sm transition-all duration-300 shadow-lg"
-                        >
-                          <ChevronRight className="w-6 h-6" />
-                        </button>
-                      </>
-                    )}
-                  </div>
-
-                  {/* Premium Info Panel */}
-                  {showInfoPanel && (
-                    <motion.div 
-                      initial={{ x: 300 }}
-                      animate={{ x: 0 }}
-                      exit={{ x: 300 }}
-                      className="w-1/3 border-l border-white/10 bg-white/5 backdrop-blur-sm p-6 overflow-y-auto"
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 line-clamp-1">{model.title}</h3>
+                <p className="text-gray-300 text-sm mb-4 line-clamp-2">{model.description}</p>
+                <div className="flex flex-wrap gap-1 sm:gap-2 mb-4">
+                  {model.features.slice(0, 3).map((f, idx) => (
+                    <span
+                      key={idx}
+                      className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full text-xs border border-purple-500/30"
                     >
-                      <div className="space-y-6">
-                        {/* Quick Actions */}
-                        <div className="flex gap-3">
-                          <a
-                            href={previewModel.downloadUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-4 py-3 rounded-xl text-sm font-medium shadow-lg shadow-blue-500/25 transition-all duration-300"
-                          >
-                            <Download className="w-4 h-4" /> Download
-                          </a>
-                          <button className="p-3 bg-white/10 hover:bg-white/20 text-white rounded-xl border border-white/10 transition-all duration-300">
-                            <Share2 className="w-4 h-4" />
-                          </button>
-                          <button 
-                            onClick={() => toggleBookmark(previewModel.id)}
-                            className={`p-3 rounded-xl border transition-all duration-300 ${
-                              bookmarkedModels.has(previewModel.id)
-                                ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
-                                : "bg-white/10 hover:bg-white/20 text-white border-white/10"
-                            }`}
-                          >
-                            <Bookmark className={`w-4 h-4 ${bookmarkedModels.has(previewModel.id) ? "fill-current" : ""}`} />
-                          </button>
-                        </div>
-
-                        {/* Technical Specifications */}
-                        <div className="grid grid-cols-2 gap-4 p-4 bg-white/5 rounded-xl border border-white/10">
-                          <div>
-                            <div className="text-sm text-gray-400 mb-1">File Size</div>
-                            <div className="text-white font-medium">{previewModel.fileSize}</div>
-                          </div>
-                          <div>
-                            <div className="text-sm text-gray-400 mb-1">Design Time</div>
-                            <div className="text-white font-medium">{previewModel.designTime}</div>
-                          </div>
-                          <div>
-                            <div className="text-sm text-gray-400 mb-1">Triangles</div>
-                            <div className="text-white font-medium">{previewModel.triangles}</div>
-                          </div>
-                          <div>
-                            <div className="text-sm text-gray-400 mb-1">Last Updated</div>
-                            <div className="text-white font-medium">{new Date(previewModel.lastUpdated).toLocaleDateString()}</div>
-                          </div>
-                        </div>
-
-                        {/* Features */}
-                        <div>
-                          <h4 className="text-lg font-bold text-white mb-3">Key Features</h4>
-                          <div className="space-y-2">
-                            {previewModel.features.map((f, idx) => (
-                              <div key={idx} className="flex items-center gap-3 p-3 bg-white/5 rounded-lg border border-white/10">
-                                <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
-                                <span className="text-sm text-gray-300">{f}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Materials */}
-                        <div>
-                          <h4 className="text-lg font-bold text-white mb-3">Materials</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {previewModel.materials.map((material, idx) => (
-                              <span
-                                key={idx}
-                                className="px-3 py-1.5 bg-white/10 text-gray-300 rounded-full text-xs border border-white/10"
-                              >
-                                {material}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Tags */}
-                        <div>
-                          <h4 className="text-lg font-bold text-white mb-3">Tags</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {previewModel.tags.map((tag, idx) => (
-                              <span
-                                key={idx}
-                                className="px-3 py-1.5 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 rounded-full text-xs border border-blue-500/30"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
+                      {f}
+                    </span>
+                  ))}
+                  {model.features.length > 3 && (
+                    <span className="bg-gray-700 text-gray-300 px-2 py-1 rounded-full text-xs">
+                      +{model.features.length - 3}
+                    </span>
                   )}
                 </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
-        {/* Image Preview Modal */}
-        <AnimatePresence>
-          {previewImage && (
+                <div className="flex gap-2 sm:gap-3">
+                  <motion.button
+                    onClick={() => setPreviewImage(model)}
+                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 bg-green-600/20 hover:bg-green-600/30 text-green-400 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-xs sm:text-sm border border-green-500/30"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Eye className="w-3 h-3 sm:w-4 sm:h-4" /> Photo
+                  </motion.button>
+                  <motion.button
+                    onClick={() => setPreviewModel(model)}
+                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 bg-purple-600/20 hover:bg-purple-600/30 text-purple-400 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-xs sm:text-sm border border-purple-500/30"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Box className="w-3 h-3 sm:w-4 sm:h-4" /> 3D
+                  </motion.button>
+                  <a
+                    href={model.downloadUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-xs sm:text-sm border border-blue-500/30"
+                  >
+                    <Download className="w-3 h-3 sm:w-4 sm:h-4" /> Download
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      {/* 3D Preview Modal */}
+      <AnimatePresence>
+        {previewModel && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+            onClick={() => setPreviewModel(null)}
+          >
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-              onClick={() => setPreviewImage(null)}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
+              onClick={(e) => e.stopPropagation()}
             >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-gradient-to-br from-slate-900 to-purple-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col border border-white/10 shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="flex justify-between items-center p-6 border-b border-white/10 bg-white/5 backdrop-blur-sm">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white">{previewImage.title}</h3>
-                    <p className="text-gray-400">{previewImage.category} • {previewImage.software}</p>
-                  </div>
+              <div className="flex justify-between items-center p-4 sm:p-6 border-b border-gray-700/50">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">{previewModel.title}</h3>
+                  <p className="text-gray-400 text-sm">{previewModel.category} • {previewModel.software}</p>
+                </div>
+                <div className="flex gap-2">
                   <button
-                    onClick={() => setPreviewImage(null)}
-                    className="p-3 text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-all duration-300"
+                    onClick={() => setShowInfoPanel(!showInfoPanel)}
+                    className="p-2 text-gray-300 hover:text-white bg-gray-800/50 rounded-lg border border-gray-700/50"
+                    title="Model Information"
+                  >
+                    <Info className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => setPreviewModel(null)}
+                    className="p-2 text-gray-300 hover:text-white bg-gray-800/50 rounded-lg border border-gray-700/50"
                   >
                     <X className="w-5 h-5" />
                   </button>
                 </div>
+              </div>
 
-                <div className="flex-1 overflow-auto p-8">
-                  <div className="relative w-full h-96 bg-gradient-to-br from-white/5 to-white/10 rounded-2xl overflow-hidden border border-white/10 mb-6">
-                    <img
-                      src={previewImage.image}
-                      alt={previewImage.title}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="text-xl font-bold text-white mb-3">Design Overview</h4>
-                      <p className="text-gray-300 leading-relaxed">{previewImage.description}</p>
-                    </div>
-                    
-                    <div>
-                      <h4 className="text-xl font-bold text-white mb-3">Technical Features</h4>
-                      <div className="grid grid-cols-2 gap-4">
-                        {previewImage.features.map((f, idx) => (
-                          <div key={idx} className="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/10">
-                            <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" />
-                            <span className="text-gray-300">{f}</span>
-                          </div>
-                        ))}
+              <div className="flex flex-1 overflow-hidden">
+                <div className={`${showInfoPanel ? 'w-2/3' : 'w-full'} relative flex items-center justify-center`}>
+                  {loadingModel && (
+                    <div className="absolute inset-0 flex items-center justify-center z-10 bg-gray-800/80">
+                      <div className="text-center">
+                        <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                        <span className="text-white text-lg">Loading 3D Model...</span>
                       </div>
                     </div>
-                    
-                    <div className="pt-6 border-t border-white/10">
-                      <a
-                        href={previewImage.downloadUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-6 py-4 rounded-xl text-sm font-medium shadow-lg shadow-blue-500/25 transition-all duration-300"
+                  )}
+                  <div 
+                    ref={mountRef} 
+                    className="w-96 h-96 max-w-full max-h-full flex items-center justify-center"
+                  />
+                  
+                  {/* 3D Controls */}
+                  <div className="absolute bottom-4 left-4 flex flex-col gap-2">
+                    <button
+                      onClick={zoomIn}
+                      className="p-2 bg-gray-800/70 backdrop-blur-sm text-white rounded-lg border border-gray-700/50 hover:bg-gray-700/70"
+                      title="Zoom In"
+                    >
+                      <ZoomIn className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={zoomOut}
+                      className="p-2 bg-gray-800/70 backdrop-blur-sm text-white rounded-lg border border-gray-700/50 hover:bg-gray-700/70"
+                      title="Zoom Out"
+                    >
+                      <ZoomOut className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={toggleAutoRotate}
+                      className={`p-2 backdrop-blur-sm text-white rounded-lg border ${
+                        autoRotate 
+                          ? "bg-green-600/70 border-green-500/50" 
+                          : "bg-gray-800/70 border-gray-700/50"
+                      } hover:bg-gray-700/70`}
+                      title={autoRotate ? "Pause Rotation" : "Auto Rotate"}
+                    >
+                      {autoRotate ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+                    </button>
+                  </div>
+
+                  {/* Navigation Arrows */}
+                  {filteredModels.length > 1 && (
+                    <>
+                      <button
+                        onClick={() => navigateModels('prev')}
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800/70 backdrop-blur-sm text-white rounded-full border border-gray-700/50 hover:bg-gray-700/70"
                       >
-                        <Download className="w-5 h-5" /> Download CAD Model
-                      </a>
+                        <ChevronLeft className="w-5 h-5" />
+                      </button>
+                      <button
+                        onClick={() => navigateModels('next')}
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800/70 backdrop-blur-sm text-white rounded-full border border-gray-700/50 hover:bg-gray-700/70"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </button>
+                    </>
+                  )}
+                </div>
+
+                {/* Info Panel */}
+                {showInfoPanel && (
+                  <motion.div 
+                    initial={{ x: 300 }}
+                    animate={{ x: 0 }}
+                    exit={{ x: 300 }}
+                    className="w-1/3 border-l border-gray-700/50 bg-gray-800/30 p-4 sm:p-6 overflow-y-auto"
+                  >
+                    <h4 className="text-lg font-bold text-white mb-4">Model Details</h4>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <h5 className="text-sm font-medium text-gray-400 mb-1">Description</h5>
+                        <p className="text-sm text-gray-300">{previewModel.description}</p>
+                      </div>
+                      
+                      <div>
+                        <h5 className="text-sm font-medium text-gray-400 mb-1">Features</h5>
+                        <div className="flex flex-wrap gap-2">
+                          {previewModel.features.map((f, idx) => (
+                            <span
+                              key={idx}
+                              className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs border border-purple-500/30"
+                            >
+                              {f}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <h5 className="text-sm font-medium text-gray-400 mb-1">Complexity</h5>
+                          <span className={`px-2 py-1 rounded text-xs border ${getComplexityColor(previewModel.complexity)}`}>
+                            {previewModel.complexity}
+                          </span>
+                        </div>
+                        
+                        <div>
+                          <h5 className="text-sm font-medium text-gray-400 mb-1">File Size</h5>
+                          <p className="text-sm text-gray-300">{previewModel.fileSize}</p>
+                        </div>
+                        
+                        <div>
+                          <h5 className="text-sm font-medium text-gray-400 mb-1">Views</h5>
+                          <p className="text-sm text-gray-300">{previewModel.views}</p>
+                        </div>
+                        
+                        <div>
+                          <h5 className="text-sm font-medium text-gray-400 mb-1">Downloads</h5>
+                          <p className="text-sm text-gray-300">{previewModel.downloads}</p>
+                        </div>
+                        
+                        <div>
+                          <h5 className="text-sm font-medium text-gray-400 mb-1">Last Updated</h5>
+                          <p className="text-sm text-gray-300">{new Date(previewModel.lastUpdated).toLocaleDateString()}</p>
+                        </div>
+                      </div>
+                      
+                      <div className="pt-4 border-t border-gray-700/50">
+                        <a
+                          href={previewModel.downloadUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+                        >
+                          <Download className="w-4 h-4" /> Download Model
+                        </a>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Image Preview Modal */}
+      <AnimatePresence>
+        {previewImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+            onClick={() => setPreviewImage(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-between items-center p-6 border-b border-gray-700/50">
+                <div>
+                  <h3 className="text-2xl font-bold text-white">{previewImage.title}</h3>
+                  <p className="text-gray-400">{previewImage.category} • {previewImage.software}</p>
+                </div>
+                <button
+                  onClick={() => setPreviewImage(null)}
+                  className="p-2 text-gray-300 hover:text-white"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-auto p-6">
+                <div className="relative w-full h-96 bg-gray-800 rounded-lg overflow-hidden mb-6">
+                  <img
+                    src={previewImage.image}
+                    alt={previewImage.title}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="text-lg font-bold text-white mb-2">Description</h4>
+                    <p className="text-gray-300">{previewImage.description}</p>
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-lg font-bold text-white mb-2">Features</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {previewImage.features.map((f, idx) => (
+                        <span
+                          key={idx}
+                          className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
+                        >
+                          {f}
+                        </span>
+                      ))}
                     </div>
                   </div>
+                  
+                  <div className="pt-4 border-t border-gray-700/50">
+                    <a
+                      href={previewImage.downloadUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                    >
+                      <Download className="w-4 h-4" /> Download Model
+                    </a>
+                  </div>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

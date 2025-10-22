@@ -261,7 +261,7 @@ For professional engineering consultation, visit: https://viswam-portfolio.com/c
           whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.9 }}
         >
-          <Crown className="w-5 h-5 text-white" />
+          <Calculator className="w-6 h-6 text-white" />
           <motion.div
             className="absolute -inset-1 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full opacity-0 group-hover:opacity-30 blur-lg transition-opacity"
             whileHover={{ scale: 1.2 }}
@@ -296,11 +296,11 @@ For professional engineering consultation, visit: https://viswam-portfolio.com/c
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl shadow-lg">
-                      <Crown className="w-5 h-5 text-white" />
+                      <Calculator className="w-6 h-6 text-white" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="text-xl font-bold text-white">Premium Engineering Suite</h3>
+                        <h3 className="text-xl font-bold text-white">Engineering Calculator Pro</h3>
                         <span className="px-2 py-1 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full text-xs font-bold text-white">
                           PRO
                         </span>
@@ -627,8 +627,8 @@ For professional engineering consultation, visit: https://viswam-portfolio.com/c
                   className="text-center pt-2"
                 >
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full text-xs font-bold text-white shadow-lg">
-                    <Crown className="w-3 h-3" />
-                    PREMIUM ENGINEERING SUITE
+                    <Calculator className="w-3 h-3" />
+                    ENGINEERING CALCULATOR PRO
                   </span>
                 </motion.div>
               </div>

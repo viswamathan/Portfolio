@@ -60,7 +60,7 @@ const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simu
       exit={{ opacity: 0 }}
       className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 p-4"
     >
-      <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden border border-purple-500/20 shadow-2xl">
+      <div className="bg-gray-900 rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden border border-purple-500/20 shadow-2xl">
         <div className="sticky top-0 bg-gray-900/80 backdrop-blur-md p-6 flex justify-between items-center border-b border-purple-500/20">
           <div>
             <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -160,7 +160,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image, title }
         className="relative max-w-7xl w-full max-h-[90vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between items-center mb-6 p-4 bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-t-2xl backdrop-blur-md border-b border-purple-500/30">
+        <div className="flex justify-between items-center mb-6 p-4 bg-gray-900/80 rounded-t-2xl backdrop-blur-md border-b border-purple-500/30">
           {title && (
             <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               {title}
@@ -173,7 +173,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image, title }
             <X className="w-6 h-6 text-red-400 group-hover:scale-110 transition-transform" />
           </button>
         </div>
-        <div className="flex-1 flex items-center justify-center bg-gradient-to-br from-gray-900 to-black rounded-b-2xl p-8">
+        <div className="flex-1 flex items-center justify-center bg-gray-900 rounded-b-2xl p-8">
           <motion.img 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -215,13 +215,13 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
       onClick={onClose}
     >
       <div
-        className={`relative bg-gradient-to-br from-gray-900 to-black border border-purple-500/20 shadow-2xl ${
+        className={`relative bg-gray-900 border border-purple-500/20 shadow-2xl ${
           isFullscreen ? 'w-full h-full' : 'max-w-7xl w-full max-h-[95vh] rounded-3xl'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Enhanced Header */}
-        <div className="sticky top-0 bg-gradient-to-r from-purple-900/40 to-pink-900/40 backdrop-blur-md p-6 border-b border-purple-500/20 z-10">
+        <div className="sticky top-0 bg-gray-900/80 backdrop-blur-md p-6 border-b border-purple-500/20 z-10">
           <div className="flex justify-between items-start">
             <div className="flex-1">
               <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
@@ -262,7 +262,7 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
         <div className="flex flex-col lg:flex-row h-[calc(95vh-140px)]">
           {/* Enhanced Image Viewer */}
           <div className="flex-1 flex flex-col p-6">
-            <div className="flex-1 flex items-center justify-center relative bg-gradient-to-br from-gray-800/20 to-gray-900/20 rounded-2xl p-4">
+            <div className="flex-1 flex items-center justify-center relative bg-gray-800/20 rounded-2xl p-4">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentImageIndex}
@@ -341,7 +341,7 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
           </div>
 
           {/* Enhanced Project Info Sidebar */}
-          <div className="lg:w-96 bg-gradient-to-b from-gray-900/80 to-gray-800/80 backdrop-blur-md border-l border-purple-500/20 p-6 overflow-y-auto">
+          <div className="lg:w-96 bg-gray-800/80 backdrop-blur-md border-l border-purple-500/20 p-6 overflow-y-auto">
             <div className="space-y-6">
               {/* Project Stats */}
               <div className="grid grid-cols-2 gap-4">
@@ -451,7 +451,7 @@ const PremiumProjectCard: React.FC<{
       whileHover={{ y: -8, scale: 1.02 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="group relative bg-gradient-to-br from-gray-800/40 to-gray-900/40 rounded-2xl overflow-hidden backdrop-blur-sm border border-gray-700/50 hover:border-purple-500/50 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-purple-500/10 flex flex-col h-full"
+      className="group relative bg-gray-800/30 rounded-2xl overflow-hidden backdrop-blur-sm border border-gray-700/50 hover:border-purple-500/50 transition-all duration-500 shadow-xl hover:shadow-2xl hover:shadow-purple-500/10 flex flex-col h-full"
     >
       {/* Background Glow Effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -470,7 +470,7 @@ const PremiumProjectCard: React.FC<{
           </div>
           <motion.button
             onClick={() => onViewGallery(project)}
-            className="p-3 bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/40 hover:to-pink-600/40 rounded-xl transition-all duration-300 border border-purple-500/30 flex-shrink-0 ml-4"
+            className="p-3 bg-purple-600/20 hover:bg-purple-600/40 rounded-xl transition-all duration-300 border border-purple-500/30 flex-shrink-0 ml-4"
             whileHover={{ scale: 1.1, rotate: 5 }}
             whileTap={{ scale: 0.9 }}
           >
@@ -487,7 +487,7 @@ const PremiumProjectCard: React.FC<{
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30 backdrop-blur-sm"
+                className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30 backdrop-blur-sm"
                 whileHover={{ scale: 1.1, y: -2 }}
               >
                 {tech}
@@ -580,7 +580,7 @@ const PremiumProjectCard: React.FC<{
                 href={project.report}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 flex-1 min-w-[140px] bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-purple-500/25"
+                className="flex items-center justify-center gap-2 flex-1 min-w-[140px] bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-purple-500/25"
               >
                 <FileText className="w-4 h-4" />
                 <span>Report</span>
@@ -592,7 +592,7 @@ const PremiumProjectCard: React.FC<{
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onViewSimulation(project.simulations, project.title)}
-                className="flex items-center justify-center gap-2 flex-1 min-w-[140px] bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-blue-500/25"
+                className="flex items-center justify-center gap-2 flex-1 min-w-[140px] bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-blue-500/25"
               >
                 <Play className="w-4 h-4" />
                 <span>Simulation</span>
@@ -606,7 +606,7 @@ const PremiumProjectCard: React.FC<{
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 flex-1 min-w-[140px] bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-800 hover:to-gray-900 text-white px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-gray-500/25"
+                className="flex items-center justify-center gap-2 flex-1 min-w-[140px] bg-gray-700 hover:bg-gray-800 text-white px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-gray-500/25"
               >
                 <Github className="w-4 h-4" />
                 <span>Code</span>
@@ -617,7 +617,7 @@ const PremiumProjectCard: React.FC<{
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => onViewGallery(project)}
-              className="flex items-center justify-center gap-2 flex-1 min-w-[140px] bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-700 hover:to-pink-800 text-white px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-pink-500/25"
+              className="flex items-center justify-center gap-2 flex-1 min-w-[140px] bg-pink-600 hover:bg-pink-700 text-white px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-pink-500/25"
             >
               <ExternalLink className="w-4 h-4" />
               <span>Gallery</span>
@@ -725,12 +725,12 @@ const Projects: React.FC = () => {
   const categoryButtonStyle = (isActive: boolean) => 
     `flex items-center gap-3 px-8 py-4 rounded-2xl transition-all duration-300 font-semibold text-lg ${
       isActive 
-        ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-2xl shadow-purple-500/25' 
+        ? 'bg-purple-600 text-white shadow-2xl shadow-purple-500/25' 
         : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/80 hover:text-white shadow-lg hover:shadow-purple-500/10'
     }`;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 py-12">
+    <div className="min-h-screen bg-gray-900 py-12">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

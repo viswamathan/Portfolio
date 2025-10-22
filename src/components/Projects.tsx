@@ -19,11 +19,11 @@ import {
 } from 'lucide-react';
 
 /**
- * Professional Projects Component
- * - Perfect image alignment and consistency
- * - Clean, professional layout
- * - Consistent spacing and proportions
- * - Professional color scheme and typography
+ * Enhanced Projects Component
+ * - Improved card layouts and alignments
+ * - Better visual hierarchy and spacing
+ * - Enhanced image gallery organization
+ * - Consistent button styling and positioning
  */
 
 /* ----------------------------- Modal Components ---------------------------- */
@@ -47,7 +47,7 @@ const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simu
     >
       <div className="bg-gray-900 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-auto">
         <div className="sticky top-0 bg-gray-900 p-4 flex justify-between items-center border-b border-gray-800">
-          <h3 className="text-xl font-bold text-blue-600">
+          <h3 className="text-xl font-bold text-purple-400">
             {title || 'Simulation View'}
           </h3>
           <button 
@@ -63,7 +63,7 @@ const SimulationModal: React.FC<SimulationModalProps> = ({ isOpen, onClose, simu
               <img
                 src={simulation}
                 alt={`Simulation ${index + 1}`}
-                className="max-w-full rounded-lg border-2 border-blue-500/30"
+                className="max-w-full rounded-lg border-2 border-purple-500/30"
               />
             </div>
           ))}
@@ -194,7 +194,7 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
                 key={index}
                 onClick={() => setCurrentImageIndex(index)}
                 className={`relative w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                  currentImageIndex === index ? 'border-blue-500' : 'border-gray-600 hover:border-gray-400'
+                  currentImageIndex === index ? 'border-purple-500' : 'border-gray-600 hover:border-gray-400'
                 }`}
               >
                 <img src={img} alt={`Thumbnail ${index + 1}`} className="w-full h-full object-cover" />
@@ -207,7 +207,7 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
         <div className="bg-gray-900/80 backdrop-blur-sm rounded-lg p-6">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-lg font-semibold text-blue-600 mb-2">Project Overview</h4>
+              <h4 className="text-lg font-semibold text-purple-400 mb-2">Project Overview</h4>
               <p className="text-gray-300 text-sm mb-4">{project.description}</p>
               {project.problem && (
                 <div className="mb-3">
@@ -232,7 +232,7 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
               )}
               <div className="flex flex-wrap gap-2">
                 {project.technologies?.map((tech: string, idx: number) => (
-                  <span key={idx} className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded-full text-xs">
+                  <span key={idx} className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full text-xs">
                     {tech}
                   </span>
                 ))}
@@ -245,16 +245,16 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
   );
 };
 
-/* --------------------------- Professional Project Card -------------------------- */
+/* --------------------------- Enhanced Project Card -------------------------- */
 
-type ProjectCardProps = {
+type EnhancedProjectCardProps = {
   project: any;
   onViewGallery: (project: any) => void;
   onViewImage: (image: string, title?: string) => void;
   onViewSimulation: (sims: string[], title?: string) => void;
 };
 
-const ProfessionalProjectCard: React.FC<ProjectCardProps> = ({
+const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
   project,
   onViewGallery,
   onViewImage,
@@ -262,113 +262,125 @@ const ProfessionalProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const images = [project.image1, project.image2].filter(Boolean) as string[];
 
-  const buttonStyle = "flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-3 rounded-lg transition-all duration-300 text-sm font-medium flex-1 min-w-[140px]";
+  // Consolidated button style for consistency
+  const buttonStyle = "flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium flex-1 min-w-[140px]";
 
   return (
     <motion.div
-      whileHover={{ y: -5 }}
-      className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 flex flex-col h-full"
+      whileHover={{ scale: 1.02, y: -5 }}
+      className="bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col h-full"
     >
-      {/* Image Section - Consistent Height */}
-      {images.length > 0 && (
-        <div className="relative">
-          <div className="grid grid-cols-2 gap-1 p-1 bg-gray-100">
-            {images.map((img, idx) => (
-              <div key={idx} className="relative aspect-video bg-gray-200 rounded-lg overflow-hidden">
-                <img
-                  src={img}
-                  alt={`${project.title} - View ${idx + 1}`}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
-                  onClick={() => onViewImage(img, project.title)}
-                />
-                <button
-                  onClick={() => onViewImage(img, project.title)}
-                  className="absolute top-2 right-2 p-1.5 bg-black/50 hover:bg-blue-600 rounded-full transition-colors opacity-0 group-hover:opacity-100"
-                >
-                  <Eye className="w-3 h-3 text-white" />
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Content Section */}
       <div className="p-6 flex flex-col flex-1">
         {/* Header */}
         <div className="flex justify-between items-start mb-4">
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">{project.description}</p>
+            <h3 className="text-2xl font-bold text-purple-400 mb-2">{project.title}</h3>
+            <p className="text-gray-300 text-sm leading-relaxed">{project.description}</p>
           </div>
           <motion.button
             onClick={() => onViewGallery(project)}
-            className="p-2 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors ml-4 flex-shrink-0"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="p-2 bg-purple-600/20 hover:bg-purple-600/40 rounded-lg transition-colors ml-4 flex-shrink-0"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
           >
-            <ZoomIn className="w-4 h-4 text-blue-600" />
+            <ZoomIn className="w-5 h-5 text-purple-400" />
           </motion.button>
         </div>
 
-        {/* Project Details */}
-        <div className="flex-1 space-y-4 mb-6">
-          {/* Problem/Solution/Impact Cards */}
-          <div className="space-y-3">
-            {project.problem && (
-              <div className="bg-red-50 border border-red-100 rounded-lg p-3">
-                <h4 className="font-semibold text-red-700 text-sm mb-1 flex items-center gap-2">
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                  Challenge
-                </h4>
-                <p className="text-gray-600 text-xs leading-relaxed">{project.problem}</p>
-              </div>
-            )}
-            {project.solution && (
-              <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
-                <h4 className="font-semibold text-blue-700 text-sm mb-1 flex items-center gap-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  Solution
-                </h4>
-                <p className="text-gray-600 text-xs leading-relaxed">{project.solution}</p>
-              </div>
-            )}
-            {project.impact && (
-              <div className="bg-green-50 border border-green-100 rounded-lg p-3">
-                <h4 className="font-semibold text-green-700 text-sm mb-1 flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  Impact
-                </h4>
-                <p className="text-gray-600 text-xs leading-relaxed">{project.impact}</p>
-              </div>
-            )}
-          </div>
+        {/* Project Details Grid */}
+        <div className="flex-1">
+          {(project.problem || project.solution || project.impact) && (
+            <div className="grid gap-3 mb-6">
+              {project.problem && (
+                <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+                  <h4 className="font-semibold text-red-400 text-sm mb-1">Challenge</h4>
+                  <p className="text-gray-300 text-xs leading-relaxed">{project.problem}</p>
+                </div>
+              )}
+              {project.solution && (
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
+                  <h4 className="font-semibold text-blue-400 text-sm mb-1">Solution</h4>
+                  <p className="text-gray-300 text-xs leading-relaxed">{project.solution}</p>
+                </div>
+              )}
+              {project.impact && (
+                <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
+                  <h4 className="font-semibold text-green-400 text-sm mb-1">Impact</h4>
+                  <p className="text-gray-300 text-xs leading-relaxed">{project.impact}</p>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Technologies */}
           {project.technologies && (
-            <div>
-              <h4 className="font-semibold text-gray-700 mb-2 text-sm">Technologies</h4>
+            <div className="mb-6">
+              <h4 className="font-semibold text-purple-300 mb-2 text-sm">Technologies Used:</h4>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech: string, index: number) => (
-                  <span
+                  <motion.span
                     key={index}
-                    className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs border border-gray-200"
+                    className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30"
+                    whileHover={{ scale: 1.05 }}
                   >
                     {tech}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </div>
           )}
         </div>
 
-        {/* Actions */}
+        {/* Enhanced Image Gallery */}
+        {images.length > 0 && (
+          <div className="mb-6">
+            <div className="flex justify-between items-center mb-3">
+              <h4 className="font-semibold text-purple-300 text-sm">Project Visuals:</h4>
+              <span className="text-gray-400 text-xs">{images.length} images</span>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {images.map((img, idx) => (
+                <div key={idx} className="relative group">
+                  <motion.div
+                    className="relative w-full h-40 rounded-lg overflow-hidden border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
+                    whileHover={{ scale: 1.03 }}
+                    onClick={() => onViewImage(img, project.title)}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`${project.title} - View ${idx + 1}`} 
+                      className="w-full h-full object-cover" 
+                    />
+
+                    {/* Overlay with view button */}
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <motion.button
+                        className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <Eye className="w-4 h-4 text-white" />
+                      </motion.button>
+                    </div>
+
+                    {/* Image Label */}
+                    <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
+                      View {idx + 1}
+                    </div>
+                  </motion.div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Enhanced Actions - Consistent Layout */}
         <div className="mt-auto">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3 justify-center">
             {project.report && (
               <motion.a
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 href={project.report}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -381,8 +393,8 @@ const ProfessionalProjectCard: React.FC<ProjectCardProps> = ({
 
             {project.simulations && (
               <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => onViewSimulation(project.simulations, project.title)}
                 className={buttonStyle}
               >
@@ -393,8 +405,8 @@ const ProfessionalProjectCard: React.FC<ProjectCardProps> = ({
 
             {project.githubUrl && (
               <motion.a
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -406,13 +418,13 @@ const ProfessionalProjectCard: React.FC<ProjectCardProps> = ({
             )}
 
             <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => onViewGallery(project)}
               className={buttonStyle}
             >
               <ExternalLink className="w-4 h-4" />
-              <span>Details</span>
+              <span>Gallery</span>
             </motion.button>
           </div>
         </div>
@@ -434,12 +446,12 @@ const projectCategories: Record<
 > = {
   mechanical: {
     icon: Cog,
-    title: 'Mechanical Engineering',
-    intro: 'Advanced mechanical engineering projects showcasing design optimization, structural analysis, and innovative solutions using cutting-edge technology.',
+    title: 'Optimization and Innovation',
+    intro: 'Advanced Mechanical engineering projects showcasing design optimization, structural analysis, and innovative solutions.',
     projects: [
       {
         title: 'Flat Sprocket Analysis',
-        description: 'Comprehensive structural analysis and optimization of a flat sprocket using advanced FEA techniques to enhance durability and performance.',
+        description: 'Comprehensive structural analysis and optimization of a flat sprocket using advanced FEA techniques.',
         problem: 'Traditional sprocket designs showing premature wear and structural weaknesses under high loads.',
         solution: 'Implemented optimized geometry and material distribution through FEA-driven design iterations.',
         impact: '40% increase in durability and 25% reduction in material usage while maintaining performance.',
@@ -450,8 +462,8 @@ const projectCategories: Record<
         simulations: ['/simulations/deform.gif', '/simulations/stress.gif'],
       },
       {
-        title: 'Piston Head Optimization',
-        description: 'Thermal and structural FEA simulation of piston head to identify hotspots and optimize design for enhanced durability and material efficiency.',
+        title: 'Piston Head Optimization Through Thermal and Structural FEA',
+        description: 'Simulated piston head in ANSYS to identify thermal and stress hotspots, enabling durability and material optimization.',
         problem: 'Piston head faces extreme heat and pressure, causing thermal fatigue and structural deformation.',
         solution: 'Conducted integrated thermal and structural FEA to analyze temperature distribution, stress zones, and deformation.',
         impact: 'Achieved up to 40% increase in durability and 25% reduction in material usage through design optimization.',
@@ -465,16 +477,14 @@ const projectCategories: Record<
   },
   software: {
     icon: Code,
-    title: 'Software Development',
-    intro: 'Innovative software solutions and applications built with modern technologies to solve real-world problems efficiently.',
+    title: 'Software',
+    intro: 'Innovative software solutions bridging modern technology.',
     projects: [
       {
-        title: 'Petrol Management System',
-        description: 'Comprehensive fuel management system designed to track stock, sales, and transactions with real-time monitoring and reporting capabilities.',
-        problem: 'Manual tracking of fuel inventory and sales leading to inefficiencies and errors in management.',
-        solution: 'Developed an automated system with database integration and real-time monitoring features.',
-        impact: 'Improved accuracy in inventory management and streamlined operations for petrol stations.',
-        technologies: ['Python', 'MySQL', 'OS Module', 'Matplotlib'],
+        title: 'Petrol Management Project',
+        description:
+          'Designed to track fuel stock, sales, and transactions efficiently, enabling real-time monitoring and report generation for petrol stations.',
+        technologies: ['Python', 'MySql', 'OS', 'Matplotlib'],
         githubUrl: 'https://github.com/viswamathan/PETROL-MANAGEMENT-PROJECT-USING-PYTHON-AND-SQL',
         image1: 'https://tse1.mm.bing.net/th/id/OIP.MiI4dSBh7VjBXlCSkD6uDwHaD5?pid=Api&P=0&h=180',
         image2: 'https://tse1.mm.bing.net/th/id/OIP.cjsy2jUvC0aT29PsC8kRRAHaEK?pid=Api&P=0&h=180',
@@ -482,18 +492,18 @@ const projectCategories: Record<
       },
     ],
   },
-  automation: {
+  hybrid: {
     icon: Cpu,
-    title: 'Automation Systems',
-    intro: 'Advanced systems combining mechanical design with smart control systems and automation technologies.',
+    title: 'Automation',
+    intro: 'Advanced Systems combining mechanical design with smart control systems.',
     projects: [
       {
-        title: 'Modified Solar Dryer with Thermal Storage',
-        description: 'Solar dryer prototype enhanced with copper fins and paraffin wax-based PCM for efficient and continuous food dehydration.',
-        problem: 'Conventional solar dryers suffer from poor heat retention and uneven temperature distribution.',
-        solution: 'Integrated copper fins for improved heat transfer and PCM for thermal energy storage with forced-air circulation.',
-        impact: 'Reduced drying time by 30-40% and maintained consistent temperature for better product quality.',
-        technologies: ['SolidWorks', 'Copper Fins', 'PCM', 'Forced Air Circulation', 'Solar Energy'],
+        title: 'Design and Development of a Modified Solar Dryer Integrated with Thermal Energy Storage with applicaation of Concave fins',
+        description: 'A solar dryer prototype enhanced with copper fins and paraffin wax-based Phase Change Material (PCM) for efficient and continuous food dehydration.',
+        problem: 'Conventional solar dryers suffer from poor heat retention, uneven temperature distribution, and dependency on sunlight, leading to incomplete drying and reduced product quality.',
+        solution: 'Developed a modified solar dryer with copper fins for improved heat transfer, PCM for thermal energy storage, and a forced-air circulation system to ensure uniform and continuous drying even under low solar radiation.',
+        impact: 'Reduced drying time by 30–40%, maintained chamber temperature up to 11°C higher than conventional dryers, ensured consistent drying even during cloudy conditions, and improved overall energy efficiency and product quality.',
+        technologies: ['SolidWorks', 'Copper Fins', 'Paraffin Wax PCM', 'Forced Air Circulation', 'Solar Energy Systems'],
         image1: 'SOLAR DRYER PROTOTYPE.jpeg',
         image2: 'SOLAR DRYER MODAL.jpeg',
         report: '/reports/Modified Solar Dryer Report.pdf',
@@ -505,7 +515,7 @@ const projectCategories: Record<
 /* ------------------------------- Main Page --------------------------------- */
 
 const Projects: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<'mechanical' | 'software' | 'automation'>('mechanical');
+  const [activeCategory, setActiveCategory] = useState<'mechanical' | 'software' | 'hybrid'>('mechanical');
   const [modalSimulations, setModalSimulations] = useState<{simulations: string[], title?: string} | null>(null);
   const [lightboxImage, setLightboxImage] = useState<{ image: string; title?: string } | null>(null);
   const [galleryProject, setGalleryProject] = useState<any | null>(null);
@@ -519,82 +529,188 @@ const Projects: React.FC = () => {
   const openGallery = (project: any) => setGalleryProject(project);
   const closeGallery = () => setGalleryProject(null);
 
+  // Consolidated button style for category buttons
   const categoryButtonStyle = (isActive: boolean) => 
-    `flex items-center gap-3 px-6 py-3 rounded-lg transition-all font-medium border-2 ${
+    `flex items-center gap-3 px-6 py-3 rounded-full transition-all font-medium ${
       isActive 
-        ? 'bg-blue-600 text-white border-blue-600 shadow-lg' 
-        : 'bg-white text-gray-700 border-gray-300 hover:border-blue-400 hover:text-blue-600'
+        ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg' 
+        : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700 hover:text-white'
     }`;
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12">
-      <div className="container mx-auto px-4">
+  const renderSoftwareProject = (project: any, idx: number) => {
+    const images = [project.image1, project.image2].filter(Boolean) as string[];
+    const buttonStyle = "flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium flex-1 min-w-[140px]";
+
+    return (
+      <motion.div
+        key={idx}
+        whileHover={{ scale: 1.02 }}
+        className="bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 p-6 flex flex-col h-full"
+      >
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Professional Portfolio</h1>
-          <p className="text-gray-700 text-lg max-w-2xl mx-auto">
-            Showcasing innovative engineering solutions and software development projects
-          </p>
-        </motion.div>
-
-        {/* Category Navigation */}
-        <div className="flex justify-center mb-12 space-x-4">
-          {Object.entries(projectCategories).map(([key, category]) => {
-            const Icon = category.icon;
-            return (
-              <motion.button
-                key={key}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setActiveCategory(key as any)}
-                className={categoryButtonStyle(activeCategory === key)}
-              >
-                <Icon className="w-5 h-5" />
-                <span>{category.title}</span>
-              </motion.button>
-            );
-          })}
+        <div className="flex justify-between items-start mb-4">
+          <div className="flex-1">
+            <h3 className="text-2xl font-bold text-purple-400 mb-2">{project.title}</h3>
+            <p className="text-gray-300 leading-relaxed">{project.description}</p>
+          </div>
+          <motion.button
+            onClick={() => openGallery(project)}
+            className="p-2 bg-purple-600/20 hover:bg-purple-600/40 rounded-lg transition-colors ml-4 flex-shrink-0"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <ZoomIn className="w-5 h-5 text-purple-400" />
+          </motion.button>
         </div>
 
-        {/* Category Description */}
-        <motion.div 
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }}
-          className="text-center mb-12"
-        >
-          <p className="text-gray-700 text-lg max-w-4xl mx-auto leading-relaxed">
-            {projectCategories[activeCategory].intro}
-          </p>
-        </motion.div>
-
-        {/* Projects Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-          {projectCategories[activeCategory].projects.map((project, index) => (
-            <ProfessionalProjectCard
-              key={index}
-              project={project}
-              onViewGallery={openGallery}
-              onViewImage={openLightbox}
-              onViewSimulation={handleViewSimulation}
-            />
-          ))}
-        </div>
-
-        {/* Empty State */}
-        {projectCategories[activeCategory].projects.length === 0 && (
-          <div className="text-center py-12">
-            <div className="bg-white rounded-lg shadow-sm p-8 max-w-md mx-auto">
-              <Code className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">No Projects Available</h3>
-              <p className="text-gray-600">Projects for this category are currently under development.</p>
+        {/* Content Area */}
+        <div className="flex-1">
+          {/* Technologies */}
+          <div className="mb-6">
+            <h4 className="font-semibold text-purple-300 mb-3">Technologies Used:</h4>
+            <div className="flex flex-wrap gap-2">
+              {project.technologies.map((tech: string, index: number) => (
+                <span
+                  key={index}
+                  className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
           </div>
-        )}
+
+          {/* Images */}
+          {images.length > 0 && (
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-3">
+                <h4 className="font-semibold text-purple-300">Project Visuals:</h4>
+                <span className="text-gray-400 text-sm">{images.length} images</span>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {images.map((img, idxImg) => (
+                  <div key={idxImg} className="relative group">
+                    <motion.img
+                      whileHover={{ scale: 1.05 }}
+                      src={img}
+                      alt={`${project.title} - View ${idxImg + 1}`}
+                      className="w-full h-48 object-cover rounded-lg border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
+                      onClick={() => openLightbox(img, project.title)}
+                    />
+                    <button
+                      onClick={() => openLightbox(img, project.title)}
+                      className="absolute top-2 right-2 p-2 bg-black/50 rounded-full hover:bg-purple-600 transition-colors opacity-0 group-hover:opacity-100"
+                    >
+                      <Eye className="w-4 h-4 text-white" />
+                    </button>
+                    <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
+                      View {idxImg + 1}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Actions */}
+        <div className="mt-auto">
+          <div className="flex flex-wrap gap-3 justify-center">
+            {project.githubUrl && (
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonStyle}
+              >
+                <Github className="w-4 h-4" />
+                <span>GitHub</span>
+              </motion.a>
+            )}
+
+            {project.report && (
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href={project.report}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonStyle}
+              >
+                <FileText className="w-4 h-4" />
+                <span>Report</span>
+              </motion.a>
+            )}
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => openGallery(project)}
+              className={buttonStyle}
+            >
+              <ExternalLink className="w-4 h-4" />
+              <span>Gallery</span>
+            </motion.button>
+          </div>
+        </div>
+      </motion.div>
+    );
+  };
+
+  return (
+    <div className="container mx-auto px-6 py-12">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-4xl font-bold mb-12 text-center text-white"
+      >
+        Featured Projects
+      </motion.h2>
+
+      {/* Category Navigation */}
+      <div className="flex justify-center mb-12 space-x-4">
+        {Object.entries(projectCategories).map(([key, category]) => {
+          const Icon = category.icon;
+          return (
+            <motion.button
+              key={key}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveCategory(key as any)}
+              className={categoryButtonStyle(activeCategory === key)}
+            >
+              <Icon className="w-5 h-5" />
+              <span>{category.title}</span>
+            </motion.button>
+          );
+        })}
+      </div>
+
+      {/* Category Description */}
+      <motion.p 
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        className="text-center text-gray-300 mb-12 max-w-3xl mx-auto text-lg leading-relaxed"
+      >
+        {projectCategories[activeCategory].intro}
+      </motion.p>
+
+      {/* Projects Grid */}
+      <div className="grid gap-8 md:grid-cols-2">
+        {activeCategory === 'software'
+          ? projectCategories[activeCategory].projects.map((project, index) => renderSoftwareProject(project, index))
+          : projectCategories[activeCategory].projects.map((project, index) => (
+              <EnhancedProjectCard
+                key={index}
+                project={project}
+                onViewGallery={openGallery}
+                onViewImage={openLightbox}
+                onViewSimulation={handleViewSimulation}
+              />
+            ))}
       </div>
 
       {/* Modals */}

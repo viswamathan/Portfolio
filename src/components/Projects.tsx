@@ -19,11 +19,11 @@ import {
 } from 'lucide-react';
 
 /**
- * Enhanced Projects Component
- * - Improved card layouts and alignments
- * - Better visual hierarchy and spacing
- * - Enhanced image gallery organization
- * - Consistent button styling and positioning
+ * Enhanced Projects Component with Unique Layout
+ * - Asymmetric card designs with creative alignments
+ * - Diagonal elements and angled containers
+ * - Layered visual hierarchy with depth
+ * - Unique grid patterns and overlapping elements
  */
 
 /* ----------------------------- Modal Components ---------------------------- */
@@ -252,6 +252,7 @@ type EnhancedProjectCardProps = {
   onViewGallery: (project: any) => void;
   onViewImage: (image: string, title?: string) => void;
   onViewSimulation: (sims: string[], title?: string) => void;
+  index: number;
 };
 
 const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
@@ -259,54 +260,136 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
   onViewGallery,
   onViewImage,
   onViewSimulation,
+  index,
 }) => {
   const images = [project.image1, project.image2].filter(Boolean) as string[];
-
-  // Consolidated button style for consistency
+  
+  // Alternating layouts for unique appearance
+  const isAlternate = index % 2 === 1;
+  
   const buttonStyle = "flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium flex-1 min-w-[140px]";
 
   return (
     <motion.div
       whileHover={{ scale: 1.02, y: -5 }}
-      className="bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col h-full"
+      className={`relative bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col h-full ${
+        isAlternate ? 'lg:flex-row-reverse' : 'lg:flex-row'
+      }`}
     >
-      <div className="p-6 flex flex-col flex-1">
-        {/* Header */}
-        <div className="flex justify-between items-start mb-4">
-          <div className="flex-1">
-            <h3 className="text-2xl font-bold text-purple-400 mb-2">{project.title}</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">{project.description}</p>
+      {/* Decorative Diagonal Accent */}
+      <div className={`absolute top-0 w-32 h-1 bg-gradient-to-r from-purple-500 to-pink-500 transform -translate-y-1 ${
+        isAlternate ? 'right-0' : 'left-0'
+      }`}></div>
+      
+      {/* Image Section with Creative Border */}
+      <div className={`relative lg:w-2/5 ${isAlternate ? 'lg:pl-6' : 'lg:pr-6'}`}>
+        <div className={`absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent rounded-xl ${
+          isAlternate ? 'transform skew-y-2' : 'transform -skew-y-2'
+        }`}></div>
+        
+        {images.length > 0 && (
+          <div className="relative p-6">
+            <div className={`relative group ${
+              isAlternate ? 'transform -rotate-1' : 'transform rotate-1'
+            } hover:rotate-0 transition-transform duration-300`}>
+              <motion.img
+                whileHover={{ scale: 1.05 }}
+                src={images[0]}
+                alt={`${project.title} main visual`}
+                className="w-full h-48 lg:h-64 object-cover rounded-xl border-2 border-purple-500/30 shadow-lg"
+                onClick={() => onViewImage(images[0], project.title)}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-4">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
+                  onClick={() => onViewImage(images[0], project.title)}
+                >
+                  <Eye className="w-4 h-4 text-white" />
+                </motion.button>
+              </div>
+            </div>
+            
+            {/* Secondary Image Indicator */}
+            {images.length > 1 && (
+              <div className={`absolute ${
+                isAlternate ? '-left-2 bottom-4' : '-right-2 bottom-4'
+              } transform ${isAlternate ? 'rotate-12' : '-rotate-12'}`}>
+                <div className="relative">
+                  <div className="w-16 h-16 bg-gray-700 rounded-lg border-2 border-purple-400/50 overflow-hidden shadow-lg">
+                    <img 
+                      src={images[1]} 
+                      alt="Additional view" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">+1</span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-          <motion.button
-            onClick={() => onViewGallery(project)}
-            className="p-2 bg-purple-600/20 hover:bg-purple-600/40 rounded-lg transition-colors ml-4 flex-shrink-0"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <ZoomIn className="w-5 h-5 text-purple-400" />
-          </motion.button>
+        )}
+      </div>
+
+      {/* Content Section */}
+      <div className="flex-1 p-6 flex flex-col">
+        {/* Header with Diagonal Accent */}
+        <div className="relative mb-6">
+          <div className={`absolute -top-2 -left-2 w-12 h-1 bg-gradient-to-r from-purple-500 to-pink-500 transform ${
+            isAlternate ? 'rotate-45' : '-rotate-45'
+          }`}></div>
+          <div className="flex justify-between items-start">
+            <div className="flex-1">
+              <h3 className="text-2xl font-bold text-purple-400 mb-2 relative">
+                {project.title}
+                <div className={`absolute -bottom-1 left-0 w-16 h-0.5 bg-purple-500 ${
+                  isAlternate ? 'transform -skew-x-12' : 'transform skew-x-12'
+                }`}></div>
+              </h3>
+              <p className="text-gray-300 text-sm leading-relaxed">{project.description}</p>
+            </div>
+            <motion.button
+              onClick={() => onViewGallery(project)}
+              className="p-2 bg-purple-600/20 hover:bg-purple-600/40 rounded-lg transition-colors ml-4 flex-shrink-0"
+              whileHover={{ scale: 1.1, rotate: 90 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ZoomIn className="w-5 h-5 text-purple-400" />
+            </motion.button>
+          </div>
         </div>
 
         {/* Project Details Grid */}
-        <div className="flex-1">
+        <div className="flex-1 space-y-4 mb-6">
           {(project.problem || project.solution || project.impact) && (
-            <div className="grid gap-3 mb-6">
+            <div className="grid gap-3">
               {project.problem && (
-                <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
-                  <h4 className="font-semibold text-red-400 text-sm mb-1">Challenge</h4>
-                  <p className="text-gray-300 text-xs leading-relaxed">{project.problem}</p>
+                <div className={`bg-red-500/10 border border-red-500/20 rounded-lg p-3 relative overflow-hidden ${
+                  isAlternate ? 'transform -skew-x-1' : 'transform skew-x-1'
+                } hover:skew-x-0 transition-transform`}>
+                  <div className="absolute top-0 left-0 w-2 h-full bg-red-500/50"></div>
+                  <h4 className="font-semibold text-red-400 text-sm mb-1 ml-2">Challenge</h4>
+                  <p className="text-gray-300 text-xs leading-relaxed ml-2">{project.problem}</p>
                 </div>
               )}
               {project.solution && (
-                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
-                  <h4 className="font-semibold text-blue-400 text-sm mb-1">Solution</h4>
-                  <p className="text-gray-300 text-xs leading-relaxed">{project.solution}</p>
+                <div className={`bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 relative overflow-hidden ${
+                  isAlternate ? 'transform skew-x-1' : 'transform -skew-x-1'
+                } hover:skew-x-0 transition-transform`}>
+                  <div className="absolute top-0 left-0 w-2 h-full bg-blue-500/50"></div>
+                  <h4 className="font-semibold text-blue-400 text-sm mb-1 ml-2">Solution</h4>
+                  <p className="text-gray-300 text-xs leading-relaxed ml-2">{project.solution}</p>
                 </div>
               )}
               {project.impact && (
-                <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
-                  <h4 className="font-semibold text-green-400 text-sm mb-1">Impact</h4>
-                  <p className="text-gray-300 text-xs leading-relaxed">{project.impact}</p>
+                <div className={`bg-green-500/10 border border-green-500/20 rounded-lg p-3 relative overflow-hidden ${
+                  isAlternate ? 'transform -skew-x-1' : 'transform skew-x-1'
+                } hover:skew-x-0 transition-transform`}>
+                  <div className="absolute top-0 left-0 w-2 h-full bg-green-500/50"></div>
+                  <h4 className="font-semibold text-green-400 text-sm mb-1 ml-2">Impact</h4>
+                  <p className="text-gray-300 text-xs leading-relaxed ml-2">{project.impact}</p>
                 </div>
               )}
             </div>
@@ -314,13 +397,18 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
 
           {/* Technologies */}
           {project.technologies && (
-            <div className="mb-6">
-              <h4 className="font-semibold text-purple-300 mb-2 text-sm">Technologies Used:</h4>
+            <div className="mb-4">
+              <h4 className="font-semibold text-purple-300 mb-2 text-sm relative inline-block">
+                Technologies Used
+                <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-purple-500/30"></div>
+              </h4>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech: string, index: number) => (
                   <motion.span
                     key={index}
-                    className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30"
+                    className={`bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30 ${
+                      isAlternate ? 'transform rotate-1' : 'transform -rotate-1'
+                    } hover:rotate-0 transition-transform`}
                     whileHover={{ scale: 1.05 }}
                   >
                     {tech}
@@ -331,55 +419,14 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
           )}
         </div>
 
-        {/* Enhanced Image Gallery */}
-        {images.length > 0 && (
-          <div className="mb-6">
-            <div className="flex justify-between items-center mb-3">
-              <h4 className="font-semibold text-purple-300 text-sm">Project Visuals:</h4>
-              <span className="text-gray-400 text-xs">{images.length} images</span>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {images.map((img, idx) => (
-                <div key={idx} className="relative group">
-                  <motion.div
-                    className="relative w-full h-40 rounded-lg overflow-hidden border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
-                    whileHover={{ scale: 1.03 }}
-                    onClick={() => onViewImage(img, project.title)}
-                  >
-                    <img 
-                      src={img} 
-                      alt={`${project.title} - View ${idx + 1}`} 
-                      className="w-full h-full object-cover" 
-                    />
-
-                    {/* Overlay with view button */}
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <motion.button
-                        className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <Eye className="w-4 h-4 text-white" />
-                      </motion.button>
-                    </div>
-
-                    {/* Image Label */}
-                    <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
-                      View {idx + 1}
-                    </div>
-                  </motion.div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Enhanced Actions - Consistent Layout */}
+        {/* Enhanced Actions - Creative Layout */}
         <div className="mt-auto">
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className={`flex flex-wrap gap-3 justify-center ${
+            isAlternate ? 'transform -skew-x-2' : 'transform skew-x-2'
+          } hover:skew-x-0 transition-transform`}>
             {project.report && (
               <motion.a
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 href={project.report}
                 target="_blank"
@@ -393,7 +440,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
 
             {project.simulations && (
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onViewSimulation(project.simulations, project.title)}
                 className={buttonStyle}
@@ -405,7 +452,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
 
             {project.githubUrl && (
               <motion.a
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 href={project.githubUrl}
                 target="_blank"
@@ -418,7 +465,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
             )}
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => onViewGallery(project)}
               className={buttonStyle}
@@ -529,34 +576,51 @@ const Projects: React.FC = () => {
   const openGallery = (project: any) => setGalleryProject(project);
   const closeGallery = () => setGalleryProject(null);
 
-  // Consolidated button style for category buttons
+  // Enhanced category button style with unique shapes
   const categoryButtonStyle = (isActive: boolean) => 
-    `flex items-center gap-3 px-6 py-3 rounded-full transition-all font-medium ${
+    `flex items-center gap-3 px-6 py-3 rounded-full transition-all font-medium relative overflow-hidden group ${
       isActive 
-        ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg' 
-        : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700 hover:text-white'
+        ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg transform -skew-x-6' 
+        : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700 hover:text-white transform hover:-skew-x-3 transition-transform'
     }`;
 
   const renderSoftwareProject = (project: any, idx: number) => {
     const images = [project.image1, project.image2].filter(Boolean) as string[];
     const buttonStyle = "flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium flex-1 min-w-[140px]";
+    const isAlternate = idx % 2 === 1;
 
     return (
       <motion.div
         key={idx}
-        whileHover={{ scale: 1.02 }}
-        className="bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 p-6 flex flex-col h-full"
+        whileHover={{ scale: 1.02, y: -5 }}
+        className={`relative bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 p-6 flex flex-col h-full ${
+          isAlternate ? 'lg:flex-row-reverse' : 'lg:flex-row'
+        }`}
       >
+        {/* Diagonal Background Pattern */}
+        <div className={`absolute inset-0 opacity-5 ${
+          isAlternate 
+            ? 'bg-gradient-to-br from-purple-500 via-transparent to-pink-500' 
+            : 'bg-gradient-to-bl from-purple-500 via-transparent to-pink-500'
+        }`}></div>
+
         {/* Header */}
-        <div className="flex justify-between items-start mb-4">
+        <div className={`flex justify-between items-start mb-4 relative z-10 ${
+          isAlternate ? 'lg:order-2' : 'lg:order-1'
+        }`}>
           <div className="flex-1">
-            <h3 className="text-2xl font-bold text-purple-400 mb-2">{project.title}</h3>
+            <h3 className="text-2xl font-bold text-purple-400 mb-2 relative inline-block">
+              {project.title}
+              <div className={`absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-500 to-transparent ${
+                isAlternate ? 'transform -skew-x-12' : 'transform skew-x-12'
+              }`}></div>
+            </h3>
             <p className="text-gray-300 leading-relaxed">{project.description}</p>
           </div>
           <motion.button
             onClick={() => openGallery(project)}
             className="p-2 bg-purple-600/20 hover:bg-purple-600/40 rounded-lg transition-colors ml-4 flex-shrink-0"
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.1, rotate: 90 }}
             whileTap={{ scale: 0.9 }}
           >
             <ZoomIn className="w-5 h-5 text-purple-400" />
@@ -564,45 +628,63 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Content Area */}
-        <div className="flex-1">
+        <div className={`flex-1 space-y-6 relative z-10 ${
+          isAlternate ? 'lg:order-1 lg:pr-6' : 'lg:order-2 lg:pl-6'
+        }`}>
           {/* Technologies */}
-          <div className="mb-6">
-            <h4 className="font-semibold text-purple-300 mb-3">Technologies Used:</h4>
+          <div>
+            <h4 className="font-semibold text-purple-300 mb-3 relative inline-block">
+              Technologies Used
+              <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-purple-500/30"></div>
+            </h4>
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((tech: string, index: number) => (
-                <span
+                <motion.span
                   key={index}
-                  className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
+                  className={`bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30 ${
+                    isAlternate ? 'transform rotate-1' : 'transform -rotate-1'
+                  } hover:rotate-0 transition-transform`}
+                  whileHover={{ scale: 1.05 }}
                 >
                   {tech}
-                </span>
+                </motion.span>
               ))}
             </div>
           </div>
 
           {/* Images */}
           {images.length > 0 && (
-            <div className="mb-6">
+            <div>
               <div className="flex justify-between items-center mb-3">
-                <h4 className="font-semibold text-purple-300">Project Visuals:</h4>
+                <h4 className="font-semibold text-purple-300 relative inline-block">
+                  Project Visuals
+                  <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-purple-500/30"></div>
+                </h4>
                 <span className="text-gray-400 text-sm">{images.length} images</span>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {images.map((img, idxImg) => (
                   <div key={idxImg} className="relative group">
-                    <motion.img
-                      whileHover={{ scale: 1.05 }}
-                      src={img}
-                      alt={`${project.title} - View ${idxImg + 1}`}
-                      className="w-full h-48 object-cover rounded-lg border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
-                      onClick={() => openLightbox(img, project.title)}
-                    />
-                    <button
-                      onClick={() => openLightbox(img, project.title)}
-                      className="absolute top-2 right-2 p-2 bg-black/50 rounded-full hover:bg-purple-600 transition-colors opacity-0 group-hover:opacity-100"
+                    <motion.div
+                      whileHover={{ scale: 1.05, rotate: idxImg % 2 === 0 ? 1 : -1 }}
+                      className="relative overflow-hidden rounded-lg border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
                     >
-                      <Eye className="w-4 h-4 text-white" />
-                    </button>
+                      <img
+                        src={img}
+                        alt={`${project.title} - View ${idxImg + 1}`}
+                        className="w-full h-48 object-cover"
+                        onClick={() => openLightbox(img, project.title)}
+                      />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <motion.button
+                          whileHover={{ scale: 1.1 }}
+                          className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
+                          onClick={() => openLightbox(img, project.title)}
+                        >
+                          <Eye className="w-4 h-4 text-white" />
+                        </motion.button>
+                      </div>
+                    </motion.div>
                     <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
                       View {idxImg + 1}
                     </div>
@@ -614,11 +696,13 @@ const Projects: React.FC = () => {
         </div>
 
         {/* Actions */}
-        <div className="mt-auto">
-          <div className="flex flex-wrap gap-3 justify-center">
+        <div className="mt-6 relative z-10 lg:mt-auto lg:w-full">
+          <div className={`flex flex-wrap gap-3 justify-center ${
+            isAlternate ? 'transform -skew-x-2' : 'transform skew-x-2'
+          } hover:skew-x-0 transition-transform`}>
             {project.githubUrl && (
               <motion.a
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 href={project.githubUrl}
                 target="_blank"
@@ -632,7 +716,7 @@ const Projects: React.FC = () => {
 
             {project.report && (
               <motion.a
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 href={project.report}
                 target="_blank"
@@ -645,7 +729,7 @@ const Projects: React.FC = () => {
             )}
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => openGallery(project)}
               className={buttonStyle}
@@ -665,9 +749,10 @@ const Projects: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-4xl font-bold mb-12 text-center text-white"
+        className="text-4xl font-bold mb-12 text-center text-white relative"
       >
         Featured Projects
+        <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
       </motion.h2>
 
       {/* Category Navigation */}
@@ -677,7 +762,7 @@ const Projects: React.FC = () => {
           return (
             <motion.button
               key={key}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveCategory(key as any)}
               className={categoryButtonStyle(activeCategory === key)}
@@ -693,13 +778,14 @@ const Projects: React.FC = () => {
       <motion.p 
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
-        className="text-center text-gray-300 mb-12 max-w-3xl mx-auto text-lg leading-relaxed"
+        className="text-center text-gray-300 mb-12 max-w-3xl mx-auto text-lg leading-relaxed relative"
       >
         {projectCategories[activeCategory].intro}
+        <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-16 h-0.5 bg-purple-500/30 rounded-full"></div>
       </motion.p>
 
       {/* Projects Grid */}
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid gap-8 md:grid-cols-1">
         {activeCategory === 'software'
           ? projectCategories[activeCategory].projects.map((project, index) => renderSoftwareProject(project, index))
           : projectCategories[activeCategory].projects.map((project, index) => (
@@ -709,6 +795,7 @@ const Projects: React.FC = () => {
                 onViewGallery={openGallery}
                 onViewImage={openLightbox}
                 onViewSimulation={handleViewSimulation}
+                index={index}
               />
             ))}
       </div>

@@ -19,11 +19,11 @@ import {
 } from 'lucide-react';
 
 /**
- * Enhanced Projects Component
- * - Improved card layouts and alignments
- * - Better visual hierarchy and spacing
- * - Enhanced image gallery organization
- * - Consistent button styling and positioning
+ * Enhanced Projects Component with Consistent Alignment
+ * - Unified card layouts and spacing
+ * - Consistent visual hierarchy across all project types
+ * - Improved grid alignment and responsive behavior
+ * - Standardized button styles and positioning
  */
 
 /* ----------------------------- Modal Components ---------------------------- */
@@ -247,6 +247,22 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
 
 /* --------------------------- Enhanced Project Card -------------------------- */
 
+// Consolidated styles for consistency
+const CARD_STYLES = {
+  container: "bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col h-full",
+  header: "p-6 flex justify-between items-start mb-4",
+  title: "text-2xl font-bold text-purple-400 mb-2",
+  description: "text-gray-300 text-sm leading-relaxed",
+  content: "flex-1",
+  section: "mb-6",
+  sectionTitle: "font-semibold text-purple-300 mb-3 text-sm",
+  button: "flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium flex-1 min-w-[140px]",
+  techTag: "bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30",
+  imageContainer: "relative w-full h-40 rounded-lg overflow-hidden border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer",
+  imageOverlay: "absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center",
+  imageLabel: "absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white"
+};
+
 type EnhancedProjectCardProps = {
   project: any;
   onViewGallery: (project: any) => void;
@@ -262,20 +278,17 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
 }) => {
   const images = [project.image1, project.image2].filter(Boolean) as string[];
 
-  // Consolidated button style for consistency
-  const buttonStyle = "flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium flex-1 min-w-[140px]";
-
   return (
     <motion.div
       whileHover={{ scale: 1.02, y: -5 }}
-      className="bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 shadow-lg hover:shadow-2xl flex flex-col h-full"
+      className={CARD_STYLES.container}
     >
       <div className="p-6 flex flex-col flex-1">
         {/* Header */}
-        <div className="flex justify-between items-start mb-4">
+        <div className={CARD_STYLES.header}>
           <div className="flex-1">
-            <h3 className="text-2xl font-bold text-purple-400 mb-2">{project.title}</h3>
-            <p className="text-gray-300 text-sm leading-relaxed">{project.description}</p>
+            <h3 className={CARD_STYLES.title}>{project.title}</h3>
+            <p className={CARD_STYLES.description}>{project.description}</p>
           </div>
           <motion.button
             onClick={() => onViewGallery(project)}
@@ -288,7 +301,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
         </div>
 
         {/* Project Details Grid */}
-        <div className="flex-1">
+        <div className={CARD_STYLES.content}>
           {(project.problem || project.solution || project.impact) && (
             <div className="grid gap-3 mb-6">
               {project.problem && (
@@ -314,13 +327,13 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
 
           {/* Technologies */}
           {project.technologies && (
-            <div className="mb-6">
-              <h4 className="font-semibold text-purple-300 mb-2 text-sm">Technologies Used:</h4>
+            <div className={CARD_STYLES.section}>
+              <h4 className={CARD_STYLES.sectionTitle}>Technologies Used:</h4>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech: string, index: number) => (
                   <motion.span
                     key={index}
-                    className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30"
+                    className={CARD_STYLES.techTag}
                     whileHover={{ scale: 1.05 }}
                   >
                     {tech}
@@ -333,16 +346,16 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
 
         {/* Enhanced Image Gallery */}
         {images.length > 0 && (
-          <div className="mb-6">
+          <div className={CARD_STYLES.section}>
             <div className="flex justify-between items-center mb-3">
-              <h4 className="font-semibold text-purple-300 text-sm">Project Visuals:</h4>
+              <h4 className={CARD_STYLES.sectionTitle}>Project Visuals:</h4>
               <span className="text-gray-400 text-xs">{images.length} images</span>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {images.map((img, idx) => (
                 <div key={idx} className="relative group">
                   <motion.div
-                    className="relative w-full h-40 rounded-lg overflow-hidden border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
+                    className={CARD_STYLES.imageContainer}
                     whileHover={{ scale: 1.03 }}
                     onClick={() => onViewImage(img, project.title)}
                   >
@@ -353,7 +366,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
                     />
 
                     {/* Overlay with view button */}
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div className={CARD_STYLES.imageOverlay}>
                       <motion.button
                         className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
                         whileHover={{ scale: 1.1 }}
@@ -364,7 +377,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
                     </div>
 
                     {/* Image Label */}
-                    <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
+                    <div className={CARD_STYLES.imageLabel}>
                       View {idx + 1}
                     </div>
                   </motion.div>
@@ -384,7 +397,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
                 href={project.report}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={buttonStyle}
+                className={CARD_STYLES.button}
               >
                 <FileText className="w-4 h-4" />
                 <span>Report</span>
@@ -396,7 +409,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onViewSimulation(project.simulations, project.title)}
-                className={buttonStyle}
+                className={CARD_STYLES.button}
               >
                 <Play className="w-4 h-4" />
                 <span>Simulation</span>
@@ -410,7 +423,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={buttonStyle}
+                className={CARD_STYLES.button}
               >
                 <Github className="w-4 h-4" />
                 <span>Code</span>
@@ -421,7 +434,7 @@ const EnhancedProjectCard: React.FC<EnhancedProjectCardProps> = ({
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => onViewGallery(project)}
-              className={buttonStyle}
+              className={CARD_STYLES.button}
             >
               <ExternalLink className="w-4 h-4" />
               <span>Gallery</span>
@@ -537,122 +550,173 @@ const Projects: React.FC = () => {
         : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700 hover:text-white'
     }`;
 
-  const renderSoftwareProject = (project: any, idx: number) => {
+  // Unified project card renderer for all categories
+  const renderProjectCard = (project: any, index: number) => {
     const images = [project.image1, project.image2].filter(Boolean) as string[];
-    const buttonStyle = "flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium flex-1 min-w-[140px]";
 
     return (
       <motion.div
-        key={idx}
-        whileHover={{ scale: 1.02 }}
-        className="bg-gray-800/50 rounded-xl overflow-hidden backdrop-blur-sm border border-gray-700 hover:border-purple-500 transition-all duration-300 p-6 flex flex-col h-full"
+        key={index}
+        whileHover={{ scale: 1.02, y: -5 }}
+        className={CARD_STYLES.container}
       >
-        {/* Header */}
-        <div className="flex justify-between items-start mb-4">
-          <div className="flex-1">
-            <h3 className="text-2xl font-bold text-purple-400 mb-2">{project.title}</h3>
-            <p className="text-gray-300 leading-relaxed">{project.description}</p>
-          </div>
-          <motion.button
-            onClick={() => openGallery(project)}
-            className="p-2 bg-purple-600/20 hover:bg-purple-600/40 rounded-lg transition-colors ml-4 flex-shrink-0"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <ZoomIn className="w-5 h-5 text-purple-400" />
-          </motion.button>
-        </div>
-
-        {/* Content Area */}
-        <div className="flex-1">
-          {/* Technologies */}
-          <div className="mb-6">
-            <h4 className="font-semibold text-purple-300 mb-3">Technologies Used:</h4>
-            <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech: string, index: number) => (
-                <span
-                  key={index}
-                  className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
-                >
-                  {tech}
-                </span>
-              ))}
+        <div className="p-6 flex flex-col flex-1">
+          {/* Header */}
+          <div className={CARD_STYLES.header}>
+            <div className="flex-1">
+              <h3 className={CARD_STYLES.title}>{project.title}</h3>
+              <p className={CARD_STYLES.description}>{project.description}</p>
             </div>
+            <motion.button
+              onClick={() => openGallery(project)}
+              className="p-2 bg-purple-600/20 hover:bg-purple-600/40 rounded-lg transition-colors ml-4 flex-shrink-0"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ZoomIn className="w-5 h-5 text-purple-400" />
+            </motion.button>
           </div>
 
-          {/* Images */}
-          {images.length > 0 && (
-            <div className="mb-6">
-              <div className="flex justify-between items-center mb-3">
-                <h4 className="font-semibold text-purple-300">Project Visuals:</h4>
-                <span className="text-gray-400 text-sm">{images.length} images</span>
+          {/* Project Details Grid */}
+          <div className={CARD_STYLES.content}>
+            {(project.problem || project.solution || project.impact) && (
+              <div className="grid gap-3 mb-6">
+                {project.problem && (
+                  <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+                    <h4 className="font-semibold text-red-400 text-sm mb-1">Challenge</h4>
+                    <p className="text-gray-300 text-xs leading-relaxed">{project.problem}</p>
+                  </div>
+                )}
+                {project.solution && (
+                  <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
+                    <h4 className="font-semibold text-blue-400 text-sm mb-1">Solution</h4>
+                    <p className="text-gray-300 text-xs leading-relaxed">{project.solution}</p>
+                  </div>
+                )}
+                {project.impact && (
+                  <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
+                    <h4 className="font-semibold text-green-400 text-sm mb-1">Impact</h4>
+                    <p className="text-gray-300 text-xs leading-relaxed">{project.impact}</p>
+                  </div>
+                )}
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                {images.map((img, idxImg) => (
-                  <div key={idxImg} className="relative group">
-                    <motion.img
+            )}
+
+            {/* Technologies */}
+            {project.technologies && (
+              <div className={CARD_STYLES.section}>
+                <h4 className={CARD_STYLES.sectionTitle}>Technologies Used:</h4>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech: string, index: number) => (
+                    <motion.span
+                      key={index}
+                      className={CARD_STYLES.techTag}
                       whileHover={{ scale: 1.05 }}
-                      src={img}
-                      alt={`${project.title} - View ${idxImg + 1}`}
-                      className="w-full h-48 object-cover rounded-lg border-2 border-purple-500/30 hover:border-purple-500 cursor-pointer"
-                      onClick={() => openLightbox(img, project.title)}
-                    />
-                    <button
-                      onClick={() => openLightbox(img, project.title)}
-                      className="absolute top-2 right-2 p-2 bg-black/50 rounded-full hover:bg-purple-600 transition-colors opacity-0 group-hover:opacity-100"
                     >
-                      <Eye className="w-4 h-4 text-white" />
-                    </button>
-                    <div className="absolute bottom-2 left-2 bg-black/70 px-2 py-1 rounded text-xs text-white">
-                      View {idxImg + 1}
-                    </div>
+                      {tech}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Enhanced Image Gallery */}
+          {images.length > 0 && (
+            <div className={CARD_STYLES.section}>
+              <div className="flex justify-between items-center mb-3">
+                <h4 className={CARD_STYLES.sectionTitle}>Project Visuals:</h4>
+                <span className="text-gray-400 text-xs">{images.length} images</span>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {images.map((img, idx) => (
+                  <div key={idx} className="relative group">
+                    <motion.div
+                      className={CARD_STYLES.imageContainer}
+                      whileHover={{ scale: 1.03 }}
+                      onClick={() => openLightbox(img, project.title)}
+                    >
+                      <img 
+                        src={img} 
+                        alt={`${project.title} - View ${idx + 1}`} 
+                        className="w-full h-full object-cover" 
+                      />
+
+                      {/* Overlay with view button */}
+                      <div className={CARD_STYLES.imageOverlay}>
+                        <motion.button
+                          className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          <Eye className="w-4 h-4 text-white" />
+                        </motion.button>
+                      </div>
+
+                      {/* Image Label */}
+                      <div className={CARD_STYLES.imageLabel}>
+                        View {idx + 1}
+                      </div>
+                    </motion.div>
                   </div>
                 ))}
               </div>
             </div>
           )}
-        </div>
 
-        {/* Actions */}
-        <div className="mt-auto">
-          <div className="flex flex-wrap gap-3 justify-center">
-            {project.githubUrl && (
-              <motion.a
+          {/* Enhanced Actions - Consistent Layout */}
+          <div className="mt-auto">
+            <div className="flex flex-wrap gap-3 justify-center">
+              {project.report && (
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={project.report}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={CARD_STYLES.button}
+                >
+                  <FileText className="w-4 h-4" />
+                  <span>Report</span>
+                </motion.a>
+              )}
+
+              {project.simulations && (
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => handleViewSimulation(project.simulations, project.title)}
+                  className={CARD_STYLES.button}
+                >
+                  <Play className="w-4 h-4" />
+                  <span>Simulation</span>
+                </motion.button>
+              )}
+
+              {project.githubUrl && (
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={CARD_STYLES.button}
+                >
+                  <Github className="w-4 h-4" />
+                  <span>Code</span>
+                </motion.a>
+              )}
+
+              <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={buttonStyle}
+                onClick={() => openGallery(project)}
+                className={CARD_STYLES.button}
               >
-                <Github className="w-4 h-4" />
-                <span>GitHub</span>
-              </motion.a>
-            )}
-
-            {project.report && (
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                href={project.report}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={buttonStyle}
-              >
-                <FileText className="w-4 h-4" />
-                <span>Report</span>
-              </motion.a>
-            )}
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => openGallery(project)}
-              className={buttonStyle}
-            >
-              <ExternalLink className="w-4 h-4" />
-              <span>Gallery</span>
-            </motion.button>
+                <ExternalLink className="w-4 h-4" />
+                <span>Gallery</span>
+              </motion.button>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -698,19 +762,11 @@ const Projects: React.FC = () => {
         {projectCategories[activeCategory].intro}
       </motion.p>
 
-      {/* Projects Grid */}
+      {/* Projects Grid - Consistent across all categories */}
       <div className="grid gap-8 md:grid-cols-2">
-        {activeCategory === 'software'
-          ? projectCategories[activeCategory].projects.map((project, index) => renderSoftwareProject(project, index))
-          : projectCategories[activeCategory].projects.map((project, index) => (
-              <EnhancedProjectCard
-                key={index}
-                project={project}
-                onViewGallery={openGallery}
-                onViewImage={openLightbox}
-                onViewSimulation={handleViewSimulation}
-              />
-            ))}
+        {projectCategories[activeCategory].projects.map((project, index) => 
+          renderProjectCard(project, index)
+        )}
       </div>
 
       {/* Modals */}

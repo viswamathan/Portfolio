@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Box, Download, Eye, Layers, Award, X, ZoomIn, ZoomOut, 
-  RotateCcw, Search, Filter, SortAsc, Star, Info, 
+  Search, Filter, SortAsc, Info, 
   ChevronLeft, ChevronRight, Play, Pause
 } from "lucide-react";
 import * as THREE from "three";
@@ -41,7 +41,6 @@ const CADModels = () => {
       modelPath: "/Models/Spur Gear profile.STL",
       views: 1247,
       downloads: 89,
-      rating: 4.5,
       fileSize: "4.2 MB",
       lastUpdated: "2023-10-15"
     },
@@ -58,7 +57,6 @@ const CADModels = () => {
       modelPath: "/Models/Exhaust manifold.STL",
       views: 500,
       downloads: 25,
-      rating: 4.2,
       fileSize: "6.7 MB",
       lastUpdated: "2023-09-22"
     },
@@ -75,7 +73,6 @@ const CADModels = () => {
       modelPath: "/Models/KNUCKLE JOINT.STL",
       views: 226,
       downloads: 10,
-      rating: 4.0,
       fileSize: "3.1 MB",
       lastUpdated: "2023-08-30"
     },
@@ -92,7 +89,6 @@ const CADModels = () => {
       modelPath: "/Models/UNIVERSAL COUPLING.STL",
       views: 189,
       downloads: 15,
-      rating: 3.8,
       fileSize: "2.8 MB",
       lastUpdated: "2023-07-18"
     },
@@ -109,7 +105,6 @@ const CADModels = () => {
       modelPath: "/Models/MUFF COUPLING.STL",
       views: 189,
       downloads: 15,
-      rating: 3.9,
       fileSize: "2.5 MB",
       lastUpdated: "2023-06-12"
     },
@@ -126,7 +121,6 @@ const CADModels = () => {
       modelPath: "/Models/Door lock.STL",
       views: 312,
       downloads: 18,
-      rating: 4.1,
       fileSize: "5.3 MB",
       lastUpdated: "2023-05-25"
     },
@@ -143,7 +137,6 @@ const CADModels = () => {
       modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
       views: 278,
       downloads: 25,
-      rating: 4.3,
       fileSize: "4.8 MB",
       lastUpdated: "2023-04-17"
     },
@@ -160,7 +153,6 @@ const CADModels = () => {
       modelPath: "/Models/Refrigeration Valves.STL",
       views: 342,
       downloads: 27,
-      rating: 4.4,
       fileSize: "7.2 MB",
       lastUpdated: "2023-03-09"
     },
@@ -177,7 +169,6 @@ const CADModels = () => {
       modelPath: "/Models/Connecting Rod.STL",
       views: 297,
       downloads: 24,
-      rating: 4.2,
       fileSize: "3.9 MB",
       lastUpdated: "2023-02-14"
     },
@@ -194,7 +185,6 @@ const CADModels = () => {
       modelPath: "/Models/piston head.STL",
       views: 410,
       downloads: 32,
-      rating: 4.6,
       fileSize: "4.5 MB",
       lastUpdated: "2023-01-28"
     },
@@ -211,7 +201,6 @@ const CADModels = () => {
       modelPath: "/Models/crank shaft.STL",
       views: 365,
       downloads: 28,
-      rating: 4.5,
       fileSize: "5.1 MB",
       lastUpdated: "2022-12-05"
     },
@@ -228,7 +217,6 @@ const CADModels = () => {
       modelPath: "/Models/Stuffing Box.STL",
       views: 248,
       downloads: 19,
-      rating: 4.0,
       fileSize: "6.3 MB",
       lastUpdated: "2022-11-19"
     },
@@ -245,7 +233,6 @@ const CADModels = () => {
       modelPath: "/Models/Robotic Gripper.STL",
       views: 312,
       downloads: 27,
-      rating: 4.7,
       fileSize: "8.5 MB",
       lastUpdated: "2022-10-30"
     },
@@ -282,8 +269,6 @@ const CADModels = () => {
         case "complexity":
           const complexityOrder = { "Basic": 0, "Beginner": 1, "Intermediate": 2, "Advanced": 3 };
           return complexityOrder[b.complexity] - complexityOrder[a.complexity];
-        case "rating":
-          return b.rating - a.rating;
         case "newest":
           return new Date(b.lastUpdated) - new Date(a.lastUpdated);
         default:
@@ -310,7 +295,7 @@ const CADModels = () => {
     { label: "Total Models", value: cadModels.length, icon: Box, color: "purple" },
     { label: "Downloads", value: cadModels.reduce((sum, model) => sum + model.downloads, 0), icon: Download, color: "blue" },
     { label: "Categories", value: categories.length - 1, icon: Layers, color: "green" },
-    { label: "Avg Rating", value: (cadModels.reduce((sum, model) => sum + model.rating, 0) / cadModels.length).toFixed(1), icon: Star, color: "orange" },
+    { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
 
   // Enhanced 3D Viewer with better controls and error handling
@@ -334,9 +319,12 @@ const CADModels = () => {
     scene.background = new THREE.Color(0x111827);
     sceneRef.current = scene;
 
+    // Square aspect ratio for viewer
+    const viewerSize = Math.min(mountRef.current.clientWidth, mountRef.current.clientHeight);
+    
     const camera = new THREE.PerspectiveCamera(
       45,
-      mountRef.current.clientWidth / mountRef.current.clientHeight,
+      1, // Square aspect ratio
       0.1,
       1000
     );
@@ -347,7 +335,7 @@ const CADModels = () => {
       alpha: true
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
+    renderer.setSize(viewerSize, viewerSize);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     rendererRef.current = renderer;
@@ -449,7 +437,8 @@ const CADModels = () => {
         const fov = camera.fov * (Math.PI / 180);
         const cameraZ = Math.abs(groupMax / 2 / Math.tan(fov / 2));
         
-        camera.position.set(0, groupMax * 0.2, cameraZ * 1.5);
+        // Perfectly center the camera
+        camera.position.set(0, 0, cameraZ * 1.5);
         camera.lookAt(new THREE.Vector3(0, 0, 0));
         controls.update();
 
@@ -470,9 +459,8 @@ const CADModels = () => {
     const handleResize = () => {
       if (!mountRef.current) return;
       
-      camera.aspect = mountRef.current.clientWidth / mountRef.current.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(mountRef.current.clientWidth, mountRef.current.clientHeight);
+      const viewerSize = Math.min(mountRef.current.clientWidth, mountRef.current.clientHeight);
+      renderer.setSize(viewerSize, viewerSize);
     };
     
     window.addEventListener("resize", handleResize);
@@ -512,12 +500,6 @@ const CADModels = () => {
   const zoomOut = () => {
     if (cameraRef.current) {
       cameraRef.current.position.multiplyScalar(1.2);
-    }
-  };
-
-  const resetView = () => {
-    if (controlsRef.current) {
-      controlsRef.current.reset();
     }
   };
 
@@ -562,9 +544,6 @@ const CADModels = () => {
       case '-':
         zoomOut();
         break;
-      case 'r':
-        resetView();
-        break;
       default:
         break;
     }
@@ -576,26 +555,6 @@ const CADModels = () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [previewModel, filteredModels]);
-
-  const renderStars = (rating) => {
-    return (
-      <div className="flex">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <Star
-            key={star}
-            className={`w-4 h-4 ${
-              star <= rating
-                ? "text-yellow-400 fill-yellow-400"
-                : star - 0.5 <= rating
-                ? "text-yellow-400 fill-yellow-400"
-                : "text-gray-400"
-            }`}
-          />
-        ))}
-        <span className="ml-1 text-sm text-gray-300">({rating})</span>
-      </div>
-    );
-  };
 
   return (
     <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-20">
@@ -664,7 +623,6 @@ const CADModels = () => {
             >
               <option value="popularity">Most Popular</option>
               <option value="downloads">Most Downloads</option>
-              <option value="rating">Highest Rated</option>
               <option value="complexity">Complexity</option>
               <option value="newest">Newest</option>
             </select>
@@ -733,7 +691,7 @@ const CADModels = () => {
                     <Download className="w-3 h-3" /> {model.downloads}
                   </span>
                 </div>
-                <div className="absolute top-3 right-3 z-20 flex flex-col gap-2 items-end">
+                <div className="absolute top-3 right-3 z-20">
                   <span
                     className={`px-2 py-1 rounded text-xs border ${getComplexityColor(
                       model.complexity
@@ -741,7 +699,6 @@ const CADModels = () => {
                   >
                     {model.complexity}
                   </span>
-                  {renderStars(model.rating)}
                 </div>
                 <div className="absolute bottom-3 left-3 z-20">
                   <span className="bg-purple-600/80 backdrop-blur-sm px-2 py-1 rounded text-xs text-white">
@@ -815,7 +772,7 @@ const CADModels = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-gray-900 rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col"
+              className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center p-4 sm:p-6 border-b border-gray-700/50">
@@ -841,7 +798,7 @@ const CADModels = () => {
               </div>
 
               <div className="flex flex-1 overflow-hidden">
-                <div className={`${showInfoPanel ? 'w-2/3' : 'w-full'} relative`}>
+                <div className={`${showInfoPanel ? 'w-2/3' : 'w-full'} relative flex items-center justify-center`}>
                   {loadingModel && (
                     <div className="absolute inset-0 flex items-center justify-center z-10 bg-gray-800/80">
                       <div className="text-center">
@@ -850,7 +807,10 @@ const CADModels = () => {
                       </div>
                     </div>
                   )}
-                  <div ref={mountRef} className="w-full h-full min-h-[400px]" />
+                  <div 
+                    ref={mountRef} 
+                    className="w-96 h-96 max-w-full max-h-full flex items-center justify-center"
+                  />
                   
                   {/* 3D Controls */}
                   <div className="absolute bottom-4 left-4 flex flex-col gap-2">
@@ -867,13 +827,6 @@ const CADModels = () => {
                       title="Zoom Out"
                     >
                       <ZoomOut className="w-5 h-5" />
-                    </button>
-                    <button
-                      onClick={resetView}
-                      className="p-2 bg-gray-800/70 backdrop-blur-sm text-white rounded-lg border border-gray-700/50 hover:bg-gray-700/70"
-                      title="Reset View"
-                    >
-                      <RotateCcw className="w-5 h-5" />
                     </button>
                     <button
                       onClick={toggleAutoRotate}
@@ -946,13 +899,18 @@ const CADModels = () => {
                         </div>
                         
                         <div>
-                          <h5 className="text-sm font-medium text-gray-400 mb-1">Rating</h5>
-                          {renderStars(previewModel.rating)}
+                          <h5 className="text-sm font-medium text-gray-400 mb-1">File Size</h5>
+                          <p className="text-sm text-gray-300">{previewModel.fileSize}</p>
                         </div>
                         
                         <div>
-                          <h5 className="text-sm font-medium text-gray-400 mb-1">File Size</h5>
-                          <p className="text-sm text-gray-300">{previewModel.fileSize}</p>
+                          <h5 className="text-sm font-medium text-gray-400 mb-1">Views</h5>
+                          <p className="text-sm text-gray-300">{previewModel.views}</p>
+                        </div>
+                        
+                        <div>
+                          <h5 className="text-sm font-medium text-gray-400 mb-1">Downloads</h5>
+                          <p className="text-sm text-gray-300">{previewModel.downloads}</p>
                         </div>
                         
                         <div>

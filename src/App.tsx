@@ -14,7 +14,6 @@ import EngineeringCalculator from './components/EngineeringCalculator';
 import LoadingScreen from './components/LoadingScreen';
 import Achievements from './components/Achievements';
 import Navigation from './components/Navigation';
-import ParticleBackground from './components/ParticleBackground';
 import ScrollProgress from './components/ScrollProgress';
 
 export default function App() {
@@ -93,9 +92,6 @@ export default function App() {
               exit="exit"
               className="relative"
             >
-              {/* Particle Background */}
-              <ParticleBackground />
-
               {/* Navigation */}
               <Navigation
                 activeSection={activeSection}

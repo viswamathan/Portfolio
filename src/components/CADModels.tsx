@@ -256,6 +256,8 @@ const CADModels = () => {
         case "complexity":
           const complexityOrder = { "Basic": 0, "Beginner": 1, "Intermediate": 2, "Advanced": 3 };
           return complexityOrder[b.complexity] - complexityOrder[a.complexity];
+        case "newest":
+          return new Date(b.lastUpdated) - new Date(a.lastUpdated);
         default:
           return 0;
       }
@@ -274,10 +276,6 @@ const CADModels = () => {
       default:
         return "bg-gray-500/90 text-white border-gray-600";
     }
-  };
-
-  const getSoftwareColor = (software) => {
-    return "bg-purple-600/90 text-white border-purple-700";
   };
 
   const stats = [
@@ -613,6 +611,7 @@ const CADModels = () => {
               <option value="popularity">Most Popular</option>
               <option value="downloads">Most Downloads</option>
               <option value="complexity">Complexity</option>
+              <option value="newest">Newest</option>
             </select>
           </div>
         </div>
@@ -689,7 +688,7 @@ const CADModels = () => {
                   </span>
                 </div>
                 <div className="absolute bottom-3 left-3 z-20">
-                  <span className={`px-3 py-1.5 rounded-lg text-sm font-semibold border-2 shadow-lg ${getSoftwareColor(model.software)}`}>
+                  <span className="bg-purple-600/80 backdrop-blur-sm px-2 py-1 rounded text-xs text-white">
                     {model.software}
                   </span>
                 </div>
@@ -698,17 +697,17 @@ const CADModels = () => {
               <div className="p-4 sm:p-6">
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-2 line-clamp-1">{model.title}</h3>
                 <p className="text-gray-300 text-sm mb-4 line-clamp-2">{model.description}</p>
-                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
+                <div className="flex flex-wrap gap-1 sm:gap-2 mb-4">
                   {model.features.slice(0, 3).map((f, idx) => (
                     <span
                       key={idx}
-                      className="bg-purple-600/90 text-white px-3 py-1.5 rounded-lg text-xs font-medium border-2 border-purple-700 shadow-sm"
+                      className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full text-xs border border-purple-500/30"
                     >
                       {f}
                     </span>
                   ))}
                   {model.features.length > 3 && (
-                    <span className="bg-gray-700 text-gray-300 px-3 py-1.5 rounded-lg text-xs font-medium border-2 border-gray-600">
+                    <span className="bg-gray-700 text-gray-300 px-2 py-1 rounded-full text-xs">
                       +{model.features.length - 3}
                     </span>
                   )}
@@ -717,27 +716,27 @@ const CADModels = () => {
                 <div className="flex gap-2 sm:gap-3">
                   <motion.button
                     onClick={() => setPreviewImage(model)}
-                    className="flex-1 flex items-center justify-center gap-1.5 sm:gap-2 bg-green-600 hover:bg-green-700 text-white px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg text-sm font-medium border-2 border-green-700 shadow-sm"
+                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 bg-green-600/20 hover:bg-green-600/30 text-green-400 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-xs sm:text-sm border border-green-500/30"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Eye className="w-4 h-4" /> Photo
+                    <Eye className="w-3 h-3 sm:w-4 sm:h-4" /> Photo
                   </motion.button>
                   <motion.button
                     onClick={() => setPreviewModel(model)}
-                    className="flex-1 flex items-center justify-center gap-1.5 sm:gap-2 bg-purple-600 hover:bg-purple-700 text-white px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg text-sm font-medium border-2 border-purple-700 shadow-sm"
+                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 bg-purple-600/20 hover:bg-purple-600/30 text-purple-400 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-xs sm:text-sm border border-purple-500/30"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Box className="w-4 h-4" /> 3D
+                    <Box className="w-3 h-3 sm:w-4 sm:h-4" /> 3D
                   </motion.button>
                   <a
                     href={model.downloadUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-1.5 sm:gap-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg text-sm font-medium border-2 border-blue-700 shadow-sm"
+                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-xs sm:text-sm border border-blue-500/30"
                   >
-                    <Download className="w-4 h-4" /> Download
+                    <Download className="w-3 h-3 sm:w-4 sm:h-4" /> Download
                   </a>
                 </div>
               </div>
@@ -870,7 +869,7 @@ const CADModels = () => {
                           {previewModel.features.map((f, idx) => (
                             <span
                               key={idx}
-                              className="bg-purple-600/90 text-white px-3 py-1.5 rounded-lg text-xs font-medium border-2 border-purple-700"
+                              className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs border border-purple-500/30"
                             >
                               {f}
                             </span>
@@ -972,7 +971,7 @@ const CADModels = () => {
                       {previewImage.features.map((f, idx) => (
                         <span
                           key={idx}
-                          className="bg-purple-600/90 text-white px-3 py-1.5 rounded-lg text-sm font-medium border-2 border-purple-700"
+                          className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
                         >
                           {f}
                         </span>

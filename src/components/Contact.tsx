@@ -61,7 +61,7 @@ export default function Contact() {
 
   return (
     <motion.div
-      className="container mx-auto px-6 py-20"
+      className="container mx-auto px-6 py-20 bg-gray-900"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"

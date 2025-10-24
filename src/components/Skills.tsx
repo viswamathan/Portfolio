@@ -254,7 +254,7 @@ const Skills = () => {
   };
 
   return (
-    <div className="container mx-auto px-6 py-16">
+    <div className="container mx-auto px-6 py-16 bg-gray-900">
       {/* Enhanced Header */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}

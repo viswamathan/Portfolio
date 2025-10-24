@@ -8,24 +8,8 @@ import { useState, useEffect } from 'react';
 
 interface HeroProps {
   scrollToContact: () => void;
+  navigateToPage?: (page: 'portfolio' | 'cad-models' | 'achievements') => void;
 }
-
-// Interactive 3D Sphere with real-time controls
-const AnimatedSphere = () => {
-  return (
-    <Float speed={1.4} rotationIntensity={1} floatIntensity={2}>
-      <Sphere args={[1, 100, 200]} scale={2.4}>
-        <MeshDistortMaterial
-          color="#8b5cf6"
-          attach="material"
-          distort={0.3}
-          speed={1.5}
-          roughness={0.4}
-        />
-      </Sphere>
-    </Float>
-  );
-};
 
 // Real-time typing effect with voice synthesis
 const VoiceTypingAnimation = () => {
@@ -166,11 +150,6 @@ const InteractiveSkillCard = ({ icon: Icon, title, desc, index }: any) => {
   );
 };
 
-interface HeroProps {
-  scrollToContact: () => void;
-  navigateToPage?: (page: 'portfolio' | 'cad-models' | 'achievements') => void;
-}
-
 const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [isDownloading, setIsDownloading] = useState(false);
@@ -230,16 +209,13 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* 3D Background */}
-      <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 5] }}>
-          <Suspense fallback={null}>
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[10, 10, 5]} intensity={1} />
-            <AnimatedSphere />
-            <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} autoRotate autoRotateSpeed={0.5} />
-          </Suspense>
-        </Canvas>
+      {/* Background gradient instead of 3D sphere */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
+        {/* Subtle animated background elements */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
       </div>
 
       {/* Content */}
@@ -421,7 +397,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
           </motion.a>
 
           <motion.button
-            onClick={() => navigateToPage('cad-models')}
+            onClick={() => navigateToPage && navigateToPage('cad-models')}
             className="group relative bg-gradient-to-r from-green-600 to-teal-600 text-white px-5 py-2.5 rounded-full font-medium transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl text-sm"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}

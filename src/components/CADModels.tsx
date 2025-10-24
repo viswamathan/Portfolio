@@ -41,8 +41,7 @@ const CADModels = () => {
       modelPath: "/Models/Spur Gear profile.STL",
       views: 1247,
       downloads: 89,
-      fileSize: "4.2 MB",
-      lastUpdated: "2023-10-15"
+      fileSize: "4.2 MB"
     },
     {
       id: 2,
@@ -57,8 +56,7 @@ const CADModels = () => {
       modelPath: "/Models/Exhaust manifold.STL",
       views: 500,
       downloads: 25,
-      fileSize: "6.7 MB",
-      lastUpdated: "2023-09-22"
+      fileSize: "6.7 MB"
     },
     {
       id: 3,
@@ -73,8 +71,7 @@ const CADModels = () => {
       modelPath: "/Models/KNUCKLE JOINT.STL",
       views: 226,
       downloads: 10,
-      fileSize: "3.1 MB",
-      lastUpdated: "2023-08-30"
+      fileSize: "3.1 MB"
     },
     {
       id: 4,
@@ -89,8 +86,7 @@ const CADModels = () => {
       modelPath: "/Models/UNIVERSAL COUPLING.STL",
       views: 189,
       downloads: 15,
-      fileSize: "2.8 MB",
-      lastUpdated: "2023-07-18"
+      fileSize: "2.8 MB"
     },
     {
       id: 5,
@@ -105,8 +101,7 @@ const CADModels = () => {
       modelPath: "/Models/MUFF COUPLING.STL",
       views: 189,
       downloads: 15,
-      fileSize: "2.5 MB",
-      lastUpdated: "2023-06-12"
+      fileSize: "2.5 MB"
     },
     {
       id: 6,
@@ -121,8 +116,7 @@ const CADModels = () => {
       modelPath: "/Models/Door lock.STL",
       views: 312,
       downloads: 18,
-      fileSize: "5.3 MB",
-      lastUpdated: "2023-05-25"
+      fileSize: "5.3 MB"
     },
     {
       id: 7,
@@ -137,8 +131,7 @@ const CADModels = () => {
       modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
       views: 278,
       downloads: 25,
-      fileSize: "4.8 MB",
-      lastUpdated: "2023-04-17"
+      fileSize: "4.8 MB"
     },
     {
       id: 8,
@@ -153,8 +146,7 @@ const CADModels = () => {
       modelPath: "/Models/Refrigeration Valves.STL",
       views: 342,
       downloads: 27,
-      fileSize: "7.2 MB",
-      lastUpdated: "2023-03-09"
+      fileSize: "7.2 MB"
     },
     {
       id: 9,
@@ -169,8 +161,7 @@ const CADModels = () => {
       modelPath: "/Models/Connecting Rod.STL",
       views: 297,
       downloads: 24,
-      fileSize: "3.9 MB",
-      lastUpdated: "2023-02-14"
+      fileSize: "3.9 MB"
     },
     {
       id: 10,
@@ -185,8 +176,7 @@ const CADModels = () => {
       modelPath: "/Models/piston head.STL",
       views: 410,
       downloads: 32,
-      fileSize: "4.5 MB",
-      lastUpdated: "2023-01-28"
+      fileSize: "4.5 MB"
     },
     {
       id: 11,
@@ -201,8 +191,7 @@ const CADModels = () => {
       modelPath: "/Models/crank shaft.STL",
       views: 365,
       downloads: 28,
-      fileSize: "5.1 MB",
-      lastUpdated: "2022-12-05"
+      fileSize: "5.1 MB"
     },
     {
       id: 12,
@@ -217,8 +206,7 @@ const CADModels = () => {
       modelPath: "/Models/Stuffing Box.STL",
       views: 248,
       downloads: 19,
-      fileSize: "6.3 MB",
-      lastUpdated: "2022-11-19"
+      fileSize: "6.3 MB"
     },
     {
       id: 13,
@@ -233,8 +221,7 @@ const CADModels = () => {
       modelPath: "/Models/Robotic Gripper.STL",
       views: 312,
       downloads: 27,
-      fileSize: "8.5 MB",
-      lastUpdated: "2022-10-30"
+      fileSize: "8.5 MB"
     },
   ];
 
@@ -269,8 +256,6 @@ const CADModels = () => {
         case "complexity":
           const complexityOrder = { "Basic": 0, "Beginner": 1, "Intermediate": 2, "Advanced": 3 };
           return complexityOrder[b.complexity] - complexityOrder[a.complexity];
-        case "newest":
-          return new Date(b.lastUpdated) - new Date(a.lastUpdated);
         default:
           return 0;
       }
@@ -279,16 +264,20 @@ const CADModels = () => {
   const getComplexityColor = (complexity) => {
     switch (complexity) {
       case "Basic":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
+        return "bg-green-500/90 text-white border-green-600";
       case "Beginner":
-        return "bg-blue-500/20 text-blue-400 border-blue-500/30";
+        return "bg-blue-500/90 text-white border-blue-600";
       case "Intermediate":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
+        return "bg-yellow-500/90 text-white border-yellow-600";
       case "Advanced":
-        return "bg-red-500/20 text-red-400 border-red-500/30";
+        return "bg-red-500/90 text-white border-red-600";
       default:
-        return "bg-gray-500/20 text-gray-400 border-gray-500/30";
+        return "bg-gray-500/90 text-white border-gray-600";
     }
+  };
+
+  const getSoftwareColor = (software) => {
+    return "bg-purple-600/90 text-white border-purple-700";
   };
 
   const stats = [
@@ -624,7 +613,6 @@ const CADModels = () => {
               <option value="popularity">Most Popular</option>
               <option value="downloads">Most Downloads</option>
               <option value="complexity">Complexity</option>
-              <option value="newest">Newest</option>
             </select>
           </div>
         </div>
@@ -684,16 +672,16 @@ const CADModels = () => {
                 />
 
                 <div className="absolute top-3 left-3 flex flex-col gap-2 z-20">
-                  <span className="bg-black/70 backdrop-blur-sm px-2 py-1 rounded text-xs text-white flex items-center gap-1">
-                    <Eye className="w-3 h-3" /> {model.views}
+                  <span className="bg-black/80 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm text-white flex items-center gap-1.5 font-medium shadow-lg">
+                    <Eye className="w-4 h-4" /> {model.views}
                   </span>
-                  <span className="bg-black/70 backdrop-blur-sm px-2 py-1 rounded text-xs text-white flex items-center gap-1">
-                    <Download className="w-3 h-3" /> {model.downloads}
+                  <span className="bg-black/80 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm text-white flex items-center gap-1.5 font-medium shadow-lg">
+                    <Download className="w-4 h-4" /> {model.downloads}
                   </span>
                 </div>
                 <div className="absolute top-3 right-3 z-20">
                   <span
-                    className={`px-2 py-1 rounded text-xs border ${getComplexityColor(
+                    className={`px-3 py-1.5 rounded-lg text-sm font-semibold border-2 shadow-lg ${getComplexityColor(
                       model.complexity
                     )}`}
                   >
@@ -701,7 +689,7 @@ const CADModels = () => {
                   </span>
                 </div>
                 <div className="absolute bottom-3 left-3 z-20">
-                  <span className="bg-purple-600/80 backdrop-blur-sm px-2 py-1 rounded text-xs text-white">
+                  <span className={`px-3 py-1.5 rounded-lg text-sm font-semibold border-2 shadow-lg ${getSoftwareColor(model.software)}`}>
                     {model.software}
                   </span>
                 </div>
@@ -710,17 +698,17 @@ const CADModels = () => {
               <div className="p-4 sm:p-6">
                 <h3 className="text-lg sm:text-xl font-bold text-white mb-2 line-clamp-1">{model.title}</h3>
                 <p className="text-gray-300 text-sm mb-4 line-clamp-2">{model.description}</p>
-                <div className="flex flex-wrap gap-1 sm:gap-2 mb-4">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
                   {model.features.slice(0, 3).map((f, idx) => (
                     <span
                       key={idx}
-                      className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-full text-xs border border-purple-500/30"
+                      className="bg-purple-600/90 text-white px-3 py-1.5 rounded-lg text-xs font-medium border-2 border-purple-700 shadow-sm"
                     >
                       {f}
                     </span>
                   ))}
                   {model.features.length > 3 && (
-                    <span className="bg-gray-700 text-gray-300 px-2 py-1 rounded-full text-xs">
+                    <span className="bg-gray-700 text-gray-300 px-3 py-1.5 rounded-lg text-xs font-medium border-2 border-gray-600">
                       +{model.features.length - 3}
                     </span>
                   )}
@@ -729,27 +717,27 @@ const CADModels = () => {
                 <div className="flex gap-2 sm:gap-3">
                   <motion.button
                     onClick={() => setPreviewImage(model)}
-                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 bg-green-600/20 hover:bg-green-600/30 text-green-400 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-xs sm:text-sm border border-green-500/30"
+                    className="flex-1 flex items-center justify-center gap-1.5 sm:gap-2 bg-green-600 hover:bg-green-700 text-white px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg text-sm font-medium border-2 border-green-700 shadow-sm"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Eye className="w-3 h-3 sm:w-4 sm:h-4" /> Photo
+                    <Eye className="w-4 h-4" /> Photo
                   </motion.button>
                   <motion.button
                     onClick={() => setPreviewModel(model)}
-                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 bg-purple-600/20 hover:bg-purple-600/30 text-purple-400 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-xs sm:text-sm border border-purple-500/30"
+                    className="flex-1 flex items-center justify-center gap-1.5 sm:gap-2 bg-purple-600 hover:bg-purple-700 text-white px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg text-sm font-medium border-2 border-purple-700 shadow-sm"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Box className="w-3 h-3 sm:w-4 sm:h-4" /> 3D
+                    <Box className="w-4 h-4" /> 3D
                   </motion.button>
                   <a
                     href={model.downloadUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-xs sm:text-sm border border-blue-500/30"
+                    className="flex-1 flex items-center justify-center gap-1.5 sm:gap-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg text-sm font-medium border-2 border-blue-700 shadow-sm"
                   >
-                    <Download className="w-3 h-3 sm:w-4 sm:h-4" /> Download
+                    <Download className="w-4 h-4" /> Download
                   </a>
                 </div>
               </div>
@@ -882,7 +870,7 @@ const CADModels = () => {
                           {previewModel.features.map((f, idx) => (
                             <span
                               key={idx}
-                              className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs border border-purple-500/30"
+                              className="bg-purple-600/90 text-white px-3 py-1.5 rounded-lg text-xs font-medium border-2 border-purple-700"
                             >
                               {f}
                             </span>
@@ -893,7 +881,7 @@ const CADModels = () => {
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <h5 className="text-sm font-medium text-gray-400 mb-1">Complexity</h5>
-                          <span className={`px-2 py-1 rounded text-xs border ${getComplexityColor(previewModel.complexity)}`}>
+                          <span className={`px-3 py-1.5 rounded-lg text-xs font-semibold border-2 ${getComplexityColor(previewModel.complexity)}`}>
                             {previewModel.complexity}
                           </span>
                         </div>
@@ -911,11 +899,6 @@ const CADModels = () => {
                         <div>
                           <h5 className="text-sm font-medium text-gray-400 mb-1">Downloads</h5>
                           <p className="text-sm text-gray-300">{previewModel.downloads}</p>
-                        </div>
-                        
-                        <div>
-                          <h5 className="text-sm font-medium text-gray-400 mb-1">Last Updated</h5>
-                          <p className="text-sm text-gray-300">{new Date(previewModel.lastUpdated).toLocaleDateString()}</p>
                         </div>
                       </div>
                       
@@ -989,7 +972,7 @@ const CADModels = () => {
                       {previewImage.features.map((f, idx) => (
                         <span
                           key={idx}
-                          className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
+                          className="bg-purple-600/90 text-white px-3 py-1.5 rounded-lg text-sm font-medium border-2 border-purple-700"
                         >
                           {f}
                         </span>

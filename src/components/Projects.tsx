@@ -29,341 +29,15 @@ import {
   Maximize2,
   Minimize2,
   RotateCcw,
-  Terminal,
-  Zap,
-  BookOpen,
-  FolderOpen,
-  Copy,
-  Check,
-  Upload,
-  Trash2,
 } from 'lucide-react';
 
-/* ----------------------------- Python Compiler Modal ---------------------------- */
-
-interface PythonCompilerProps {
-  isOpen: boolean;
-  onClose: () => void;
-  initialCode?: string;
-  projectTitle?: string;
-  codeDescription?: string;
-}
-
-const PythonCompiler: React.FC<PythonCompilerProps> = ({ 
-  isOpen, 
-  onClose, 
-  initialCode = '',
-  projectTitle = '',
-  codeDescription = ''
-}) => {
-  const [compilerState, setCompilerState] = useState({
-    code: initialCode || `# Welcome to the Python Compiler!
-# This compiler supports all major Python libraries
-
-print("🚀 Running ${projectTitle || 'Project'} Code")
-print("This is a frontend demo - code execution simulated")`,
-    output: '',
-    isRunning: false,
-    isFullscreen: false,
-    currentFile: 'main.py',
-    files: {
-      'main.py': initialCode || `# Welcome to the Python Compiler!
-# This compiler supports all major Python libraries
-
-print("🚀 Running ${projectTitle || 'Project'} Code")
-print("This is a frontend demo - code execution simulated")`
-    }
-  });
-
-  const [copied, setCopied] = useState(false);
-
-  const supportedLibraries = [
-    { name: 'numpy', category: 'Scientific Computing', description: 'Array operations and linear algebra' },
-    { name: 'pandas', category: 'Data Analysis', description: 'Data manipulation and analysis' },
-    { name: 'matplotlib', category: 'Visualization', description: '2D plotting and visualization' },
-    { name: 'scikit-learn', category: 'Machine Learning', description: 'ML algorithms and tools' },
-    { name: 'requests', category: 'Web', description: 'HTTP requests and APIs' },
-    { name: 'tensorflow', category: 'Deep Learning', description: 'Neural networks and deep learning' },
-    { name: 'opencv-python', category: 'Computer Vision', description: 'Image and video processing' },
-    { name: 'flask', category: 'Web Framework', description: 'Lightweight web applications' }
-  ];
-
-  const handleRunCode = async () => {
-    setCompilerState(prev => ({ ...prev, isRunning: true, output: '🚀 Running code...' }));
-    
-    setTimeout(() => {
-      const output = simulatePythonExecution(compilerState.code, projectTitle);
-      setCompilerState(prev => ({ ...prev, output, isRunning: false }));
-    }, 2000);
-  };
-
-  const simulatePythonExecution = (code: string, title: string): string => {
-    if (code.includes('petrol') || code.includes('fuel') || code.includes('inventory')) {
-      return `🏭 PETROL MANAGEMENT SYSTEM - EXECUTION RESULTS
-
-✅ Database initialized successfully
-✅ Inventory tables created
-✅ Sample data populated
-
-📊 OPERATIONS COMPLETED:
-• Added 10,000L Petrol at ₹98.5/L
-• Added 15,000L Diesel at ₹89.2/L
-• Processed sale: 45.5L Petrol - ₹4,481.75
-• Processed sale: 32.8L Diesel - ₹2,925.76
-• Processed sale: 28.3L Petrol - ₹2,787.55
-
-💰 FINANCIAL SUMMARY:
-Total Revenue: ₹10,195.06
-Inventory Value: ₹2,345,800.00
-
-📈 VISUALIZATION: Sales trend chart generated
-🎉 System operational - All modules working correctly
-
-💡 This demo shows the core functionality. Full system includes:
-   - Real-time inventory tracking
-   - Automated reporting
-   - User authentication
-   - Data visualization`;
-    }
-    
-    if (code.includes('plt.show()') || code.includes('matplotlib')) {
-      return `📊 VISUALIZATION GENERATED SUCCESSFULLY!
-
-✅ Matplotlib plot rendered
-✅ Data processed correctly
-✅ Chart displayed in output window
-
-📈 Chart Details:
-• Type: Line plot with markers
-• Data Points: 30 days of sales data
-• Features: Grid, labels, professional styling
-
-🎉 Code executed without errors
-All libraries imported successfully
-
-Output:
-🚀 Running ${title} Code
-📈 Sales visualization ready!
-💰 Revenue tracking operational`;
-    }
-    
-    return `✅ CODE EXECUTION COMPLETED!
-
-🎉 Script ran successfully
-📝 Output generated
-🔧 All dependencies resolved
-
-CONSOLE OUTPUT:
-🚀 Running ${title} Code
-This is a frontend demo - code execution simulated
-
-💡 Available libraries: numpy, pandas, matplotlib, scikit-learn, and more!
-🔧 For real execution, connect to a Python backend service.`;
-  };
-
-  const handleSaveCode = () => {
-    const blob = new Blob([compilerState.code], { type: 'text/x-python' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = compilerState.currentFile;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const handleCopyCode = () => {
-    navigator.clipboard.writeText(compilerState.code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  if (!isOpen) return null;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 50 }}
-      className={`fixed inset-0 bg-black/95 flex items-center justify-center z-50 p-4 ${
-        compilerState.isFullscreen ? '' : 'backdrop-blur-sm'
-      }`}
-      onClick={onClose}
-    >
-      <div
-        className={`bg-gradient-to-br from-gray-900 to-black rounded-3xl border border-purple-500/20 shadow-2xl overflow-hidden ${
-          compilerState.isFullscreen ? 'w-full h-full' : 'max-w-7xl w-full max-h-[95vh]'
-        }`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header */}
-        <div className="bg-gradient-to-r from-purple-900/40 to-pink-900/40 backdrop-blur-md p-6 border-b border-purple-500/20">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <Terminal className="w-8 h-8 text-purple-400" />
-                <div>
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                    Python Compiler - {projectTitle}
-                  </h3>
-                  <p className="text-gray-400 text-sm">{codeDescription || 'Run and test Python code with all major libraries'}</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 bg-purple-500/20 px-3 py-1 rounded-full border border-purple-500/30">
-                <Zap className="w-4 h-4 text-purple-400" />
-                <span className="text-purple-300 text-sm font-medium">Online</span>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setCompilerState(prev => ({ ...prev, isFullscreen: !prev.isFullscreen }))}
-                className="p-3 bg-blue-600/20 hover:bg-blue-600/40 rounded-xl transition-all border border-blue-500/30"
-              >
-                {compilerState.isFullscreen ? (
-                  <Minimize2 className="w-5 h-5 text-blue-400" />
-                ) : (
-                  <Maximize2 className="w-5 h-5 text-blue-400" />
-                )}
-              </button>
-              <button
-                onClick={onClose}
-                className="p-3 bg-red-600/20 hover:bg-red-600/40 rounded-xl transition-all border border-red-500/30"
-              >
-                <X className="w-5 h-5 text-red-400" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col lg:flex-row h-[calc(95vh-140px)]">
-          {/* Sidebar */}
-          <div className="lg:w-80 bg-gray-800/30 border-r border-purple-500/20 flex flex-col">
-            {/* Project Info */}
-            {codeDescription && (
-              <div className="p-4 border-b border-gray-700/50">
-                <h4 className="text-lg font-semibold text-blue-400 mb-2 flex items-center gap-2">
-                  <FileText className="w-5 h-5" />
-                  Code Description
-                </h4>
-                <p className="text-gray-300 text-sm leading-relaxed">{codeDescription}</p>
-              </div>
-            )}
-
-            {/* Supported Libraries */}
-            <div className="flex-1 p-4 overflow-y-auto">
-              <h4 className="text-lg font-semibold text-blue-400 mb-3 flex items-center gap-2">
-                <BookOpen className="w-5 h-5" />
-                Supported Libraries
-              </h4>
-              <div className="space-y-2">
-                {supportedLibraries.map((lib, index) => (
-                  <motion.div
-                    key={lib.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="bg-gray-700/30 rounded-lg p-3 border border-gray-600/50 hover:border-blue-500/30 transition-all"
-                  >
-                    <div className="flex justify-between items-start mb-1">
-                      <span className="text-white font-medium text-sm">{lib.name}</span>
-                      <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full">
-                        {lib.category}
-                      </span>
-                    </div>
-                    <p className="text-gray-400 text-xs">{lib.description}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Main Content */}
-          <div className="flex-1 flex flex-col">
-            {/* Code Editor */}
-            <div className="flex-1 flex flex-col border-b border-gray-700/50">
-              <div className="flex justify-between items-center p-4 bg-gray-800/20 border-b border-gray-700/50">
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-purple-400" />
-                    <span className="text-white font-medium">{compilerState.currentFile}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-                    <span className="text-green-400 text-xs">Ready</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={handleCopyCode}
-                    className="flex items-center gap-2 px-3 py-2 bg-gray-700/50 hover:bg-gray-700/80 rounded-lg transition-all border border-gray-600/50 text-gray-300 hover:text-white text-sm"
-                  >
-                    {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-                    {copied ? 'Copied!' : 'Copy'}
-                  </button>
-                  <button
-                    onClick={handleSaveCode}
-                    className="flex items-center gap-2 px-3 py-2 bg-green-600/20 hover:bg-green-600/40 rounded-lg transition-all border border-green-500/30 text-green-300 hover:text-green-200 text-sm"
-                  >
-                    <Download className="w-4 h-4" />
-                    Save
-                  </button>
-                </div>
-              </div>
-              <div className="flex-1 p-4">
-                <textarea
-                  value={compilerState.code}
-                  onChange={(e) => setCompilerState(prev => ({ ...prev, code: e.target.value }))}
-                  className="w-full h-full bg-gray-800/50 text-gray-100 font-mono text-sm rounded-lg p-4 border border-gray-600/50 focus:border-purple-500/50 focus:outline-none resize-none scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800"
-                  spellCheck="false"
-                  placeholder="# Enter your Python code here..."
-                />
-              </div>
-            </div>
-
-            {/* Output Panel */}
-            <div className="h-48 flex flex-col">
-              <div className="flex justify-between items-center p-4 bg-gray-800/20 border-b border-gray-700/50">
-                <h4 className="text-lg font-semibold text-green-400 flex items-center gap-2">
-                  <Terminal className="w-5 h-5" />
-                  Output
-                </h4>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={handleRunCode}
-                    disabled={compilerState.isRunning}
-                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 disabled:from-gray-600 disabled:to-gray-700 text-white rounded-lg transition-all text-sm font-medium shadow-lg hover:shadow-green-500/25 disabled:shadow-none"
-                  >
-                    {compilerState.isRunning ? (
-                      <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                        Running...
-                      </>
-                    ) : (
-                      <>
-                        <Play className="w-4 h-4" />
-                        Run Code
-                      </>
-                    )}
-                  </button>
-                  <button
-                    onClick={() => setCompilerState(prev => ({ ...prev, output: '' }))}
-                    className="p-2 bg-red-600/20 hover:bg-red-600/40 rounded-lg transition-all border border-red-500/30"
-                  >
-                    <Trash2 className="w-4 h-4 text-red-400" />
-                  </button>
-                </div>
-              </div>
-              <div className="flex-1 p-4 bg-black/20 overflow-y-auto">
-                <pre className="text-green-300 font-mono text-sm whitespace-pre-wrap">
-                  {compilerState.output || '👆 Click "Run Code" to execute your Python script'}
-                </pre>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
+/**
+ * Enhanced Projects Component with Premium Gallery & Sophisticated Cards
+ * - Advanced gallery viewer with full-screen mode
+ * - Premium card designs with glass morphism effects
+ * - Enhanced animations and interactive elements
+ * - Professional layout with better visual hierarchy
+ */
 
 /* ----------------------------- Enhanced Modal Components ---------------------------- */
 
@@ -768,8 +442,7 @@ const PremiumProjectCard: React.FC<{
   onViewGallery: (project: any) => void;
   onViewImage: (image: string, title?: string) => void;
   onViewSimulation: (sims: string[], title?: string) => void;
-  onRunPythonCode: (code: string, title: string, description?: string) => void;
-}> = ({ project, onViewGallery, onViewImage, onViewSimulation, onRunPythonCode }) => {
+}> = ({ project, onViewGallery, onViewImage, onViewSimulation }) => {
   const images = [project.image1, project.image2].filter(Boolean) as string[];
   const [isHovered, setIsHovered] = useState(false);
 
@@ -914,19 +587,6 @@ const PremiumProjectCard: React.FC<{
               </motion.a>
             )}
 
-            {/* NEW: Run Python Code Button */}
-            {project.pythonCode && (
-              <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => onRunPythonCode(project.pythonCode, project.title, project.codeDescription)}
-                className="flex items-center justify-center gap-2 flex-1 min-w-[140px] bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-green-500/25"
-              >
-                <Terminal className="w-4 h-4" />
-                <span>Run Code</span>
-              </motion.button>
-            )}
-
             {project.simulations && (
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
@@ -1022,158 +682,6 @@ const projectCategories = {
         image1: 'https://tse1.mm.bing.net/th/id/OIP.MiI4dSBh7VjBXlCSkD6uDwHaD5?pid=Api&P=0&h=180',
         image2: 'https://tse1.mm.bing.net/th/id/OIP.cjsy2jUvC0aT29PsC8kRRAHaEK?pid=Api&P=0&h=180',
         report: '/reports/automation-report.pdf',
-        // NEW: Python Code Integration
-        pythonCode: `# Petrol Management System - Core Functionality
-import pandas as pd
-import matplotlib.pyplot as plt
-from datetime import datetime, timedelta
-import sqlite3
-
-class PetrolManagement:
-    def __init__(self):
-        self.initialize_database()
-        
-    def initialize_database(self):
-        """Initialize SQLite database for petrol management"""
-        self.conn = sqlite3.connect('petrol_station.db')
-        self.cursor = self.conn.cursor()
-        
-        # Create tables
-        self.cursor.execute('''
-            CREATE TABLE IF NOT EXISTS inventory (
-                id INTEGER PRIMARY KEY,
-                fuel_type TEXT,
-                quantity_liters REAL,
-                price_per_liter REAL,
-                last_updated TIMESTAMP
-            )
-        ''')
-        
-        self.cursor.execute('''
-            CREATE TABLE IF NOT EXISTS sales (
-                id INTEGER PRIMARY KEY,
-                fuel_type TEXT,
-                quantity_liters REAL,
-                total_amount REAL,
-                sale_date TIMESTAMP
-            )
-        ''')
-        self.conn.commit()
-        
-    def add_fuel_stock(self, fuel_type, quantity, price):
-        """Add fuel stock to inventory"""
-        self.cursor.execute('''
-            INSERT INTO inventory (fuel_type, quantity_liters, price_per_liter, last_updated)
-            VALUES (?, ?, ?, ?)
-        ''', (fuel_type, quantity, price, datetime.now()))
-        self.conn.commit()
-        print(f"✅ Added {quantity}L of {fuel_type} at ₹{price}/L")
-        
-    def sell_fuel(self, fuel_type, quantity):
-        """Process fuel sale"""
-        # Check inventory
-        self.cursor.execute('SELECT quantity_liters, price_per_liter FROM inventory WHERE fuel_type = ?', (fuel_type,))
-        result = self.cursor.fetchone()
-        
-        if result and result[0] >= quantity:
-            remaining = result[0] - quantity
-            total_amount = quantity * result[1]
-            
-            # Update inventory
-            self.cursor.execute('UPDATE inventory SET quantity_liters = ? WHERE fuel_type = ?', (remaining, fuel_type))
-            
-            # Record sale
-            self.cursor.execute('''
-                INSERT INTO sales (fuel_type, quantity_liters, total_amount, sale_date)
-                VALUES (?, ?, ?, ?)
-            ''', (fuel_type, quantity, total_amount, datetime.now()))
-            
-            self.conn.commit()
-            print(f"✅ Sold {quantity}L of {fuel_type} for ₹{total_amount:.2f}")
-            return total_amount
-        else:
-            print(f"❌ Insufficient {fuel_type} in inventory")
-            return 0
-            
-    def generate_sales_report(self, days=7):
-        """Generate sales report for the last N days"""
-        start_date = datetime.now() - timedelta(days=days)
-        
-        self.cursor.execute('''
-            SELECT fuel_type, SUM(quantity_liters), SUM(total_amount)
-            FROM sales 
-            WHERE sale_date >= ?
-            GROUP BY fuel_type
-        ''', (start_date,))
-        
-        sales_data = self.cursor.fetchall()
-        
-        print(f"\\n📊 SALES REPORT - Last {days} Days")
-        print("=" * 40)
-        total_revenue = 0
-        
-        for fuel_type, total_liters, total_amount in sales_data:
-            print(f"{fuel_type}: {total_liters:.1f}L - ₹{total_amount:.2f}")
-            total_revenue += total_amount
-            
-        print(f"\\n💰 Total Revenue: ₹{total_revenue:.2f}")
-        return sales_data
-        
-    def plot_sales_trend(self):
-        """Plot sales trend using matplotlib"""
-        self.cursor.execute('''
-            SELECT DATE(sale_date), SUM(total_amount)
-            FROM sales 
-            GROUP BY DATE(sale_date)
-            ORDER BY DATE(sale_date)
-            LIMIT 30
-        ''')
-        
-        trend_data = self.cursor.fetchall()
-        
-        if trend_data:
-            dates = [row[0] for row in trend_data]
-            amounts = [row[1] for row in trend_data]
-            
-            plt.figure(figsize=(12, 6))
-            plt.plot(dates, amounts, marker='o', linewidth=2, markersize=6)
-            plt.title('Petrol Station - Daily Sales Trend', fontsize=14, fontweight='bold')
-            plt.xlabel('Date')
-            plt.ylabel('Daily Revenue (₹)')
-            plt.grid(True, alpha=0.3)
-            plt.xticks(rotation=45)
-            plt.tight_layout()
-            plt.show()
-            
-            print("📈 Sales trend chart generated!")
-        else:
-            print("No sales data available for trend analysis")
-
-# Demo the petrol management system
-if __name__ == "__main__":
-    print("🚀 Starting Petrol Management System Demo...")
-    
-    # Create management system instance
-    mgmt = PetrolManagement()
-    
-    # Add initial stock
-    mgmt.add_fuel_stock("Petrol", 10000, 98.5)
-    mgmt.add_fuel_stock("Diesel", 15000, 89.2)
-    
-    # Simulate some sales
-    mgmt.sell_fuel("Petrol", 45.5)
-    mgmt.sell_fuel("Diesel", 32.8)
-    mgmt.sell_fuel("Petrol", 28.3)
-    
-    # Generate reports
-    mgmt.generate_sales_report(7)
-    
-    # Show sales trend (if enough data)
-    print("\\n📈 Generating sales trend visualization...")
-    mgmt.plot_sales_trend()
-    
-    print("\\n🎉 Petrol Management System demo completed!")`,
-        codeDescription: 'Core functionality of the Petrol Management System including inventory management, sales processing, and reporting features with data visualization.'
       },
     ],
   },
@@ -1204,17 +712,6 @@ const Projects: React.FC = () => {
   const [modalSimulations, setModalSimulations] = useState<{simulations: string[], title?: string} | null>(null);
   const [lightboxImage, setLightboxImage] = useState<{ image: string; title?: string } | null>(null);
   const [galleryProject, setGalleryProject] = useState<any | null>(null);
-  const [pythonCompiler, setPythonCompiler] = useState<{
-    isOpen: boolean;
-    code: string;
-    title: string;
-    description?: string;
-  }>({
-    isOpen: false,
-    code: '',
-    title: '',
-    description: ''
-  });
 
   const handleViewSimulation = (simulations: string[], title?: string) => setModalSimulations({simulations, title});
   const closeSimulationModal = () => setModalSimulations(null);
@@ -1224,25 +721,6 @@ const Projects: React.FC = () => {
 
   const openGallery = (project: any) => setGalleryProject(project);
   const closeGallery = () => setGalleryProject(null);
-
-  // NEW: Handle Python code execution
-  const handleRunPythonCode = (code: string, title: string, description?: string) => {
-    setPythonCompiler({
-      isOpen: true,
-      code,
-      title,
-      description
-    });
-  };
-
-  const closePythonCompiler = () => {
-    setPythonCompiler({
-      isOpen: false,
-      code: '',
-      title: '',
-      description: ''
-    });
-  };
 
   const categoryButtonStyle = (isActive: boolean) => 
     `flex items-center gap-3 px-8 py-4 rounded-2xl transition-all duration-300 font-semibold text-lg ${
@@ -1315,7 +793,6 @@ const Projects: React.FC = () => {
               onViewGallery={openGallery}
               onViewImage={openLightbox}
               onViewSimulation={handleViewSimulation}
-              onRunPythonCode={handleRunPythonCode}
             />
           ))}
         </motion.div>
@@ -1339,15 +816,6 @@ const Projects: React.FC = () => {
           isOpen={!!galleryProject} 
           onClose={closeGallery} 
           project={galleryProject} 
-        />
-
-        {/* NEW: Python Compiler Modal */}
-        <PythonCompiler
-          isOpen={pythonCompiler.isOpen}
-          onClose={closePythonCompiler}
-          initialCode={pythonCompiler.code}
-          projectTitle={pythonCompiler.title}
-          codeDescription={pythonCompiler.description}
         />
       </div>
     </div>

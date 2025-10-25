@@ -223,6 +223,22 @@ const CADModels = () => {
       downloads: 27,
       fileSize: "8.5 MB"
     },
+    {
+  id: 14,
+  title: "Bevel Gear",
+  description: "A precisely modeled straight bevel gear developed in Siemens NX with accurate tooth geometry and optimized surface finish. Designed using Revolve, Through Curve, Mirror, and Arc-based features to ensure efficient torque transmission, smooth meshing, and structural symmetry.",
+  software: "Siemens NX",
+  category: "Mechanical",
+  complexity: "Intermediate",
+  features: ["Revolve", "Through Curve", "Mirror Feature", "Datum Planes", "Arc Profile", "Synchronous Modeling"],
+  image: "/3d Pictures/Bevel Gear.png",
+  downloadUrl: "https://drive.google.com/file/d/1TtVjkl4h6yNqSFXxG0R2gVJ2xw3zNqvQ/view?usp=sharing",
+  modelPath: "/Models/Bevel Gear.STL",
+  views: 380,
+  downloads: 18,
+  fileSize: "4.2 MB"
+},
+
   ];
 
   const categories = [
@@ -1000,3 +1016,4 @@ const CADModels = () => {
 };
 
 export default CADModels;
+

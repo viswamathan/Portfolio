@@ -233,7 +233,7 @@ const CADModels = () => {
   features: ["Revolve", "Through Curve", "Mirror Feature", "Datum Planes", "Arc Profile", "Synchronous Modeling"],
   image: "/3d Pictures/Bevel Gear.png",
   downloadUrl: "https://drive.google.com/file/d/1TtVjkl4h6yNqSFXxG0R2gVJ2xw3zNqvQ/view?usp=sharing",
-  modelPath: "/Models/Bevel Gear.STL",
+  modelPath: "/Models/Bevel Gear.stl",
   views: 380,
   downloads: 18,
   fileSize: "4.2 MB"
@@ -1016,4 +1016,5 @@ const CADModels = () => {
 };
 
 export default CADModels;
+
 

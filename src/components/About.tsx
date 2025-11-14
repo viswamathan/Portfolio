@@ -16,18 +16,13 @@ import {
   X,
   Eye,
   Download,
-  FileSearch,
-  BarChart3,
-  Clock,
-  Users,
-  Tag
+  FileSearch
 } from "lucide-react";
 
 const About = () => {
   const [activeTab, setActiveTab] = useState("summary");
   const [modalImage, setModalImage] = useState(null);
   const [selectedPatent, setSelectedPatent] = useState(null);
-  const [selectedDocument, setSelectedDocument] = useState(null);
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -48,7 +43,18 @@ const About = () => {
     transition: { type: "spring", stiffness: 300 },
   };
 
-  // Enhanced Patent Data with Documents
+  // Scroll to contact function
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  // Simplified Patent Data with Single Report
   const patents = [
     {
       id: 1,
@@ -60,196 +66,61 @@ const About = () => {
       category: "Renewable Energy",
       filingDate: "2024-03-15",
       inventors: ["Your Name", "Co-inventor Name"],
-      description: "A solar dryer integrating phase change material for enhanced thermal energy storage and efficiency improvement with innovative concave fin design for optimal heat transfer. This innovation represents a significant advancement in solar thermal technology for agricultural and industrial drying applications.",
+      description: "A solar dryer integrating phase change material for enhanced thermal energy storage and efficiency improvement with innovative concave fin design for optimal heat transfer.",
       features: [
         "Phase Change Material (PCM) integration",
         "Concave fin heat exchanger design",
-        "Modular construction for scalability",
-        "IoT monitoring and control capability",
-        "60% improved thermal efficiency",
-        "Reduced drying time by 40%",
-        "Energy storage for 24/7 operation"
+        "Modular construction",
+        "IoT monitoring capability",
+        "60% improved efficiency"
       ],
       technicalSpecs: {
-        efficiency: "60% improvement over conventional dryers",
+        efficiency: "60% improvement",
         temperature: "45-75°C operating range",
         capacity: "50kg batch processing",
-        material: "Food-grade stainless steel AISI 304",
-        "energy storage": "8-10 hours thermal retention",
-        "drying time": "4-6 hours for most agricultural products"
+        material: "Food-grade stainless steel"
       },
-      documents: [
-        {
-          name: "Patent Application",
-          type: "PDF",
-          size: "2.4 MB",
-          url: "/patent-documents/solar-dryer-application.pdf",
-          description: "Complete patent application with claims and abstract"
-        },
-        {
-          name: "Technical Report",
-          type: "PDF",
-          size: "3.1 MB",
-          url: "/patent-documents/solar-dryer-technical-report.pdf",
-          description: "Detailed technical analysis and performance data"
-        },
-        {
-          name: "CAD Designs",
-          type: "ZIP",
-          size: "5.2 MB",
-          url: "/patent-documents/solar-dryer-cad.zip",
-          description: "3D models and engineering drawings"
-        },
-        {
-          name: "Test Results",
-          type: "PDF",
-          size: "1.8 MB",
-          url: "/patent-documents/solar-dryer-tests.pdf",
-          description: "Experimental data and validation results"
-        }
-      ],
-      milestones: [
-        { date: "2023-09-01", event: "Concept Development" },
-        { date: "2023-11-15", event: "Prototype Testing" },
-        { date: "2024-01-20", event: "Patent Research" },
-        { date: "2024-03-15", event: "Application Filed" }
-      ]
+      report: {
+        name: "Technical Report",
+        type: "PDF",
+        size: "2.4 MB",
+        url: "/patent-documents/solar-dryer-report.pdf",
+        description: "Complete technical analysis and performance data"
+      }
     },
     {
       id: 2,
       img: "Multi Purpose Knife.png",
-      title: "Multi Purpose Kitchen Knife with Safety Features",
+      title: "Multi Purpose Knife",
       appNo: "2024112346",
       status: "Approved",
       type: "Design Patent",
       category: "Kitchen Tools",
       filingDate: "2024-01-10",
       inventors: ["Your Name"],
-      description: "Innovative multi-functional knife for cutting, peeling, and slicing, enhancing convenience and efficiency in the kitchen with ergonomic design and advanced safety features. Designed for both professional and home use.",
+      description: "Innovative multi-functional knife for cutting, peeling, and slicing, enhancing convenience and efficiency in the kitchen with ergonomic design and safety features.",
       features: [
-        "7-in-1 multifunctional design",
-        "Ergonomic non-slip handle",
+        "7-in-1 functionality",
+        "Ergonomic handle design",
         "Safety locking mechanism",
-        "Dishwasher safe construction",
-        "Food-grade certified materials",
-        "Integrated measuring scales",
-        "Magnetic storage capability"
+        "Dishwasher safe",
+        "Food-grade materials"
       ],
       technicalSpecs: {
-        material: "420 Stainless Steel with ceramic coating",
-        weight: "150g ± 5g",
-        dimensions: "18cm blade, 12cm handle",
-        features: "Integrated peeler, slicer, chopper, measurer",
-        "safety standards": "ISO 8442, FDA compliant",
-        "blade hardness": "55-57 HRC"
+        material: "420 Stainless Steel",
+        weight: "150g",
+        dimensions: "18cm total length",
+        features: "Integrated peeler, slicer, chopper"
       },
-      documents: [
-        {
-          name: "Design Patent",
-          type: "PDF",
-          size: "1.8 MB",
-          url: "/patent-documents/multi-knife-patent.pdf",
-          description: "Granted design patent certificate"
-        },
-        {
-          name: "Product Specifications",
-          type: "PDF",
-          size: "2.1 MB",
-          url: "/patent-documents/multi-knife-specs.pdf",
-          description: "Detailed product specifications and features"
-        },
-        {
-          name: "Manufacturing Drawings",
-          type: "DWG",
-          size: "3.5 MB",
-          url: "/patent-documents/multi-knife-drawings.dwg",
-          description: "Technical manufacturing drawings"
-        },
-        {
-          name: "User Testing Report",
-          type: "PDF",
-          size: "1.2 MB",
-          url: "/patent-documents/multi-knife-testing.pdf",
-          description: "User experience and safety testing results"
-        }
-      ],
-      milestones: [
-        { date: "2023-07-10", event: "Initial Concept" },
-        { date: "2023-09-25", event: "Prototype Development" },
-        { date: "2023-11-30", event: "User Testing" },
-        { date: "2024-01-10", event: "Patent Filed" },
-        { date: "2024-06-15", event: "Patent Approved" }
-      ]
+      report: {
+        name: "Technical Report",
+        type: "PDF",
+        size: "1.8 MB",
+        url: "/patent-documents/multi-knife-report.pdf",
+        description: "Product specifications and testing results"
+      }
     }
   ];
-
-  const DocumentModal = ({ document, onClose }) => (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 300 }}
-        className="bg-gray-900 rounded-2xl max-w-2xl w-full border border-purple-500/30"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="p-6 border-b border-gray-700">
-          <div className="flex justify-between items-start">
-            <div>
-              <h3 className="text-xl font-bold text-white mb-2">{document.name}</h3>
-              <div className="flex items-center gap-4 text-sm text-gray-400">
-                <span className="flex items-center gap-1">
-                  <FileText className="w-4 h-4" />
-                  {document.type}
-                </span>
-                <span className="flex items-center gap-1">
-                  <BarChart3 className="w-4 h-4" />
-                  {document.size}
-                </span>
-              </div>
-            </div>
-            <button
-              onClick={onClose}
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-            >
-              <X className="w-6 h-6 text-gray-400" />
-            </button>
-          </div>
-        </div>
-        
-        <div className="p-6">
-          <p className="text-gray-300 mb-6">{document.description}</p>
-          <div className="flex gap-3">
-            <button
-              onClick={() => window.open(document.url, '_blank')}
-              className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
-            >
-              <FileSearch className="w-5 h-5" />
-              View Document
-            </button>
-            <button
-              onClick={() => {
-                // Simulate download
-                const link = document.createElement('a');
-                link.href = document.url;
-                link.download = document.name;
-                link.click();
-              }}
-              className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
-            >
-              <Download className="w-5 h-5" />
-              Download
-            </button>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
 
   const PatentModal = ({ patent, onClose }) => (
     <motion.div
@@ -263,11 +134,11 @@ const About = () => {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring", stiffness: 300 }}
-        className="bg-gray-900 rounded-2xl max-w-6xl w-full max-h-[95vh] overflow-y-auto border border-purple-500/30"
+        className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-purple-500/30"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 p-6 border-b border-purple-500/30 sticky top-0 z-10">
+        <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 p-6 border-b border-purple-500/30">
           <div className="flex justify-between items-start">
             <div className="flex-1">
               <h3 className="text-2xl font-bold text-white mb-2">{patent.title}</h3>
@@ -299,10 +170,9 @@ const About = () => {
         </div>
 
         <div className="p-6">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Left Column - Image & Basic Info */}
-            <div className="lg:col-span-1 space-y-6">
-              {/* Image Section */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Image Section */}
+            <div className="space-y-4">
               <div className="bg-black rounded-xl p-4 border border-gray-700">
                 <img
                   src={patent.img}
@@ -310,155 +180,70 @@ const About = () => {
                   className="w-full h-64 object-contain rounded-lg cursor-pointer"
                   onClick={() => setModalImage(patent.img)}
                 />
-                <button
-                  onClick={() => setModalImage(patent.img)}
-                  className="w-full mt-3 bg-gray-800 hover:bg-gray-700 text-white py-2 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
-                >
-                  <Eye className="w-4 h-4" />
-                  Enlarge Image
-                </button>
               </div>
-
-              {/* Quick Info */}
-              <div className="bg-gray-800/30 rounded-xl p-4 border border-gray-700">
-                <h4 className="text-lg font-semibold text-purple-300 mb-4 flex items-center gap-2">
-                  <FileText className="w-5 h-5" />
-                  Patent Information
-                </h4>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center py-2 border-b border-gray-700">
-                    <span className="text-gray-400 flex items-center gap-2">
-                      <Tag className="w-4 h-4" />
-                      Application No:
-                    </span>
-                    <span className="text-white font-mono text-sm">{patent.appNo}</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-gray-700">
-                    <span className="text-gray-400 flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
-                      Filing Date:
-                    </span>
-                    <span className="text-white">{patent.filingDate}</span>
-                  </div>
-                  <div className="flex justify-between items-start py-2">
-                    <span className="text-gray-400 flex items-center gap-2">
-                      <Users className="w-4 h-4" />
-                      Inventors:
-                    </span>
-                    <span className="text-white text-right text-sm">{patent.inventors.join(', ')}</span>
-                  </div>
-                </div>
+              {/* Report Button */}
+              <button
+                onClick={() => window.open(patent.report.url, '_blank')}
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
+              >
+                <FileText className="w-5 h-5" />
+                View Technical Report
+              </button>
+              <div className="text-center text-gray-400 text-sm">
+                {patent.report.type} • {patent.report.size}
               </div>
             </div>
 
-            {/* Right Column - Details */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Description */}
-              <div className="bg-gray-800/30 rounded-xl p-5 border border-gray-700">
-                <h4 className="text-lg font-semibold text-purple-300 mb-3">Description</h4>
-                <p className="text-gray-300 leading-relaxed">{patent.description}</p>
-              </div>
-
-              {/* Features & Specs Grid */}
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Key Features */}
-                <div className="bg-gray-800/30 rounded-xl p-5 border border-gray-700">
-                  <h4 className="text-lg font-semibold text-purple-300 mb-3">Key Features</h4>
-                  <div className="space-y-3">
-                    {patent.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-300 text-sm leading-relaxed">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Technical Specifications */}
-                <div className="bg-gray-800/30 rounded-xl p-5 border border-gray-700">
-                  <h4 className="text-lg font-semibold text-purple-300 mb-3">Technical Specifications</h4>
-                  <div className="space-y-3">
-                    {Object.entries(patent.technicalSpecs).map(([key, value]) => (
-                      <div key={key} className="flex justify-between items-center py-1 border-b border-gray-700/50">
-                        <span className="text-gray-400 text-sm capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}:</span>
-                        <span className="text-white text-sm text-right">{value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Documents Section */}
-              <div className="bg-gray-800/30 rounded-xl p-5 border border-gray-700">
-                <h4 className="text-lg font-semibold text-purple-300 mb-4 flex items-center gap-2">
-                  <FileText className="w-5 h-5" />
-                  Patent Documents & Reports
-                </h4>
+            {/* Details Section */}
+            <div className="space-y-6">
+              <div>
+                <h4 className="text-lg font-semibold text-purple-300 mb-3">Patent Information</h4>
                 <div className="space-y-3">
-                  {patent.documents.map((doc, idx) => (
-                    <motion.div
-                      key={idx}
-                      whileHover={{ scale: 1.02 }}
-                      className="flex items-center justify-between p-3 bg-gray-700/30 rounded-lg border border-gray-600 hover:border-purple-500/50 transition-colors group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <FileText className="w-8 h-8 text-purple-400" />
-                        <div>
-                          <h5 className="font-semibold text-white group-hover:text-purple-300 transition-colors">
-                            {doc.name}
-                          </h5>
-                          <p className="text-gray-400 text-sm">{doc.description}</p>
-                          <div className="flex items-center gap-4 mt-1">
-                            <span className="text-xs text-gray-500">{doc.type}</span>
-                            <span className="text-xs text-gray-500">{doc.size}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => setSelectedDocument(doc)}
-                          className="p-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
-                          title="View Document"
-                        >
-                          <Eye className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => window.open(doc.url, '_blank')}
-                          className="p-2 bg-gray-600 hover:bg-gray-500 text-white rounded-lg transition-colors"
-                          title="Download"
-                        >
-                          <Download className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </motion.div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700">
+                    <span className="text-gray-400">Application No:</span>
+                    <span className="text-white font-mono">{patent.appNo}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700">
+                    <span className="text-gray-400">Filing Date:</span>
+                    <span className="text-white">{patent.filingDate}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-gray-700">
+                    <span className="text-gray-400">Inventors:</span>
+                    <span className="text-white text-right">{patent.inventors.join(', ')}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-lg font-semibold text-purple-300 mb-3">Key Features</h4>
+                <div className="space-y-2">
+                  {patent.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full flex-shrink-0"></div>
+                      <span className="text-gray-300 text-sm">{feature}</span>
+                    </div>
                   ))}
                 </div>
               </div>
 
-              {/* Development Timeline */}
-              <div className="bg-gray-800/30 rounded-xl p-5 border border-gray-700">
-                <h4 className="text-lg font-semibold text-purple-300 mb-4 flex items-center gap-2">
-                  <Clock className="w-5 h-5" />
-                  Development Timeline
-                </h4>
-                <div className="space-y-4">
-                  {patent.milestones.map((milestone, idx) => (
-                    <div key={idx} className="flex items-center gap-4">
-                      <div className="flex flex-col items-center">
-                        <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                        {idx < patent.milestones.length - 1 && (
-                          <div className="w-0.5 h-8 bg-purple-500/30 mt-1"></div>
-                        )}
-                      </div>
-                      <div className="flex-1">
-                        <div className="text-white font-semibold">{milestone.event}</div>
-                        <div className="text-gray-400 text-sm">{milestone.date}</div>
-                      </div>
+              <div>
+                <h4 className="text-lg font-semibold text-purple-300 mb-3">Technical Specifications</h4>
+                <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
+                  {Object.entries(patent.technicalSpecs).map(([key, value]) => (
+                    <div key={key} className="flex justify-between py-1">
+                      <span className="text-gray-400 capitalize">{key}:</span>
+                      <span className="text-white">{value}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Description */}
+          <div className="mt-6 p-4 bg-gray-800/30 rounded-lg border border-gray-700">
+            <h4 className="text-lg font-semibold text-purple-300 mb-2">Description</h4>
+            <p className="text-gray-300 leading-relaxed">{patent.description}</p>
           </div>
         </div>
       </motion.div>
@@ -651,7 +436,7 @@ const About = () => {
         </motion.div>
       </motion.div>
 
-      {/* ---------------- Enhanced Professional Patent Section ---------------- */}
+      {/* ---------------- Enhanced Patent Section ---------------- */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -671,10 +456,9 @@ const About = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-gray-400 text-lg max-w-2xl mx-auto"
           >
-            Transforming innovative ideas into protected intellectual property with practical applications. 
-            Each patent includes comprehensive documentation, technical reports, and development insights.
+            Transforming innovative ideas into protected intellectual property with practical applications
           </motion.p>
         </div>
 
@@ -683,51 +467,28 @@ const About = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
         >
           {[
-            { 
-              label: "Total Patents", 
-              value: patents.length.toString(), 
-              icon: FileText,
-              description: "Filed & Approved"
-            },
-            { 
-              label: "Approved", 
-              value: patents.filter(p => p.status === 'Approved').length.toString(), 
-              icon: Shield,
-              description: "Granted Patents"
-            },
-            { 
-              label: "Pending", 
-              value: patents.filter(p => p.status === 'Pending').length.toString(), 
-              icon: Calendar,
-              description: "Under Review"
-            },
-            { 
-              label: "Categories", 
-              value: [...new Set(patents.map(p => p.category))].length.toString(), 
-              icon: Tag,
-              description: "Technical Domains"
-            },
+            { label: "Total Patents", value: patents.length.toString(), icon: FileText },
+            { label: "Approved", value: patents.filter(p => p.status === 'Approved').length.toString(), icon: Shield },
+            { label: "Pending", value: patents.filter(p => p.status === 'Pending').length.toString(), icon: Calendar },
+            { label: "Categories", value: [...new Set(patents.map(p => p.category))].length.toString(), icon: User },
           ].map((stat, idx) => (
             <motion.div 
               key={idx}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="bg-gray-800/50 rounded-xl p-6 text-center border border-purple-500/20 hover:border-purple-400/40 transition-all group"
+              whileHover={{ scale: 1.05 }}
+              className="bg-gray-800/50 rounded-xl p-4 text-center border border-purple-500/20"
             >
-              <div className="bg-purple-500/10 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:bg-purple-500/20 transition-colors">
-                <stat.icon className="w-6 h-6 text-purple-400" />
-              </div>
-              <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-              <div className="text-gray-300 font-semibold mb-1">{stat.label}</div>
-              <div className="text-gray-500 text-sm">{stat.description}</div>
+              <stat.icon className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+              <div className="text-2xl font-bold text-white">{stat.value}</div>
+              <div className="text-gray-400 text-sm">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
 
         {/* Patent Cards Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid lg:grid-cols-2 gap-8">
           {patents.map((patent, idx) => (
             <motion.div
               key={patent.id}
@@ -793,51 +554,43 @@ const About = () => {
                     <Calendar className="w-4 h-4" />
                     <span>Filed: {patent.filingDate}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-400">
-                    <Users className="w-4 h-4" />
-                    <span>{patent.inventors.length} Inventor{patent.inventors.length > 1 ? 's' : ''}</span>
-                  </div>
                 </div>
 
                 <p className="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
                   {patent.description}
                 </p>
 
-                {/* Documents Preview */}
+                {/* Features Preview */}
                 <div className="mb-4">
-                  <div className="flex items-center gap-2 text-gray-400 text-sm mb-2">
-                    <FileText className="w-4 h-4" />
-                    <span>Documents: {patent.documents.length} files</span>
-                  </div>
                   <div className="flex flex-wrap gap-1">
-                    {patent.documents.slice(0, 2).map((doc, idx) => (
+                    {patent.features.slice(0, 3).map((feature, idx) => (
                       <span key={idx} className="px-2 py-1 text-xs bg-gray-800/50 text-gray-300 rounded border border-gray-700">
-                        {doc.name}
+                        {feature}
                       </span>
                     ))}
-                    {patent.documents.length > 2 && (
+                    {patent.features.length > 3 && (
                       <span className="px-2 py-1 text-xs bg-gray-800/50 text-gray-300 rounded border border-gray-700">
-                        +{patent.documents.length - 2} more
+                        +{patent.features.length - 3} more
                       </span>
                     )}
                   </div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex gap-3">
+                <div className="flex gap-2">
                   <button
                     onClick={() => setSelectedPatent(patent)}
                     className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg text-sm font-semibold transition-colors flex items-center justify-center gap-2"
                   >
-                    <FileSearch className="w-4 h-4" />
+                    <Eye className="w-4 h-4" />
                     View Details
                   </button>
                   <button
-                    onClick={() => setSelectedDocument(patent.documents[0])}
-                    className="p-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors flex items-center gap-2"
-                    title="View Documents"
+                    onClick={() => window.open(patent.report.url, '_blank')}
+                    className="p-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
+                    title="View Report"
                   >
-                    <Eye className="w-4 h-4" />
+                    <ExternalLink className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -859,34 +612,51 @@ const About = () => {
             Interested in collaborating on new innovations or learning more about these patents?
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:shadow-purple-500/25 flex items-center gap-2">
+            <button 
+              onClick={scrollToContact}
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:shadow-purple-500/25 flex items-center justify-center gap-2"
+            >
               <FileText className="w-5 h-5" />
               Request Technical Documentation
             </button>
-            <button className="border border-purple-500 text-purple-400 hover:bg-purple-500/10 px-8 py-3 rounded-full font-semibold transition-all flex items-center gap-2">
-              <Users className="w-5 h-5" />
+            <button 
+              onClick={scrollToContact}
+              className="border border-purple-500 text-purple-400 hover:bg-purple-500/10 px-8 py-3 rounded-full font-semibold transition-all flex items-center justify-center gap-2"
+            >
+              <Briefcase className="w-5 h-5" />
               Discuss Collaboration
             </button>
           </div>
         </motion.div>
       </motion.div>
 
-      {/* Image Modal */}
+      {/* Fixed Image Modal */}
       {modalImage && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="fixed inset-0 bg-black/90 flex justify-center items-center z-50 p-4"
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           onClick={() => setModalImage(null)}
         >
-          <motion.img
+          <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            src={modalImage}
-            alt="Patent View"
-            className="max-h-[90%] max-w-[90%] rounded-2xl shadow-2xl border border-purple-500/30 object-contain"
-          />
+            className="relative max-w-4xl max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setModalImage(null)}
+              className="absolute -top-12 right-0 p-2 text-white hover:text-gray-300 transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <img
+              src={modalImage}
+              alt="Patent View"
+              className="max-h-[85vh] max-w-full object-contain rounded-lg"
+            />
+          </motion.div>
         </motion.div>
       )}
 
@@ -895,14 +665,6 @@ const About = () => {
         <PatentModal 
           patent={selectedPatent} 
           onClose={() => setSelectedPatent(null)} 
-        />
-      )}
-
-      {/* Document Modal */}
-      {selectedDocument && (
-        <DocumentModal 
-          document={selectedDocument} 
-          onClose={() => setSelectedDocument(null)} 
         />
       )}
     </div>

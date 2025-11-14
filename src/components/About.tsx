@@ -14,9 +14,7 @@ import {
   Shield,
   ExternalLink,
   X,
-  Eye,
-  Download,
-  FileSearch
+  Eye
 } from "lucide-react";
 
 const About = () => {
@@ -43,18 +41,7 @@ const About = () => {
     transition: { type: "spring", stiffness: 300 },
   };
 
-  // Scroll to contact function
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  };
-
-  // Simplified Patent Data with Single Report
+  // Enhanced Patent Data
   const patents = [
     {
       id: 1,
@@ -80,13 +67,7 @@ const About = () => {
         capacity: "50kg batch processing",
         material: "Food-grade stainless steel"
       },
-      report: {
-        name: "Technical Report",
-        type: "PDF",
-        size: "2.4 MB",
-        url: "/patent-documents/solar-dryer-report.pdf",
-        description: "Complete technical analysis and performance data"
-      }
+      onView: () => window.open('/patent-documents/solar-dryer.pdf', '_blank')
     },
     {
       id: 2,
@@ -112,13 +93,7 @@ const About = () => {
         dimensions: "18cm total length",
         features: "Integrated peeler, slicer, chopper"
       },
-      report: {
-        name: "Technical Report",
-        type: "PDF",
-        size: "1.8 MB",
-        url: "/patent-documents/multi-knife-report.pdf",
-        description: "Product specifications and testing results"
-      }
+      onView: () => window.open('/patent-documents/multi-knife.pdf', '_blank')
     }
   ];
 
@@ -143,26 +118,26 @@ const About = () => {
             <div className="flex-1">
               <h3 className="text-2xl font-bold text-white mb-2">{patent.title}</h3>
               <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 text-sm font-semibold rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                <span className="px-3 py-1 text-sm font-semibold rounded-full bg-blue-500/20 text-blue-300">
                   {patent.type}
                 </span>
-                <span className={`px-3 py-1 text-sm font-semibold rounded-full border ${
+                <span className={`px-3 py-1 text-sm font-semibold rounded-full ${
                   patent.status === 'Approved' 
-                    ? 'bg-green-500/20 text-green-300 border-green-500/30'
+                    ? 'bg-green-500/20 text-green-300'
                     : patent.status === 'Pending'
-                    ? 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30'
-                    : 'bg-blue-500/20 text-blue-300 border-blue-500/30'
+                    ? 'bg-yellow-500/20 text-yellow-300'
+                    : 'bg-blue-500/20 text-blue-300'
                 }`}>
                   {patent.status}
                 </span>
-                <span className="px-3 py-1 text-sm font-semibold rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                <span className="px-3 py-1 text-sm font-semibold rounded-full bg-purple-500/20 text-purple-300">
                   {patent.category}
                 </span>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors ml-4"
+              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
             >
               <X className="w-6 h-6 text-gray-400" />
             </button>
@@ -177,21 +152,16 @@ const About = () => {
                 <img
                   src={patent.img}
                   alt={patent.title}
-                  className="w-full h-64 object-contain rounded-lg cursor-pointer"
-                  onClick={() => setModalImage(patent.img)}
+                  className="w-full h-64 object-contain rounded-lg"
                 />
               </div>
-              {/* Report Button */}
               <button
-                onClick={() => window.open(patent.report.url, '_blank')}
+                onClick={patent.onView}
                 className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors"
               >
                 <FileText className="w-5 h-5" />
-                View Technical Report
+                View Patent Documents
               </button>
-              <div className="text-center text-gray-400 text-sm">
-                {patent.report.type} • {patent.report.size}
-              </div>
             </div>
 
             {/* Details Section */}
@@ -228,7 +198,7 @@ const About = () => {
 
               <div>
                 <h4 className="text-lg font-semibold text-purple-300 mb-3">Technical Specifications</h4>
-                <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
+                <div className="bg-gray-800/50 rounded-lg p-4">
                   {Object.entries(patent.technicalSpecs).map(([key, value]) => (
                     <div key={key} className="flex justify-between py-1">
                       <span className="text-gray-400 capitalize">{key}:</span>
@@ -533,10 +503,10 @@ const About = () => {
               {/* Content */}
               <div className="p-6">
                 <div className="flex flex-wrap gap-2 mb-3">
-                  <span className="px-2 py-1 text-xs font-semibold rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                  <span className="px-2 py-1 text-xs font-semibold rounded-full bg-blue-500/20 text-blue-300">
                     {patent.type}
                   </span>
-                  <span className="px-2 py-1 text-xs font-semibold rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                  <span className="px-2 py-1 text-xs font-semibold rounded-full bg-purple-500/20 text-purple-300">
                     {patent.category}
                   </span>
                 </div>
@@ -564,12 +534,12 @@ const About = () => {
                 <div className="mb-4">
                   <div className="flex flex-wrap gap-1">
                     {patent.features.slice(0, 3).map((feature, idx) => (
-                      <span key={idx} className="px-2 py-1 text-xs bg-gray-800/50 text-gray-300 rounded border border-gray-700">
+                      <span key={idx} className="px-2 py-1 text-xs bg-gray-800/50 text-gray-300 rounded">
                         {feature}
                       </span>
                     ))}
                     {patent.features.length > 3 && (
-                      <span className="px-2 py-1 text-xs bg-gray-800/50 text-gray-300 rounded border border-gray-700">
+                      <span className="px-2 py-1 text-xs bg-gray-800/50 text-gray-300 rounded">
                         +{patent.features.length - 3} more
                       </span>
                     )}
@@ -586,9 +556,9 @@ const About = () => {
                     View Details
                   </button>
                   <button
-                    onClick={() => window.open(patent.report.url, '_blank')}
+                    onClick={patent.onView}
                     className="p-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
-                    title="View Report"
+                    title="View Documents"
                   >
                     <ExternalLink className="w-4 h-4" />
                   </button>
@@ -606,57 +576,31 @@ const About = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="text-center mt-12 pt-8 border-t border-gray-700/50"
+          className="text-center mt-12"
         >
-          <p className="text-gray-400 mb-6 text-lg">
-            Interested in collaborating on new innovations or learning more about these patents?
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={scrollToContact}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:shadow-purple-500/25 flex items-center justify-center gap-2"
-            >
-              <FileText className="w-5 h-5" />
-              Request Technical Documentation
-            </button>
-            <button 
-              onClick={scrollToContact}
-              className="border border-purple-500 text-purple-400 hover:bg-purple-500/10 px-8 py-3 rounded-full font-semibold transition-all flex items-center justify-center gap-2"
-            >
-              <Briefcase className="w-5 h-5" />
-              Discuss Collaboration
-            </button>
-          </div>
+          <p className="text-gray-400 mb-6">Interested in collaborating on new innovations?</p>
+          <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:shadow-purple-500/25">
+            Discuss Innovation
+          </button>
         </motion.div>
       </motion.div>
 
-      {/* Fixed Image Modal */}
+      {/* Image Modal */}
       {modalImage && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/90 flex justify-center items-center z-50 p-4"
           onClick={() => setModalImage(null)}
         >
-          <motion.div
+          <motion.img
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="relative max-w-4xl max-h-[90vh]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setModalImage(null)}
-              className="absolute -top-12 right-0 p-2 text-white hover:text-gray-300 transition-colors"
-            >
-              <X className="w-6 h-6" />
-            </button>
-            <img
-              src={modalImage}
-              alt="Patent View"
-              className="max-h-[85vh] max-w-full object-contain rounded-lg"
-            />
-          </motion.div>
+            transition={{ duration: 0.3 }}
+            src={modalImage}
+            alt="Patent View"
+            className="max-h-[90%] max-w-[90%] rounded-2xl shadow-2xl border border-purple-500/30 object-contain"
+          />
         </motion.div>
       )}
 

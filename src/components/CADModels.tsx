@@ -252,7 +252,7 @@ const CADModels = () => {
       views: 975,
       downloads: 67,
       fileSize: "3.6 MB"
-}
+},
 
   ];
 
@@ -1031,4 +1031,5 @@ const CADModels = () => {
 };
 
 export default CADModels;
+
 

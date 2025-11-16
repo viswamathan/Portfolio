@@ -238,6 +238,22 @@ const CADModels = () => {
       downloads: 18,
       fileSize: "4.2 MB"
     },
+    {
+      id: 15,
+      title: "Roller Support Assembly",
+      description: "A fully-defined roller support assembly modeled from 2D technical drawings, featuring precise constraints for smooth rotational motion and accurate load-bearing representation.",
+      software: "SolidWorks",
+      category: "Mechanical Parts",
+      complexity: "Intermediate",
+      features: ["Extrude Boss/Base", "Revolve", "Hole Wizard", "Assembly Mates", "Motion Study"],
+      image: "/3d Pictures/Roller Support.png",
+      downloadUrl: "https://drive.google.com/file/d/1ROLLER_SAMPLE_LINK/view?usp=sharing",
+      modelPath: "/Models/Roller Support.STL",
+      views: 975,
+      downloads: 67,
+      fileSize: "3.6 MB"
+}
+
   ];
 
   const categories = [
@@ -1015,3 +1031,4 @@ const CADModels = () => {
 };
 
 export default CADModels;
+

@@ -11,7 +11,7 @@ const Achievements = () => {
       date: "2024",
       description:
         "Professional certification demonstrating proficiency in SolidWorks 3D CAD software, including part modeling, assembly creation, and drawing generation.",
-      image: "VISWA CSWA.png", // make sure this file is inside your public folder
+      image: "VISWA CSWA.png",
       skills: [
         "3D Modeling",
         "Assembly Design",
@@ -29,6 +29,57 @@ const Achievements = () => {
         "Skilled in creating technical drawings and annotations",
         "Validated understanding of design intent and best practices",
       ],
+    },
+  ];
+
+  const specializations = [
+    {
+      id: 1,
+      title: "Additive Manufacturing",
+      issuer: "Arizona State University",
+      image: "additive-manufacturing-cert.png", // Add your certificate image path
+      category: "Coursera Specialization",
+      date: "2024",
+    },
+    {
+      id: 2,
+      title: "Digital Technologies and the Future of Manufacturing",
+      issuer: "University of Michigan",
+      image: "digital-tech-manufacturing-cert.png", // Add your certificate image path
+      category: "Coursera Specialization",
+      date: "2024",
+    },
+    {
+      id: 3,
+      title: "Rapid Prototyping Using 3D Printing",
+      issuer: "Arizona State University",
+      image: "rapid-prototyping-3d-printing-cert.png", // Add your certificate image path
+      category: "Coursera Specialization",
+      date: "2024",
+    },
+    {
+      id: 4,
+      title: "Rapid Prototyping and Tooling",
+      issuer: "Arizona State University",
+      image: "rapid-prototyping-tooling-cert.png", // Add your certificate image path
+      category: "Coursera Specialization",
+      date: "2024",
+    },
+    {
+      id: 5,
+      title: "The Engineering of Structures Around Us",
+      issuer: "Dartmouth College",
+      image: "engineering-structures-cert.png", // Add your certificate image path
+      category: "Coursera Specialization",
+      date: "2024",
+    },
+    {
+      id: 6,
+      title: "Digital Manufacturing & Design Technology",
+      issuer: "University at Buffalo, The State University of New York",
+      image: "digital-manufacturing-design-cert.png", // Add your certificate image path
+      category: "Coursera Specialization",
+      date: "2024",
     },
   ];
 
@@ -204,6 +255,71 @@ const Achievements = () => {
               </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Coursera Specializations */}
+        <motion.div variants={itemVariants} className="mb-16">
+          <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-purple-400">
+            My Specializations
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {specializations.map((specialization) => (
+              <motion.div
+                key={specialization.id}
+                className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-purple-500/30 transition-all duration-300 group"
+                whileHover={{ scale: 1.05, y: -5 }}
+              >
+                {/* Certificate Logo Placeholder */}
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:from-purple-500/30 group-hover:to-blue-500/30 transition-all duration-300">
+                  <Award className="w-8 h-8 text-purple-400" />
+                </div>
+                
+                <h4 className="text-lg font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                  {specialization.title}
+                </h4>
+                
+                <p className="text-purple-400 font-medium text-sm mb-3">
+                  {specialization.issuer}
+                </p>
+                
+                <div className="flex items-center justify-between text-gray-400 text-sm">
+                  <span>{specialization.category}</span>
+                  <span>{specialization.date}</span>
+                </div>
+                
+                {/* Action Buttons */}
+                <div className="flex gap-2 mt-4">
+                  <motion.button
+                    className="flex items-center gap-1 text-purple-400 hover:text-purple-300 text-sm transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => window.open(specialization.image, "_blank")}
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    View
+                  </motion.button>
+                  
+                  <motion.button
+                    className="flex items-center gap-1 text-gray-400 hover:text-white text-sm transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      const link = document.createElement("a");
+                      link.href = specialization.image;
+                      link.download = `${specialization.title}.png`;
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }}
+                  >
+                    <Download className="w-3 h-3" />
+                    Download
+                  </motion.button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Additional Certifications Preview */}

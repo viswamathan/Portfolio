@@ -594,28 +594,40 @@ const Achievements = () => {
                   whileHover="hover"
                 >
                   <div className="flex flex-col h-full">
-                    {/* Header with University Branding */}
-                    <div className="p-8 pb-0">
-                      <div className="flex items-start justify-between mb-6">
-                        <div>
-                          <h3 className="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors">
-                            {specialization.title}
-                          </h3>
-                          <p className="text-blue-400 font-semibold text-lg">{specialization.issuer}</p>
+                    {/* Specialization Thumbnail Header */}
+                    <div className="relative h-48 bg-gradient-to-r from-purple-500/10 to-blue-500/10 overflow-hidden">
+                      <img
+                        src={specialization.specializationImage}
+                        alt={specialization.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent" />
+                      
+                      {/* Badges */}
+                      <div className="absolute top-4 right-4 flex gap-2">
+                        <div className="bg-purple-600/90 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1">
+                          <Layers className="w-4 h-4" />
+                          {specialization.courses} Courses
                         </div>
-                        <div className="text-right">
-                          <div className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-purple-300 px-4 py-2 rounded-xl border border-purple-500/30">
-                            <div className="flex items-center gap-2 text-sm font-semibold">
-                              <Layers className="w-4 h-4" />
-                              {specialization.courses} Courses
-                            </div>
-                          </div>
+                        <div className="bg-blue-600/90 text-white px-3 py-1 rounded-full text-sm font-medium">
+                          {specialization.level}
+                        </div>
+                      </div>
+                      
+                      {/* University Badge */}
+                      <div className="absolute bottom-4 left-4">
+                        <div className="bg-gray-800/90 text-white px-3 py-1 rounded-lg text-sm font-medium border border-gray-600/50">
+                          {specialization.issuer.split('(')[0].trim()}
                         </div>
                       </div>
                     </div>
 
                     {/* Content Area */}
                     <div className="p-8 flex-1">
+                      <h3 className="text-2xl font-bold text-white mb-3 leading-tight group-hover:text-purple-300 transition-colors">
+                        {specialization.title}
+                      </h3>
+
                       <p className="text-gray-300 text-lg mb-6 leading-relaxed">
                         {specialization.description}
                       </p>

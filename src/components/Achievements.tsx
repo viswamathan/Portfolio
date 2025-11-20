@@ -6,6 +6,7 @@ const Achievements = () => {
   const [selectedSpecialization, setSelectedSpecialization] = useState(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentCertIndex, setCurrentCertIndex] = useState(0);
+  const [coursesModalOpen, setCoursesModalOpen] = useState(false);
 
   const certificates = [
     {
@@ -350,6 +351,16 @@ const Achievements = () => {
     }
   };
 
+  const openCoursesModal = (specialization) => {
+    setSelectedSpecialization(specialization);
+    setCoursesModalOpen(true);
+  };
+
+  const closeCoursesModal = () => {
+    setCoursesModalOpen(false);
+    setSelectedSpecialization(null);
+  };
+
   const openLightbox = (specialization, index = 0) => {
     setSelectedSpecialization(specialization);
     setCurrentCertIndex(index);
@@ -642,7 +653,7 @@ const Achievements = () => {
                             className="flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-300 font-semibold"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            onClick={() => openLightbox(specialization, 0)}
+                            onClick={() => openCoursesModal(specialization)}
                           >
                             <Book className="w-4 h-4" />
                             View Courses
@@ -667,6 +678,126 @@ const Achievements = () => {
         </motion.div>
       </div>
 
+      {/* Courses Modal */}
+      <AnimatePresence>
+        {coursesModalOpen && selectedSpecialization && (
+          <motion.div
+            className="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-hidden border border-purple-500/20 shadow-2xl"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between p-8 border-b border-gray-700/50 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
+                <div>
+                  <h3 className="text-2xl font-bold text-white mb-2">{selectedSpecialization.title}</h3>
+                  <p className="text-purple-400 font-semibold">{selectedSpecialization.issuer}</p>
+                </div>
+                <motion.button
+                  onClick={closeCoursesModal}
+                  className="p-3 hover:bg-gray-800 rounded-xl transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <X className="w-6 h-6 text-gray-400" />
+                </motion.button>
+              </div>
+
+              {/* Courses Grid */}
+              <div className="p-8 max-h-[70vh] overflow-y-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {selectedSpecialization.courseCertificates.map((course, index) => (
+                    <motion.div
+                      key={course.id}
+                      className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700/30 hover:border-purple-500/30 transition-all duration-300 group"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ scale: 1.02, y: -5 }}
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h4 className="text-lg font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                            {course.title}
+                          </h4>
+                          <p className="text-blue-400 text-sm font-medium">{course.issuer}</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="bg-green-500/20 text-green-400 px-2 py-1 rounded-lg text-xs font-medium">
+                            Course {index + 1}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Course Image Preview */}
+                      <div className="mb-4 rounded-lg overflow-hidden bg-gray-700/30 cursor-pointer"
+                           onClick={() => openLightbox(selectedSpecialization, index)}>
+                        <img
+                          src={course.image}
+                          alt={course.title}
+                          className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+
+                      {/* Skills */}
+                      <div>
+                        <h5 className="font-semibold text-purple-300 mb-2 text-sm">Skills Gained</h5>
+                        <div className="flex flex-wrap gap-2">
+                          {course.skills.map((skill, skillIndex) => (
+                            <span
+                              key={skillIndex}
+                              className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-lg text-xs border border-purple-500/30"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex gap-2 mt-4">
+                        <motion.button
+                          className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-lg text-sm transition-colors flex-1 justify-center"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => openLightbox(selectedSpecialization, index)}
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                          View Certificate
+                        </motion.button>
+                        
+                        <motion.button
+                          className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-lg transition-colors"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          onClick={() => {
+                            const link = document.createElement("a");
+                            link.href = course.image;
+                            link.download = `${course.title}.png`;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                          }}
+                        >
+                          <Download className="w-3 h-3" />
+                        </motion.button>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Lightbox Modal */}
       <AnimatePresence>
         {lightboxOpen && selectedSpecialization && (
@@ -678,10 +809,10 @@ const Achievements = () => {
           >
             <motion.div
               className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl max-w-7xl w-full max-h-[95vh] overflow-hidden border border-purple-500/20 shadow-2xl"
-              variants={lightboxVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
             >
               {/* Header */}
               <div className="flex items-center justify-between p-8 border-b border-gray-700/50 bg-gradient-to-r from-purple-900/20 to-blue-900/20">

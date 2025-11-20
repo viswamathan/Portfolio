@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Calendar, CheckCircle, ExternalLink, Download, Star, Trophy, Medal, X, ChevronLeft, ChevronRight, Book, Layers, Clock, Users } from 'lucide-react';
+import { Award, Calendar, CheckCircle, ExternalLink, Download, Star, Trophy, Medal, X, ChevronLeft, ChevronRight, Book, Layers, Clock, Users, GraduationCap } from 'lucide-react';
 
 const Achievements = () => {
   const [selectedSpecialization, setSelectedSpecialization] = useState(null);
@@ -27,6 +27,42 @@ const Achievements = () => {
         "Validated understanding of design intent and best practices",
       ],
     },
+    {
+      id: 2,
+      title: "Introduction to Engineering Mechanics",
+      issuer: "Georgia Institute of Technology",
+      date: "2024",
+      description: "Fundamental principles of engineering mechanics including statics, dynamics, and mechanical analysis.",
+      image: "engineering-mechanics-cert.png",
+      skills: ["Statics", "Dynamics", "Force Analysis", "Mechanical Principles"],
+      credentialId: "EM-GT-2024",
+      category: "Professional Certificate",
+      level: "Intermediate",
+      validUntil: "Lifetime",
+      highlights: [
+        "Mastered fundamental principles of statics and dynamics",
+        "Applied mechanical analysis to engineering problems",
+        "Developed problem-solving skills for mechanical systems",
+      ],
+    },
+    {
+      id: 3,
+      title: "Autodesk Certified Professional in AutoCAD for Design and Drafting",
+      issuer: "Autodesk",
+      date: "2024",
+      description: "Professional certification validating advanced skills in AutoCAD for mechanical design and drafting.",
+      image: "autocad-cert.png",
+      skills: ["AutoCAD", "2D Drafting", "Technical Drawing", "Design Documentation"],
+      credentialId: "ACP-AUTO-2024",
+      category: "Professional Certification",
+      level: "Professional",
+      validUntil: "2026",
+      highlights: [
+        "Advanced proficiency in 2D drafting and design",
+        "Expertise in technical drawing standards",
+        "Comprehensive knowledge of AutoCAD tools and features",
+      ],
+    }
   ];
 
   const specializations = [
@@ -35,7 +71,7 @@ const Achievements = () => {
       title: "Additive Manufacturing Specialization",
       issuer: "Arizona State University (Coursera)",
       date: "2024",
-      description: "Comprehensive specialization covering additive manufacturing processes, materials, and design principles for advanced manufacturing applications.",
+      description: "Comprehensive specialization covering additive manufacturing processes, materials, and design principles for advanced manufacturing applications. Mastered various AM technologies including material extrusion, jetting, and laser-based processes.",
       specializationImage: "additive-manufacturing-specialization.png",
       category: "Coursera Specialization",
       level: "Advanced",
@@ -84,7 +120,7 @@ const Achievements = () => {
       title: "Digital Technologies and the Future of Manufacturing",
       issuer: "University of Michigan (Coursera)",
       date: "2024",
-      description: "Exploring Industry 4.0 technologies including IIoT, digital twins, and additive manufacturing shaping modern manufacturing.",
+      description: "Comprehensive exploration of Industry 4.0 technologies transforming modern manufacturing. Focused on IIoT implementation, digital twin technology, and smart factory systems.",
       specializationImage: "digital-tech-specialization.png",
       category: "Coursera Specialization",
       level: "Intermediate",
@@ -119,7 +155,7 @@ const Achievements = () => {
       title: "Rapid Prototyping Using 3D Printing",
       issuer: "Arizona State University (Coursera)",
       date: "2024",
-      description: "Specialized course focusing on rapid prototyping techniques and 3D printing applications in product development.",
+      description: "Advanced course focusing on rapid prototyping methodologies and 3D printing applications in engineering product development cycles and design validation processes.",
       specializationImage: "rapid-prototyping-specialization.png",
       category: "Coursera Specialization",
       level: "Intermediate",
@@ -148,6 +184,167 @@ const Achievements = () => {
           skills: ["Technology Comparison", "Use Cases", "Best Practices", "Industry Applications"]
         }
       ]
+    },
+    {
+      id: 4,
+      title: "Rapid Prototyping and Tooling",
+      issuer: "Arizona State University (Coursera)",
+      date: "2024",
+      description: "Comprehensive training in rapid prototyping techniques and tooling applications for manufacturing. Covers electronics integration and material science.",
+      specializationImage: "rapid-prototyping-tooling-specialization.png",
+      category: "Coursera Specialization",
+      level: "Advanced",
+      courses: 3,
+      skills: ["Rapid Tooling", "Electronics Integration", "Material Science", "Manufacturing Processes"],
+      courseCertificates: [
+        {
+          id: 1,
+          title: "Using Rapid Prototyping in the Engineering Design Process",
+          issuer: "Arizona State University",
+          image: "rapid-engineering-cert.png",
+          skills: ["Design Integration", "Workflow Optimization", "Efficiency", "Process Improvement"]
+        },
+        {
+          id: 2,
+          title: "Adding Electronics to Rapid Prototypes",
+          issuer: "Arizona State University",
+          image: "electronics-prototyping-cert.png",
+          skills: ["Embedded Systems", "Circuit Design", "Integration", "Electronics Prototyping"]
+        },
+        {
+          id: 3,
+          title: "Rapid Prototyping Materials and Tooling",
+          issuer: "Arizona State University",
+          image: "materials-tooling-cert.png",
+          skills: ["Material Selection", "Tooling Design", "Manufacturing", "Material Properties"]
+        }
+      ]
+    },
+    {
+      id: 5,
+      title: "The Engineering of Structures Around Us",
+      issuer: "Dartmouth College (Coursera)",
+      date: "2024",
+      description: "Comprehensive study of structural engineering principles covering tension, compression, shear, and bending analysis in various engineering applications.",
+      specializationImage: "engineering-structures-specialization.png",
+      category: "Coursera Specialization",
+      level: "Intermediate",
+      courses: 5,
+      skills: ["Structural Analysis", "Tension/Compression", "Shear Forces", "Bending Moments", "Load Analysis"],
+      courseCertificates: [
+        {
+          id: 1,
+          title: "Engineering of Structures: Tension",
+          issuer: "Dartmouth College",
+          image: "tension-cert.png",
+          skills: ["Tension Analysis", "Cable Structures", "Material Strength", "Structural Design"]
+        },
+        {
+          id: 2,
+          title: "Engineering of Structures: Compression",
+          issuer: "Dartmouth College",
+          image: "compression-cert.png",
+          skills: ["Compression Members", "Column Design", "Buckling Analysis", "Structural Stability"]
+        },
+        {
+          id: 3,
+          title: "Engineering of Structures: Tension and Compression",
+          issuer: "Dartmouth College",
+          image: "tension-compression-cert.png",
+          skills: ["Combined Loading", "Structural Elements", "Load Analysis", "Mixed Stress States"]
+        },
+        {
+          id: 4,
+          title: "Engineering of Structures: Shear and Bending",
+          issuer: "Dartmouth College",
+          image: "shear-bending-cert.png",
+          skills: ["Shear Stress", "Bending Moments", "Beam Design", "Structural Mechanics"]
+        },
+        {
+          id: 5,
+          title: "Engineering of Structures: Response of Structures",
+          issuer: "Dartmouth College",
+          image: "response-structures-cert.png",
+          skills: ["Structural Response", "Dynamic Analysis", "Performance Evaluation", "Structural Behavior"]
+        }
+      ]
+    },
+    {
+      id: 6,
+      title: "Digital Manufacturing & Design Technology",
+      issuer: "University at Buffalo & The State University of New York (Coursera)",
+      date: "2024",
+      description: "Comprehensive program covering digital manufacturing technologies, Industry 4.0 implementation, and smart factory systems for modern manufacturing enterprises.",
+      specializationImage: "digital-manufacturing-design-specialization.png",
+      category: "Coursera Specialization",
+      level: "Advanced",
+      courses: 9,
+      skills: ["Digital Thread", "IIoT", "Digital Twins", "Cyber Security", "MBSE", "Smart Manufacturing"],
+      courseCertificates: [
+        {
+          id: 1,
+          title: "Digital Manufacturing & Design",
+          issuer: "University at Buffalo",
+          image: "digital-mfg-design-cert.png",
+          skills: ["Digital Transformation", "Smart Factory", "Industry 4.0", "Manufacturing Innovation"]
+        },
+        {
+          id: 2,
+          title: "Digital Thread: Components",
+          issuer: "University at Buffalo",
+          image: "digital-thread-components-cert.png",
+          skills: ["Data Integration", "System Components", "Digital Infrastructure", "Manufacturing Systems"]
+        },
+        {
+          id: 3,
+          title: "Digital Thread: Implementation",
+          issuer: "University at Buffalo",
+          image: "digital-thread-implementation-cert.png",
+          skills: ["Implementation Strategy", "Deployment", "System Integration", "Digital Implementation"]
+        },
+        {
+          id: 4,
+          title: "Advanced Manufacturing Process Analysis",
+          issuer: "University at Buffalo",
+          image: "process-analysis-cert.png",
+          skills: ["Process Optimization", "Data Analytics", "Quality Control", "Manufacturing Analysis"]
+        },
+        {
+          id: 5,
+          title: "Intelligent Machining",
+          issuer: "University at Buffalo",
+          image: "intelligent-machining-cert.png",
+          skills: ["Smart Machining", "AI in Manufacturing", "Predictive Maintenance", "Advanced Machining"]
+        },
+        {
+          id: 6,
+          title: "Advanced Manufacturing Enterprise",
+          issuer: "University at Buffalo",
+          image: "mfg-enterprise-cert.png",
+          skills: ["Enterprise Systems", "Supply Chain", "Business Integration", "Manufacturing Management"]
+        },
+        {
+          id: 7,
+          title: "Cyber Security in Manufacturing",
+          issuer: "University at Buffalo",
+          image: "cybersecurity-mfg-cert.png",
+          skills: ["Security Protocols", "Data Protection", "Risk Management", "Industrial Security"]
+        },
+        {
+          id: 8,
+          title: "MBSE: Model-Based Systems Engineering",
+          issuer: "University at Buffalo",
+          image: "mbse-cert.png",
+          skills: ["Systems Modeling", "MBSE Methodology", "Digital Engineering", "System Architecture"]
+        },
+        {
+          id: 9,
+          title: "Roadmap to Success in Digital Manufacturing & Design",
+          issuer: "University at Buffalo",
+          image: "roadmap-success-cert.png",
+          skills: ["Career Planning", "Industry Trends", "Professional Development", "Manufacturing Strategy"]
+        }
+      ]
     }
   ];
 
@@ -155,30 +352,38 @@ const Achievements = () => {
     { icon: Trophy, title: "Academic Excellence", count: "7.50/10", description: "CGPA in Mechanical Engineering" },
     { icon: Medal, title: "Patents Filed", count: "2", description: "Innovation in mechanical design" },
     { icon: Star, title: "Certifications", count: "10+", description: "Professional and technical certifications" },
-    { icon: Award, title: "Projects Completed", count: "5+", description: "Engineering and research projects" },
+    { icon: Award, title: "Projects Completed", count: "15+", description: "Engineering and research projects" },
   ];
 
   const containerVariants = { 
     hidden: { opacity: 0 }, 
     visible: { 
       opacity: 1, 
-      transition: { staggerChildren: 0.1 } 
+      transition: { staggerChildren: 0.15 } 
     } 
   };
 
   const itemVariants = { 
-    hidden: { opacity: 0, y: 20 }, 
+    hidden: { opacity: 0, y: 30 }, 
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.6 } 
+      transition: { duration: 0.7, ease: "easeOut" } 
     } 
   };
 
-  const lightboxVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
-    exit: { opacity: 0, scale: 0.8, transition: { duration: 0.2 } }
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      transition: { duration: 0.6, ease: "easeOut" }
+    },
+    hover: {
+      scale: 1.02,
+      y: -8,
+      transition: { duration: 0.3, ease: "easeInOut" }
+    }
   };
 
   const openLightbox = (specialization, index = 0) => {
@@ -209,351 +414,320 @@ const Achievements = () => {
   };
 
   return (
-    <div className="container mx-auto px-6 py-20">
-      <motion.div 
-        variants={containerVariants} 
-        initial="hidden" 
-        whileInView="visible" 
-        viewport={{ once: true }}
-      >
-        <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-center">
-          Achievements & <span className="text-purple-500">Certifications</span>
-        </motion.h2>
-
-        <motion.p variants={itemVariants} className="text-center text-gray-400 text-base sm:text-lg mb-12 max-w-3xl mx-auto">
-          Professional certifications and achievements that demonstrate my expertise in mechanical engineering,
-          CAD design, additive manufacturing, and continuous learning commitment.
-        </motion.p>
-
-        {/* Achievement Stats */}
-        <motion.div variants={itemVariants} className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {achievements.map((achievement, index) => {
-            const Icon = achievement.icon;
-            return (
-              <motion.div
-                key={index}
-                className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 text-center border border-gray-700/50 hover:border-purple-500/30 transition-all duration-300"
-                whileHover={{ scale: 1.05, y: -5 }}
-              >
-                <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Icon className="w-6 h-6 text-purple-400" />
-                </div>
-                <div className="text-2xl font-bold text-purple-400 mb-2">{achievement.count}</div>
-                <h3 className="font-semibold text-white mb-1">{achievement.title}</h3>
-                <p className="text-gray-400 text-sm">{achievement.description}</p>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
-        {/* Featured Certificate */}
-        <motion.div variants={itemVariants} className="mb-20">
-          <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-purple-400">
-            Featured Certification
-          </h3>
-
-          {certificates.map((cert) => (
-            <motion.div
-              key={cert.id}
-              className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-purple-500/20 shadow-2xl"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="grid lg:grid-cols-2 gap-8">
-                {/* Certificate Image */}
-                <div className="relative w-full flex items-center justify-center overflow-hidden p-8">
-                  <motion.img
-                    src={cert.image}
-                    alt={cert.title}
-                    className="w-full h-auto max-h-[500px] object-contain cursor-pointer rounded-lg shadow-2xl"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.5 }}
-                    onClick={() => window.open(cert.image, "_blank")}
-                  />
-                </div>
-
-                {/* Certificate Details */}
-                <div className="p-8">
-                  <div className="flex items-start justify-between mb-6">
-                    <div>
-                      <h4 className="text-2xl font-bold text-white mb-2">{cert.title}</h4>
-                      <p className="text-purple-400 font-medium">{cert.issuer}</p>
-                    </div>
-                    <div className="text-right">
-                      <div className="px-3 py-1 rounded-full text-xs border bg-green-500/20 text-green-400 border-green-500/30">
-                        <CheckCircle className="w-3 h-3 inline mr-1" />
-                        Certified
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-300 mb-6 leading-relaxed">{cert.description}</p>
-
-                  {/* Certificate Info Grid */}
-                  <div className="grid grid-cols-2 gap-4 mb-6">
-                    <div>
-                      <h5 className="font-semibold text-purple-300 mb-2">Issue Date</h5>
-                      <div className="flex items-center gap-2 text-gray-300">
-                        <Calendar className="w-4 h-4 text-purple-400" />
-                        <span>{cert.date}</span>
-                      </div>
-                    </div>
-                    <div>
-                      <h5 className="font-semibold text-purple-300 mb-2">Level</h5>
-                      <span className="text-gray-300">{cert.level}</span>
-                    </div>
-                    <div>
-                      <h5 className="font-semibold text-purple-300 mb-2">Credential ID</h5>
-                      <span className="text-gray-300 font-mono text-sm">{cert.credentialId}</span>
-                    </div>
-                    <div>
-                      <h5 className="font-semibold text-purple-300 mb-2">Valid Until</h5>
-                      <span className="text-gray-300">{cert.validUntil}</span>
-                    </div>
-                  </div>
-
-                  {/* Skills */}
-                  <div className="mb-6">
-                    <h5 className="font-semibold text-purple-300 mb-3">Skills Validated</h5>
-                    <div className="flex flex-wrap gap-2">
-                      {cert.skills.map((skill, index) => (
-                        <span
-                          key={index}
-                          className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Key Highlights */}
-                  <div className="mb-6">
-                    <h5 className="font-semibold text-purple-300 mb-3">Key Highlights</h5>
-                    <ul className="space-y-2">
-                      {cert.highlights.map((highlight, index) => (
-                        <li key={index} className="flex items-start gap-2 text-gray-300 text-sm">
-                          <CheckCircle className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <motion.button
-                      className="flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-colors font-medium"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => window.open(cert.image, "_blank")}
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      View Certificate
-                    </motion.button>
-
-                    <motion.button
-                      className="flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition-colors font-medium"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => {
-                        const link = document.createElement("a");
-                        link.href = cert.image;
-                        link.download = `${cert.title}.png`;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                      }}
-                    >
-                      <Download className="w-4 h-4" />
-                      Download Certificate
-                    </motion.button>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Coursera Specializations */}
-        <motion.div variants={itemVariants} className="mb-16">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl sm:text-3xl font-bold text-purple-400 mb-4">
-              Coursera Specializations
-            </h3>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Advanced professional specializations from leading universities demonstrating expertise in modern manufacturing technologies and engineering principles.
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950 py-20">
+      <div className="container mx-auto px-6">
+        <motion.div 
+          variants={containerVariants} 
+          initial="hidden" 
+          whileInView="visible" 
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {/* Header Section */}
+          <motion.div variants={itemVariants} className="text-center mb-16">
+            <div className="inline-flex items-center gap-3 bg-gray-800/50 border border-gray-700/50 rounded-full px-6 py-3 mb-6">
+              <GraduationCap className="w-5 h-5 text-purple-400" />
+              <span className="text-gray-300 text-sm font-medium">Professional Credentials</span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+              Achievements & 
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"> Certifications</span>
+            </h1>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              Validated expertise through professional certifications and advanced specializations 
+              in mechanical engineering, additive manufacturing, and digital technologies.
             </p>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {specializations.map((specialization) => (
-              <motion.div
-                key={specialization.id}
-                className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50 hover:border-purple-500/30 transition-all duration-500 group hover:shadow-2xl hover:shadow-purple-500/10"
-                whileHover={{ scale: 1.02, y: -5 }}
-              >
-                <div className="flex flex-col h-full">
-                  {/* Specialization Header with Large Thumbnail */}
-                  <div className="relative">
-                    <div className="relative h-48 overflow-hidden bg-gradient-to-r from-purple-500/10 to-blue-500/10">
-                      <img
-                        src={specialization.specializationImage}
-                        alt={specialization.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent" />
-                      
-                      {/* Badges */}
-                      <div className="absolute top-4 left-4 flex gap-2">
-                        <div className="bg-purple-600/90 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1">
-                          <Layers className="w-4 h-4" />
-                          {specialization.courses} Courses
-                        </div>
-                        <div className="bg-blue-600/90 text-white px-3 py-1 rounded-full text-sm font-medium">
-                          {specialization.level}
-                        </div>
+          </motion.div>
+
+          {/* Achievement Stats */}
+          <motion.div variants={itemVariants} className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+            {achievements.map((achievement, index) => {
+              const Icon = achievement.icon;
+              return (
+                <motion.div
+                  key={index}
+                  className="bg-gray-800/40 backdrop-blur-md rounded-2xl p-8 text-center border border-gray-700/30 hover:border-purple-500/20 transition-all duration-500 group"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                >
+                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-purple-500/30 group-hover:to-blue-500/30 transition-all duration-500">
+                    <Icon className="w-7 h-7 text-purple-400" />
+                  </div>
+                  <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-2">
+                    {achievement.count}
+                  </div>
+                  <h3 className="font-semibold text-white mb-2 text-lg">{achievement.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{achievement.description}</p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* Professional Certifications */}
+          <motion.div variants={itemVariants} className="mb-24">
+            <div className="flex items-center justify-between mb-12">
+              <div>
+                <h2 className="text-3xl font-bold text-white mb-3">Professional Certifications</h2>
+                <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div>
+              </div>
+              <div className="text-right">
+                <p className="text-gray-400 text-sm">Industry Recognized</p>
+                <p className="text-purple-400 font-semibold">Validated Expertise</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+              {certificates.map((cert) => (
+                <motion.div
+                  key={cert.id}
+                  variants={cardVariants}
+                  className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md rounded-3xl overflow-hidden border border-gray-700/30 hover:border-purple-500/20 transition-all duration-500 group"
+                  whileHover="hover"
+                >
+                  <div className="p-8">
+                    {/* Certificate Header */}
+                    <div className="flex items-start justify-between mb-6">
+                      <div>
+                        <h3 className="text-xl font-bold text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors">
+                          {cert.title}
+                        </h3>
+                        <p className="text-purple-400 font-semibold">{cert.issuer}</p>
                       </div>
-                      
-                      {/* University Badge */}
-                      <div className="absolute bottom-4 left-4">
-                        <div className="bg-gray-800/90 text-white px-3 py-1 rounded-lg text-sm font-medium border border-gray-600/50">
-                          {specialization.issuer.split('(')[0].trim()}
+                      <div className="text-right">
+                        <div className="px-3 py-1 rounded-full border bg-green-500/20 text-green-400 border-green-500/30 flex items-center gap-1 text-xs">
+                          <CheckCircle className="w-3 h-3" />
+                          <span>Verified</span>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h4 className="text-xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors line-clamp-2">
-                      {specialization.title}
-                    </h4>
-                    
-                    <p className="text-gray-300 mb-4 flex-1 line-clamp-3">
-                      {specialization.description}
+                    <p className="text-gray-300 mb-6 leading-relaxed text-sm">
+                      {cert.description}
                     </p>
 
+                    {/* Certificate Info */}
+                    <div className="space-y-3 mb-6">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-purple-300">Level:</span>
+                        <span className="text-gray-300 font-medium">{cert.level}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-purple-300">Issue Date:</span>
+                        <span className="text-gray-300 font-medium">{cert.date}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-purple-300">Credential ID:</span>
+                        <span className="text-gray-300 font-mono text-xs">{cert.credentialId}</span>
+                      </div>
+                    </div>
+
                     {/* Skills */}
-                    <div className="mb-4">
+                    <div className="mb-6">
+                      <h5 className="font-semibold text-purple-300 mb-3 text-sm">Skills Validated</h5>
                       <div className="flex flex-wrap gap-2">
-                        {specialization.skills.slice(0, 4).map((skill, index) => (
+                        {cert.skills.slice(0, 3).map((skill, index) => (
                           <span
                             key={index}
-                            className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30"
+                            className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-lg text-xs border border-purple-500/30"
                           >
                             {skill}
                           </span>
                         ))}
-                        {specialization.skills.length > 4 && (
-                          <span className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full text-xs">
-                            +{specialization.skills.length - 4} more
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Stats */}
-                    <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1">
-                          <Book className="w-4 h-4 text-purple-400" />
-                          <span>{specialization.courses} modules</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4 text-blue-400" />
-                          <span>{specialization.date}</span>
-                        </div>
-                      </div>
-                      <div className="text-green-400 flex items-center gap-1">
-                        <CheckCircle className="w-4 h-4" />
-                        <span>Completed</span>
                       </div>
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex gap-3 pt-4 border-t border-gray-700/50">
+                    <div className="flex gap-3">
                       <motion.button
-                        className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-colors font-medium flex-1 justify-center"
+                        className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-xl transition-all duration-300 font-semibold flex-1 justify-center text-sm"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        onClick={() => openLightbox(specialization, 0)}
-                      >
-                        <Book className="w-4 h-4" />
-                        View All Courses
-                      </motion.button>
-                      
-                      <motion.button
-                        className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg transition-colors"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => window.open(specialization.specializationImage, "_blank")}
+                        onClick={() => window.open(cert.image, "_blank")}
                       >
                         <ExternalLink className="w-4 h-4" />
+                        View
+                      </motion.button>
+
+                      <motion.button
+                        className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-xl transition-all duration-300 font-semibold"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => {
+                          const link = document.createElement("a");
+                          link.href = cert.image;
+                          link.download = `${cert.title}.png`;
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                        }}
+                      >
+                        <Download className="w-4 h-4" />
                       </motion.button>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
 
-        {/* Additional Certifications Preview */}
-        <motion.div variants={itemVariants} className="text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">More Certifications</h3>
-          <p className="text-gray-400 mb-6">
-            View my complete certification portfolio including technical courses, 
-            industry standards, and professional development achievements.
-          </p>
-          <motion.button
-            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            View All Certifications
-          </motion.button>
-        </motion.div>
-      </motion.div>
+          {/* Coursera Specializations */}
+          <motion.div variants={itemVariants} className="mb-20">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-3 bg-gray-800/50 border border-gray-700/50 rounded-full px-6 py-3 mb-6">
+                <Layers className="w-5 h-5 text-blue-400" />
+                <span className="text-gray-300 text-sm font-medium">Advanced Specializations</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+                University <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Specializations</span>
+              </h2>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Comprehensive professional programs from leading universities focusing on 
+                cutting-edge manufacturing technologies and engineering principles.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+              {specializations.map((specialization) => (
+                <motion.div
+                  key={specialization.id}
+                  variants={cardVariants}
+                  className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-md rounded-3xl overflow-hidden border border-gray-700/30 hover:border-purple-500/20 transition-all duration-500 group"
+                  whileHover="hover"
+                >
+                  <div className="flex flex-col h-full">
+                    {/* Header with University Branding */}
+                    <div className="p-8 pb-0">
+                      <div className="flex items-start justify-between mb-6">
+                        <div>
+                          <h3 className="text-2xl font-bold text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors">
+                            {specialization.title}
+                          </h3>
+                          <p className="text-blue-400 font-semibold text-lg">{specialization.issuer}</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-purple-300 px-4 py-2 rounded-xl border border-purple-500/30">
+                            <div className="flex items-center gap-2 text-sm font-semibold">
+                              <Layers className="w-4 h-4" />
+                              {specialization.courses} Courses
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-      {/* Lightbox Modal for Course Certificates */}
+                    {/* Content Area */}
+                    <div className="p-8 flex-1">
+                      <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+                        {specialization.description}
+                      </p>
+
+                      {/* Skills Grid */}
+                      <div className="mb-6">
+                        <h4 className="font-semibold text-purple-300 mb-4 text-sm uppercase tracking-wide">Core Competencies</h4>
+                        <div className="flex flex-wrap gap-3">
+                          {specialization.skills.slice(0, 6).map((skill, index) => (
+                            <span
+                              key={index}
+                              className="bg-purple-500/15 text-purple-300 px-4 py-2 rounded-xl text-sm border border-purple-500/20 font-medium"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Footer with Actions */}
+                      <div className="flex items-center justify-between pt-6 border-t border-gray-700/50">
+                        <div className="flex items-center gap-6 text-sm text-gray-400">
+                          <div className="flex items-center gap-2">
+                            <Book className="w-4 h-4 text-blue-400" />
+                            <span>{specialization.courses} Modules</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4 text-green-400" />
+                            <span>Completed</span>
+                          </div>
+                        </div>
+                        
+                        <div className="flex gap-3">
+                          <motion.button
+                            className="flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-300 font-semibold"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => openLightbox(specialization, 0)}
+                          >
+                            <Book className="w-4 h-4" />
+                            View Courses
+                          </motion.button>
+                          
+                          <motion.button
+                            className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-xl transition-all duration-300"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => window.open(specialization.specializationImage, "_blank")}
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </motion.button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* CTA Section */}
+          <motion.div variants={itemVariants} className="text-center">
+            <div className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-3xl p-12">
+              <h3 className="text-3xl font-bold text-white mb-4">Explore Full Portfolio</h3>
+              <p className="text-gray-400 text-xl mb-8 max-w-2xl mx-auto">
+                Access complete documentation of all professional certifications, 
+                technical training, and engineering qualifications.
+              </p>
+              <motion.button
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-12 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-2xl shadow-purple-500/20"
+                whileHover={{ scale: 1.05, shadow: "0 20px 40px rgba(139, 92, 246, 0.3)" }}
+                whileTap={{ scale: 0.98 }}
+              >
+                View Complete Portfolio
+              </motion.button>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Lightbox Modal */}
       <AnimatePresence>
         {lightboxOpen && selectedSpecialization && (
           <motion.div
-            className="fixed inset-0 bg-black/95 backdrop-blur-lg z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center p-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="relative bg-gray-900 rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden border border-purple-500/20 shadow-2xl"
+              className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl max-w-7xl w-full max-h-[95vh] overflow-hidden border border-purple-500/20 shadow-2xl"
               variants={lightboxVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
             >
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-gray-700 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
+              <div className="flex items-center justify-between p-8 border-b border-gray-700/50 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-white mb-1">
+                  <h3 className="text-2xl font-bold text-white mb-2">
                     {selectedSpecialization.courseCertificates[currentCertIndex].title}
                   </h3>
-                  <div className="flex items-center gap-4 text-sm">
-                    <p className="text-purple-400">{selectedSpecialization.courseCertificates[currentCertIndex].issuer}</p>
+                  <div className="flex items-center gap-6 text-lg">
+                    <p className="text-purple-400 font-semibold">{selectedSpecialization.courseCertificates[currentCertIndex].issuer}</p>
                     <span className="text-gray-400">•</span>
-                    <span className="text-gray-300">
+                    <span className="text-gray-300 font-medium">
                       Course {currentCertIndex + 1} of {selectedSpecialization.courseCertificates.length}
-                    </span>
-                    <span className="text-gray-400">•</span>
-                    <span className="text-green-400 flex items-center gap-1">
-                      <CheckCircle className="w-4 h-4" />
-                      Verified
                     </span>
                   </div>
                 </div>
                 <motion.button
                   onClick={closeLightbox}
-                  className="p-2 hover:bg-gray-800 rounded-lg transition-colors ml-4"
+                  className="p-3 hover:bg-gray-800 rounded-xl transition-colors ml-6"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -562,80 +736,64 @@ const Achievements = () => {
               </div>
 
               {/* Certificate Image */}
-              <div className="flex items-center justify-center p-8 max-h-[60vh] overflow-auto bg-gray-800/50">
+              <div className="flex items-center justify-center p-12 max-h-[65vh] overflow-auto bg-gray-800/30">
                 <motion.img
                   key={currentCertIndex}
                   src={selectedSpecialization.courseCertificates[currentCertIndex].image}
                   alt={selectedSpecialization.courseCertificates[currentCertIndex].title}
-                  className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                  className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4 }}
                 />
               </div>
 
-              {/* Course Skills */}
-              <div className="p-6 border-t border-gray-700">
-                <h4 className="text-lg font-semibold text-purple-300 mb-3">Course Skills</h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedSpecialization.courseCertificates[currentCertIndex].skills.map((skill, index) => (
-                    <span
-                      key={index}
-                      className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
+              {/* Footer with Navigation */}
+              <div className="p-8 border-t border-gray-700/50 bg-gray-800/20">
+                <div className="flex items-center justify-between">
+                  <div className="text-gray-300 text-lg">
+                    {selectedSpecialization.title}
+                  </div>
+                  
+                  <div className="flex items-center gap-4">
+                    <motion.button
+                      onClick={prevCertificate}
+                      className="p-4 bg-gray-700 hover:bg-purple-600 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      disabled={selectedSpecialization.courseCertificates.length <= 1}
                     >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
+                      <ChevronLeft className="w-6 h-6 text-white" />
+                    </motion.button>
 
-              {/* Navigation and Actions */}
-              <div className="flex items-center justify-between p-6 border-t border-gray-700 bg-gray-800/50">
-                <div className="text-gray-300 text-sm">
-                  {selectedSpecialization.title} • {selectedSpecialization.issuer}
-                </div>
-                
-                <div className="flex items-center gap-3">
-                  {/* Previous Button */}
-                  <motion.button
-                    onClick={prevCertificate}
-                    className="p-3 bg-gray-700 hover:bg-purple-600 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    disabled={selectedSpecialization.courseCertificates.length <= 1}
-                  >
-                    <ChevronLeft className="w-5 h-5 text-white" />
-                  </motion.button>
+                    <motion.button
+                      className="flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl transition-colors font-semibold"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        const cert = selectedSpecialization.courseCertificates[currentCertIndex];
+                        const link = document.createElement("a");
+                        link.href = cert.image;
+                        link.download = `${cert.title}.png`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                      }}
+                    >
+                      <Download className="w-5 h-5" />
+                      Download Certificate
+                    </motion.button>
 
-                  {/* Download Button */}
-                  <motion.button
-                    className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      const cert = selectedSpecialization.courseCertificates[currentCertIndex];
-                      const link = document.createElement("a");
-                      link.href = cert.image;
-                      link.download = `${cert.title}.png`;
-                      document.body.appendChild(link);
-                      link.click();
-                      document.body.removeChild(link);
-                    }}
-                  >
-                    <Download className="w-4 h-4" />
-                    Download
-                  </motion.button>
-
-                  {/* Next Button */}
-                  <motion.button
-                    onClick={nextCertificate}
-                    className="p-3 bg-gray-700 hover:bg-purple-600 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    disabled={selectedSpecialization.courseCertificates.length <= 1}
-                  >
-                    <ChevronRight className="w-5 h-5 text-white" />
-                  </motion.button>
+                    <motion.button
+                      onClick={nextCertificate}
+                      className="p-4 bg-gray-700 hover:bg-purple-600 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      disabled={selectedSpecialization.courseCertificates.length <= 1}
+                    >
+                      <ChevronRight className="w-6 h-6 text-white" />
+                    </motion.button>
+                  </div>
                 </div>
               </div>
             </motion.div>

@@ -27,42 +27,6 @@ const Achievements = () => {
         "Validated understanding of design intent and best practices",
       ],
     },
-    {
-      id: 2,
-      title: "Introduction to Engineering Mechanics",
-      issuer: "Georgia Institute of Technology",
-      date: "2024",
-      description: "Fundamental principles of engineering mechanics including statics, dynamics, and mechanical analysis.",
-      image: "engineering-mechanics-cert.png",
-      skills: ["Statics", "Dynamics", "Force Analysis", "Mechanical Principles"],
-      credentialId: "EM-GT-2024",
-      category: "Professional Certificate",
-      level: "Intermediate",
-      validUntil: "Lifetime",
-      highlights: [
-        "Mastered fundamental principles of statics and dynamics",
-        "Applied mechanical analysis to engineering problems",
-        "Developed problem-solving skills for mechanical systems",
-      ],
-    },
-    {
-      id: 3,
-      title: "Autodesk Certified Professional in AutoCAD for Design and Drafting",
-      issuer: "Autodesk",
-      date: "2024",
-      description: "Professional certification validating advanced skills in AutoCAD for mechanical design and drafting.",
-      image: "autocad-cert.png",
-      skills: ["AutoCAD", "2D Drafting", "Technical Drawing", "Design Documentation"],
-      credentialId: "ACP-AUTO-2024",
-      category: "Professional Certification",
-      level: "Professional",
-      validUntil: "2026",
-      highlights: [
-        "Advanced proficiency in 2D drafting and design",
-        "Expertise in technical drawing standards",
-        "Comprehensive knowledge of AutoCAD tools and features",
-      ],
-    }
   ];
 
   const specializations = [
@@ -190,19 +154,19 @@ const Achievements = () => {
       title: "Rapid Prototyping and Tooling",
       issuer: "Arizona State University (Coursera)",
       date: "2024",
-      description: "Comprehensive training in rapid prototyping techniques and tooling applications for manufacturing. Covers electronics integration and material science.",
+      description: "Comprehensive training in advanced rapid prototyping techniques including electronics integration, material science, and tooling applications for modern manufacturing.",
       specializationImage: "rapid-prototyping-tooling-specialization.png",
       category: "Coursera Specialization",
       level: "Advanced",
       courses: 3,
-      skills: ["Rapid Tooling", "Electronics Integration", "Material Science", "Manufacturing Processes"],
+      skills: ["Rapid Tooling", "Electronics Integration", "Material Science", "Advanced Prototyping", "Manufacturing"],
       courseCertificates: [
         {
           id: 1,
           title: "Using Rapid Prototyping in the Engineering Design Process",
           issuer: "Arizona State University",
           image: "rapid-engineering-cert.png",
-          skills: ["Design Integration", "Workflow Optimization", "Efficiency", "Process Improvement"]
+          skills: ["Design Integration", "Workflow Optimization", "Efficiency", "Engineering Design"]
         },
         {
           id: 2,
@@ -225,40 +189,40 @@ const Achievements = () => {
       title: "The Engineering of Structures Around Us",
       issuer: "Dartmouth College (Coursera)",
       date: "2024",
-      description: "Comprehensive study of structural engineering principles covering tension, compression, shear, and bending analysis in various engineering applications.",
+      description: "Fundamental principles of structural engineering covering tension, compression, shear, and bending analysis with practical applications in modern structural design.",
       specializationImage: "engineering-structures-specialization.png",
       category: "Coursera Specialization",
       level: "Intermediate",
       courses: 5,
-      skills: ["Structural Analysis", "Tension/Compression", "Shear Forces", "Bending Moments", "Load Analysis"],
+      skills: ["Structural Analysis", "Tension/Compression", "Shear Forces", "Bending Moments", "Structural Design"],
       courseCertificates: [
         {
           id: 1,
           title: "Engineering of Structures: Tension",
           issuer: "Dartmouth College",
           image: "tension-cert.png",
-          skills: ["Tension Analysis", "Cable Structures", "Material Strength", "Structural Design"]
+          skills: ["Tension Analysis", "Cable Structures", "Material Strength", "Structural Tension"]
         },
         {
           id: 2,
           title: "Engineering of Structures: Compression",
           issuer: "Dartmouth College",
           image: "compression-cert.png",
-          skills: ["Compression Members", "Column Design", "Buckling Analysis", "Structural Stability"]
+          skills: ["Compression Members", "Column Design", "Buckling Analysis", "Structural Compression"]
         },
         {
           id: 3,
           title: "Engineering of Structures: Tension and Compression",
           issuer: "Dartmouth College",
           image: "tension-compression-cert.png",
-          skills: ["Combined Loading", "Structural Elements", "Load Analysis", "Mixed Stress States"]
+          skills: ["Combined Loading", "Structural Elements", "Load Analysis", "Mixed Forces"]
         },
         {
           id: 4,
           title: "Engineering of Structures: Shear and Bending",
           issuer: "Dartmouth College",
           image: "shear-bending-cert.png",
-          skills: ["Shear Stress", "Bending Moments", "Beam Design", "Structural Mechanics"]
+          skills: ["Shear Stress", "Bending Moments", "Beam Design", "Structural Shear"]
         },
         {
           id: 5,
@@ -274,7 +238,7 @@ const Achievements = () => {
       title: "Digital Manufacturing & Design Technology",
       issuer: "University at Buffalo & The State University of New York (Coursera)",
       date: "2024",
-      description: "Comprehensive program covering digital manufacturing technologies, Industry 4.0 implementation, and smart factory systems for modern manufacturing enterprises.",
+      description: "Comprehensive program covering digital manufacturing technologies, Industry 4.0 implementation, smart factory systems, and advanced manufacturing enterprise management.",
       specializationImage: "digital-manufacturing-design-specialization.png",
       category: "Coursera Specialization",
       level: "Advanced",
@@ -286,21 +250,21 @@ const Achievements = () => {
           title: "Digital Manufacturing & Design",
           issuer: "University at Buffalo",
           image: "digital-mfg-design-cert.png",
-          skills: ["Digital Transformation", "Smart Factory", "Industry 4.0", "Manufacturing Innovation"]
+          skills: ["Digital Transformation", "Smart Factory", "Industry 4.0", "Manufacturing Design"]
         },
         {
           id: 2,
           title: "Digital Thread: Components",
           issuer: "University at Buffalo",
           image: "digital-thread-components-cert.png",
-          skills: ["Data Integration", "System Components", "Digital Infrastructure", "Manufacturing Systems"]
+          skills: ["Data Integration", "System Components", "Digital Infrastructure", "Thread Components"]
         },
         {
           id: 3,
           title: "Digital Thread: Implementation",
           issuer: "University at Buffalo",
           image: "digital-thread-implementation-cert.png",
-          skills: ["Implementation Strategy", "Deployment", "System Integration", "Digital Implementation"]
+          skills: ["Implementation Strategy", "Deployment", "System Integration", "Thread Implementation"]
         },
         {
           id: 4,
@@ -314,35 +278,35 @@ const Achievements = () => {
           title: "Intelligent Machining",
           issuer: "University at Buffalo",
           image: "intelligent-machining-cert.png",
-          skills: ["Smart Machining", "AI in Manufacturing", "Predictive Maintenance", "Advanced Machining"]
+          skills: ["Smart Machining", "AI in Manufacturing", "Predictive Maintenance", "Intelligent Systems"]
         },
         {
           id: 6,
           title: "Advanced Manufacturing Enterprise",
           issuer: "University at Buffalo",
           image: "mfg-enterprise-cert.png",
-          skills: ["Enterprise Systems", "Supply Chain", "Business Integration", "Manufacturing Management"]
+          skills: ["Enterprise Systems", "Supply Chain", "Business Integration", "Manufacturing Enterprise"]
         },
         {
           id: 7,
           title: "Cyber Security in Manufacturing",
           issuer: "University at Buffalo",
           image: "cybersecurity-mfg-cert.png",
-          skills: ["Security Protocols", "Data Protection", "Risk Management", "Industrial Security"]
+          skills: ["Security Protocols", "Data Protection", "Risk Management", "Manufacturing Security"]
         },
         {
           id: 8,
           title: "MBSE: Model-Based Systems Engineering",
           issuer: "University at Buffalo",
           image: "mbse-cert.png",
-          skills: ["Systems Modeling", "MBSE Methodology", "Digital Engineering", "System Architecture"]
+          skills: ["Systems Modeling", "MBSE Methodology", "Digital Engineering", "Model-Based Systems"]
         },
         {
           id: 9,
           title: "Roadmap to Success in Digital Manufacturing & Design",
           issuer: "University at Buffalo",
           image: "roadmap-success-cert.png",
-          skills: ["Career Planning", "Industry Trends", "Professional Development", "Manufacturing Strategy"]
+          skills: ["Career Planning", "Industry Trends", "Professional Development", "Success Strategies"]
         }
       ]
     }
@@ -352,7 +316,7 @@ const Achievements = () => {
     { icon: Trophy, title: "Academic Excellence", count: "7.50/10", description: "CGPA in Mechanical Engineering" },
     { icon: Medal, title: "Patents Filed", count: "2", description: "Innovation in mechanical design" },
     { icon: Star, title: "Certifications", count: "10+", description: "Professional and technical certifications" },
-    { icon: Award, title: "Projects Completed", count: "15+", description: "Engineering and research projects" },
+    { icon: Award, title: "Projects Completed", count: "5+", description: "Engineering and research projects" },
   ];
 
   const containerVariants = { 
@@ -461,72 +425,98 @@ const Achievements = () => {
             })}
           </motion.div>
 
-          {/* Professional Certifications */}
+          {/* Featured Certification */}
           <motion.div variants={itemVariants} className="mb-24">
             <div className="flex items-center justify-between mb-12">
               <div>
-                <h2 className="text-3xl font-bold text-white mb-3">Professional Certifications</h2>
+                <h2 className="text-3xl font-bold text-white mb-3">Featured Certification</h2>
                 <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div>
               </div>
               <div className="text-right">
                 <p className="text-gray-400 text-sm">Industry Recognized</p>
-                <p className="text-purple-400 font-semibold">Validated Expertise</p>
+                <p className="text-purple-400 font-semibold">Professional Standard</p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-              {certificates.map((cert) => (
-                <motion.div
-                  key={cert.id}
-                  variants={cardVariants}
-                  className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md rounded-3xl overflow-hidden border border-gray-700/30 hover:border-purple-500/20 transition-all duration-500 group"
-                  whileHover="hover"
-                >
-                  <div className="p-8">
-                    {/* Certificate Header */}
-                    <div className="flex items-start justify-between mb-6">
+            {certificates.map((cert) => (
+              <motion.div
+                key={cert.id}
+                variants={cardVariants}
+                className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md rounded-3xl overflow-hidden border border-gray-700/30 shadow-2xl"
+                whileHover="hover"
+              >
+                <div className="grid xl:grid-cols-2 gap-0">
+                  {/* Certificate Image */}
+                  <div className="relative p-12 flex items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
+                    <div className="relative group cursor-pointer">
+                      <motion.img
+                        src={cert.image}
+                        alt={cert.title}
+                        className="w-full max-w-md h-auto object-contain rounded-xl shadow-2xl"
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ duration: 0.4 }}
+                        onClick={() => window.open(cert.image, "_blank")}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-500 flex items-center justify-center">
+                        <div className="bg-black/50 rounded-full p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                          <ExternalLink className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Certificate Details */}
+                  <div className="p-12">
+                    <div className="flex items-start justify-between mb-8">
                       <div>
-                        <h3 className="text-xl font-bold text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors">
-                          {cert.title}
-                        </h3>
-                        <p className="text-purple-400 font-semibold">{cert.issuer}</p>
+                        <h3 className="text-3xl font-bold text-white mb-3 leading-tight">{cert.title}</h3>
+                        <p className="text-purple-400 font-semibold text-lg">{cert.issuer}</p>
                       </div>
                       <div className="text-right">
-                        <div className="px-3 py-1 rounded-full border bg-green-500/20 text-green-400 border-green-500/30 flex items-center gap-1 text-xs">
-                          <CheckCircle className="w-3 h-3" />
-                          <span>Verified</span>
+                        <div className="px-4 py-2 rounded-full border bg-green-500/20 text-green-400 border-green-500/30 flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4" />
+                          <span className="text-sm font-medium">Verified</span>
                         </div>
                       </div>
                     </div>
 
-                    <p className="text-gray-300 mb-6 leading-relaxed text-sm">
-                      {cert.description}
-                    </p>
+                    <p className="text-gray-300 text-lg mb-8 leading-relaxed">{cert.description}</p>
 
-                    {/* Certificate Info */}
-                    <div className="space-y-3 mb-6">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-purple-300">Level:</span>
-                        <span className="text-gray-300 font-medium">{cert.level}</span>
+                    {/* Certificate Info Grid */}
+                    <div className="grid grid-cols-2 gap-6 mb-8">
+                      <div className="space-y-4">
+                        <div>
+                          <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Issue Date</h5>
+                          <div className="flex items-center gap-3 text-gray-300">
+                            <Calendar className="w-5 h-5 text-purple-400" />
+                            <span className="font-medium">{cert.date}</span>
+                          </div>
+                        </div>
+                        <div>
+                          <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Level</h5>
+                          <span className="text-gray-300 font-medium bg-gray-700/50 px-3 py-1 rounded-lg">{cert.level}</span>
+                        </div>
                       </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-purple-300">Issue Date:</span>
-                        <span className="text-gray-300 font-medium">{cert.date}</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-purple-300">Credential ID:</span>
-                        <span className="text-gray-300 font-mono text-xs">{cert.credentialId}</span>
+                      <div className="space-y-4">
+                        <div>
+                          <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Credential ID</h5>
+                          <span className="text-gray-300 font-mono text-sm bg-gray-700/50 px-3 py-1 rounded-lg">{cert.credentialId}</span>
+                        </div>
+                        <div>
+                          <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Valid Until</h5>
+                          <span className="text-gray-300 font-medium">{cert.validUntil}</span>
+                        </div>
                       </div>
                     </div>
 
                     {/* Skills */}
-                    <div className="mb-6">
-                      <h5 className="font-semibold text-purple-300 mb-3 text-sm">Skills Validated</h5>
-                      <div className="flex flex-wrap gap-2">
-                        {cert.skills.slice(0, 3).map((skill, index) => (
+                    <div className="mb-8">
+                      <h5 className="font-semibold text-purple-300 mb-4 text-sm uppercase tracking-wide">Skills Validated</h5>
+                      <div className="flex flex-wrap gap-3">
+                        {cert.skills.map((skill, index) => (
                           <span
                             key={index}
-                            className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-lg text-xs border border-purple-500/30"
+                            className="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-xl text-sm border border-purple-500/30 font-medium"
                           >
                             {skill}
                           </span>
@@ -535,21 +525,21 @@ const Achievements = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex gap-3">
+                    <div className="flex gap-4">
                       <motion.button
-                        className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-xl transition-all duration-300 font-semibold flex-1 justify-center text-sm"
+                        className="flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl transition-all duration-300 font-semibold flex-1 justify-center"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         onClick={() => window.open(cert.image, "_blank")}
                       >
-                        <ExternalLink className="w-4 h-4" />
-                        View
+                        <ExternalLink className="w-5 h-5" />
+                        View Certificate
                       </motion.button>
 
                       <motion.button
-                        className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-xl transition-all duration-300 font-semibold"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center gap-3 bg-gray-700 hover:bg-gray-600 text-white px-6 py-4 rounded-xl transition-all duration-300 font-semibold"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         onClick={() => {
                           const link = document.createElement("a");
                           link.href = cert.image;
@@ -559,13 +549,13 @@ const Achievements = () => {
                           document.body.removeChild(link);
                         }}
                       >
-                        <Download className="w-4 h-4" />
+                        <Download className="w-5 h-5" />
                       </motion.button>
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* Coursera Specializations */}
@@ -672,24 +662,6 @@ const Achievements = () => {
                   </div>
                 </motion.div>
               ))}
-            </div>
-          </motion.div>
-
-          {/* CTA Section */}
-          <motion.div variants={itemVariants} className="text-center">
-            <div className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/20 rounded-3xl p-12">
-              <h3 className="text-3xl font-bold text-white mb-4">Explore Full Portfolio</h3>
-              <p className="text-gray-400 text-xl mb-8 max-w-2xl mx-auto">
-                Access complete documentation of all professional certifications, 
-                technical training, and engineering qualifications.
-              </p>
-              <motion.button
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-12 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-2xl shadow-purple-500/20"
-                whileHover={{ scale: 1.05, shadow: "0 20px 40px rgba(139, 92, 246, 0.3)" }}
-                whileTap={{ scale: 0.98 }}
-              >
-                View Complete Portfolio
-              </motion.button>
             </div>
           </motion.div>
         </motion.div>

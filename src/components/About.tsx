@@ -570,19 +570,6 @@ const About = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-center mt-12"
-        >
-          <p className="text-gray-400 mb-6">Interested in collaborating on new innovations?</p>
-          <button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-full font-semibold transition-all shadow-lg hover:shadow-purple-500/25">
-            Discuss Innovation
-          </button>
-        </motion.div>
       </motion.div>
 
       {/* Image Modal */}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Calendar, CheckCircle, ExternalLink, Download, Star, Trophy, Medal, X, ChevronLeft, ChevronRight, Book, Layers, Clock, Users } from 'lucide-react';
+import { Award, Calendar, CheckCircle, ExternalLink, Download, Star, Trophy, Medal, X, ChevronLeft, ChevronRight, Book, Layers } from 'lucide-react';
 
 const Achievements = () => {
   const [selectedSpecialization, setSelectedSpecialization] = useState(null);
@@ -40,42 +40,42 @@ const Achievements = () => {
       category: "Coursera Specialization",
       level: "Advanced",
       courses: 5,
-      skills: ["Material Extrusion", "Material Jetting", "Stereolithography", "Selective Laser Sintering", "Design for AM", "3D Printing", "Rapid Prototyping"],
+      skills: ["Material Extrusion", "Material Jetting", "Stereolithography", "Selective Laser Sintering", "Design for AM"],
       courseCertificates: [
         {
           id: 1,
           title: "Introduction to Additive Manufacturing Processes",
           issuer: "Arizona State University",
           image: "additive-intro-cert.png",
-          skills: ["AM Fundamentals", "Process Selection", "Technology Overview", "Manufacturing Processes"]
+          skills: ["AM Fundamentals", "Process Selection", "Technology Overview"]
         },
         {
           id: 2,
           title: "Material Extrusion",
           issuer: "Arizona State University",
           image: "material-extrusion-cert.png",
-          skills: ["FDM/FFF", "Material Properties", "Process Parameters", "Extrusion Technology"]
+          skills: ["FDM/FFF", "Material Properties", "Process Parameters"]
         },
         {
           id: 3,
           title: "Material Jetting and Stereolithography",
           issuer: "Arizona State University",
           image: "material-jetting-cert.png",
-          skills: ["SLA", "Material Jetting", "High-Resolution Printing", "Photopolymerization"]
+          skills: ["SLA", "Material Jetting", "High-Resolution Printing"]
         },
         {
           id: 4,
           title: "Selective Laser Sintering and Metal Laser Powder Bed Fusion",
           issuer: "Arizona State University",
           image: "sls-metal-cert.png",
-          skills: ["SLS", "LPBF", "Metal AM", "Post-Processing", "Laser Technology"]
+          skills: ["SLS", "LPBF", "Metal AM", "Post-Processing"]
         },
         {
           id: 5,
           title: "Design for Additive Manufacturing",
           issuer: "Arizona State University",
           image: "dfam-cert.png",
-          skills: ["DFAM Principles", "Topology Optimization", "Lattice Structures", "Generative Design"]
+          skills: ["DFAM Principles", "Topology Optimization", "Lattice Structures"]
         }
       ]
     },
@@ -89,28 +89,28 @@ const Achievements = () => {
       category: "Coursera Specialization",
       level: "Intermediate",
       courses: 3,
-      skills: ["IIoT", "Digital Twins", "Smart Manufacturing", "Industry 4.0", "Data Analytics", "Automation"],
+      skills: ["IIoT", "Digital Twins", "Smart Manufacturing", "Industry 4.0"],
       courseCertificates: [
         {
           id: 1,
           title: "Industrial Internet of Things (IIoT)",
           issuer: "University of Michigan",
           image: "iiot-cert.png",
-          skills: ["IoT Sensors", "Data Analytics", "Connectivity", "Industrial Automation"]
+          skills: ["IoT Sensors", "Data Analytics", "Connectivity"]
         },
         {
           id: 2,
           title: "Digital Twins",
           issuer: "University of Michigan",
           image: "digital-twins-cert.png",
-          skills: ["Virtual Modeling", "Simulation", "Real-time Monitoring", "Digital Replication"]
+          skills: ["Virtual Modeling", "Simulation", "Real-time Monitoring"]
         },
         {
           id: 3,
           title: "Additive Manufacturing",
           issuer: "University of Michigan",
           image: "am-umich-cert.png",
-          skills: ["AM Integration", "Digital Workflow", "Quality Control", "Manufacturing Innovation"]
+          skills: ["AM Integration", "Digital Workflow", "Quality Control"]
         }
       ]
     },
@@ -124,28 +124,189 @@ const Achievements = () => {
       category: "Coursera Specialization",
       level: "Intermediate",
       courses: 3,
-      skills: ["3D Printing", "Prototyping", "Product Design", "CAD", "Iterative Design", "Product Development"],
+      skills: ["3D Printing", "Prototyping", "Product Design", "CAD"],
       courseCertificates: [
         {
           id: 1,
           title: "Engineering and Product Design Processes",
           issuer: "Arizona State University",
           image: "design-process-cert.png",
-          skills: ["Design Thinking", "Product Development", "Iterative Design", "Engineering Methodology"]
+          skills: ["Design Thinking", "Product Development", "Iterative Design"]
         },
         {
           id: 2,
           title: "Prototyping",
           issuer: "Arizona State University",
           image: "prototyping-cert.png",
-          skills: ["Prototype Development", "Testing", "Validation", "Design Validation"]
+          skills: ["Prototype Development", "Testing", "Validation"]
         },
         {
           id: 3,
           title: "3D Printing Technology Deep Dive and Use Cases",
           issuer: "Arizona State University",
           image: "3d-printing-deepdive-cert.png",
-          skills: ["Technology Comparison", "Use Cases", "Best Practices", "Industry Applications"]
+          skills: ["Technology Comparison", "Use Cases", "Best Practices"]
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "Rapid Prototyping and Tooling",
+      issuer: "Arizona State University (Coursera)",
+      date: "2024",
+      description: "Advanced techniques in rapid prototyping including electronics integration and material selection.",
+      specializationImage: "prototyping-tooling-specialization.png",
+      category: "Coursera Specialization",
+      level: "Advanced",
+      courses: 3,
+      skills: ["Rapid Tooling", "Electronics Integration", "Material Science"],
+      courseCertificates: [
+        {
+          id: 1,
+          title: "Using Rapid Prototyping in the Engineering Design Process",
+          issuer: "Arizona State University",
+          image: "rapid-engineering-cert.png",
+          skills: ["Design Integration", "Workflow Optimization", "Efficiency"]
+        },
+        {
+          id: 2,
+          title: "Adding Electronics to Rapid Prototypes",
+          issuer: "Arizona State University",
+          image: "electronics-prototyping-cert.png",
+          skills: ["Embedded Systems", "Circuit Design", "Integration"]
+        },
+        {
+          id: 3,
+          title: "Rapid Prototyping Materials and Tooling",
+          issuer: "Arizona State University",
+          image: "materials-tooling-cert.png",
+          skills: ["Material Selection", "Tooling Design", "Manufacturing"]
+        }
+      ]
+    },
+    {
+      id: 5,
+      title: "The Engineering of Structures Around Us",
+      issuer: "Dartmouth College (Coursera)",
+      date: "2024",
+      description: "Fundamental principles of structural engineering covering tension, compression, shear, and bending analysis.",
+      specializationImage: "structures-specialization.png",
+      category: "Coursera Specialization",
+      level: "Intermediate",
+      courses: 5,
+      skills: ["Structural Analysis", "Tension/Compression", "Shear Forces", "Bending Moments"],
+      courseCertificates: [
+        {
+          id: 1,
+          title: "Engineering of Structures: Tension",
+          issuer: "Dartmouth College",
+          image: "tension-cert.png",
+          skills: ["Tension Analysis", "Cable Structures", "Material Strength"]
+        },
+        {
+          id: 2,
+          title: "Engineering of Structures: Compression",
+          issuer: "Dartmouth College",
+          image: "compression-cert.png",
+          skills: ["Compression Members", "Column Design", "Buckling Analysis"]
+        },
+        {
+          id: 3,
+          title: "Engineering of Structures: Tension and Compression",
+          issuer: "Dartmouth College",
+          image: "tension-compression-cert.png",
+          skills: ["Combined Loading", "Structural Elements", "Load Analysis"]
+        },
+        {
+          id: 4,
+          title: "Engineering of Structures: Shear and Bending",
+          issuer: "Dartmouth College",
+          image: "shear-bending-cert.png",
+          skills: ["Shear Stress", "Bending Moments", "Beam Design"]
+        },
+        {
+          id: 5,
+          title: "Engineering of Structures: Response of Structures",
+          issuer: "Dartmouth College",
+          image: "response-structures-cert.png",
+          skills: ["Structural Response", "Dynamic Analysis", "Performance Evaluation"]
+        }
+      ]
+    },
+    {
+      id: 6,
+      title: "Digital Manufacturing & Design Technology",
+      issuer: "University at Buffalo & The State University of New York (Coursera)",
+      date: "2024",
+      description: "Comprehensive program covering digital manufacturing technologies, Industry 4.0, and smart factory implementation.",
+      specializationImage: "digital-manufacturing-specialization.png",
+      category: "Coursera Specialization",
+      level: "Advanced",
+      courses: 9,
+      skills: ["Digital Thread", "IIoT", "Digital Twins", "Cyber Security", "MBSE"],
+      courseCertificates: [
+        {
+          id: 1,
+          title: "Digital Manufacturing & Design",
+          issuer: "University at Buffalo",
+          image: "digital-mfg-design-cert.png",
+          skills: ["Digital Transformation", "Smart Factory", "Industry 4.0"]
+        },
+        {
+          id: 2,
+          title: "Digital Thread: Components",
+          issuer: "University at Buffalo",
+          image: "digital-thread-components-cert.png",
+          skills: ["Data Integration", "System Components", "Digital Infrastructure"]
+        },
+        {
+          id: 3,
+          title: "Digital Thread: Implementation",
+          issuer: "University at Buffalo",
+          image: "digital-thread-implementation-cert.png",
+          skills: ["Implementation Strategy", "Deployment", "System Integration"]
+        },
+        {
+          id: 4,
+          title: "Advanced Manufacturing Process Analysis",
+          issuer: "University at Buffalo",
+          image: "process-analysis-cert.png",
+          skills: ["Process Optimization", "Data Analytics", "Quality Control"]
+        },
+        {
+          id: 5,
+          title: "Intelligent Machining",
+          issuer: "University at Buffalo",
+          image: "intelligent-machining-cert.png",
+          skills: ["Smart Machining", "AI in Manufacturing", "Predictive Maintenance"]
+        },
+        {
+          id: 6,
+          title: "Advanced Manufacturing Enterprise",
+          issuer: "University at Buffalo",
+          image: "mfg-enterprise-cert.png",
+          skills: ["Enterprise Systems", "Supply Chain", "Business Integration"]
+        },
+        {
+          id: 7,
+          title: "Cyber Security in Manufacturing",
+          issuer: "University at Buffalo",
+          image: "cybersecurity-mfg-cert.png",
+          skills: ["Security Protocols", "Data Protection", "Risk Management"]
+        },
+        {
+          id: 8,
+          title: "MBSE: Model-Based Systems Engineering",
+          issuer: "University at Buffalo",
+          image: "mbse-cert.png",
+          skills: ["Systems Modeling", "MBSE Methodology", "Digital Engineering"]
+        },
+        {
+          id: 9,
+          title: "Roadmap to Success in Digital Manufacturing & Design",
+          issuer: "University at Buffalo",
+          image: "roadmap-success-cert.png",
+          skills: ["Career Planning", "Industry Trends", "Professional Development"]
         }
       ]
     }
@@ -247,7 +408,7 @@ const Achievements = () => {
         </motion.div>
 
         {/* Featured Certificate */}
-        <motion.div variants={itemVariants} className="mb-20">
+        <motion.div variants={itemVariants} className="mb-16">
           <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-purple-400">
             Featured Certification
           </h3>
@@ -261,11 +422,11 @@ const Achievements = () => {
             >
               <div className="grid lg:grid-cols-2 gap-8">
                 {/* Certificate Image */}
-                <div className="relative w-full flex items-center justify-center overflow-hidden p-8">
+                <div className="relative w-full flex items-center justify-center overflow-hidden">
                   <motion.img
                     src={cert.image}
                     alt={cert.title}
-                    className="w-full h-auto max-h-[500px] object-contain cursor-pointer rounded-lg shadow-2xl"
+                    className="w-full h-auto max-h-[500px] object-contain cursor-pointer"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.5 }}
                     onClick={() => window.open(cert.image, "_blank")}
@@ -377,122 +538,87 @@ const Achievements = () => {
 
         {/* Coursera Specializations */}
         <motion.div variants={itemVariants} className="mb-16">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl sm:text-3xl font-bold text-purple-400 mb-4">
-              Coursera Specializations
-            </h3>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Advanced professional specializations from leading universities demonstrating expertise in modern manufacturing technologies and engineering principles.
-            </p>
-          </div>
+          <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 text-purple-400">
+            Coursera Specializations
+          </h3>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {specializations.map((specialization) => (
               <motion.div
                 key={specialization.id}
-                className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50 hover:border-purple-500/30 transition-all duration-500 group hover:shadow-2xl hover:shadow-purple-500/10"
-                whileHover={{ scale: 1.02, y: -5 }}
+                className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-purple-500/30 transition-all duration-300 group"
+                whileHover={{ scale: 1.05, y: -5 }}
               >
-                <div className="flex flex-col h-full">
-                  {/* Specialization Header with Large Thumbnail */}
-                  <div className="relative">
-                    <div className="relative h-48 overflow-hidden bg-gradient-to-r from-purple-500/10 to-blue-500/10">
-                      <img
-                        src={specialization.specializationImage}
-                        alt={specialization.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent" />
-                      
-                      {/* Badges */}
-                      <div className="absolute top-4 left-4 flex gap-2">
-                        <div className="bg-purple-600/90 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1">
-                          <Layers className="w-4 h-4" />
-                          {specialization.courses} Courses
-                        </div>
-                        <div className="bg-blue-600/90 text-white px-3 py-1 rounded-full text-sm font-medium">
-                          {specialization.level}
-                        </div>
-                      </div>
-                      
-                      {/* University Badge */}
-                      <div className="absolute bottom-4 left-4">
-                        <div className="bg-gray-800/90 text-white px-3 py-1 rounded-lg text-sm font-medium border border-gray-600/50">
-                          {specialization.issuer.split('(')[0].trim()}
-                        </div>
-                      </div>
-                    </div>
+                {/* Specialization Thumbnail */}
+                <div className="relative mb-4 rounded-lg overflow-hidden bg-gradient-to-br from-purple-500/10 to-blue-500/10">
+                  <img
+                    src={specialization.specializationImage}
+                    alt={specialization.title}
+                    className="w-full h-32 object-cover cursor-pointer"
+                    onClick={() => openLightbox(specialization, 0)}
+                  />
+                  <div className="absolute top-2 right-2 bg-purple-600/90 text-white px-2 py-1 rounded text-xs font-medium">
+                    {specialization.courses} Courses
                   </div>
-
-                  {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h4 className="text-xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors line-clamp-2">
-                      {specialization.title}
-                    </h4>
-                    
-                    <p className="text-gray-300 mb-4 flex-1 line-clamp-3">
-                      {specialization.description}
-                    </p>
-
-                    {/* Skills */}
-                    <div className="mb-4">
-                      <div className="flex flex-wrap gap-2">
-                        {specialization.skills.slice(0, 4).map((skill, index) => (
-                          <span
-                            key={index}
-                            className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-xs border border-purple-500/30"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                        {specialization.skills.length > 4 && (
-                          <span className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full text-xs">
-                            +{specialization.skills.length - 4} more
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Stats */}
-                    <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1">
-                          <Book className="w-4 h-4 text-purple-400" />
-                          <span>{specialization.courses} modules</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4 text-blue-400" />
-                          <span>{specialization.date}</span>
-                        </div>
-                      </div>
-                      <div className="text-green-400 flex items-center gap-1">
-                        <CheckCircle className="w-4 h-4" />
-                        <span>Completed</span>
-                      </div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex gap-3 pt-4 border-t border-gray-700/50">
-                      <motion.button
-                        className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition-colors font-medium flex-1 justify-center"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => openLightbox(specialization, 0)}
-                      >
-                        <Book className="w-4 h-4" />
-                        View All Courses
-                      </motion.button>
-                      
-                      <motion.button
-                        className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg transition-colors"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => window.open(specialization.specializationImage, "_blank")}
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </motion.button>
-                    </div>
+                </div>
+                
+                <h4 className="text-lg font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                  {specialization.title}
+                </h4>
+                
+                <p className="text-purple-400 font-medium text-sm mb-3">
+                  {specialization.issuer}
+                </p>
+                
+                <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+                  {specialization.description}
+                </p>
+                
+                <div className="flex items-center justify-between text-gray-400 text-sm mb-4">
+                  <div className="flex items-center gap-1">
+                    <Layers className="w-4 h-4" />
+                    <span>Level: {specialization.level}</span>
                   </div>
+                  <span>{specialization.date}</span>
+                </div>
+
+                {/* Skills */}
+                <div className="flex flex-wrap gap-1 mb-4">
+                  {specialization.skills.slice(0, 3).map((skill, index) => (
+                    <span
+                      key={index}
+                      className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs border border-purple-500/30"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                  {specialization.skills.length > 3 && (
+                    <span className="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs">
+                      +{specialization.skills.length - 3}
+                    </span>
+                  )}
+                </div>
+                
+                {/* Action Buttons */}
+                <div className="flex gap-2">
+                  <motion.button
+                    className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm transition-colors flex-1 justify-center"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => openLightbox(specialization, 0)}
+                  >
+                    <Book className="w-4 h-4" />
+                    View Courses
+                  </motion.button>
+                  
+                  <motion.button
+                    className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-lg transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => window.open(specialization.specializationImage, "_blank")}
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </motion.button>
                 </div>
               </motion.div>
             ))}

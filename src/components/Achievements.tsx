@@ -1,629 +1,336 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Box, Download, Eye, Layers, Award, X, ZoomIn, ZoomOut, 
-  Search, Filter, SortAsc, Info, 
-  ChevronLeft, ChevronRight, Play, Pause,
-  Calendar, CheckCircle, ExternalLink, Book, Clock, Users
-} from "lucide-react";
-import * as THREE from "three";
-import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Award, Calendar, CheckCircle, ExternalLink, Download, Star, Trophy, Medal, X, ChevronLeft, ChevronRight, Book, Layers, Clock, Users, GraduationCap, Eye } from 'lucide-react';
 
-const CADModels = () => {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [previewModel, setPreviewModel] = useState(null);
-  const [previewImage, setPreviewImage] = useState(null);
-  const [loadingModel, setLoadingModel] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sortBy, setSortBy] = useState("popularity");
-  const [autoRotate, setAutoRotate] = useState(true);
-  const [currentModelIndex, setCurrentModelIndex] = useState(0);
-  const [showInfoPanel, setShowInfoPanel] = useState(false);
-  
-  const mountRef = useRef(null);
-  const controlsRef = useRef(null);
-  const cameraRef = useRef(null);
-  const sceneRef = useRef(null);
-  const rendererRef = useRef(null);
-  const animationRef = useRef(null);
+const Achievements = () => {
+  const [selectedSpecialization, setSelectedSpecialization] = useState(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentCertIndex, setCurrentCertIndex] = useState(0);
+  const [coursesModalOpen, setCoursesModalOpen] = useState(false);
 
-  const cadModels = [
+  const certificates = [
     {
       id: 1,
-      title: "Pair of Spur Gears",
-      description: "Precision-engineered spur gear pair with optimized module and pressure angle for smooth torque transmission and minimal vibration under varying loads.",
-      software: "SolidWorks",
-      category: "Mechanical Parts",
-      complexity: "Intermediate",
-      features: ["Extrude", "Circular Pattern", "Mate Relations", "Helix and Sweep"],
-      image: "/3d Pictures/gear profile.png",
-      downloadUrl: "https://drive.google.com/file/d/13oG8TdKusFUKPVeh9SLd1cu0uHhuE8F5/view?usp=sharing",
-      modelPath: "/Models/Spur Gear profile.STL",
-      views: 1247,
-      downloads: 89,
-      fileSize: "4.2 MB",
-      lastUpdated: "2024-01-15"
+      title: "Certified SolidWorks Associate (CSWA)",
+      issuer: "Dassault Systèmes SolidWorks Corporation",
+      date: "2024",
+      description: "Professional certification demonstrating proficiency in SolidWorks 3D CAD software, including part modeling, assembly creation, and drawing generation.",
+      image: "/Certifications/VISWA CSWA.png",
+      skills: ["3D Modeling", "Assembly Design", "Technical Drawings", "Part Configuration", "Design Validation"],
+      credentialId: "C-L3G7SF84B9",
+      category: "Professional Certification",
+      level: "Associate",
+      validUntil: "Lifetime",
+      highlights: [
+        "Demonstrated proficiency in 3D part modeling",
+        "Mastered assembly creation and constraints",
+        "Skilled in creating technical drawings and annotations",
+        "Validated understanding of design intent and best practices",
+      ],
+    },
+  ];
+
+  const specializations = [
+    {
+      id: 1,
+      title: "Additive Manufacturing Specialization",
+      issuer: "Arizona State University (Coursera)",
+      date: "2024",
+      description: "Comprehensive specialization covering additive manufacturing processes, materials, and design principles for advanced manufacturing applications. Mastered various AM technologies including material extrusion, jetting, and laser-based processes.",
+      specializationImage: '/Certifications/Additive Manufacturing.png',
+      category: "Coursera Specialization",
+      level: "Advanced",
+      courses: 5,
+      duration: "5 months",
+      skills: ["Material Extrusion", "Material Jetting", "Stereolithography", "Selective Laser Sintering", "Design for AM", "3D Printing", "Rapid Prototyping"],
+      credentialId: "SP-L3G7SF84B1",
+      courseCertificates: [
+        {
+          id: 1,
+          title: "Introduction to Additive Manufacturing Processes",
+          issuer: "Arizona State University",
+          image: '/Certifications/Additive Manufacturing 1.png',
+          skills: ["AM Fundamentals", "Process Selection", "Technology Overview", "Manufacturing Processes"]
+        },
+        {
+          id: 2,
+          title: "Material Extrusion",
+          issuer: "Arizona State University",
+          image: '/Certifications/Additive Manufacturing 2.png',
+          skills: ["FDM/FFF", "Material Properties", "Process Parameters", "Extrusion Technology"]
+        },
+        {
+          id: 3,
+          title: "Material Jetting and Stereolithography",
+          issuer: "Arizona State University",
+          image: '/Certifications/Additive Manufacturing 3.png',
+          skills: ["SLA", "Material Jetting", "High-Resolution Printing", "Photopolymerization"]
+        },
+        {
+          id: 4,
+          title: "Selective Laser Sintering and Metal Laser Powder Bed Fusion",
+          issuer: "Arizona State University",
+          image: '/Certifications/Additive Manufacturing 4.png',
+          skills: ["SLS", "LPBF", "Metal AM", "Post-Processing", "Laser Technology"]
+        },
+        {
+          id: 5,
+          title: "Design for Additive Manufacturing",
+          issuer: "Arizona State University",
+          image: '/Certifications/Additive Manufacturing 5.png',
+          skills: ["DFAM Principles", "Topology Optimization", "Lattice Structures", "Generative Design"]
+        }
+      ]
     },
     {
       id: 2,
-      title: "Exhaust Manifold",
-      description: "Optimized exhaust manifold designed for efficient gas flow, reduced backpressure, and improved engine performance. Features smooth flow paths and minimized thermal stresses for durability.",
-      software: "SolidWorks",
-      category: "Automotive",
-      complexity: "Advanced",
-      features: ["Surface Loft", "Shell", "Fillet", "Swept Boss"],
-      image: "/3d Pictures/exhaust manifold.png",
-      downloadUrl: "https://drive.google.com/file/d/1gSdm1ro2u_3ZhIzegXzAI3INK1gj24mp/view?usp=sharing",
-      modelPath: "/Models/Exhaust manifold.STL",
-      views: 500,
-      downloads: 25,
-      fileSize: "6.7 MB",
-      lastUpdated: "2024-01-10"
+      title: "Digital Technologies and the Future of Manufacturing",
+      issuer: "University of Michigan (Coursera)",
+      date: "2024",
+      description: "Comprehensive exploration of Industry 4.0 technologies transforming modern manufacturing. Focused on IIoT implementation, digital twin technology, and smart factory systems.",
+      specializationImage: "/Certifications/Digital Technologies and the future of manufacturing.png",
+      category: "Coursera Specialization",
+      level: "Intermediate",
+      courses: 3,
+      duration: "3 months",
+      skills: ["IIoT", "Digital Twins", "Smart Manufacturing", "Industry 4.0", "Data Analytics", "Automation"],
+      credentialId: "SP-L3G7SF84B2",
+      courseCertificates: [
+        {
+          id: 1,
+          title: "Industrial Internet of Things (IIoT)",
+          issuer: "University of Michigan",
+          image: "/Certifications/Digital Technologies and the future of manufacturing 1.png",
+          skills: ["IoT Sensors", "Data Analytics", "Connectivity", "Industrial Automation"]
+        },
+        {
+          id: 2,
+          title: "Digital Twins",
+          issuer: "University of Michigan",
+          image: "/Certifications/Digital Technologies and the future of manufacturing 2.png",
+          skills: ["Virtual Modeling", "Simulation", "Real-time Monitoring", "Digital Replication"]
+        },
+        {
+          id: 3,
+          title: "Additive Manufacturing",
+          issuer: "University of Michigan",
+          image: "/Certifications/Digital Technologies and the future of manufacturing 3.png",
+          skills: ["AM Integration", "Digital Workflow", "Quality Control", "Manufacturing Innovation"]
+        }
+      ]
     },
     {
       id: 3,
-      title: "Knuckle Joint",
-      description: "Robust knuckle joint designed for heavy load applications, ensuring secure connections while allowing limited angular movement. Suitable for linkages in structural and mechanical systems.",
-      software: "SolidWorks",
-      category: "Mechanical Parts",
-      complexity: "Intermediate",
-      features: ["Revolve", "Extrude Cut", "Chamfer", "Assembly Mates"],
-      image: "/3d Pictures/knuckle joint.png",
-      downloadUrl: "https://drive.google.com/file/d/1Hh5q3akmigDoskDe_LOv58-YAJ3TAzuu/view?usp=sharing",
-      modelPath: "/Models/KNUCKLE JOINT.STL",
-      views: 226,
-      downloads: 10,
-      fileSize: "3.1 MB",
-      lastUpdated: "2024-01-08"
+      title: "Rapid Prototyping Using 3D Printing",
+      issuer: "Arizona State University (Coursera)",
+      date: "2024",
+      description: "Advanced course focusing on rapid prototyping methodologies and 3D printing applications in engineering product development cycles and design validation processes.",
+      specializationImage: "/Certifications/rapid-prototyping-specialization.png",
+      category: "Coursera Specialization",
+      level: "Intermediate",
+      courses: 3,
+      duration: "3 months",
+      skills: ["3D Printing", "Prototyping", "Product Design", "CAD", "Iterative Design", "Product Development"],
+      credentialId: "SP-L3G7SF84B3",
+      courseCertificates: [
+        {
+          id: 1,
+          title: "Engineering and Product Design Processes",
+          issuer: "Arizona State University",
+          image: "/Certifications/design-process-cert.png",
+          skills: ["Design Thinking", "Product Development", "Iterative Design", "Engineering Methodology"]
+        },
+        {
+          id: 2,
+          title: "Prototyping",
+          issuer: "Arizona State University",
+          image: "/Certifications/prototyping-cert.png",
+          skills: ["Prototype Development", "Testing", "Validation", "Design Validation"]
+        },
+        {
+          id: 3,
+          title: "3D Printing Technology Deep Dive and Use Cases",
+          issuer: "Arizona State University",
+          image: "/Certifications/3d-printing-deepdive-cert.png",
+          skills: ["Technology Comparison", "Use Cases", "Best Practices", "Industry Applications"]
+        }
+      ]
     },
     {
       id: 4,
-      title: "Universal Coupling",
-      description: "Precision universal coupling enabling torque transmission between shafts at varying angles. Designed to minimize backlash and maintain smooth power delivery in dynamic conditions.",
-      software: "SolidWorks",
-      category: "Industrial",
-      complexity: "Beginner",
-      features: ["Revolve", "Swept Cut", "Mirror", "Circular Pattern"],
-      image: "/3d Pictures/universal coupling.png",
-      downloadUrl: "https://drive.google.com/file/d/1hztYGQrBMjPsVBhAbwLdsVCVdrLDunm8/view?usp=sharing",
-      modelPath: "/Models/UNIVERSAL COUPLING.STL",
-      views: 189,
-      downloads: 15,
-      fileSize: "2.8 MB",
-      lastUpdated: "2024-01-05"
+      title: "Rapid Prototyping and Tooling",
+      issuer: "Arizona State University (Coursera)",
+      date: "2024",
+      description: "Comprehensive training in advanced rapid prototyping techniques including electronics integration, material science, and tooling applications for modern manufacturing.",
+      specializationImage: "/Certifications/rapid-prototyping-tooling-specialization.png",
+      category: "Coursera Specialization",
+      level: "Advanced",
+      courses: 3,
+      duration: "3 months",
+      skills: ["Rapid Tooling", "Electronics Integration", "Material Science", "Advanced Prototyping", "Manufacturing"],
+      credentialId: "SP-L3G7SF84B4",
+      courseCertificates: [
+        {
+          id: 1,
+          title: "Using Rapid Prototyping in the Engineering Design Process",
+          issuer: "Arizona State University",
+          image: "/Certifications/rapid-engineering-cert.png",
+          skills: ["Design Integration", "Workflow Optimization", "Efficiency", "Engineering Design"]
+        },
+        {
+          id: 2,
+          title: "Adding Electronics to Rapid Prototypes",
+          issuer: "Arizona State University",
+          image: "/Certifications/electronics-prototyping-cert.png",
+          skills: ["Embedded Systems", "Circuit Design", "Integration", "Electronics Prototyping"]
+        },
+        {
+          id: 3,
+          title: "Rapid Prototyping Materials and Tooling",
+          issuer: "Arizona State University",
+          image: "/Certifications/materials-tooling-cert.png",
+          skills: ["Material Selection", "Tooling Design", "Manufacturing", "Material Properties"]
+        }
+      ]
     },
     {
       id: 5,
-      title: "Muff Coupling",
-      description: "Simple and efficient muff coupling designed for rigid torque transmission between co-axial shafts. Features a hollow cylindrical sleeve with key and keyway for secure power transfer.",
-      software: "SolidWorks",
-      category: "Industrial",
-      complexity: "Basic",
-      features: ["Extrude", "Hole Wizard", "Chamfer", "Section View"],
-      image: "/3d Pictures/muff coupling.png",
-      downloadUrl: "https://drive.google.com/file/d/1swp0ZzEw2iwtmelt6Dzu66cQZQu1cvqz/view?usp=sharing",
-      modelPath: "/Models/MUFF COUPLING.STL",
-      views: 189,
-      downloads: 15,
-      fileSize: "2.5 MB",
-      lastUpdated: "2024-01-03"
+      title: "The Engineering of Structures Around Us",
+      issuer: "Dartmouth College (Coursera)",
+      date: "2024",
+      description: "Fundamental principles of structural engineering covering tension, compression, shear, and bending analysis with practical applications in modern structural design.",
+      specializationImage: "/Certifications/engineering-structures-specialization.png",
+      category: "Coursera Specialization",
+      level: "Intermediate",
+      courses: 5,
+      duration: "5 months",
+      skills: ["Structural Analysis", "Tension/Compression", "Shear Forces", "Bending Moments", "Structural Design"],
+      credentialId: "SP-L3G7SF84B5",
+      courseCertificates: [
+        {
+          id: 1,
+          title: "Engineering of Structures: Tension",
+          issuer: "Dartmouth College",
+          image: "/Certifications/tension-cert.png",
+          skills: ["Tension Analysis", "Cable Structures", "Material Strength", "Structural Tension"]
+        },
+        {
+          id: 2,
+          title: "Engineering of Structures: Compression",
+          issuer: "Dartmouth College",
+          image: "/Certifications/compression-cert.png",
+          skills: ["Compression Members", "Column Design", "Buckling Analysis", "Structural Compression"]
+        },
+        {
+          id: 3,
+          title: "Engineering of Structures: Tension and Compression",
+          issuer: "Dartmouth College",
+          image: "/Certifications/tension-compression-cert.png",
+          skills: ["Combined Loading", "Structural Elements", "Load Analysis", "Mixed Forces"]
+        },
+        {
+          id: 4,
+          title: "Engineering of Structures: Shear and Bending",
+          issuer: "Dartmouth College",
+          image: "/Certifications/shear-bending-cert.png",
+          skills: ["Shear Stress", "Bending Moments", "Beam Design", "Structural Shear"]
+        },
+        {
+          id: 5,
+          title: "Engineering of Structures: Response of Structures",
+          issuer: "Dartmouth College",
+          image: "/Certifications/response-structures-cert.png",
+          skills: ["Structural Response", "Dynamic Analysis", "Performance Evaluation", "Structural Behavior"]
+        }
+      ]
     },
     {
       id: 6,
-      title: "Door Lock Mechanism",
-      description: "Compact and reliable door lock mechanism featuring latch, spring, and handle components for secure and smooth operation.",
-      software: "SolidWorks",
-      category: "Assembly",
-      complexity: "Basic",
-      features: ["Assembly Mates", "Exploded View", "Motion Study", "Interference Detection"],
-      image: "/3d Pictures/DOOR LOCK.png",
-      downloadUrl: "https://drive.google.com/file/d/1xTRDlldKi1214mGtlxoh-5audLo4tGdR/view?usp=sharing",
-      modelPath: "/Models/Door lock.STL",
-      views: 312,
-      downloads: 18,
-      fileSize: "5.3 MB",
-      lastUpdated: "2023-12-28"
-    },
-    {
-      id: 7,
-      title: "Flanged Tee Pipe Fitting",
-      description: "Industrial-grade flanged tee pipe fitting designed for fluid distribution systems. Features precise flanges for secure bolted connections and optimized internal geometry for minimal pressure loss.",
-      software: "SolidWorks",
-      category: "Industrial",
-      complexity: "Intermediate",
-      features: ["Revolve", "Fillet", "Circular Pattern", "Hole Wizard"],
-      image: "/3d Pictures/flanged tee pipe fitting.png",
-      downloadUrl: "https://drive.google.com/file/d/1hdD_tgdv1UfKgLsE0bWNK6lnudQZs1i3/view?usp=sharing",
-      modelPath: "/Models/Flanged Tee Pipe Fitting.STL",
-      views: 278,
-      downloads: 25,
-      fileSize: "4.8 MB",
-      lastUpdated: "2023-12-25"
-    },
-    {
-      id: 8,
-      title: "Refrigeration Valves Assembly",
-      description: "Precision-designed refrigeration valve assembly used for controlling refrigerant flow in HVAC and cooling systems. Includes service, expansion, and solenoid valves optimized for durability and leak-proof operation.",
-      software: "SolidWorks",
-      category: "Thermal Systems",
-      complexity: "Basic",
-      features: ["Assembly Mates", "Configurations", "Bill of Materials", "Exploded View"],
-      image: "/3d Pictures/refrigeration valves.png",
-      downloadUrl: "https://drive.google.com/file/d/1vwR_r4u5kM9mDazRRgwkHwoYjdYJW1US/view?usp=sharing",
-      modelPath: "/Models/Refrigeration Valves.STL",
-      views: 342,
-      downloads: 27,
-      fileSize: "7.2 MB",
-      lastUpdated: "2023-12-20"
-    },
-    {
-      id: 9,
-      title: "Connecting Rod (Without Cap)",
-      description: "Lightweight connecting rod designed without cap for simplified design analysis and manufacturing demonstration. Optimized cross-section for strength-to-weight ratio and fatigue resistance.",
-      software: "SolidWorks",
-      category: "Automotive",
-      complexity: "Intermediate",
-      features: ["Extrude", "Fillet", "Draft Analysis", "Section Properties"],
-      image: "/3d Pictures/connecting rod.png",
-      downloadUrl: "https://drive.google.com/file/d/1U4gchYO7Sgz-I0zRMdEkQbriGfLoLmSq/view?usp=sharing",
-      modelPath: "/Models/Connecting Rod.STL",
-      views: 297,
-      downloads: 24,
-      fileSize: "3.9 MB",
-      lastUpdated: "2023-12-18"
-    },
-    {
-      id: 10,
-      title: "Piston Head",
-      description: "High-strength piston head designed for internal combustion engines. Optimized for heat dissipation, minimal friction, and maximum durability under high-pressure conditions.",
-      software: "SolidWorks",
-      category: "Automotive",
-      complexity: "Basic",
-      features: ["Revolve", "Extrude Cut", "Chamfer", "Circular Pattern"],
-      image: "/3d Pictures/piston head.png",
-      downloadUrl: "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
-      modelPath: "/Models/piston head.STL",
-      views: 410,
-      downloads: 32,
-      fileSize: "4.5 MB",
-      lastUpdated: "2023-12-15"
-    },
-    {
-      id: 11,
-      title: "Crankshaft",
-      description: "Precision crankshaft designed for efficient torque transmission and balanced rotation. Engineered for minimal vibration, maximum fatigue resistance, and high-performance automotive engines.",
-      software: "SolidWorks",
-      category: "Automotive",
-      complexity: "Basic",
-      features: ["Revolve", "Extrude", "Mirror", "Circular Pattern"],
-      image: "/3d Pictures/crankshaft.png",
-      downloadUrl: "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
-      modelPath: "/Models/crank shaft.STL",
-      views: 365,
-      downloads: 28,
-      fileSize: "5.1 MB",
-      lastUpdated: "2023-12-12"
-    },
-    {
-      id: 12,
-      title: "Stuffing Box",
-      description: "A sealing assembly designed to prevent fluid leakage around rotating shafts in pumps and valves. Modeled and assembled in SolidWorks with precise dimensional accuracy and material differentiation.",
-      software: "SolidWorks",
-      category: "Mechanical Parts",
-      complexity: "Intermediate",
-      features: ["Extrude", "Revolve", "Assembly Mates", "Exploded View"],
-      image: "/3d Pictures/stuffingbox.png",
-      downloadUrl:"https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
-      modelPath: "/Models/Stuffing Box.STL",
-      views: 248,
-      downloads: 19,
-      fileSize: "6.3 MB",
-      lastUpdated: "2023-12-10"
-    },
-    {
-      id: 13,
-      title: "Servo-Driven Robotic Gripper",
-      description: "An intelligent robotic gripper actuated by servo motors for precise object handling. Designed in SolidWorks with adjustable finger mechanisms, torque-based control, and lightweight aluminum structure for automation and pick-and-place applications.",
-      software: "SolidWorks",
-      category: "Robotics",
-      complexity: "Advanced",
-      features: ["Assembly Mates", "Motion Study", "Interference Check", "Exploded View"],
-      image: "/3d Pictures/Robotic Gripper.png",
-      downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
-      modelPath: "/Models/Robotic Gripper.STL",
-      views: 312,
-      downloads: 27,
-      fileSize: "8.5 MB",
-      lastUpdated: "2023-12-08"
-    },
-    {
-      id: 14,
-      title: "Bevel Gear",
-      description: "A precisely modeled straight bevel gear developed in Siemens NX with accurate tooth geometry and optimized surface finish. Designed using Revolve, Through Curve, Mirror, and Arc-based features to ensure efficient torque transmission, smooth meshing, and structural symmetry.",
-      software: "Siemens NX",
-      category: "Mechanical",
-      complexity: "Intermediate",
-      features: ["Revolve", "Through Curve", "Mirror Feature", "Synchronous Modeling"],
-      image: "/3d Pictures/Bevel Gear.png",
-      downloadUrl: "https://drive.google.com/file/d/1TtVjkl4h6yNqSFXxG0R2gVJ2xw3zNqvQ/view?usp=sharing",
-      modelPath: "/Models/Bevel Gear.stl",
-      views: 380,
-      downloads: 18,
-      fileSize: "4.2 MB",
-      lastUpdated: "2023-12-05"
-    },
-    {
-      id: 15,
-      title: "Roller Support Assembly",
-      description: "A fully-defined roller support assembly modeled from 2D technical drawings, featuring precise constraints for smooth rotational motion and accurate load-bearing representation.",
-      software: "SolidWorks",
-      category: "Mechanical Parts",
-      complexity: "Intermediate",
-      features: ["Extrude Boss/Base", "Revolve", "Hole Wizard", "Assembly Mates", "Motion Study"],
-      image: "/3d Pictures/Roller Support.png",
-      downloadUrl: "https://drive.google.com/file/d/1ROLLER_SAMPLE_LINK/view?usp=sharing",
-      modelPath: "/Models/Roller Support.STL",
-      views: 975,
-      downloads: 67,
-      fileSize: "3.6 MB",
-      lastUpdated: "2023-12-01"
+      title: "Digital Manufacturing & Design Technology",
+      issuer: "University at Buffalo & The State University of New York (Coursera)",
+      date: "2024",
+      description: "Comprehensive program covering digital manufacturing technologies, Industry 4.0 implementation, smart factory systems, and advanced manufacturing enterprise management.",
+      specializationImage: "/Certifications/digital-manufacturing-design-specialization.png",
+      category: "Coursera Specialization",
+      level: "Advanced",
+      courses: 9,
+      duration: "6 months",
+      skills: ["Digital Thread", "IIoT", "Digital Twins", "Cyber Security", "MBSE", "Smart Manufacturing"],
+      credentialId: "SP-L3G7SF84B6",
+      courseCertificates: [
+        {
+          id: 1,
+          title: "Digital Manufacturing & Design",
+          issuer: "University at Buffalo",
+          image: "/Certifications/digital-mfg-design-cert.png",
+          skills: ["Digital Transformation", "Smart Factory", "Industry 4.0", "Manufacturing Design"]
+        },
+        {
+          id: 2,
+          title: "Digital Thread: Components",
+          issuer: "University at Buffalo",
+          image: "/Certifications/digital-thread-components-cert.png",
+          skills: ["Data Integration", "System Components", "Digital Infrastructure", "Thread Components"]
+        },
+        {
+          id: 3,
+          title: "Digital Thread: Implementation",
+          issuer: "University at Buffalo",
+          image: "/Certifications/digital-thread-implementation-cert.png",
+          skills: ["Implementation Strategy", "Deployment", "System Integration", "Thread Implementation"]
+        },
+        {
+          id: 4,
+          title: "Advanced Manufacturing Process Analysis",
+          issuer: "University at Buffalo",
+          image: "/Certifications/process-analysis-cert.png",
+          skills: ["Process Optimization", "Data Analytics", "Quality Control", "Manufacturing Analysis"]
+        },
+        {
+          id: 5,
+          title: "Intelligent Machining",
+          issuer: "University at Buffalo",
+          image: "/Certifications/intelligent-machining-cert.png",
+          skills: ["Smart Machining", "AI in Manufacturing", "Predictive Maintenance", "Intelligent Systems"]
+        },
+        {
+          id: 6,
+          title: "Advanced Manufacturing Enterprise",
+          issuer: "University at Buffalo",
+          image: "/Certifications/mfg-enterprise-cert.png",
+          skills: ["Enterprise Systems", "Supply Chain", "Business Integration", "Manufacturing Enterprise"]
+        },
+        {
+          id: 7,
+          title: "Cyber Security in Manufacturing",
+          issuer: "University at Buffalo",
+          image: "/Certifications/cybersecurity-mfg-cert.png",
+          skills: ["Security Protocols", "Data Protection", "Risk Management", "Manufacturing Security"]
+        },
+        {
+          id: 8,
+          title: "MBSE: Model-Based Systems Engineering",
+          issuer: "University at Buffalo",
+          image: "/Certifications/mbse-cert.png",
+          skills: ["Systems Modeling", "MBSE Methodology", "Digital Engineering", "Model-Based Systems"]
+        },
+        {
+          id: 9,
+          title: "Roadmap to Success in Digital Manufacturing & Design",
+          issuer: "University at Buffalo",
+          image: "/Certifications/roadmap-success-cert.png",
+          skills: ["Career Planning", "Industry Trends", "Professional Development", "Success Strategies"]
+        }
+      ]
     }
   ];
 
-  const categories = [
-    "All",
-    "Assembly",
-    "Mechanical Parts",
-    "Automotive",
-    "Industrial",
-    "Thermal Systems",
-    "Robotics",
-    "Aerospace",
+  const achievements = [
+    { icon: Trophy, title: "Academic Excellence", count: "7.50/10", description: "CGPA in Mechanical Engineering" },
+    { icon: Medal, title: "Patents Filed", count: "2", description: "Innovation in mechanical design" },
+    { icon: Star, title: "Certifications", count: "10+", description: "Professional and technical certifications" },
+    { icon: Award, title: "Projects Completed", count: "5+", description: "Engineering and research projects" },
   ];
-
-  // Filter and sort models
-  const filteredModels = cadModels
-    .filter(model => 
-      (activeCategory === "All" || model.category === activeCategory) &&
-      (searchQuery === "" || 
-        model.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        model.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        model.features.some(feature => 
-          feature.toLowerCase().includes(searchQuery.toLowerCase())
-        ))
-    )
-    .sort((a, b) => {
-      switch(sortBy) {
-        case "popularity":
-          return b.views - a.views;
-        case "downloads":
-          return b.downloads - a.downloads;
-        case "complexity":
-          const complexityOrder = { "Basic": 0, "Beginner": 1, "Intermediate": 2, "Advanced": 3 };
-          return complexityOrder[b.complexity] - complexityOrder[a.complexity];
-        case "newest":
-          return new Date(b.lastUpdated) - new Date(a.lastUpdated);
-        default:
-          return 0;
-      }
-    });
-
-  const getComplexityColor = (complexity) => {
-    switch (complexity) {
-      case "Basic":
-        return "bg-green-500/20 text-green-400 border-green-500/30";
-      case "Beginner":
-        return "bg-blue-500/20 text-blue-400 border-blue-500/30";
-      case "Intermediate":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
-      case "Advanced":
-        return "bg-red-500/20 text-red-400 border-red-500/30";
-      default:
-        return "bg-gray-500/20 text-gray-400 border-gray-500/30";
-    }
-  };
-
-  const getCategoryColor = (category) => {
-    switch (category) {
-      case "Automotive":
-        return "from-orange-500/20 to-red-500/20 border-orange-500/30";
-      case "Mechanical Parts":
-        return "from-blue-500/20 to-cyan-500/20 border-blue-500/30";
-      case "Industrial":
-        return "from-purple-500/20 to-pink-500/20 border-purple-500/30";
-      case "Assembly":
-        return "from-green-500/20 to-emerald-500/20 border-green-500/30";
-      case "Thermal Systems":
-        return "from-red-500/20 to-orange-500/20 border-red-500/30";
-      case "Robotics":
-        return "from-indigo-500/20 to-purple-500/20 border-indigo-500/30";
-      case "Aerospace":
-        return "from-cyan-500/20 to-blue-500/20 border-cyan-500/30";
-      default:
-        return "from-gray-500/20 to-gray-600/20 border-gray-500/30";
-    }
-  };
-
-  const stats = [
-    { label: "Total Models", value: cadModels.length, icon: Box, color: "purple" },
-    { label: "Downloads", value: cadModels.reduce((sum, model) => sum + model.downloads, 0), icon: Download, color: "blue" },
-    { label: "Categories", value: categories.length - 1, icon: Layers, color: "green" },
-    { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
-  ];
-
-  // Enhanced 3D Viewer with better colors
-  const init3DViewer = useCallback(() => {
-    if (!previewModel || !mountRef.current) return;
-
-    setLoadingModel(true);
-
-    // Clean up previous scene
-    if (sceneRef.current) {
-      while(sceneRef.current.children.length > 0) { 
-        sceneRef.current.remove(sceneRef.current.children[0]); 
-      }
-    }
-
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-    }
-
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0f172a); // Darker blue-gray background
-    sceneRef.current = scene;
-
-    // Square aspect ratio for viewer
-    const viewerSize = Math.min(mountRef.current.clientWidth, mountRef.current.clientHeight);
-    
-    const camera = new THREE.PerspectiveCamera(
-      45,
-      1, // Square aspect ratio
-      0.1,
-      1000
-    );
-    cameraRef.current = camera;
-
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: true,
-      alpha: true
-    });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(viewerSize, viewerSize);
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    rendererRef.current = renderer;
-
-    mountRef.current.innerHTML = "";
-    mountRef.current.appendChild(renderer.domElement);
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-    controls.autoRotate = autoRotate;
-    controls.autoRotateSpeed = 2;
-    controls.minDistance = 1;
-    controls.maxDistance = 50;
-    controlsRef.current = controls;
-
-    // Enhanced lighting with warmer tones
-    const ambientLight = new THREE.AmbientLight(0x404060, 0.6); // Bluish ambient
-    scene.add(ambientLight);
-
-    const directionalLight = new THREE.DirectionalLight(0xffebb3, 1); // Warm directional light
-    directionalLight.position.set(50, 50, 50);
-    directionalLight.castShadow = true;
-    directionalLight.shadow.mapSize.width = 2048;
-    directionalLight.shadow.mapSize.height = 2048;
-    scene.add(directionalLight);
-
-    const fillLight = new THREE.DirectionalLight(0x6688cc, 0.3); // Cool fill light
-    fillLight.position.set(-50, 50, -50);
-    scene.add(fillLight);
-
-    const loader = new STLLoader();
-    const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
-    const meshes = [];
-
-    const loadModel = (path, index) => {
-      return new Promise((resolve, reject) => {
-        // Better material colors - metallic finishes
-        const materialColors = [
-          0x4f46e5, // Indigo
-          0xdc2626, // Red
-          0x059669, // Emerald
-          0xd97706, // Amber
-          0x7c3aed, // Purple
-          0x0891b2, // Cyan
-          0xea580c, // Orange
-          0x16a34a, // Green
-        ];
-
-        const material = new THREE.MeshPhysicalMaterial({
-          color: new THREE.Color(materialColors[index % materialColors.length]),
-          metalness: 0.8,
-          roughness: 0.2,
-          clearcoat: 0.5,
-          clearcoatRoughness: 0.1,
-          reflectivity: 1.0,
-          transparent: false,
-          opacity: 1.0,
-        });
-
-        loader.load(
-          path,
-          (geometry) => {
-            geometry.computeVertexNormals();
-            geometry.computeBoundingBox();
-            
-            const box = geometry.boundingBox;
-            const size = new THREE.Vector3();
-            box.getSize(size);
-            const center = new THREE.Vector3();
-            box.getCenter(center);
-
-            geometry.translate(-center.x, -center.y, -center.z);
-
-            const maxDim = Math.max(size.x, size.y, size.z);
-            const scaleFactor = 5 / maxDim;
-            const mesh = new THREE.Mesh(geometry, material);
-            mesh.scale.setScalar(scaleFactor);
-            mesh.castShadow = true;
-            mesh.receiveShadow = true;
-
-            scene.add(mesh);
-            meshes.push(mesh);
-
-            resolve(mesh);
-          },
-          (progress) => {
-            // Progress callback if needed
-          },
-          (error) => {
-            console.error(`Error loading model: ${path}`, error);
-            reject(error);
-          }
-        );
-      });
-    };
-
-    // Load all models
-    Promise.all(modelPaths.map((path, index) => loadModel(path, index)))
-      .then(() => {
-        // Center and scale all models together
-        const groupBox = new THREE.Box3();
-        meshes.forEach((m) => groupBox.expandByObject(m));
-        
-        const groupSize = groupBox.getSize(new THREE.Vector3());
-        const groupCenter = groupBox.getCenter(new THREE.Vector3());
-        
-        // Reposition all meshes to center
-        meshes.forEach(mesh => {
-          mesh.position.sub(groupCenter);
-        });
-
-        const groupMax = Math.max(groupSize.x, groupSize.y, groupSize.z);
-        const fov = camera.fov * (Math.PI / 180);
-        const cameraZ = Math.abs(groupMax / 2 / Math.tan(fov / 2));
-        
-        // Perfectly center the camera
-        camera.position.set(0, 0, cameraZ * 1.5);
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
-        controls.update();
-
-        setLoadingModel(false);
-      })
-      .catch(error => {
-        console.error("Error loading models:", error);
-        setLoadingModel(false);
-      });
-
-    const animate = () => {
-      animationRef.current = requestAnimationFrame(animate);
-      controls.update();
-      renderer.render(scene, camera);
-    };
-    animate();
-
-    const handleResize = () => {
-      if (!mountRef.current) return;
-      
-      const viewerSize = Math.min(mountRef.current.clientWidth, mountRef.current.clientHeight);
-      renderer.setSize(viewerSize, viewerSize);
-    };
-    
-    window.addEventListener("resize", handleResize);
-    
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [previewModel, autoRotate]);
-
-  useEffect(() => {
-    const cleanup = init3DViewer();
-    return cleanup;
-  }, [init3DViewer]);
-
-  // Clean up Three.js resources
-  useEffect(() => {
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-      
-      if (rendererRef.current) {
-        rendererRef.current.dispose();
-      }
-    };
-  }, []);
-
-  const zoomIn = () => {
-    if (cameraRef.current) {
-      cameraRef.current.position.multiplyScalar(0.8);
-    }
-  };
-
-  const zoomOut = () => {
-    if (cameraRef.current) {
-      cameraRef.current.position.multiplyScalar(1.2);
-    }
-  };
-
-  const toggleAutoRotate = () => {
-    setAutoRotate(!autoRotate);
-    if (controlsRef.current) {
-      controlsRef.current.autoRotate = !autoRotate;
-    }
-  };
-
-  const navigateModels = (direction) => {
-    const currentIndex = filteredModels.findIndex(model => model.id === previewModel.id);
-    let newIndex;
-    
-    if (direction === 'next') {
-      newIndex = (currentIndex + 1) % filteredModels.length;
-    } else {
-      newIndex = (currentIndex - 1 + filteredModels.length) % filteredModels.length;
-    }
-    
-    setPreviewModel(filteredModels[newIndex]);
-    setCurrentModelIndex(newIndex);
-  };
-
-  const handleKeyDown = (e) => {
-    if (!previewModel) return;
-    
-    switch(e.key) {
-      case 'Escape':
-        setPreviewModel(null);
-        setPreviewImage(null);
-        break;
-      case 'ArrowLeft':
-        navigateModels('prev');
-        break;
-      case 'ArrowRight':
-        navigateModels('next');
-        break;
-      case '+':
-        zoomIn();
-        break;
-      case '-':
-        zoomOut();
-        break;
-      default:
-        break;
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [previewModel, filteredModels]);
 
   const containerVariants = { 
     hidden: { opacity: 0 }, 
@@ -651,9 +358,53 @@ const CADModels = () => {
     },
     hover: {
       scale: 1.02,
-      y: -5,
+      y: -8,
       transition: { duration: 0.3, ease: "easeInOut" }
     }
+  };
+
+  const openCoursesModal = (specialization) => {
+    setSelectedSpecialization(specialization);
+    setCoursesModalOpen(true);
+  };
+
+  const closeCoursesModal = () => {
+    setCoursesModalOpen(false);
+    setSelectedSpecialization(null);
+  };
+
+  const openLightbox = (specialization, index = 0) => {
+    setSelectedSpecialization(specialization);
+    setCurrentCertIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    setSelectedSpecialization(null);
+  };
+
+  const nextCertificate = () => {
+    if (selectedSpecialization) {
+      setCurrentCertIndex((prev) => 
+        (prev + 1) % selectedSpecialization.courseCertificates.length
+      );
+    }
+  };
+
+  const prevCertificate = () => {
+    if (selectedSpecialization) {
+      setCurrentCertIndex((prev) => 
+        (prev - 1 + selectedSpecialization.courseCertificates.length) % selectedSpecialization.courseCertificates.length
+      );
+    }
+  };
+
+  // Image error handler
+  const handleImageError = (e) => {
+    console.error('Image failed to load:', e.target.src);
+    e.target.src = 'https://via.placeholder.com/600x400/1f2937/9ca3af?text=Certificate+Image';
+    e.target.alt = 'Certificate image not available';
   };
 
   return (
@@ -668,23 +419,23 @@ const CADModels = () => {
           {/* Header Section */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <div className="inline-flex items-center gap-3 bg-gray-800/50 border border-gray-700/50 rounded-full px-6 py-3 mb-6">
-              <Box className="w-5 h-5 text-purple-400" />
-              <span className="text-gray-300 text-sm font-medium">3D CAD Portfolio</span>
+              <GraduationCap className="w-5 h-5 text-purple-400" />
+              <span className="text-gray-300 text-sm font-medium">Professional Credentials</span>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
-              CAD Model{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Showcase</span>
+              Achievements & 
+              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"> Certifications</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Explore precision-engineered 3D models and mechanical designs created with professional CAD software. 
-              Each model demonstrates advanced engineering principles and manufacturing-ready design practices.
+              Validated expertise through professional certifications and advanced specializations 
+              in mechanical engineering, additive manufacturing, and digital technologies.
             </p>
           </motion.div>
 
-          {/* Stats Section */}
+          {/* Achievement Stats */}
           <motion.div variants={itemVariants} className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
+            {achievements.map((achievement, index) => {
+              const Icon = achievement.icon;
               return (
                 <motion.div
                   key={index}
@@ -695,462 +446,530 @@ const CADModels = () => {
                     <Icon className="w-7 h-7 text-purple-400" />
                   </div>
                   <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-2">
-                    {stat.value}
+                    {achievement.count}
                   </div>
-                  <h3 className="font-semibold text-white mb-2 text-lg">{stat.label}</h3>
+                  <h3 className="font-semibold text-white mb-2 text-lg">{achievement.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{achievement.description}</p>
                 </motion.div>
               );
             })}
           </motion.div>
 
-          {/* Search and Filter Section */}
-          <motion.div variants={itemVariants} className="mb-12">
-            <div className="flex flex-col lg:flex-row gap-6 justify-between items-start lg:items-center mb-8">
-              <div className="flex-1 max-w-2xl">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input
-                    type="text"
-                    placeholder="Search models by name, description, or features..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-lg"
-                  />
-                </div>
+          {/* Featured Certification */}
+          <motion.div variants={itemVariants} className="mb-24">
+            <div className="flex items-center justify-between mb-12">
+              <div>
+                <h2 className="text-3xl font-bold text-white mb-3">Featured Certification</h2>
+                <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div>
               </div>
-              
-              <div className="flex gap-4">
-                <div className="relative">
-                  <Filter className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="pl-12 pr-8 py-4 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500 appearance-none text-lg"
-                  >
-                    <option value="popularity">Most Popular</option>
-                    <option value="downloads">Most Downloads</option>
-                    <option value="complexity">Complexity</option>
-                    <option value="newest">Newest</option>
-                  </select>
-                </div>
+              <div className="text-right">
+                <p className="text-gray-400 text-sm">Industry Recognized</p>
+                <p className="text-purple-400 font-semibold">Professional Standard</p>
               </div>
             </div>
 
-            {/* Category Filter */}
-            <div className="flex flex-wrap justify-center gap-3">
-              {categories.map((cat) => (
-                <motion.button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-6 py-3 rounded-full text-sm font-medium transition-all relative ${
-                    activeCategory === cat
-                      ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
-                      : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50"
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {cat}
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* All Models Grid - 3 Columns */}
-          <motion.div variants={itemVariants} className="mb-20">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-3 bg-gray-800/50 border border-gray-700/50 rounded-full px-6 py-3 mb-6">
-                <Layers className="w-5 h-5 text-blue-400" />
-                <span className="text-gray-300 text-sm font-medium">Complete Collection</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-                All <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">CAD Models</span>
-              </h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Browse our comprehensive collection of mechanical designs, assemblies, and engineering components.
-              </p>
-            </div>
-            
-            {filteredModels.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-gray-400 text-lg">No models found matching your criteria.</p>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                {filteredModels.map((model, index) => (
-                  <motion.div
-                    key={model.id}
-                    variants={cardVariants}
-                    className={`bg-gradient-to-br ${getCategoryColor(model.category)} backdrop-blur-md rounded-2xl overflow-hidden border shadow-xl flex flex-col`}
-                    whileHover="hover"
-                  >
-                    {/* Model Image */}
-                    <div className="relative h-48 bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden">
+            {certificates.map((cert) => (
+              <motion.div
+                key={cert.id}
+                variants={cardVariants}
+                className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md rounded-3xl overflow-hidden border border-gray-700/30 shadow-2xl"
+                whileHover="hover"
+              >
+                <div className="grid xl:grid-cols-2 gap-0">
+                  {/* Certificate Image */}
+                  <div className="relative p-12 flex items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
+                    <div className="relative group cursor-pointer">
                       <motion.img
-                        src={model.image}
-                        alt={model.title}
-                        className="w-full h-full object-cover"
-                        whileHover={{ scale: 1.05 }}
+                        src={cert.image}
+                        alt={cert.title}
+                        className="w-full max-w-md h-auto object-contain rounded-xl shadow-2xl"
+                        whileHover={{ scale: 1.03 }}
                         transition={{ duration: 0.4 }}
+                        onError={handleImageError}
                       />
-                      
-                      {/* Badges */}
-                      <div className="absolute top-3 left-3 flex flex-col gap-2">
-                        <span className="bg-black/80 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm text-white flex items-center gap-1.5 font-medium shadow-lg">
-                          <Eye className="w-4 h-4" /> {model.views}
-                        </span>
-                        <span className="bg-black/80 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm text-white flex items-center gap-1.5 font-medium shadow-lg">
-                          <Download className="w-4 h-4" /> {model.downloads}
-                        </span>
+                    </div>
+                  </div>
+
+                  {/* Certificate Details */}
+                  <div className="p-12">
+                    <div className="flex items-start justify-between mb-8">
+                      <div>
+                        <h3 className="text-3xl font-bold text-white mb-3 leading-tight">{cert.title}</h3>
+                        <p className="text-purple-400 font-semibold text-lg">{cert.issuer}</p>
                       </div>
-                      
-                      <div className="absolute top-3 right-3">
-                        <span className={`px-3 py-1.5 rounded-lg text-sm font-semibold border-2 shadow-lg ${getComplexityColor(model.complexity)}`}>
-                          {model.complexity}
-                        </span>
-                      </div>
-                      
-                      <div className="absolute bottom-3 left-3">
-                        <span className="bg-purple-600/80 backdrop-blur-sm px-2 py-1 rounded text-xs text-white">
-                          {model.software}
-                        </span>
+                      <div className="text-right">
+                        <div className="px-4 py-2 rounded-full border bg-green-500/20 text-green-400 border-green-500/30 flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4" />
+                          <span className="text-sm font-medium">Verified</span>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Model Details */}
-                    <div className="p-6 flex-1 flex flex-col">
-                      <div className="flex items-start justify-between mb-3">
-                        <h3 className="text-xl font-bold text-white mb-2 leading-tight line-clamp-2">{model.title}</h3>
-                      </div>
+                    <p className="text-gray-300 text-lg mb-8 leading-relaxed">{cert.description}</p>
 
-                      <p className="text-gray-300 text-sm mb-4 line-clamp-3 flex-1">{model.description}</p>
-
-                      {/* Model Info Grid */}
-                      <div className="grid grid-cols-2 gap-4 mb-4">
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-gray-300">
-                            <Layers className="w-4 h-4 text-purple-400" />
-                            <span className="text-sm font-medium">{model.category}</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-gray-300">
-                            <Box className="w-4 h-4 text-purple-400" />
-                            <span className="text-sm">{model.fileSize}</span>
+                    {/* Certificate Info Grid */}
+                    <div className="grid grid-cols-2 gap-6 mb-8">
+                      <div className="space-y-4">
+                        <div>
+                          <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Issue Date</h5>
+                          <div className="flex items-center gap-3 text-gray-300">
+                            <Calendar className="w-5 h-5 text-purple-400" />
+                            <span className="font-medium">{cert.date}</span>
                           </div>
                         </div>
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-gray-300">
-                            <Calendar className="w-4 h-4 text-purple-400" />
-                            <span className="text-sm">{new Date(model.lastUpdated).toLocaleDateString()}</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-gray-300">
-                            <Download className="w-4 h-4 text-purple-400" />
-                            <span className="text-sm">{model.downloads} downloads</span>
+                        <div>
+                          <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Level</h5>
+                          <span className="text-gray-300 font-medium bg-gray-700/50 px-3 py-1 rounded-lg">{cert.level}</span>
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        <div>
+                          <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Credential ID</h5>
+                          <span className="text-gray-300 font-mono text-sm bg-gray-700/50 px-3 py-1 rounded-lg">{cert.credentialId}</span>
+                        </div>
+                        <div>
+                          <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Valid Until</h5>
+                          <span className="text-gray-300 font-medium">{cert.validUntil}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Skills */}
+                    <div className="mb-8">
+                      <h5 className="font-semibold text-purple-300 mb-4 text-sm uppercase tracking-wide">Skills Validated</h5>
+                      <div className="flex flex-wrap gap-3">
+                        {cert.skills.map((skill, index) => (
+                          <span
+                            key={index}
+                            className="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-xl text-sm border border-purple-500/30 font-medium"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-4">
+                      <motion.button
+                        className="flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl transition-all duration-300 font-semibold flex-1 justify-center"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => window.open(cert.image, "_blank")}
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                        View Certificate
+                      </motion.button>
+
+                      <motion.button
+                        className="flex items-center gap-3 bg-gray-700 hover:bg-gray-600 text-white px-6 py-4 rounded-xl transition-all duration-300 font-semibold"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => {
+                          const link = document.createElement("a");
+                          link.href = cert.image;
+                          link.download = `${cert.title}.png`;
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                        }}
+                      >
+                        <Download className="w-5 h-5" />
+                      </motion.button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* University Specializations */}
+          <motion.div variants={itemVariants} className="mb-20">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-3 bg-gray-800/50 border border-gray-700/50 rounded-full px-6 py-3 mb-6">
+                <Layers className="w-5 h-5 text-blue-400" />
+                <span className="text-gray-300 text-sm font-medium">Advanced Specializations</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+                University <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Specializations</span>
+              </h2>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Comprehensive professional programs from leading universities focusing on 
+                cutting-edge manufacturing technologies and engineering principles.
+              </p>
+            </div>
+            
+            <div className="space-y-8">
+              {specializations.map((specialization) => (
+                <motion.div
+                  key={specialization.id}
+                  variants={cardVariants}
+                  className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md rounded-3xl overflow-hidden border border-gray-700/30 shadow-2xl"
+                  whileHover="hover"
+                >
+                  <div className="grid xl:grid-cols-2 gap-0">
+                    {/* Specialization Image */}
+                    <div className="relative p-8 flex items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
+                      <div className="relative w-full">
+                        <motion.img
+                          src={specialization.specializationImage}
+                          alt={specialization.title}
+                          className="w-full max-w-lg h-auto object-contain rounded-xl shadow-2xl"
+                          whileHover={{ scale: 1.03 }}
+                          transition={{ duration: 0.4 }}
+                          onError={handleImageError}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Specialization Details */}
+                    <div className="p-8">
+                      <div className="flex items-start justify-between mb-6">
+                        <div>
+                          <h3 className="text-2xl font-bold text-white mb-2 leading-tight">{specialization.title}</h3>
+                          <p className="text-purple-400 font-semibold text-lg">{specialization.issuer}</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="px-3 py-1 rounded-full border bg-green-500/20 text-green-400 border-green-500/30 flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4" />
+                            <span className="text-sm font-medium">Completed</span>
                           </div>
                         </div>
                       </div>
 
-                      {/* Features */}
-                      <div className="mb-4">
-                        <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Key Features</h5>
+                      <p className="text-gray-300 text-lg mb-6 leading-relaxed">{specialization.description}</p>
+
+                      {/* Specialization Info Grid */}
+                      <div className="grid grid-cols-2 gap-6 mb-6">
+                        <div className="space-y-4">
+                          <div>
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Completion Date</h5>
+                            <div className="flex items-center gap-3 text-gray-300">
+                              <Calendar className="w-4 h-4 text-purple-400" />
+                              <span className="font-medium">{specialization.date}</span>
+                          </div>
+                          </div>
+                          <div>
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Level</h5>
+                            <span className="text-gray-300 font-medium bg-gray-700/50 px-3 py-1 rounded-lg text-sm">{specialization.level}</span>
+                          </div>
+                        </div>
+                        <div className="space-y-4">
+                          <div>
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Duration</h5>
+                            <div className="flex items-center gap-3 text-gray-300">
+                              <Clock className="w-4 h-4 text-purple-400" />
+                              <span className="font-medium">{specialization.duration}</span>
+                            </div>
+                          </div>
+                          <div>
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Courses</h5>
+                            <div className="flex items-center gap-3 text-gray-300">
+                              <Book className="w-4 h-4 text-purple-400" />
+                              <span className="font-medium">{specialization.courses} Modules</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Skills */}
+                      <div className="mb-6">
+                        <h5 className="font-semibold text-purple-300 mb-3 text-sm uppercase tracking-wide">Core Competencies</h5>
                         <div className="flex flex-wrap gap-2">
-                          {model.features.slice(0, 3).map((feature, idx) => (
+                          {specialization.skills.slice(0, 6).map((skill, index) => (
                             <span
-                              key={idx}
-                              className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-lg text-xs border border-purple-500/30 font-medium"
+                              key={index}
+                              className="bg-purple-500/20 text-purple-300 px-3 py-1.5 rounded-lg text-sm border border-purple-500/30 font-medium"
                             >
-                              {feature}
+                              {skill}
                             </span>
                           ))}
-                          {model.features.length > 3 && (
-                            <span className="bg-gray-700 text-gray-300 px-2 py-1 rounded-lg text-xs">
-                              +{model.features.length - 3}
-                            </span>
-                          )}
                         </div>
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="flex gap-3 pt-4 border-t border-gray-700/50">
+                      <div className="flex gap-3">
                         <motion.button
-                          onClick={() => setPreviewModel(model)}
-                          className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          className="flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-300 font-semibold flex-1 justify-center"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => openCoursesModal(specialization)}
                         >
-                          <Box className="w-4 h-4" />
-                          3D View
+                          <Book className="w-4 h-4" />
+                          View All Courses
                         </motion.button>
-                        
+
                         <motion.button
-                          onClick={() => setPreviewImage(model)}
-                          className="flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg transition-all duration-300"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-xl transition-all duration-300 font-semibold"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => window.open(specialization.specializationImage, "_blank")}
                         >
-                          <Eye className="w-4 h-4" />
+                          <ExternalLink className="w-4 h-4" />
                         </motion.button>
-                        
+
                         <motion.button
-                          onClick={() => window.open(model.downloadUrl, "_blank")}
-                          className="flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-lg transition-all duration-300"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                          className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-xl transition-all duration-300 font-semibold"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            const link = document.createElement("a");
+                            link.href = specialization.specializationImage;
+                            link.download = `${specialization.title}.png`;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                          }}
                         >
                           <Download className="w-4 h-4" />
                         </motion.button>
                       </div>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
-            )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* 3D Preview Modal */}
+      {/* Courses Modal */}
       <AnimatePresence>
-        {previewModel && (
+        {coursesModalOpen && selectedSpecialization && (
           <motion.div
+            className="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center p-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center p-4"
-            onClick={() => setPreviewModel(null)}
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
-              onClick={(e) => e.stopPropagation()}
+              className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-hidden border border-purple-500/20 shadow-2xl"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className="flex justify-between items-center p-6 border-b border-gray-700/50">
+              {/* Header */}
+              <div className="flex items-center justify-between p-8 border-b border-gray-700/50 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
                 <div>
-                  <h3 className="text-2xl font-bold text-white">{previewModel.title}</h3>
-                  <p className="text-gray-400">{previewModel.category} • {previewModel.software}</p>
+                  <h3 className="text-2xl font-bold text-white mb-2">{selectedSpecialization.title}</h3>
+                  <p className="text-purple-400 font-semibold">{selectedSpecialization.issuer}</p>
                 </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => setShowInfoPanel(!showInfoPanel)}
-                    className="p-2 text-gray-300 hover:text-white bg-gray-800/50 rounded-lg border border-gray-700/50"
-                    title="Model Information"
-                  >
-                    <Info className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={() => setPreviewModel(null)}
-                    className="p-2 text-gray-300 hover:text-white bg-gray-800/50 rounded-lg border border-gray-700/50"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
+                <motion.button
+                  onClick={closeCoursesModal}
+                  className="p-3 hover:bg-gray-800 rounded-xl transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <X className="w-6 h-6 text-gray-400" />
+                </motion.button>
               </div>
 
-              <div className="flex flex-1 overflow-hidden">
-                <div className={`${showInfoPanel ? 'w-2/3' : 'w-full'} relative flex items-center justify-center`}>
-                  {loadingModel && (
-                    <div className="absolute inset-0 flex items-center justify-center z-10 bg-gray-800/80">
-                      <div className="text-center">
-                        <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                        <span className="text-white text-lg">Loading 3D Model...</span>
-                      </div>
-                    </div>
-                  )}
-                  <div 
-                    ref={mountRef} 
-                    className="w-96 h-96 max-w-full max-h-full flex items-center justify-center"
-                  />
-                  
-                  {/* 3D Controls */}
-                  <div className="absolute bottom-4 left-4 flex flex-col gap-2">
-                    <button
-                      onClick={zoomIn}
-                      className="p-2 bg-gray-800/70 backdrop-blur-sm text-white rounded-lg border border-gray-700/50 hover:bg-gray-700/70"
-                      title="Zoom In"
+              {/* Courses Grid */}
+              <div className="p-8 max-h-[70vh] overflow-y-auto">
+                <div className="space-y-6">
+                  {selectedSpecialization.courseCertificates.map((course, index) => (
+                    <motion.div
+                      key={course.id}
+                      className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-md rounded-2xl overflow-hidden border border-gray-700/30 shadow-xl"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ scale: 1.01, y: -2 }}
                     >
-                      <ZoomIn className="w-5 h-5" />
-                    </button>
-                    <button
-                      onClick={zoomOut}
-                      className="p-2 bg-gray-800/70 backdrop-blur-sm text-white rounded-lg border border-gray-700/50 hover:bg-gray-700/70"
-                      title="Zoom Out"
-                    >
-                      <ZoomOut className="w-5 h-5" />
-                    </button>
-                    <button
-                      onClick={toggleAutoRotate}
-                      className={`p-2 backdrop-blur-sm text-white rounded-lg border ${
-                        autoRotate 
-                          ? "bg-green-600/70 border-green-500/50" 
-                          : "bg-gray-800/70 border-gray-700/50"
-                      } hover:bg-gray-700/70`}
-                      title={autoRotate ? "Pause Rotation" : "Auto Rotate"}
-                    >
-                      {autoRotate ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-                    </button>
-                  </div>
+                      <div className="grid md:grid-cols-2 gap-0">
+                        {/* Course Image */}
+                        <div className="relative p-6 flex items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
+                          <div className="relative w-full">
+                            <motion.img
+                              src={course.image}
+                              alt={course.title}
+                              className="w-full h-48 object-contain rounded-lg shadow-lg"
+                              whileHover={{ scale: 1.03 }}
+                              transition={{ duration: 0.3 }}
+                              onError={handleImageError}
+                            />
+                          </div>
+                        </div>
 
-                  {/* Navigation Arrows */}
-                  {filteredModels.length > 1 && (
-                    <>
-                      <button
-                        onClick={() => navigateModels('prev')}
-                        className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800/70 backdrop-blur-sm text-white rounded-full border border-gray-700/50 hover:bg-gray-700/70"
-                      >
-                        <ChevronLeft className="w-5 h-5" />
-                      </button>
-                      <button
-                        onClick={() => navigateModels('next')}
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-gray-800/70 backdrop-blur-sm text-white rounded-full border border-gray-700/50 hover:bg-gray-700/70"
-                      >
-                        <ChevronRight className="w-5 h-5" />
-                      </button>
-                    </>
-                  )}
-                </div>
+                        {/* Course Details */}
+                        <div className="p-6">
+                          <div className="flex items-start justify-between mb-4">
+                            <div>
+                              <h4 className="text-xl font-bold text-white mb-2">{course.title}</h4>
+                              <p className="text-blue-400 font-medium text-sm">{course.issuer}</p>
+                            </div>
+                            <div className="text-right">
+                              <div className="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs font-medium">
+                                Course {index + 1}
+                              </div>
+                            </div>
+                          </div>
 
-                {/* Info Panel */}
-                {showInfoPanel && (
-                  <motion.div 
-                    initial={{ x: 300 }}
-                    animate={{ x: 0 }}
-                    exit={{ x: 300 }}
-                    className="w-1/3 border-l border-gray-700/50 bg-gray-800/30 p-6 overflow-y-auto"
-                  >
-                    <h4 className="text-lg font-bold text-white mb-4">Model Details</h4>
-                    
-                    <div className="space-y-4">
-                      <div>
-                        <h5 className="text-sm font-medium text-gray-400 mb-1">Description</h5>
-                        <p className="text-sm text-gray-300">{previewModel.description}</p>
-                      </div>
-                      
-                      <div>
-                        <h5 className="text-sm font-medium text-gray-400 mb-1">Features</h5>
-                        <div className="flex flex-wrap gap-2">
-                          {previewModel.features.map((f, idx) => (
-                            <span
-                              key={idx}
-                              className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs border border-purple-500/30"
+                          {/* Skills */}
+                          <div className="mb-4">
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Skills Gained</h5>
+                            <div className="flex flex-wrap gap-2">
+                              {course.skills.map((skill, skillIndex) => (
+                                <span
+                                  key={skillIndex}
+                                  className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-lg text-xs border border-purple-500/30 font-medium"
+                                >
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Action Buttons */}
+                          <div className="flex gap-3">
+                            <motion.button
+                              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-300 font-semibold flex-1 justify-center"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => openLightbox(selectedSpecialization, index)}
                             >
-                              {f}
-                            </span>
-                          ))}
+                              <Eye className="w-4 h-4" />
+                              Preview
+                            </motion.button>
+                            
+                            <motion.button
+                              className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-lg transition-colors"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => window.open(course.image, "_blank")}
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                            </motion.button>
+                            
+                            <motion.button
+                              className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-lg transition-colors"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => {
+                                const link = document.createElement("a");
+                                link.href = course.image;
+                                link.download = `${course.title}.png`;
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                              }}
+                            >
+                              <Download className="w-4 h-4" />
+                            </motion.button>
+                          </div>
                         </div>
                       </div>
-                      
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <h5 className="text-sm font-medium text-gray-400 mb-1">Complexity</h5>
-                          <span className={`px-3 py-1.5 rounded-lg text-xs font-semibold border-2 ${getComplexityColor(previewModel.complexity)}`}>
-                            {previewModel.complexity}
-                          </span>
-                        </div>
-                        
-                        <div>
-                          <h5 className="text-sm font-medium text-gray-400 mb-1">File Size</h5>
-                          <p className="text-sm text-gray-300">{previewModel.fileSize}</p>
-                        </div>
-                        
-                        <div>
-                          <h5 className="text-sm font-medium text-gray-400 mb-1">Views</h5>
-                          <p className="text-sm text-gray-300">{previewModel.views}</p>
-                        </div>
-                        
-                        <div>
-                          <h5 className="text-sm font-medium text-gray-400 mb-1">Downloads</h5>
-                          <p className="text-sm text-gray-300">{previewModel.downloads}</p>
-                        </div>
-                      </div>
-                      
-                      <div className="pt-4 border-t border-gray-700/50">
-                        <a
-                          href={previewModel.downloadUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg text-sm font-medium transition-colors"
-                        >
-                          <Download className="w-4 h-4" /> Download Model
-                        </a>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Image Preview Modal */}
+      {/* Lightbox Modal */}
       <AnimatePresence>
-        {previewImage && (
+        {lightboxOpen && selectedSpecialization && (
           <motion.div
+            className="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center p-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-            onClick={() => setPreviewImage(null)}
+            onClick={closeLightbox}
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
+              className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl max-w-7xl w-full max-h-[95vh] overflow-hidden border border-purple-500/20 shadow-2xl"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex justify-between items-center p-6 border-b border-gray-700/50">
-                <div>
-                  <h3 className="text-2xl font-bold text-white">{previewImage.title}</h3>
-                  <p className="text-gray-400">{previewImage.category} • {previewImage.software}</p>
+              {/* Header */}
+              <div className="flex items-center justify-between p-8 border-b border-gray-700/50 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    {selectedSpecialization.courseCertificates[currentCertIndex].title}
+                  </h3>
+                  <div className="flex items-center gap-6 text-lg">
+                    <p className="text-purple-400 font-semibold">{selectedSpecialization.courseCertificates[currentCertIndex].issuer}</p>
+                    <span className="text-gray-400">•</span>
+                    <span className="text-gray-300 font-medium">
+                      Course {currentCertIndex + 1} of {selectedSpecialization.courseCertificates.length}
+                    </span>
+                  </div>
                 </div>
-                <button
-                  onClick={() => setPreviewImage(null)}
-                  className="p-2 text-gray-300 hover:text-white"
+                <motion.button
+                  onClick={closeLightbox}
+                  className="p-3 hover:bg-gray-800 rounded-xl transition-colors ml-6"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                 >
-                  <X className="w-6 h-6" />
-                </button>
+                  <X className="w-6 h-6 text-gray-400" />
+                </motion.button>
               </div>
 
-              <div className="flex-1 overflow-auto p-6">
-                <div className="relative w-full h-96 bg-gray-800 rounded-lg overflow-hidden mb-6">
-                  <img
-                    src={previewImage.image}
-                    alt={previewImage.title}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
+              {/* Certificate Image */}
+              <div className="flex items-center justify-center p-8 max-h-[65vh] overflow-auto bg-gray-800/30">
+                <motion.img
+                  key={currentCertIndex}
+                  src={selectedSpecialization.courseCertificates[currentCertIndex].image}
+                  alt={selectedSpecialization.courseCertificates[currentCertIndex].title}
+                  className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4 }}
+                  onError={handleImageError}
+                />
+              </div>
 
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-2">Description</h4>
-                    <p className="text-gray-300">{previewImage.description}</p>
+              {/* Footer with Navigation */}
+              <div className="p-8 border-t border-gray-700/50 bg-gray-800/20">
+                <div className="flex items-center justify-between">
+                  <div className="text-gray-300 text-lg">
+                    {selectedSpecialization.title}
                   </div>
                   
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-2">Features</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {previewImage.features.map((f, idx) => (
-                        <span
-                          key={idx}
-                          className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full text-sm border border-purple-500/30"
-                        >
-                          {f}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="pt-4 border-t border-gray-700/50">
-                    <a
-                      href={previewImage.downloadUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                  <div className="flex items-center gap-4">
+                    <motion.button
+                      onClick={prevCertificate}
+                      className="p-4 bg-gray-700 hover:bg-purple-600 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      disabled={selectedSpecialization.courseCertificates.length <= 1}
                     >
-                      <Download className="w-4 h-4" /> Download Model
-                    </a>
+                      <ChevronLeft className="w-6 h-6 text-white" />
+                    </motion.button>
+
+                    <motion.button
+                      className="flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl transition-colors font-semibold"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => {
+                        const cert = selectedSpecialization.courseCertificates[currentCertIndex];
+                        const link = document.createElement("a");
+                        link.href = cert.image;
+                        link.download = `${cert.title}.png`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                      }}
+                    >
+                      <Download className="w-5 h-5" />
+                      Download Certificate
+                    </motion.button>
+
+                    <motion.button
+                      onClick={nextCertificate}
+                      className="p-4 bg-gray-700 hover:bg-purple-600 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      disabled={selectedSpecialization.courseCertificates.length <= 1}
+                    >
+                      <ChevronRight className="w-6 h-6 text-white" />
+                    </motion.button>
                   </div>
                 </div>
               </div>
@@ -1162,4 +981,4 @@ const CADModels = () => {
   );
 };
 
-export default CADModels;
+export default Achievements;

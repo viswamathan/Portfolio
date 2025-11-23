@@ -485,14 +485,8 @@ const Achievements = () => {
                         className="w-full max-w-md h-auto object-contain rounded-xl shadow-2xl"
                         whileHover={{ scale: 1.03 }}
                         transition={{ duration: 0.4 }}
-                        onClick={() => window.open(cert.image, "_blank")}
                         onError={handleImageError}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-500 flex items-center justify-center">
-                        <div className="bg-black/50 rounded-full p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                          <ExternalLink className="w-6 h-6 text-white" />
-                        </div>
-                      </div>
                     </div>
                   </div>
 
@@ -589,7 +583,7 @@ const Achievements = () => {
             ))}
           </motion.div>
 
-          {/* University Specializations - UPDATED PROFESSIONAL CARDS */}
+          {/* University Specializations */}
           <motion.div variants={itemVariants} className="mb-20">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 bg-gray-800/50 border border-gray-700/50 rounded-full px-6 py-3 mb-6">
@@ -614,23 +608,17 @@ const Achievements = () => {
                   whileHover="hover"
                 >
                   <div className="grid xl:grid-cols-2 gap-0">
-                    {/* Specialization Image - Large and Professional */}
+                    {/* Specialization Image */}
                     <div className="relative p-8 flex items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
-                      <div className="relative group cursor-pointer w-full">
+                      <div className="relative w-full">
                         <motion.img
                           src={specialization.specializationImage}
                           alt={specialization.title}
                           className="w-full max-w-lg h-auto object-contain rounded-xl shadow-2xl"
                           whileHover={{ scale: 1.03 }}
                           transition={{ duration: 0.4 }}
-                          onClick={() => window.open(specialization.specializationImage, "_blank")}
                           onError={handleImageError}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-500 flex items-center justify-center">
-                          <div className="bg-black/50 rounded-full p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <ExternalLink className="w-6 h-6 text-white" />
-                          </div>
-                        </div>
                       </div>
                     </div>
 
@@ -659,7 +647,7 @@ const Achievements = () => {
                             <div className="flex items-center gap-3 text-gray-300">
                               <Calendar className="w-4 h-4 text-purple-400" />
                               <span className="font-medium">{specialization.date}</span>
-                            </div>
+                          </div>
                           </div>
                           <div>
                             <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Level</h5>
@@ -745,7 +733,7 @@ const Achievements = () => {
         </motion.div>
       </div>
 
-      {/* Courses Modal - UPDATED WITH PROFESSIONAL CARDS */}
+      {/* Courses Modal */}
       <AnimatePresence>
         {coursesModalOpen && selectedSpecialization && (
           <motion.div
@@ -777,7 +765,7 @@ const Achievements = () => {
                 </motion.button>
               </div>
 
-              {/* Courses Grid - UPDATED WITH PROFESSIONAL CARDS */}
+              {/* Courses Grid */}
               <div className="p-8 max-h-[70vh] overflow-y-auto">
                 <div className="space-y-6">
                   {selectedSpecialization.courseCertificates.map((course, index) => (
@@ -790,25 +778,17 @@ const Achievements = () => {
                       whileHover={{ scale: 1.01, y: -2 }}
                     >
                       <div className="grid md:grid-cols-2 gap-0">
-                        {/* Course Image - Professional Preview */}
+                        {/* Course Image */}
                         <div className="relative p-6 flex items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
-                          <div className="relative group cursor-pointer w-full">
+                          <div className="relative w-full">
                             <motion.img
                               src={course.image}
                               alt={course.title}
                               className="w-full h-48 object-contain rounded-lg shadow-lg"
                               whileHover={{ scale: 1.03 }}
                               transition={{ duration: 0.3 }}
-                              onClick={() => openLightbox(selectedSpecialization, index)}
                               onError={handleImageError}
                             />
-                            {/* Preview Overlay with Eye Icon */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 rounded-lg transition-all duration-300 flex items-center justify-center">
-                              <div className="bg-black/60 rounded-full p-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-2">
-                                <Eye className="w-5 h-5 text-white" />
-                                <span className="text-white text-sm font-medium">Click to Preview</span>
-                              </div>
-                            </div>
                           </div>
                         </div>
 
@@ -889,7 +869,7 @@ const Achievements = () => {
         )}
       </AnimatePresence>
 
-      {/* Lightbox Modal - FIXED */}
+      {/* Lightbox Modal */}
       <AnimatePresence>
         {lightboxOpen && selectedSpecialization && (
           <motion.div

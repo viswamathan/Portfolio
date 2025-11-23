@@ -741,9 +741,9 @@ const projectCategories = {
         solution: 'Developed and characterized HVOF-sprayed Stellite 6 coatings on W-Cu substrate to enhance wear resistance, thermal stability, and electrical conductivity.',
         impact: 'Significant improvement in wear resistance (60-70% reduction), enhanced thermal stability up to 800°C, and maintained electrical conductivity for efficient current collection.',
         technologies: ['HVOF Thermal Spray', 'Stellite 6', 'Tungsten-Copper Alloy', 'Wear Testing', 'Microstructural Analysis', 'XRD', 'SEM/EDS'],
-        image1: '/images/stellite-coating-1.png',
-        image2: '/images/stellite-coating-2.png',
-        phase1Report: '/reports/Phase 1 Final Year Project report .pdf',
+        image1: '/stellite-coating-1.png',
+        image2: '/stellite-coating-2.png',
+        phase1Report: '/Phase 1 Final Year Project report .pdf',
         showPhase2Button: true,
         // phase2Report will be added when Phase 2 is completed
       },

@@ -88,7 +88,7 @@ const Achievements = () => {
       issuer: "University of Michigan (Coursera)",
       date: "2024",
       description: "Comprehensive exploration of Industry 4.0 technologies transforming modern manufacturing. Focused on IIoT implementation, digital twin technology, and smart factory systems.",
-      specializationImage: "/Certifications/digital-tech-specialization.png",
+      specializationImage: "/Certifications/Digital Technologies and the future of manufacturing.png",
       category: "Coursera Specialization",
       level: "Intermediate",
       courses: 3,
@@ -100,21 +100,21 @@ const Achievements = () => {
           id: 1,
           title: "Industrial Internet of Things (IIoT)",
           issuer: "University of Michigan",
-          image: "/Certifications/iiot-cert.png",
+          image: "/Certifications/Digital Technologies and the future of manufacturing 1.png",
           skills: ["IoT Sensors", "Data Analytics", "Connectivity", "Industrial Automation"]
         },
         {
           id: 2,
           title: "Digital Twins",
           issuer: "University of Michigan",
-          image: "/Certifications/digital-twins-cert.png",
+          image: "/Certifications/Digital Technologies and the future of manufacturing 2.png",
           skills: ["Virtual Modeling", "Simulation", "Real-time Monitoring", "Digital Replication"]
         },
         {
           id: 3,
           title: "Additive Manufacturing",
           issuer: "University of Michigan",
-          image: "/Certifications/am-umich-cert.png",
+          image: "/Certifications/Digital Technologies and the future of manufacturing 3.png",
           skills: ["AM Integration", "Digital Workflow", "Quality Control", "Manufacturing Innovation"]
         }
       ]

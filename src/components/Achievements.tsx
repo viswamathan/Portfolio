@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, Calendar, CheckCircle, ExternalLink, Download, Star, Trophy, Medal, X, ChevronLeft, ChevronRight, Book, Layers, Clock, Users, GraduationCap } from 'lucide-react';
+import { Award, Calendar, CheckCircle, ExternalLink, Download, Star, Trophy, Medal, X, ChevronLeft, ChevronRight, Book, Layers, Clock, Users, GraduationCap, Eye } from 'lucide-react';
 
 const Achievements = () => {
   const [selectedSpecialization, setSelectedSpecialization] = useState(null);
@@ -403,8 +403,8 @@ const Achievements = () => {
   // Image error handler
   const handleImageError = (e) => {
     console.error('Image failed to load:', e.target.src);
-    e.target.src = 'https://via.placeholder.com/600x400/1f2937/9ca3af?text=Specialization+Image';
-    e.target.alt = 'Specialization image not available';
+    e.target.src = 'https://via.placeholder.com/600x400/1f2937/9ca3af?text=Certificate+Image';
+    e.target.alt = 'Certificate image not available';
   };
 
   return (
@@ -745,7 +745,7 @@ const Achievements = () => {
         </motion.div>
       </div>
 
-      {/* Courses Modal */}
+      {/* Courses Modal - UPDATED WITH PROFESSIONAL CARDS */}
       <AnimatePresence>
         {coursesModalOpen && selectedSpecialization && (
           <motion.div
@@ -777,87 +777,108 @@ const Achievements = () => {
                 </motion.button>
               </div>
 
-              {/* Courses Grid */}
+              {/* Courses Grid - UPDATED WITH PROFESSIONAL CARDS */}
               <div className="p-8 max-h-[70vh] overflow-y-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-6">
                   {selectedSpecialization.courseCertificates.map((course, index) => (
                     <motion.div
                       key={course.id}
-                      className="bg-gray-800/50 rounded-2xl p-6 border border-gray-700/30 hover:border-purple-500/30 transition-all duration-300 group"
+                      className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-md rounded-2xl overflow-hidden border border-gray-700/30 shadow-xl"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      whileHover={{ scale: 1.02, y: -5 }}
+                      whileHover={{ scale: 1.01, y: -2 }}
                     >
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <h4 className="text-lg font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
-                            {course.title}
-                          </h4>
-                          <p className="text-blue-400 text-sm font-medium">{course.issuer}</p>
-                        </div>
-                        <div className="text-right">
-                          <div className="bg-green-500/20 text-green-400 px-2 py-1 rounded-lg text-xs font-medium">
-                            Course {index + 1}
+                      <div className="grid md:grid-cols-2 gap-0">
+                        {/* Course Image - Professional Preview */}
+                        <div className="relative p-6 flex items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
+                          <div className="relative group cursor-pointer w-full">
+                            <motion.img
+                              src={course.image}
+                              alt={course.title}
+                              className="w-full h-48 object-contain rounded-lg shadow-lg"
+                              whileHover={{ scale: 1.03 }}
+                              transition={{ duration: 0.3 }}
+                              onClick={() => openLightbox(selectedSpecialization, index)}
+                              onError={handleImageError}
+                            />
+                            {/* Preview Overlay with Eye Icon */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 rounded-lg transition-all duration-300 flex items-center justify-center">
+                              <div className="bg-black/60 rounded-full p-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-2">
+                                <Eye className="w-5 h-5 text-white" />
+                                <span className="text-white text-sm font-medium">Click to Preview</span>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      {/* Course Image Preview */}
-                      <div 
-                        className="mb-4 rounded-lg overflow-hidden bg-gray-700/30 cursor-pointer border border-gray-600/30"
-                        onClick={() => openLightbox(selectedSpecialization, index)}
-                      >
-                        <img
-                          src={course.image}
-                          alt={course.title}
-                          className="w-full h-48 object-contain hover:scale-105 transition-transform duration-300"
-                          onError={handleImageError}
-                        />
-                      </div>
+                        {/* Course Details */}
+                        <div className="p-6">
+                          <div className="flex items-start justify-between mb-4">
+                            <div>
+                              <h4 className="text-xl font-bold text-white mb-2">{course.title}</h4>
+                              <p className="text-blue-400 font-medium text-sm">{course.issuer}</p>
+                            </div>
+                            <div className="text-right">
+                              <div className="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs font-medium">
+                                Course {index + 1}
+                              </div>
+                            </div>
+                          </div>
 
-                      {/* Skills */}
-                      <div>
-                        <h5 className="font-semibold text-purple-300 mb-2 text-sm">Skills Gained</h5>
-                        <div className="flex flex-wrap gap-2">
-                          {course.skills.map((skill, skillIndex) => (
-                            <span
-                              key={skillIndex}
-                              className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-lg text-xs border border-purple-500/30"
+                          {/* Skills */}
+                          <div className="mb-4">
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Skills Gained</h5>
+                            <div className="flex flex-wrap gap-2">
+                              {course.skills.map((skill, skillIndex) => (
+                                <span
+                                  key={skillIndex}
+                                  className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-lg text-xs border border-purple-500/30 font-medium"
+                                >
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Action Buttons */}
+                          <div className="flex gap-3">
+                            <motion.button
+                              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-300 font-semibold flex-1 justify-center"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => openLightbox(selectedSpecialization, index)}
                             >
-                              {skill}
-                            </span>
-                          ))}
+                              <Eye className="w-4 h-4" />
+                              Preview
+                            </motion.button>
+                            
+                            <motion.button
+                              className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-lg transition-colors"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => window.open(course.image, "_blank")}
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                            </motion.button>
+                            
+                            <motion.button
+                              className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-lg transition-colors"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => {
+                                const link = document.createElement("a");
+                                link.href = course.image;
+                                link.download = `${course.title}.png`;
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                              }}
+                            >
+                              <Download className="w-4 h-4" />
+                            </motion.button>
+                          </div>
                         </div>
-                      </div>
-
-                      {/* Action Buttons */}
-                      <div className="flex gap-2 mt-4">
-                        <motion.button
-                          className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-lg text-sm transition-colors flex-1 justify-center"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={() => openLightbox(selectedSpecialization, index)}
-                        >
-                          <ExternalLink className="w-3 h-3" />
-                          View Certificate
-                        </motion.button>
-                        
-                        <motion.button
-                          className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-lg transition-colors"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={() => {
-                            const link = document.createElement("a");
-                            link.href = course.image;
-                            link.download = `${course.title}.png`;
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
-                          }}
-                        >
-                          <Download className="w-3 h-3" />
-                        </motion.button>
                       </div>
                     </motion.div>
                   ))}
@@ -868,7 +889,7 @@ const Achievements = () => {
         )}
       </AnimatePresence>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox Modal - FIXED */}
       <AnimatePresence>
         {lightboxOpen && selectedSpecialization && (
           <motion.div
@@ -876,6 +897,7 @@ const Achievements = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={closeLightbox}
           >
             <motion.div
               className="relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl max-w-7xl w-full max-h-[95vh] overflow-hidden border border-purple-500/20 shadow-2xl"
@@ -883,6 +905,7 @@ const Achievements = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
               <div className="flex items-center justify-between p-8 border-b border-gray-700/50 bg-gradient-to-r from-purple-900/20 to-blue-900/20">

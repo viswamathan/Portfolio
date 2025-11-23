@@ -324,6 +324,27 @@ const CADModels = () => {
     }
   };
 
+  const getCategoryColor = (category) => {
+    switch (category) {
+      case "Automotive":
+        return "from-orange-500/20 to-red-500/20 border-orange-500/30";
+      case "Mechanical Parts":
+        return "from-blue-500/20 to-cyan-500/20 border-blue-500/30";
+      case "Industrial":
+        return "from-purple-500/20 to-pink-500/20 border-purple-500/30";
+      case "Assembly":
+        return "from-green-500/20 to-emerald-500/20 border-green-500/30";
+      case "Thermal Systems":
+        return "from-red-500/20 to-orange-500/20 border-red-500/30";
+      case "Robotics":
+        return "from-indigo-500/20 to-purple-500/20 border-indigo-500/30";
+      case "Aerospace":
+        return "from-cyan-500/20 to-blue-500/20 border-cyan-500/30";
+      default:
+        return "from-gray-500/20 to-gray-600/20 border-gray-500/30";
+    }
+  };
+
   const stats = [
     { label: "Total Models", value: cadModels.length, icon: Box, color: "purple" },
     { label: "Downloads", value: cadModels.reduce((sum, model) => sum + model.downloads, 0), icon: Download, color: "blue" },
@@ -331,7 +352,7 @@ const CADModels = () => {
     { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
 
-  // Enhanced 3D Viewer with better controls and error handling
+  // Enhanced 3D Viewer with better colors
   const init3DViewer = useCallback(() => {
     if (!previewModel || !mountRef.current) return;
 
@@ -349,7 +370,7 @@ const CADModels = () => {
     }
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x111827);
+    scene.background = new THREE.Color(0x0f172a); // Darker blue-gray background
     sceneRef.current = scene;
 
     // Square aspect ratio for viewer
@@ -385,33 +406,48 @@ const CADModels = () => {
     controls.maxDistance = 50;
     controlsRef.current = controls;
 
-    // Enhanced lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    // Enhanced lighting with warmer tones
+    const ambientLight = new THREE.AmbientLight(0x404060, 0.6); // Bluish ambient
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    const directionalLight = new THREE.DirectionalLight(0xffebb3, 1); // Warm directional light
     directionalLight.position.set(50, 50, 50);
     directionalLight.castShadow = true;
     directionalLight.shadow.mapSize.width = 2048;
     directionalLight.shadow.mapSize.height = 2048;
     scene.add(directionalLight);
 
-    const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
+    const fillLight = new THREE.DirectionalLight(0x6688cc, 0.3); // Cool fill light
     fillLight.position.set(-50, 50, -50);
     scene.add(fillLight);
 
     const loader = new STLLoader();
     const modelPaths = previewModel.modelPaths || [previewModel.modelPath];
     const meshes = [];
-    let loadedCount = 0;
 
     const loadModel = (path, index) => {
       return new Promise((resolve, reject) => {
-        const material = new THREE.MeshStandardMaterial({
-          color: new THREE.Color(`hsl(${(index * 60) % 360}, 80%, 60%)`),
-          metalness: 0.7,
-          roughness: 0.3,
-          flatShading: false,
+        // Better material colors - metallic finishes
+        const materialColors = [
+          0x4f46e5, // Indigo
+          0xdc2626, // Red
+          0x059669, // Emerald
+          0xd97706, // Amber
+          0x7c3aed, // Purple
+          0x0891b2, // Cyan
+          0xea580c, // Orange
+          0x16a34a, // Green
+        ];
+
+        const material = new THREE.MeshPhysicalMaterial({
+          color: new THREE.Color(materialColors[index % materialColors.length]),
+          metalness: 0.8,
+          roughness: 0.2,
+          clearcoat: 0.5,
+          clearcoatRoughness: 0.1,
+          reflectivity: 1.0,
+          transparent: false,
+          opacity: 1.0,
         });
 
         loader.load(
@@ -745,11 +781,11 @@ const CADModels = () => {
                   <motion.div
                     key={model.id}
                     variants={cardVariants}
-                    className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md rounded-2xl overflow-hidden border border-gray-700/30 shadow-xl flex flex-col"
+                    className={`bg-gradient-to-br ${getCategoryColor(model.category)} backdrop-blur-md rounded-2xl overflow-hidden border shadow-xl flex flex-col`}
                     whileHover="hover"
                   >
                     {/* Model Image */}
-                    <div className="relative h-48 bg-gradient-to-br from-purple-500/5 to-blue-500/5 overflow-hidden">
+                    <div className="relative h-48 bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden">
                       <motion.img
                         src={model.image}
                         alt={model.title}

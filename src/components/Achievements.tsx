@@ -125,7 +125,7 @@ const Achievements = () => {
       issuer: "Arizona State University (Coursera)",
       date: "2024",
       description: "Advanced course focusing on rapid prototyping methodologies and 3D printing applications in engineering product development cycles and design validation processes.",
-      specializationImage: "/Certifications/rapid-prototyping-specialization.png",
+      specializationImage: "/Certifications/Rapid Prototyping Using 3d Printing.png",
       category: "Coursera Specialization",
       level: "Intermediate",
       courses: 3,
@@ -137,21 +137,21 @@ const Achievements = () => {
           id: 1,
           title: "Engineering and Product Design Processes",
           issuer: "Arizona State University",
-          image: "/Certifications/design-process-cert.png",
+          image: "/Certifications/Rapid Prototyping Using 3d Printing 1.png",
           skills: ["Design Thinking", "Product Development", "Iterative Design", "Engineering Methodology"]
         },
         {
           id: 2,
           title: "Prototyping",
           issuer: "Arizona State University",
-          image: "/Certifications/prototyping-cert.png",
+          image: "/Certifications/Rapid Prototyping Using 3d Printing 2.png",
           skills: ["Prototype Development", "Testing", "Validation", "Design Validation"]
         },
         {
           id: 3,
           title: "3D Printing Technology Deep Dive and Use Cases",
           issuer: "Arizona State University",
-          image: "/Certifications/3d-printing-deepdive-cert.png",
+          image: "/Certifications/Rapid Prototyping Using 3d Printing 3.png",
           skills: ["Technology Comparison", "Use Cases", "Best Practices", "Industry Applications"]
         }
       ]
@@ -162,7 +162,7 @@ const Achievements = () => {
       issuer: "Arizona State University (Coursera)",
       date: "2024",
       description: "Comprehensive training in advanced rapid prototyping techniques including electronics integration, material science, and tooling applications for modern manufacturing.",
-      specializationImage: "/Certifications/rapid-prototyping-tooling-specialization.png",
+      specializationImage: "/Certifications/Rapid Prototyping and Tooling.png",
       category: "Coursera Specialization",
       level: "Advanced",
       courses: 3,
@@ -174,21 +174,21 @@ const Achievements = () => {
           id: 1,
           title: "Using Rapid Prototyping in the Engineering Design Process",
           issuer: "Arizona State University",
-          image: "/Certifications/rapid-engineering-cert.png",
+          image: "/Certifications/Rapid Prototyping and Tooling 1.png",
           skills: ["Design Integration", "Workflow Optimization", "Efficiency", "Engineering Design"]
         },
         {
           id: 2,
           title: "Adding Electronics to Rapid Prototypes",
           issuer: "Arizona State University",
-          image: "/Certifications/electronics-prototyping-cert.png",
+          image: "/Certifications/Rapid Prototyping and Tooling 2.png",
           skills: ["Embedded Systems", "Circuit Design", "Integration", "Electronics Prototyping"]
         },
         {
           id: 3,
           title: "Rapid Prototyping Materials and Tooling",
           issuer: "Arizona State University",
-          image: "/Certifications/materials-tooling-cert.png",
+          image: "/Certifications/Rapid Prototyping and Tooling 3.png",
           skills: ["Material Selection", "Tooling Design", "Manufacturing", "Material Properties"]
         }
       ]
@@ -199,7 +199,7 @@ const Achievements = () => {
       issuer: "Dartmouth College (Coursera)",
       date: "2024",
       description: "Fundamental principles of structural engineering covering tension, compression, shear, and bending analysis with practical applications in modern structural design.",
-      specializationImage: "/Certifications/engineering-structures-specialization.png",
+      specializationImage: "/Certifications/The Engineering of Structures Around Us.png",
       category: "Coursera Specialization",
       level: "Intermediate",
       courses: 5,
@@ -211,35 +211,35 @@ const Achievements = () => {
           id: 1,
           title: "Engineering of Structures: Tension",
           issuer: "Dartmouth College",
-          image: "/Certifications/tension-cert.png",
+          image: "/Certifications/The Engineering of Structures Around Us 1.png",
           skills: ["Tension Analysis", "Cable Structures", "Material Strength", "Structural Tension"]
         },
         {
           id: 2,
           title: "Engineering of Structures: Compression",
           issuer: "Dartmouth College",
-          image: "/Certifications/compression-cert.png",
+          image: "/Certifications/The Engineering of Structures Around Us 2.png",
           skills: ["Compression Members", "Column Design", "Buckling Analysis", "Structural Compression"]
         },
         {
           id: 3,
           title: "Engineering of Structures: Tension and Compression",
           issuer: "Dartmouth College",
-          image: "/Certifications/tension-compression-cert.png",
+          image: "/Certifications/The Engineering of Structures Around Us 3.png",
           skills: ["Combined Loading", "Structural Elements", "Load Analysis", "Mixed Forces"]
         },
         {
           id: 4,
           title: "Engineering of Structures: Shear and Bending",
           issuer: "Dartmouth College",
-          image: "/Certifications/shear-bending-cert.png",
+          image: "/Certifications/The Engineering of Structures Around Us 4.png",
           skills: ["Shear Stress", "Bending Moments", "Beam Design", "Structural Shear"]
         },
         {
           id: 5,
           title: "Engineering of Structures: Response of Structures",
           issuer: "Dartmouth College",
-          image: "/Certifications/response-structures-cert.png",
+          image: "/Certifications/The Engineering of Structures Around Us 5.png",
           skills: ["Structural Response", "Dynamic Analysis", "Performance Evaluation", "Structural Behavior"]
         }
       ]
@@ -250,7 +250,7 @@ const Achievements = () => {
       issuer: "University at Buffalo & The State University of New York (Coursera)",
       date: "2024",
       description: "Comprehensive program covering digital manufacturing technologies, Industry 4.0 implementation, smart factory systems, and advanced manufacturing enterprise management.",
-      specializationImage: "/Certifications/digital-manufacturing-design-specialization.png",
+      specializationImage: "/Certifications/Digital Manufacturing & Design Technology.png",
       category: "Coursera Specialization",
       level: "Advanced",
       courses: 9,
@@ -262,63 +262,63 @@ const Achievements = () => {
           id: 1,
           title: "Digital Manufacturing & Design",
           issuer: "University at Buffalo",
-          image: "/Certifications/digital-mfg-design-cert.png",
+          image: "/Certifications/Digital Manufacturing & Design Technology 1.png",
           skills: ["Digital Transformation", "Smart Factory", "Industry 4.0", "Manufacturing Design"]
         },
         {
           id: 2,
           title: "Digital Thread: Components",
           issuer: "University at Buffalo",
-          image: "/Certifications/digital-thread-components-cert.png",
+          image: "/Certifications/Digital Manufacturing & Design Technology 2.png",
           skills: ["Data Integration", "System Components", "Digital Infrastructure", "Thread Components"]
         },
         {
           id: 3,
           title: "Digital Thread: Implementation",
           issuer: "University at Buffalo",
-          image: "/Certifications/digital-thread-implementation-cert.png",
+          image: "/Certifications/Digital Manufacturing & Design Technology 3.png",
           skills: ["Implementation Strategy", "Deployment", "System Integration", "Thread Implementation"]
         },
         {
           id: 4,
           title: "Advanced Manufacturing Process Analysis",
           issuer: "University at Buffalo",
-          image: "/Certifications/process-analysis-cert.png",
+          image: "/Certifications/Digital Manufacturing & Design Technology 4.png",
           skills: ["Process Optimization", "Data Analytics", "Quality Control", "Manufacturing Analysis"]
         },
         {
           id: 5,
           title: "Intelligent Machining",
           issuer: "University at Buffalo",
-          image: "/Certifications/intelligent-machining-cert.png",
+          image: "/Certifications/Digital Manufacturing & Design Technology 5.png",
           skills: ["Smart Machining", "AI in Manufacturing", "Predictive Maintenance", "Intelligent Systems"]
         },
         {
           id: 6,
           title: "Advanced Manufacturing Enterprise",
           issuer: "University at Buffalo",
-          image: "/Certifications/mfg-enterprise-cert.png",
+          image: "/Certifications/Digital Manufacturing & Design Technology 6.png",
           skills: ["Enterprise Systems", "Supply Chain", "Business Integration", "Manufacturing Enterprise"]
         },
         {
           id: 7,
           title: "Cyber Security in Manufacturing",
           issuer: "University at Buffalo",
-          image: "/Certifications/cybersecurity-mfg-cert.png",
+          image: "/Certifications/Digital Manufacturing & Design Technology 7.png",
           skills: ["Security Protocols", "Data Protection", "Risk Management", "Manufacturing Security"]
         },
         {
           id: 8,
           title: "MBSE: Model-Based Systems Engineering",
           issuer: "University at Buffalo",
-          image: "/Certifications/mbse-cert.png",
+          image: "/Certifications/Digital Manufacturing & Design Technology 8.png",
           skills: ["Systems Modeling", "MBSE Methodology", "Digital Engineering", "Model-Based Systems"]
         },
         {
           id: 9,
           title: "Roadmap to Success in Digital Manufacturing & Design",
           issuer: "University at Buffalo",
-          image: "/Certifications/roadmap-success-cert.png",
+          image: "/Certifications/Digital Manufacturing & Design Technology 9.png",
           skills: ["Career Planning", "Industry Trends", "Professional Development", "Success Strategies"]
         }
       ]

@@ -47,7 +47,7 @@ const Achievements = () => {
           id: 1,
           title: "Introduction to Additive Manufacturing Processes",
           issuer: "Arizona State University",
-          image: '/Certifications/Additive Manufacturing 1.PNG'
+          image: '/Certifications/Additive Manufacturing 1.PNG',
           skills: ["AM Fundamentals", "Process Selection", "Technology Overview", "Manufacturing Processes"]
         },
         {

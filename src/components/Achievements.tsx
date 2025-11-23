@@ -15,7 +15,7 @@ const Achievements = () => {
       issuer: "Dassault Systèmes SolidWorks Corporation",
       date: "2024",
       description: "Professional certification demonstrating proficiency in SolidWorks 3D CAD software, including part modeling, assembly creation, and drawing generation.",
-      image: "VISWA CSWA.png",
+      image: "/Certifications/VISWA CSWA.png",
       skills: ["3D Modeling", "Assembly Design", "Technical Drawings", "Part Configuration", "Design Validation"],
       credentialId: "C-L3G7SF84B9",
       category: "Professional Certification",
@@ -54,28 +54,28 @@ const Achievements = () => {
           id: 2,
           title: "Material Extrusion",
           issuer: "Arizona State University",
-          image: "material-extrusion-cert.png",
+          image: "/Certifications/material-extrusion-cert.png",
           skills: ["FDM/FFF", "Material Properties", "Process Parameters", "Extrusion Technology"]
         },
         {
           id: 3,
           title: "Material Jetting and Stereolithography",
           issuer: "Arizona State University",
-          image: "material-jetting-cert.png",
+          image: "/Certifications/material-jetting-cert.png",
           skills: ["SLA", "Material Jetting", "High-Resolution Printing", "Photopolymerization"]
         },
         {
           id: 4,
           title: "Selective Laser Sintering and Metal Laser Powder Bed Fusion",
           issuer: "Arizona State University",
-          image: "sls-metal-cert.png",
+          image: "/Certifications/sls-metal-cert.png",
           skills: ["SLS", "LPBF", "Metal AM", "Post-Processing", "Laser Technology"]
         },
         {
           id: 5,
           title: "Design for Additive Manufacturing",
           issuer: "Arizona State University",
-          image: "dfam-cert.png",
+          image: "/Certifications/dfam-cert.png",
           skills: ["DFAM Principles", "Topology Optimization", "Lattice Structures", "Generative Design"]
         }
       ]
@@ -86,7 +86,7 @@ const Achievements = () => {
       issuer: "University of Michigan (Coursera)",
       date: "2024",
       description: "Comprehensive exploration of Industry 4.0 technologies transforming modern manufacturing. Focused on IIoT implementation, digital twin technology, and smart factory systems.",
-      specializationImage: "digital-tech-specialization.png",
+      specializationImage: "/Certifications/digital-tech-specialization.png",
       category: "Coursera Specialization",
       level: "Intermediate",
       courses: 3,
@@ -96,21 +96,21 @@ const Achievements = () => {
           id: 1,
           title: "Industrial Internet of Things (IIoT)",
           issuer: "University of Michigan",
-          image: "iiot-cert.png",
+          image: "/Certifications/iiot-cert.png",
           skills: ["IoT Sensors", "Data Analytics", "Connectivity", "Industrial Automation"]
         },
         {
           id: 2,
           title: "Digital Twins",
           issuer: "University of Michigan",
-          image: "digital-twins-cert.png",
+          image: "/Certifications/digital-twins-cert.png",
           skills: ["Virtual Modeling", "Simulation", "Real-time Monitoring", "Digital Replication"]
         },
         {
           id: 3,
           title: "Additive Manufacturing",
           issuer: "University of Michigan",
-          image: "am-umich-cert.png",
+          image: "/Certifications/am-umich-cert.png",
           skills: ["AM Integration", "Digital Workflow", "Quality Control", "Manufacturing Innovation"]
         }
       ]
@@ -121,7 +121,7 @@ const Achievements = () => {
       issuer: "Arizona State University (Coursera)",
       date: "2024",
       description: "Advanced course focusing on rapid prototyping methodologies and 3D printing applications in engineering product development cycles and design validation processes.",
-      specializationImage: "rapid-prototyping-specialization.png",
+      specializationImage: "/Certifications/rapid-prototyping-specialization.png",
       category: "Coursera Specialization",
       level: "Intermediate",
       courses: 3,
@@ -131,21 +131,21 @@ const Achievements = () => {
           id: 1,
           title: "Engineering and Product Design Processes",
           issuer: "Arizona State University",
-          image: "design-process-cert.png",
+          image: "/Certifications/design-process-cert.png",
           skills: ["Design Thinking", "Product Development", "Iterative Design", "Engineering Methodology"]
         },
         {
           id: 2,
           title: "Prototyping",
           issuer: "Arizona State University",
-          image: "prototyping-cert.png",
+          image: "/Certifications/prototyping-cert.png",
           skills: ["Prototype Development", "Testing", "Validation", "Design Validation"]
         },
         {
           id: 3,
           title: "3D Printing Technology Deep Dive and Use Cases",
           issuer: "Arizona State University",
-          image: "3d-printing-deepdive-cert.png",
+          image: "/Certifications/3d-printing-deepdive-cert.png",
           skills: ["Technology Comparison", "Use Cases", "Best Practices", "Industry Applications"]
         }
       ]
@@ -156,7 +156,7 @@ const Achievements = () => {
       issuer: "Arizona State University (Coursera)",
       date: "2024",
       description: "Comprehensive training in advanced rapid prototyping techniques including electronics integration, material science, and tooling applications for modern manufacturing.",
-      specializationImage: "rapid-prototyping-tooling-specialization.png",
+      specializationImage: "/Certifications/rapid-prototyping-tooling-specialization.png",
       category: "Coursera Specialization",
       level: "Advanced",
       courses: 3,
@@ -166,21 +166,21 @@ const Achievements = () => {
           id: 1,
           title: "Using Rapid Prototyping in the Engineering Design Process",
           issuer: "Arizona State University",
-          image: "rapid-engineering-cert.png",
+          image: "/Certifications/rapid-engineering-cert.png",
           skills: ["Design Integration", "Workflow Optimization", "Efficiency", "Engineering Design"]
         },
         {
           id: 2,
           title: "Adding Electronics to Rapid Prototypes",
           issuer: "Arizona State University",
-          image: "electronics-prototyping-cert.png",
+          image: "/Certifications/electronics-prototyping-cert.png",
           skills: ["Embedded Systems", "Circuit Design", "Integration", "Electronics Prototyping"]
         },
         {
           id: 3,
           title: "Rapid Prototyping Materials and Tooling",
           issuer: "Arizona State University",
-          image: "materials-tooling-cert.png",
+          image: "/Certifications/materials-tooling-cert.png",
           skills: ["Material Selection", "Tooling Design", "Manufacturing", "Material Properties"]
         }
       ]
@@ -191,7 +191,7 @@ const Achievements = () => {
       issuer: "Dartmouth College (Coursera)",
       date: "2024",
       description: "Fundamental principles of structural engineering covering tension, compression, shear, and bending analysis with practical applications in modern structural design.",
-      specializationImage: "engineering-structures-specialization.png",
+      specializationImage: "/Certifications/engineering-structures-specialization.png",
       category: "Coursera Specialization",
       level: "Intermediate",
       courses: 5,
@@ -201,35 +201,35 @@ const Achievements = () => {
           id: 1,
           title: "Engineering of Structures: Tension",
           issuer: "Dartmouth College",
-          image: "tension-cert.png",
+          image: "/Certifications/tension-cert.png",
           skills: ["Tension Analysis", "Cable Structures", "Material Strength", "Structural Tension"]
         },
         {
           id: 2,
           title: "Engineering of Structures: Compression",
           issuer: "Dartmouth College",
-          image: "compression-cert.png",
+          image: "/Certifications/compression-cert.png",
           skills: ["Compression Members", "Column Design", "Buckling Analysis", "Structural Compression"]
         },
         {
           id: 3,
           title: "Engineering of Structures: Tension and Compression",
           issuer: "Dartmouth College",
-          image: "tension-compression-cert.png",
+          image: "/Certifications/tension-compression-cert.png",
           skills: ["Combined Loading", "Structural Elements", "Load Analysis", "Mixed Forces"]
         },
         {
           id: 4,
           title: "Engineering of Structures: Shear and Bending",
           issuer: "Dartmouth College",
-          image: "shear-bending-cert.png",
+          image: "/Certifications/shear-bending-cert.png",
           skills: ["Shear Stress", "Bending Moments", "Beam Design", "Structural Shear"]
         },
         {
           id: 5,
           title: "Engineering of Structures: Response of Structures",
           issuer: "Dartmouth College",
-          image: "response-structures-cert.png",
+          image: "/Certifications/response-structures-cert.png",
           skills: ["Structural Response", "Dynamic Analysis", "Performance Evaluation", "Structural Behavior"]
         }
       ]
@@ -240,7 +240,7 @@ const Achievements = () => {
       issuer: "University at Buffalo & The State University of New York (Coursera)",
       date: "2024",
       description: "Comprehensive program covering digital manufacturing technologies, Industry 4.0 implementation, smart factory systems, and advanced manufacturing enterprise management.",
-      specializationImage: "digital-manufacturing-design-specialization.png",
+      specializationImage: "/Certifications/digital-manufacturing-design-specialization.png",
       category: "Coursera Specialization",
       level: "Advanced",
       courses: 9,
@@ -250,63 +250,63 @@ const Achievements = () => {
           id: 1,
           title: "Digital Manufacturing & Design",
           issuer: "University at Buffalo",
-          image: "digital-mfg-design-cert.png",
+          image: "/Certifications/digital-mfg-design-cert.png",
           skills: ["Digital Transformation", "Smart Factory", "Industry 4.0", "Manufacturing Design"]
         },
         {
           id: 2,
           title: "Digital Thread: Components",
           issuer: "University at Buffalo",
-          image: "digital-thread-components-cert.png",
+          image: "/Certifications/digital-thread-components-cert.png",
           skills: ["Data Integration", "System Components", "Digital Infrastructure", "Thread Components"]
         },
         {
           id: 3,
           title: "Digital Thread: Implementation",
           issuer: "University at Buffalo",
-          image: "digital-thread-implementation-cert.png",
+          image: "/Certifications/digital-thread-implementation-cert.png",
           skills: ["Implementation Strategy", "Deployment", "System Integration", "Thread Implementation"]
         },
         {
           id: 4,
           title: "Advanced Manufacturing Process Analysis",
           issuer: "University at Buffalo",
-          image: "process-analysis-cert.png",
+          image: "/Certifications/process-analysis-cert.png",
           skills: ["Process Optimization", "Data Analytics", "Quality Control", "Manufacturing Analysis"]
         },
         {
           id: 5,
           title: "Intelligent Machining",
           issuer: "University at Buffalo",
-          image: "intelligent-machining-cert.png",
+          image: "/Certifications/intelligent-machining-cert.png",
           skills: ["Smart Machining", "AI in Manufacturing", "Predictive Maintenance", "Intelligent Systems"]
         },
         {
           id: 6,
           title: "Advanced Manufacturing Enterprise",
           issuer: "University at Buffalo",
-          image: "mfg-enterprise-cert.png",
+          image: "/Certifications/mfg-enterprise-cert.png",
           skills: ["Enterprise Systems", "Supply Chain", "Business Integration", "Manufacturing Enterprise"]
         },
         {
           id: 7,
           title: "Cyber Security in Manufacturing",
           issuer: "University at Buffalo",
-          image: "cybersecurity-mfg-cert.png",
+          image: "/Certifications/cybersecurity-mfg-cert.png",
           skills: ["Security Protocols", "Data Protection", "Risk Management", "Manufacturing Security"]
         },
         {
           id: 8,
           title: "MBSE: Model-Based Systems Engineering",
           issuer: "University at Buffalo",
-          image: "mbse-cert.png",
+          image: "/Certifications/mbse-cert.png",
           skills: ["Systems Modeling", "MBSE Methodology", "Digital Engineering", "Model-Based Systems"]
         },
         {
           id: 9,
           title: "Roadmap to Success in Digital Manufacturing & Design",
           issuer: "University at Buffalo",
-          image: "roadmap-success-cert.png",
+          image: "/Certifications/roadmap-success-cert.png",
           skills: ["Career Planning", "Industry Trends", "Professional Development", "Success Strategies"]
         }
       ]
@@ -388,6 +388,13 @@ const Achievements = () => {
     }
   };
 
+  // Image error handler
+  const handleImageError = (e) => {
+    console.error('Image failed to load:', e.target.src);
+    e.target.src = 'https://via.placeholder.com/400x300/1f2937/9ca3af?text=Image+Not+Found';
+    e.target.alt = 'Certificate image not available';
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950 py-20">
       <div className="container mx-auto px-6">
@@ -467,6 +474,7 @@ const Achievements = () => {
                         whileHover={{ scale: 1.03 }}
                         transition={{ duration: 0.4 }}
                         onClick={() => window.open(cert.image, "_blank")}
+                        onError={handleImageError}
                       />
                       <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-500 flex items-center justify-center">
                         <div className="bg-black/50 rounded-full p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
@@ -594,12 +602,13 @@ const Achievements = () => {
                   whileHover="hover"
                 >
                   <div className="flex flex-col h-full">
-                    {/* Specialization Thumbnail Header */}
+                    {/* Specialization Thumbnail Header - FIXED: object-contain instead of object-cover */}
                     <div className="relative h-48 bg-gradient-to-r from-purple-500/10 to-blue-500/10 overflow-hidden">
                       <img
                         src={specialization.specializationImage}
                         alt={specialization.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105 bg-gray-800/50"
+                        onError={handleImageError}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent" />
                       
@@ -748,13 +757,16 @@ const Achievements = () => {
                         </div>
                       </div>
 
-                      {/* Course Image Preview */}
-                      <div className="mb-4 rounded-lg overflow-hidden bg-gray-700/30 cursor-pointer"
-                           onClick={() => openLightbox(selectedSpecialization, index)}>
+                      {/* Course Image Preview - FIXED: object-contain and better styling */}
+                      <div 
+                        className="mb-4 rounded-lg overflow-hidden bg-gray-700/30 cursor-pointer border border-gray-600/30"
+                        onClick={() => openLightbox(selectedSpecialization, index)}
+                      >
                         <img
                           src={course.image}
                           alt={course.title}
-                          className="w-full h-32 object-cover hover:scale-105 transition-transform duration-300"
+                          className="w-full h-48 object-contain hover:scale-105 transition-transform duration-300"
+                          onError={handleImageError}
                         />
                       </div>
 
@@ -810,7 +822,7 @@ const Achievements = () => {
         )}
       </AnimatePresence>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox Modal - FIXED: Better image display */}
       <AnimatePresence>
         {lightboxOpen && selectedSpecialization && (
           <motion.div
@@ -850,16 +862,17 @@ const Achievements = () => {
                 </motion.button>
               </div>
 
-              {/* Certificate Image */}
-              <div className="flex items-center justify-center p-12 max-h-[65vh] overflow-auto bg-gray-800/30">
+              {/* Certificate Image - FIXED: Better sizing and centering */}
+              <div className="flex items-center justify-center p-8 max-h-[65vh] overflow-auto bg-gray-800/30">
                 <motion.img
                   key={currentCertIndex}
                   src={selectedSpecialization.courseCertificates[currentCertIndex].image}
                   alt={selectedSpecialization.courseCertificates[currentCertIndex].title}
-                  className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
+                  className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4 }}
+                  onError={handleImageError}
                 />
               </div>
 

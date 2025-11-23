@@ -56,28 +56,28 @@ const Achievements = () => {
           id: 2,
           title: "Material Extrusion",
           issuer: "Arizona State University",
-          image: "/Certifications/material-extrusion-cert.png",
+          image: '/Certifications/Additive Manufacturing 2.png',
           skills: ["FDM/FFF", "Material Properties", "Process Parameters", "Extrusion Technology"]
         },
         {
           id: 3,
           title: "Material Jetting and Stereolithography",
           issuer: "Arizona State University",
-          image: "/Certifications/material-jetting-cert.png",
+          image: '/Certifications/Additive Manufacturing 3.png',
           skills: ["SLA", "Material Jetting", "High-Resolution Printing", "Photopolymerization"]
         },
         {
           id: 4,
           title: "Selective Laser Sintering and Metal Laser Powder Bed Fusion",
           issuer: "Arizona State University",
-          image: "/Certifications/sls-metal-cert.png",
+          image: '/Certifications/Additive Manufacturing 4.png',
           skills: ["SLS", "LPBF", "Metal AM", "Post-Processing", "Laser Technology"]
         },
         {
           id: 5,
           title: "Design for Additive Manufacturing",
           issuer: "Arizona State University",
-          image: "/Certifications/dfam-cert.png",
+          image: '/Certifications/Additive Manufacturing 5.png',
           skills: ["DFAM Principles", "Topology Optimization", "Lattice Structures", "Generative Design"]
         }
       ]

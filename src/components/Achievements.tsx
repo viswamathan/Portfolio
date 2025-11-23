@@ -41,7 +41,9 @@ const Achievements = () => {
       category: "Coursera Specialization",
       level: "Advanced",
       courses: 5,
+      duration: "5 months",
       skills: ["Material Extrusion", "Material Jetting", "Stereolithography", "Selective Laser Sintering", "Design for AM", "3D Printing", "Rapid Prototyping"],
+      credentialId: "SP-L3G7SF84B1",
       courseCertificates: [
         {
           id: 1,
@@ -90,7 +92,9 @@ const Achievements = () => {
       category: "Coursera Specialization",
       level: "Intermediate",
       courses: 3,
+      duration: "3 months",
       skills: ["IIoT", "Digital Twins", "Smart Manufacturing", "Industry 4.0", "Data Analytics", "Automation"],
+      credentialId: "SP-L3G7SF84B2",
       courseCertificates: [
         {
           id: 1,
@@ -125,7 +129,9 @@ const Achievements = () => {
       category: "Coursera Specialization",
       level: "Intermediate",
       courses: 3,
+      duration: "3 months",
       skills: ["3D Printing", "Prototyping", "Product Design", "CAD", "Iterative Design", "Product Development"],
+      credentialId: "SP-L3G7SF84B3",
       courseCertificates: [
         {
           id: 1,
@@ -160,7 +166,9 @@ const Achievements = () => {
       category: "Coursera Specialization",
       level: "Advanced",
       courses: 3,
+      duration: "3 months",
       skills: ["Rapid Tooling", "Electronics Integration", "Material Science", "Advanced Prototyping", "Manufacturing"],
+      credentialId: "SP-L3G7SF84B4",
       courseCertificates: [
         {
           id: 1,
@@ -195,7 +203,9 @@ const Achievements = () => {
       category: "Coursera Specialization",
       level: "Intermediate",
       courses: 5,
+      duration: "5 months",
       skills: ["Structural Analysis", "Tension/Compression", "Shear Forces", "Bending Moments", "Structural Design"],
+      credentialId: "SP-L3G7SF84B5",
       courseCertificates: [
         {
           id: 1,
@@ -244,7 +254,9 @@ const Achievements = () => {
       category: "Coursera Specialization",
       level: "Advanced",
       courses: 9,
+      duration: "6 months",
       skills: ["Digital Thread", "IIoT", "Digital Twins", "Cyber Security", "MBSE", "Smart Manufacturing"],
+      credentialId: "SP-L3G7SF84B6",
       courseCertificates: [
         {
           id: 1,
@@ -391,8 +403,8 @@ const Achievements = () => {
   // Image error handler
   const handleImageError = (e) => {
     console.error('Image failed to load:', e.target.src);
-    e.target.src = 'https://via.placeholder.com/400x300/1f2937/9ca3af?text=Image+Not+Found';
-    e.target.alt = 'Certificate image not available';
+    e.target.src = 'https://via.placeholder.com/600x400/1f2937/9ca3af?text=Specialization+Image';
+    e.target.alt = 'Specialization image not available';
   };
 
   return (
@@ -577,7 +589,7 @@ const Achievements = () => {
             ))}
           </motion.div>
 
-          {/* Coursera Specializations */}
+          {/* University Specializations - UPDATED PROFESSIONAL CARDS */}
           <motion.div variants={itemVariants} className="mb-20">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-3 bg-gray-800/50 border border-gray-700/50 rounded-full px-6 py-3 mb-6">
@@ -593,62 +605,93 @@ const Achievements = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+            <div className="space-y-8">
               {specializations.map((specialization) => (
                 <motion.div
                   key={specialization.id}
                   variants={cardVariants}
-                  className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-md rounded-3xl overflow-hidden border border-gray-700/30 hover:border-purple-500/20 transition-all duration-500 group"
+                  className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md rounded-3xl overflow-hidden border border-gray-700/30 shadow-2xl"
                   whileHover="hover"
                 >
-                  <div className="flex flex-col h-full">
-                    {/* Specialization Thumbnail Header - FIXED: object-contain instead of object-cover */}
-                    <div className="relative h-48 bg-gradient-to-r from-purple-500/10 to-blue-500/10 overflow-hidden">
-                      <img
-                        src={specialization.specializationImage}
-                        alt={specialization.title}
-                        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105 bg-gray-800/50"
-                        onError={handleImageError}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/20 to-transparent" />
-                      
-                      {/* Badges */}
-                      <div className="absolute top-4 right-4 flex gap-2">
-                        <div className="bg-purple-600/90 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1">
-                          <Layers className="w-4 h-4" />
-                          {specialization.courses} Courses
-                        </div>
-                        <div className="bg-blue-600/90 text-white px-3 py-1 rounded-full text-sm font-medium">
-                          {specialization.level}
-                        </div>
-                      </div>
-                      
-                      {/* University Badge */}
-                      <div className="absolute bottom-4 left-4">
-                        <div className="bg-gray-800/90 text-white px-3 py-1 rounded-lg text-sm font-medium border border-gray-600/50">
-                          {specialization.issuer.split('(')[0].trim()}
+                  <div className="grid xl:grid-cols-2 gap-0">
+                    {/* Specialization Image - Large and Professional */}
+                    <div className="relative p-8 flex items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
+                      <div className="relative group cursor-pointer w-full">
+                        <motion.img
+                          src={specialization.specializationImage}
+                          alt={specialization.title}
+                          className="w-full max-w-lg h-auto object-contain rounded-xl shadow-2xl"
+                          whileHover={{ scale: 1.03 }}
+                          transition={{ duration: 0.4 }}
+                          onClick={() => window.open(specialization.specializationImage, "_blank")}
+                          onError={handleImageError}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 rounded-xl transition-all duration-500 flex items-center justify-center">
+                          <div className="bg-black/50 rounded-full p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <ExternalLink className="w-6 h-6 text-white" />
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Content Area */}
-                    <div className="p-8 flex-1">
-                      <h3 className="text-2xl font-bold text-white mb-3 leading-tight group-hover:text-purple-300 transition-colors">
-                        {specialization.title}
-                      </h3>
+                    {/* Specialization Details */}
+                    <div className="p-8">
+                      <div className="flex items-start justify-between mb-6">
+                        <div>
+                          <h3 className="text-2xl font-bold text-white mb-2 leading-tight">{specialization.title}</h3>
+                          <p className="text-purple-400 font-semibold text-lg">{specialization.issuer}</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="px-3 py-1 rounded-full border bg-green-500/20 text-green-400 border-green-500/30 flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4" />
+                            <span className="text-sm font-medium">Completed</span>
+                          </div>
+                        </div>
+                      </div>
 
-                      <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-                        {specialization.description}
-                      </p>
+                      <p className="text-gray-300 text-lg mb-6 leading-relaxed">{specialization.description}</p>
 
-                      {/* Skills Grid */}
+                      {/* Specialization Info Grid */}
+                      <div className="grid grid-cols-2 gap-6 mb-6">
+                        <div className="space-y-4">
+                          <div>
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Completion Date</h5>
+                            <div className="flex items-center gap-3 text-gray-300">
+                              <Calendar className="w-4 h-4 text-purple-400" />
+                              <span className="font-medium">{specialization.date}</span>
+                            </div>
+                          </div>
+                          <div>
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Level</h5>
+                            <span className="text-gray-300 font-medium bg-gray-700/50 px-3 py-1 rounded-lg text-sm">{specialization.level}</span>
+                          </div>
+                        </div>
+                        <div className="space-y-4">
+                          <div>
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Duration</h5>
+                            <div className="flex items-center gap-3 text-gray-300">
+                              <Clock className="w-4 h-4 text-purple-400" />
+                              <span className="font-medium">{specialization.duration}</span>
+                            </div>
+                          </div>
+                          <div>
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Courses</h5>
+                            <div className="flex items-center gap-3 text-gray-300">
+                              <Book className="w-4 h-4 text-purple-400" />
+                              <span className="font-medium">{specialization.courses} Modules</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Skills */}
                       <div className="mb-6">
-                        <h4 className="font-semibold text-purple-300 mb-4 text-sm uppercase tracking-wide">Core Competencies</h4>
-                        <div className="flex flex-wrap gap-3">
+                        <h5 className="font-semibold text-purple-300 mb-3 text-sm uppercase tracking-wide">Core Competencies</h5>
+                        <div className="flex flex-wrap gap-2">
                           {specialization.skills.slice(0, 6).map((skill, index) => (
                             <span
                               key={index}
-                              className="bg-purple-500/15 text-purple-300 px-4 py-2 rounded-xl text-sm border border-purple-500/20 font-medium"
+                              className="bg-purple-500/20 text-purple-300 px-3 py-1.5 rounded-lg text-sm border border-purple-500/30 font-medium"
                             >
                               {skill}
                             </span>
@@ -656,39 +699,42 @@ const Achievements = () => {
                         </div>
                       </div>
 
-                      {/* Footer with Actions */}
-                      <div className="flex items-center justify-between pt-6 border-t border-gray-700/50">
-                        <div className="flex items-center gap-6 text-sm text-gray-400">
-                          <div className="flex items-center gap-2">
-                            <Book className="w-4 h-4 text-blue-400" />
-                            <span>{specialization.courses} Modules</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-400" />
-                            <span>Completed</span>
-                          </div>
-                        </div>
-                        
-                        <div className="flex gap-3">
-                          <motion.button
-                            className="flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-300 font-semibold"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => openCoursesModal(specialization)}
-                          >
-                            <Book className="w-4 h-4" />
-                            View Courses
-                          </motion.button>
-                          
-                          <motion.button
-                            className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-xl transition-all duration-300"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => window.open(specialization.specializationImage, "_blank")}
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </motion.button>
-                        </div>
+                      {/* Action Buttons */}
+                      <div className="flex gap-3">
+                        <motion.button
+                          className="flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-300 font-semibold flex-1 justify-center"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => openCoursesModal(specialization)}
+                        >
+                          <Book className="w-4 h-4" />
+                          View All Courses
+                        </motion.button>
+
+                        <motion.button
+                          className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-xl transition-all duration-300 font-semibold"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => window.open(specialization.specializationImage, "_blank")}
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </motion.button>
+
+                        <motion.button
+                          className="flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-xl transition-all duration-300 font-semibold"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            const link = document.createElement("a");
+                            link.href = specialization.specializationImage;
+                            link.download = `${specialization.title}.png`;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                          }}
+                        >
+                          <Download className="w-4 h-4" />
+                        </motion.button>
                       </div>
                     </div>
                   </div>
@@ -757,7 +803,7 @@ const Achievements = () => {
                         </div>
                       </div>
 
-                      {/* Course Image Preview - FIXED: object-contain and better styling */}
+                      {/* Course Image Preview */}
                       <div 
                         className="mb-4 rounded-lg overflow-hidden bg-gray-700/30 cursor-pointer border border-gray-600/30"
                         onClick={() => openLightbox(selectedSpecialization, index)}
@@ -822,7 +868,7 @@ const Achievements = () => {
         )}
       </AnimatePresence>
 
-      {/* Lightbox Modal - FIXED: Better image display */}
+      {/* Lightbox Modal */}
       <AnimatePresence>
         {lightboxOpen && selectedSpecialization && (
           <motion.div
@@ -862,7 +908,7 @@ const Achievements = () => {
                 </motion.button>
               </div>
 
-              {/* Certificate Image - FIXED: Better sizing and centering */}
+              {/* Certificate Image */}
               <div className="flex items-center justify-center p-8 max-h-[65vh] overflow-auto bg-gray-800/30">
                 <motion.img
                   key={currentCertIndex}

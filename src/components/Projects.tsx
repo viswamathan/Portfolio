@@ -29,6 +29,7 @@ import {
   Maximize2,
   Minimize2,
   RotateCcw,
+  AlertCircle,
 } from 'lucide-react';
 
 /**
@@ -426,6 +427,35 @@ const ProjectGalleryModal: React.FC<ProjectGalleryModalProps> = ({ isOpen, onClo
                     <span>Download Report</span>
                   </motion.a>
                 )}
+
+                {/* Phase Reports for Stellite 6 Coating Project */}
+                {project.phase1Report && (
+                  <motion.a
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    href={project.phase1Report}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3 bg-blue-600/20 hover:bg-blue-600/40 text-blue-300 px-4 py-3 rounded-xl transition-all border border-blue-500/30"
+                  >
+                    <FileText className="w-5 h-5" />
+                    <span>Phase 1 Report</span>
+                  </motion.a>
+                )}
+
+                {project.phase2Report && (
+                  <motion.a
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    href={project.phase2Report}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3 bg-green-600/20 hover:bg-green-600/40 text-green-300 px-4 py-3 rounded-xl transition-all border border-green-500/30"
+                  >
+                    <FileText className="w-5 h-5" />
+                    <span>Phase 2 Report</span>
+                  </motion.a>
+                )}
               </div>
             </div>
           </div>
@@ -442,7 +472,8 @@ const PremiumProjectCard: React.FC<{
   onViewGallery: (project: any) => void;
   onViewImage: (image: string, title?: string) => void;
   onViewSimulation: (sims: string[], title?: string) => void;
-}> = ({ project, onViewGallery, onViewImage, onViewSimulation }) => {
+  onPhase2Click: (projectTitle: string) => void;
+}> = ({ project, onViewGallery, onViewImage, onViewSimulation, onPhase2Click }) => {
   const images = [project.image1, project.image2].filter(Boolean) as string[];
   const [isHovered, setIsHovered] = useState(false);
 
@@ -587,6 +618,45 @@ const PremiumProjectCard: React.FC<{
               </motion.a>
             )}
 
+            {/* Phase Reports for Stellite 6 Project */}
+            {project.phase1Report && (
+              <motion.a
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                href={project.phase1Report}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 flex-1 min-w-[140px] bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-blue-500/25"
+              >
+                <FileText className="w-4 h-4" />
+                <span>Phase 1 Report</span>
+              </motion.a>
+            )}
+
+            {project.phase2Report ? (
+              <motion.a
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                href={project.phase2Report}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 flex-1 min-w-[140px] bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-green-500/25"
+              >
+                <FileText className="w-4 h-4" />
+                <span>Phase 2 Report</span>
+              </motion.a>
+            ) : project.showPhase2Button ? (
+              <motion.button
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => onPhase2Click(project.title)}
+                className="flex items-center justify-center gap-2 flex-1 min-w-[140px] bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-gray-500/25"
+              >
+                <AlertCircle className="w-4 h-4" />
+                <span>Phase 2 Report</span>
+              </motion.button>
+            ) : null}
+
             {project.simulations && (
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
@@ -638,7 +708,7 @@ const projectCategories = {
   mechanical: {
     icon: Cog,
     title: 'Mechanical Engineering',
-    intro: 'Advanced mechanical engineering projects showcasing design optimization, structural analysis, and innovative solutions using cutting-edge simulation tools.',
+    intro: 'Advanced mechanical engineering projects showcasing design optimization, structural analysis, materials science, and innovative solutions using cutting-edge simulation tools.',
     projects: [
       {
         title: 'Flat Sprocket Analysis',
@@ -663,6 +733,19 @@ const projectCategories = {
         image2: '/images/PISTON 2.png',
         report: '/reports/Thermo-Structural Analysis of Piston Head Using ANSYS Mechanical.pdf',
         simulations: ['/simulations/head deform.gif', '/simulations/head stress.gif', '/simulations/head temparature.gif'],
+      },
+      {
+        title: 'HVOF-Sprayed Stellite 6 Coating on W-Cu Alloy',
+        description: 'Performance evaluation of HVOF-sprayed Stellite 6 coating on Tungsten-Copper (80/20) alloy for high-speed pantograph applications in railway systems.',
+        problem: 'Pantograph contact strips in high-speed railways experience severe wear, arcing, and thermal degradation, leading to frequent maintenance and operational inefficiencies.',
+        solution: 'Developed and characterized HVOF-sprayed Stellite 6 coatings on W-Cu substrate to enhance wear resistance, thermal stability, and electrical conductivity.',
+        impact: 'Significant improvement in wear resistance (60-70% reduction), enhanced thermal stability up to 800°C, and maintained electrical conductivity for efficient current collection.',
+        technologies: ['HVOF Thermal Spray', 'Stellite 6', 'Tungsten-Copper Alloy', 'Wear Testing', 'Microstructural Analysis', 'XRD', 'SEM/EDS'],
+        image1: '/images/stellite-coating-1.jpg',
+        image2: '/images/stellite-coating-2.jpg',
+        phase1Report: '/reports/Stellite6-Coating-Phase1-Report.pdf',
+        showPhase2Button: true,
+        // phase2Report will be added when Phase 2 is completed
       },
     ],
   },
@@ -712,6 +795,7 @@ const Projects: React.FC = () => {
   const [modalSimulations, setModalSimulations] = useState<{simulations: string[], title?: string} | null>(null);
   const [lightboxImage, setLightboxImage] = useState<{ image: string; title?: string } | null>(null);
   const [galleryProject, setGalleryProject] = useState<any | null>(null);
+  const [phase2Modal, setPhase2Modal] = useState<{isOpen: boolean, projectTitle: string}>({isOpen: false, projectTitle: ''});
 
   const handleViewSimulation = (simulations: string[], title?: string) => setModalSimulations({simulations, title});
   const closeSimulationModal = () => setModalSimulations(null);
@@ -721,6 +805,14 @@ const Projects: React.FC = () => {
 
   const openGallery = (project: any) => setGalleryProject(project);
   const closeGallery = () => setGalleryProject(null);
+
+  const handlePhase2Click = (projectTitle: string) => {
+    setPhase2Modal({isOpen: true, projectTitle});
+  };
+
+  const closePhase2Modal = () => {
+    setPhase2Modal({isOpen: false, projectTitle: ''});
+  };
 
   const categoryButtonStyle = (isActive: boolean) => 
     `flex items-center gap-3 px-8 py-4 rounded-2xl transition-all duration-300 font-semibold text-lg ${
@@ -793,6 +885,7 @@ const Projects: React.FC = () => {
               onViewGallery={openGallery}
               onViewImage={openLightbox}
               onViewSimulation={handleViewSimulation}
+              onPhase2Click={handlePhase2Click}
             />
           ))}
         </motion.div>
@@ -817,6 +910,54 @@ const Projects: React.FC = () => {
           onClose={closeGallery} 
           project={galleryProject} 
         />
+
+        {/* Phase 2 Coming Soon Modal */}
+        <AnimatePresence>
+          {phase2Modal.isOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+              onClick={closePhase2Modal}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="bg-gradient-to-br from-gray-900 to-black rounded-2xl max-w-md w-full p-8 border border-purple-500/30 shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-yellow-500/30">
+                    <AlertCircle className="w-8 h-8 text-yellow-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    Phase 2 - Coming Soon
+                  </h3>
+                  <p className="text-gray-300 mb-6">
+                    The Phase 2 report for <span className="text-purple-400 font-semibold">{phase2Modal.projectTitle}</span> is currently in progress. The experimental analysis and characterization are underway, and the complete report will be available soon.
+                  </p>
+                  <div className="bg-purple-500/10 rounded-xl p-4 border border-purple-500/20 mb-6">
+                    <h4 className="text-purple-400 font-semibold mb-2">Current Phase 2 Activities:</h4>
+                    <ul className="text-gray-300 text-sm text-left space-y-1">
+                      <li>• Advanced wear testing under simulated conditions</li>
+                      <li>• Thermal cycling and fatigue analysis</li>
+                      <li>• Microstructural characterization</li>
+                      <li>• Performance optimization</li>
+                    </ul>
+                  </div>
+                  <button
+                    onClick={closePhase2Modal}
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-xl transition-all duration-300 font-semibold"
+                  >
+                    Got It
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

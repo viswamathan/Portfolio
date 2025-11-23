@@ -743,7 +743,7 @@ const projectCategories = {
         technologies: ['HVOF Thermal Spray', 'Stellite 6', 'Tungsten-Copper Alloy', 'Wear Testing', 'Microstructural Analysis', 'XRD', 'SEM/EDS'],
         image1: '/stellite-coating-1.png',
         image2: '/stellite-coating-2.png',
-        phase1Report: '/Phase 1 Final Year Project report .pdf',
+        phase1Report: '/Phase 1 Final Year Project report.pdf',
         showPhase2Button: true,
         // phase2Report will be added when Phase 2 is completed
       },

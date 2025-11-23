@@ -37,7 +37,7 @@ const Achievements = () => {
       issuer: "Arizona State University (Coursera)",
       date: "2024",
       description: "Comprehensive specialization covering additive manufacturing processes, materials, and design principles for advanced manufacturing applications. Mastered various AM technologies including material extrusion, jetting, and laser-based processes.",
-      specializationImage: 'Additive Manufacturing.PNG',
+      specializationImage: 'Additive Manufacturing.png',
       category: "Coursera Specialization",
       level: "Advanced",
       courses: 5,
@@ -47,7 +47,7 @@ const Achievements = () => {
           id: 1,
           title: "Introduction to Additive Manufacturing Processes",
           issuer: "Arizona State University",
-          image: 'Additive Manufacturing 1.PNG',
+          image: 'Additive Manufacturing 1.png',
           skills: ["AM Fundamentals", "Process Selection", "Technology Overview", "Manufacturing Processes"]
         },
         {

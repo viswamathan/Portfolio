@@ -7,23 +7,45 @@ const Achievements = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentCertIndex, setCurrentCertIndex] = useState(0);
   const [coursesModalOpen, setCoursesModalOpen] = useState(false);
-  const scriptLoaded = useRef(false);
+  const badgeContainerRef = useRef(null);
+  const scriptLoadedRef = useRef(false);
 
-  // Load Credly embed script once
+  // Robust Credly badge loader
   useEffect(() => {
-    if (!scriptLoaded.current && typeof window !== 'undefined') {
+    if (scriptLoadedRef.current) return;
+
+    const loadCredlyBadge = () => {
+      // If script already exists, just try to render
       const existingScript = document.querySelector('script[src="//cdn.credly.com/assets/utilities/embed.js"]');
-      if (!existingScript) {
-        const script = document.createElement('script');
-        script.src = '//cdn.credly.com/assets/utilities/embed.js';
-        script.async = true;
-        script.type = 'text/javascript';
-        document.body.appendChild(script);
-        scriptLoaded.current = true;
-      } else {
-        scriptLoaded.current = true;
+      if (existingScript) {
+        if (window.Credly && window.Credly.renderBadges) {
+          window.Credly.renderBadges();
+        }
+        scriptLoadedRef.current = true;
+        return;
       }
-    }
+
+      // Otherwise, create and load script
+      const script = document.createElement('script');
+      script.src = '//cdn.credly.com/assets/utilities/embed.js';
+      script.async = true;
+      script.onload = () => {
+        if (window.Credly && window.Credly.renderBadges) {
+          window.Credly.renderBadges();
+        }
+        scriptLoadedRef.current = true;
+      };
+      script.onerror = () => {
+        console.error('Failed to load Credly embed script');
+      };
+      document.body.appendChild(script);
+    };
+
+    loadCredlyBadge();
+
+    return () => {
+      // Optional cleanup: do nothing, keep script in DOM
+    };
   }, []);
 
   const certificates = [
@@ -494,7 +516,7 @@ const Achievements = () => {
                 whileHover="hover"
               >
                 <div className="grid xl:grid-cols-2 gap-0">
-                  {/* Certificate Image and Badge */}
+                  {/* Certificate Image and Badge Area - FIXED FOR CLEAR VISIBILITY */}
                   <div className="relative p-12 flex flex-col items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
                     <div className="relative group cursor-pointer">
                       <motion.img
@@ -507,13 +529,17 @@ const Achievements = () => {
                       />
                     </div>
                     
-                    {/* Credly Badge - CSWA Certified SolidWorks Associate */}
-                    <div className="mt-8 flex justify-center">
+                    {/* Credly Badge - Clearly Visible Container */}
+                    <div 
+                      ref={badgeContainerRef}
+                      className="flex justify-center items-center mt-8 w-full min-h-[280px] min-w-[160px] bg-gray-800/30 backdrop-blur-sm rounded-xl p-4 border border-purple-500/20"
+                    >
                       <div 
                         data-iframe-width="150" 
                         data-iframe-height="270" 
                         data-share-badge-id="114960fc-c628-4096-bd5e-98ce7e0af975" 
                         data-share-badge-host="https://www.credly.com"
+                        style={{ minWidth: '150px', minHeight: '270px' }}
                       ></div>
                     </div>
                   </div>

@@ -54,6 +54,7 @@ const Achievements = () => {
       category: "Professional Certification",
       level: "Associate",
       validUntil: "Lifetime",
+      badgeId: "114960fc-c628-4096-bd5e-98ce7e0af975",
       highlights: [
         "Demonstrated proficiency in 3D part modeling",
         "Mastered assembly creation and constraints",
@@ -61,9 +62,30 @@ const Achievements = () => {
         "Validated understanding of design intent and best practices",
       ],
     },
+    {
+      id: 2,
+      title: "SOLIDWORKS Additive Manufacturing Associate",
+      issuer: "Dassault Systèmes SolidWorks Corporation",
+      date: "2024",
+      description: "Certification validating expertise in additive manufacturing workflows, 3D printing technologies, and design for additive manufacturing using SOLIDWORKS tools. Demonstrates proficiency in preparing models for various AM processes.",
+      image: "/Certifications/SW_Additive_Associate.png", // Replace with actual image path
+      skills: ["Additive Manufacturing", "3D Printing", "Design for AM", "SOLIDWORKS", "SLA", "SLS", "FDM", "Material Jetting"],
+      credentialId: "C-AM84B2F7K1",
+      category: "Professional Certification",
+      level: "Associate",
+      validUntil: "Lifetime",
+      badgeId: "98e2bdcf-628c-424d-af53-2275c16629f0",
+      highlights: [
+        "Mastered AM workflow integration with SOLIDWORKS",
+        "Proficient in part orientation and support generation",
+        "Skilled in selecting appropriate AM technologies",
+        "Validated understanding of DFAM principles",
+      ],
+    },
   ];
 
   const specializations = [
+    // ... (unchanged, same as before)
     {
       id: 1,
       title: "Additive Manufacturing Specialization",
@@ -359,7 +381,7 @@ const Achievements = () => {
   ];
 
   const achievements = [
-    { icon: Trophy, title: "Academic Excellence", count: "7.50/10", description: "CGPA in Mechanical Engineering" },
+    { icon: Trophy, title: "Academic Excellence", count: "7.62/10", description: "CGPA in Mechanical Engineering" },
     { icon: Medal, title: "Patents Filed", count: "2", description: "Innovation in mechanical design" },
     { icon: Star, title: "Certifications", count: "10+", description: "Professional and technical certifications" },
     { icon: Award, title: "Projects Completed", count: "5+", description: "Engineering and research projects" },
@@ -488,143 +510,145 @@ const Achievements = () => {
             })}
           </motion.div>
 
-          {/* Featured Certification */}
+          {/* Featured Certifications */}
           <motion.div variants={itemVariants} className="mb-24">
             <div className="flex items-center justify-between mb-12">
               <div>
-                <h2 className="text-3xl font-bold text-white mb-3">Featured Certification</h2>
+                <h2 className="text-3xl font-bold text-white mb-3">Featured Certifications</h2>
                 <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"></div>
               </div>
               <div className="text-right">
                 <p className="text-gray-400 text-sm">Industry Recognized</p>
-                <p className="text-purple-400 font-semibold">Professional Standard</p>
+                <p className="text-purple-400 font-semibold">Professional Standards</p>
               </div>
             </div>
 
-            {certificates.map((cert) => (
-              <motion.div
-                key={cert.id}
-                variants={cardVariants}
-                className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md rounded-3xl overflow-hidden border border-gray-700/30 shadow-2xl"
-                whileHover="hover"
-              >
-                <div className="grid xl:grid-cols-2 gap-0">
-                  {/* Certificate Image and Badge Area */}
-                  <div className="relative p-12 flex flex-col items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
-                    {/* Certificate Image */}
-                    <div className="relative group cursor-pointer">
-                      <motion.img
-                        src={cert.image}
-                        alt={cert.title}
-                        className="w-full max-w-md h-auto object-contain rounded-xl shadow-2xl"
-                        whileHover={{ scale: 1.03 }}
-                        transition={{ duration: 0.4 }}
-                        onError={handleImageError}
-                      />
-                    </div>
-                    
-                    {/* Credly Badge - Directly under the image, white background, no extra tile */}
-                    <div className="flex justify-center mt-8">
-                      <div 
-                        data-iframe-width="150" 
-                        data-iframe-height="270" 
-                        data-share-badge-id="114960fc-c628-4096-bd5e-98ce7e0af975" 
-                        data-share-badge-host="https://www.credly.com"
-                      ></div>
-                    </div>
-                  </div>
-
-                  {/* Certificate Details */}
-                  <div className="p-12">
-                    <div className="flex items-start justify-between mb-8">
-                      <div>
-                        <h3 className="text-3xl font-bold text-white mb-3 leading-tight">{cert.title}</h3>
-                        <p className="text-purple-400 font-semibold text-lg">{cert.issuer}</p>
+            <div className="space-y-8">
+              {certificates.map((cert) => (
+                <motion.div
+                  key={cert.id}
+                  variants={cardVariants}
+                  className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md rounded-3xl overflow-hidden border border-gray-700/30 shadow-2xl"
+                  whileHover="hover"
+                >
+                  <div className="grid xl:grid-cols-2 gap-0">
+                    {/* Certificate Image and Badge Area */}
+                    <div className="relative p-12 flex flex-col items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
+                      {/* Certificate Image */}
+                      <div className="relative group cursor-pointer">
+                        <motion.img
+                          src={cert.image}
+                          alt={cert.title}
+                          className="w-full max-w-md h-auto object-contain rounded-xl shadow-2xl"
+                          whileHover={{ scale: 1.03 }}
+                          transition={{ duration: 0.4 }}
+                          onError={handleImageError}
+                        />
                       </div>
-                      <div className="text-right">
-                        <div className="px-4 py-2 rounded-full border bg-green-500/20 text-green-400 border-green-500/30 flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4" />
-                          <span className="text-sm font-medium">Verified</span>
-                        </div>
+                      
+                      {/* Credly Badge - Directly under the image, white background, no extra tile */}
+                      <div className="flex justify-center mt-8">
+                        <div 
+                          data-iframe-width="150" 
+                          data-iframe-height="270" 
+                          data-share-badge-id={cert.badgeId}
+                          data-share-badge-host="https://www.credly.com"
+                        ></div>
                       </div>
                     </div>
 
-                    <p className="text-gray-300 text-lg mb-8 leading-relaxed">{cert.description}</p>
-
-                    {/* Certificate Info Grid */}
-                    <div className="grid grid-cols-2 gap-6 mb-8">
-                      <div className="space-y-4">
+                    {/* Certificate Details */}
+                    <div className="p-12">
+                      <div className="flex items-start justify-between mb-8">
                         <div>
-                          <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Issue Date</h5>
-                          <div className="flex items-center gap-3 text-gray-300">
-                            <Calendar className="w-5 h-5 text-purple-400" />
-                            <span className="font-medium">{cert.date}</span>
+                          <h3 className="text-3xl font-bold text-white mb-3 leading-tight">{cert.title}</h3>
+                          <p className="text-purple-400 font-semibold text-lg">{cert.issuer}</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="px-4 py-2 rounded-full border bg-green-500/20 text-green-400 border-green-500/30 flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4" />
+                            <span className="text-sm font-medium">Verified</span>
                           </div>
                         </div>
-                        <div>
-                          <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Level</h5>
-                          <span className="text-gray-300 font-medium bg-gray-700/50 px-3 py-1 rounded-lg">{cert.level}</span>
+                      </div>
+
+                      <p className="text-gray-300 text-lg mb-8 leading-relaxed">{cert.description}</p>
+
+                      {/* Certificate Info Grid */}
+                      <div className="grid grid-cols-2 gap-6 mb-8">
+                        <div className="space-y-4">
+                          <div>
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Issue Date</h5>
+                            <div className="flex items-center gap-3 text-gray-300">
+                              <Calendar className="w-5 h-5 text-purple-400" />
+                              <span className="font-medium">{cert.date}</span>
+                            </div>
+                          </div>
+                          <div>
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Level</h5>
+                            <span className="text-gray-300 font-medium bg-gray-700/50 px-3 py-1 rounded-lg">{cert.level}</span>
+                          </div>
+                        </div>
+                        <div className="space-y-4">
+                          <div>
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Credential ID</h5>
+                            <span className="text-gray-300 font-mono text-sm bg-gray-700/50 px-3 py-1 rounded-lg">{cert.credentialId}</span>
+                          </div>
+                          <div>
+                            <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Valid Until</h5>
+                            <span className="text-gray-300 font-medium">{cert.validUntil}</span>
+                          </div>
                         </div>
                       </div>
-                      <div className="space-y-4">
-                        <div>
-                          <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Credential ID</h5>
-                          <span className="text-gray-300 font-mono text-sm bg-gray-700/50 px-3 py-1 rounded-lg">{cert.credentialId}</span>
-                        </div>
-                        <div>
-                          <h5 className="font-semibold text-purple-300 mb-2 text-sm uppercase tracking-wide">Valid Until</h5>
-                          <span className="text-gray-300 font-medium">{cert.validUntil}</span>
+
+                      {/* Skills */}
+                      <div className="mb-8">
+                        <h5 className="font-semibold text-purple-300 mb-4 text-sm uppercase tracking-wide">Skills Validated</h5>
+                        <div className="flex flex-wrap gap-3">
+                          {cert.skills.map((skill, index) => (
+                            <span
+                              key={index}
+                              className="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-xl text-sm border border-purple-500/30 font-medium"
+                            >
+                              {skill}
+                            </span>
+                          ))}
                         </div>
                       </div>
-                    </div>
 
-                    {/* Skills */}
-                    <div className="mb-8">
-                      <h5 className="font-semibold text-purple-300 mb-4 text-sm uppercase tracking-wide">Skills Validated</h5>
-                      <div className="flex flex-wrap gap-3">
-                        {cert.skills.map((skill, index) => (
-                          <span
-                            key={index}
-                            className="bg-purple-500/20 text-purple-300 px-4 py-2 rounded-xl text-sm border border-purple-500/30 font-medium"
-                          >
-                            {skill}
-                          </span>
-                        ))}
+                      {/* Action Buttons */}
+                      <div className="flex gap-4">
+                        <motion.button
+                          className="flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl transition-all duration-300 font-semibold flex-1 justify-center"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => window.open(cert.image, "_blank")}
+                        >
+                          <ExternalLink className="w-5 h-5" />
+                          View Certificate
+                        </motion.button>
+
+                        <motion.button
+                          className="flex items-center gap-3 bg-gray-700 hover:bg-gray-600 text-white px-6 py-4 rounded-xl transition-all duration-300 font-semibold"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            const link = document.createElement("a");
+                            link.href = cert.image;
+                            link.download = `${cert.title}.png`;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                          }}
+                        >
+                          <Download className="w-5 h-5" />
+                        </motion.button>
                       </div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex gap-4">
-                      <motion.button
-                        className="flex items-center gap-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl transition-all duration-300 font-semibold flex-1 justify-center"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => window.open(cert.image, "_blank")}
-                      >
-                        <ExternalLink className="w-5 h-5" />
-                        View Certificate
-                      </motion.button>
-
-                      <motion.button
-                        className="flex items-center gap-3 bg-gray-700 hover:bg-gray-600 text-white px-6 py-4 rounded-xl transition-all duration-300 font-semibold"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        onClick={() => {
-                          const link = document.createElement("a");
-                          link.href = cert.image;
-                          link.download = `${cert.title}.png`;
-                          document.body.appendChild(link);
-                          link.click();
-                          document.body.removeChild(link);
-                        }}
-                      >
-                        <Download className="w-5 h-5" />
-                      </motion.button>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
 
           {/* University Specializations */}

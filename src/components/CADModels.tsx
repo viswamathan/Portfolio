@@ -3,8 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   Box, Download, Eye, Layers, Award, X, ZoomIn, ZoomOut, 
   Search, Filter, Info, ChevronLeft, ChevronRight, 
-  Play, Pause, Calendar, Share2, Check, AlertCircle,
-  Sun, Moon
+  Play, Pause, Calendar, Share2, Check, AlertCircle
 } from "lucide-react";
 import * as THREE from "three";
 import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
@@ -22,13 +21,9 @@ const Toast = ({ message, type, onClose }) => {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 50 }}
-      className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-xl shadow-2xl backdrop-blur-md border ${
-        type === 'success' ? 'bg-green-500/20 border-green-500/50 text-green-400' :
-        type === 'error' ? 'bg-red-500/20 border-red-500/50 text-red-400' :
-        'bg-blue-500/20 border-blue-500/50 text-blue-400'
-      }`}
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-xl shadow-2xl backdrop-blur-md border bg-gray-900/80 border-gray-700/50 text-white"
     >
-      {type === 'success' ? <Check className="w-5 h-5" /> : type === 'error' ? <AlertCircle className="w-5 h-5" /> : <Info className="w-5 h-5" />}
+      {type === 'success' ? <Check className="w-5 h-5 text-green-400" /> : type === 'error' ? <AlertCircle className="w-5 h-5 text-red-400" /> : <Info className="w-5 h-5 text-blue-400" />}
       <span className="text-sm font-medium">{message}</span>
     </motion.div>
   );
@@ -47,8 +42,7 @@ const CADModels = () => {
   const [autoRotate, setAutoRotate] = useState(true);
   const [showInfoPanel, setShowInfoPanel] = useState(false);
   const [toast, setToast] = useState(null);
-  const [isDarkMode, setIsDarkMode] = useState(true);
-
+  
   const mountRef = useRef(null);
   const controlsRef = useRef(null);
   const cameraRef = useRef(null);
@@ -56,7 +50,7 @@ const CADModels = () => {
   const rendererRef = useRef(null);
   const animationRef = useRef(null);
 
-  // CAD Models data (same as before, but ensure all paths are correct)
+  // CAD Models data (same as your original full list - keep all 15 models)
   const cadModels = [
     {
       id: 1,
@@ -154,8 +148,6 @@ const CADModels = () => {
       fileSize: "5.3 MB",
       lastUpdated: "2023-12-28"
     },
-    // ... add remaining models (7-15) as per your original code
-    // For brevity, I'm including placeholders; you must replace with actual data.
     {
       id: 7,
       title: "Flanged Tee Pipe Fitting",
@@ -191,7 +183,7 @@ const CADModels = () => {
     {
       id: 9,
       title: "Connecting Rod (Without Cap)",
-      description: "Lightweight connecting rod designed without cap for simplified design analysis.",
+      description: "Lightweight connecting rod designed without cap for simplified design analysis and manufacturing demonstration.",
       software: "SolidWorks",
       category: "Automotive",
       complexity: "Intermediate",
@@ -204,10 +196,104 @@ const CADModels = () => {
       fileSize: "3.9 MB",
       lastUpdated: "2023-12-18"
     },
-    // ... add remaining up to 15
+    {
+      id: 10,
+      title: "Piston Head",
+      description: "High-strength piston head designed for internal combustion engines, optimized for heat dissipation and minimal friction.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["Revolve", "Extrude Cut", "Chamfer", "Circular Pattern"],
+      image: "/3d Pictures/piston head.png",
+      downloadUrl: "https://drive.google.com/file/d/1criIIkz-FtTGruJ2BdK6qApuULku8FCR/view?usp=drive_link",
+      modelPath: "/Models/piston head.STL",
+      views: 410,
+      downloads: 32,
+      fileSize: "4.5 MB",
+      lastUpdated: "2023-12-15"
+    },
+    {
+      id: 11,
+      title: "Crankshaft",
+      description: "Precision crankshaft designed for efficient torque transmission and balanced rotation.",
+      software: "SolidWorks",
+      category: "Automotive",
+      complexity: "Basic",
+      features: ["Revolve", "Extrude", "Mirror", "Circular Pattern"],
+      image: "/3d Pictures/crankshaft.png",
+      downloadUrl: "https://drive.google.com/file/d/1KLG7288kK596zJ48CpyFhCJMfTL7E5q5/view?usp=drive_link",
+      modelPath: "/Models/crank shaft.STL",
+      views: 365,
+      downloads: 28,
+      fileSize: "5.1 MB",
+      lastUpdated: "2023-12-12"
+    },
+    {
+      id: 12,
+      title: "Stuffing Box",
+      description: "A sealing assembly designed to prevent fluid leakage around rotating shafts in pumps and valves.",
+      software: "SolidWorks",
+      category: "Mechanical Parts",
+      complexity: "Intermediate",
+      features: ["Extrude", "Revolve", "Assembly Mates", "Exploded View"],
+      image: "/3d Pictures/stuffingbox.png",
+      downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link", // Replace with actual link
+      modelPath: "/Models/Stuffing Box.STL",
+      views: 248,
+      downloads: 19,
+      fileSize: "6.3 MB",
+      lastUpdated: "2023-12-10"
+    },
+    {
+      id: 13,
+      title: "Servo-Driven Robotic Gripper",
+      description: "Intelligent robotic gripper actuated by servo motors for precise object handling in automation applications.",
+      software: "SolidWorks",
+      category: "Robotics",
+      complexity: "Advanced",
+      features: ["Assembly Mates", "Motion Study", "Interference Check", "Exploded View"],
+      image: "/3d Pictures/Robotic Gripper.png",
+      downloadUrl: "https://drive.google.com/file/d/1YourDriveLinkHere/view?usp=drive_link",
+      modelPath: "/Models/Robotic Gripper.STL",
+      views: 312,
+      downloads: 27,
+      fileSize: "8.5 MB",
+      lastUpdated: "2023-12-08"
+    },
+    {
+      id: 14,
+      title: "Bevel Gear",
+      description: "Precisely modeled straight bevel gear developed in Siemens NX with accurate tooth geometry.",
+      software: "Siemens NX",
+      category: "Mechanical Parts",
+      complexity: "Intermediate",
+      features: ["Revolve", "Through Curve", "Mirror Feature", "Synchronous Modeling"],
+      image: "/3d Pictures/Bevel Gear.png",
+      downloadUrl: "https://drive.google.com/file/d/1TtVjkl4h6yNqSFXxG0R2gVJ2xw3zNqvQ/view?usp=sharing",
+      modelPath: "/Models/Bevel Gear.stl",
+      views: 380,
+      downloads: 18,
+      fileSize: "4.2 MB",
+      lastUpdated: "2023-12-05"
+    },
+    {
+      id: 15,
+      title: "Roller Support Assembly",
+      description: "Fully-defined roller support assembly with precise constraints for smooth rotational motion and load-bearing representation.",
+      software: "SolidWorks",
+      category: "Mechanical Parts",
+      complexity: "Intermediate",
+      features: ["Extrude Boss/Base", "Revolve", "Hole Wizard", "Assembly Mates", "Motion Study"],
+      image: "/3d Pictures/Roller Support.png",
+      downloadUrl: "https://drive.google.com/file/d/1ROLLER_SAMPLE_LINK/view?usp=sharing",
+      modelPath: "/Models/Roller Support.STL",
+      views: 975,
+      downloads: 67,
+      fileSize: "3.6 MB",
+      lastUpdated: "2023-12-01"
+    }
   ];
 
-  // Categories (adjust as needed)
   const categories = [
     "All",
     "Assembly",
@@ -218,7 +304,7 @@ const CADModels = () => {
     "Robotics",
   ];
 
-  // Filter and sort models
+  // Filter and sort
   const filteredModels = cadModels
     .filter(model => 
       (activeCategory === "All" || model.category === activeCategory) &&
@@ -240,11 +326,14 @@ const CADModels = () => {
       }
     });
 
-  const getComplexityColor = (complexity, darkMode) => {
-    const base = darkMode 
-      ? { Basic: "bg-green-500/20 text-green-400 border-green-500/30", Beginner: "bg-blue-500/20 text-blue-400 border-blue-500/30", Intermediate: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30", Advanced: "bg-red-500/20 text-red-400 border-red-500/30" }
-      : { Basic: "bg-green-200 text-green-800 border-green-300", Beginner: "bg-blue-200 text-blue-800 border-blue-300", Intermediate: "bg-yellow-200 text-yellow-800 border-yellow-300", Advanced: "bg-red-200 text-red-800 border-red-300" };
-    return base[complexity] || "bg-gray-500/20 text-gray-400";
+  const getComplexityColor = (complexity) => {
+    const map = {
+      "Basic": "bg-green-500/20 text-green-400 border-green-500/30",
+      "Beginner": "bg-blue-500/20 text-blue-400 border-blue-500/30",
+      "Intermediate": "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
+      "Advanced": "bg-red-500/20 text-red-400 border-red-500/30"
+    };
+    return map[complexity] || "bg-gray-500/20 text-gray-400";
   };
 
   const stats = [
@@ -254,7 +343,7 @@ const CADModels = () => {
     { label: "Design Hours", value: "1000+", icon: Award, color: "orange" },
   ];
 
-  // Enhanced 3D Viewer with caching
+  // Enhanced 3D Viewer with white background and caching
   const init3DViewer = useCallback(() => {
     if (!previewModel || !mountRef.current) return;
     setLoadingModel(true);
@@ -266,7 +355,8 @@ const CADModels = () => {
     if (animationRef.current) cancelAnimationFrame(animationRef.current);
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(isDarkMode ? 0x111827 : 0xf3f4f6);
+    // WHITE BACKGROUND for better model visibility
+    scene.background = new THREE.Color(0xffffff);
     sceneRef.current = scene;
 
     const container = mountRef.current;
@@ -292,33 +382,34 @@ const CADModels = () => {
     controls.enablePan = true;
     controlsRef.current = controls;
 
-    // Lighting (adjust for light mode)
-    const ambientIntensity = isDarkMode ? 0.5 : 0.7;
-    const ambientLight = new THREE.AmbientLight(0xffffff, ambientIntensity);
+    // Lighting optimized for light background
+    const ambientLight = new THREE.AmbientLight(0x404060, 0.6);
     scene.add(ambientLight);
     const mainLight = new THREE.DirectionalLight(0xffffff, 1);
     mainLight.position.set(5, 10, 7);
     mainLight.castShadow = true;
     scene.add(mainLight);
-    const fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
+    const fillLight = new THREE.DirectionalLight(0xffcc88, 0.5);
     fillLight.position.set(-5, 5, -5);
     scene.add(fillLight);
-    const backLight = new THREE.PointLight(isDarkMode ? 0x4466cc : 0x8855aa, 0.2);
+    const backLight = new THREE.PointLight(0x88aaff, 0.3);
     backLight.position.set(0, 0, -5);
     scene.add(backLight);
+    // Additional fill from below
+    const bottomLight = new THREE.PointLight(0xccaa88, 0.2);
+    bottomLight.position.set(0, -5, 0);
+    scene.add(bottomLight);
 
     const modelPath = previewModel.modelPath;
     // Check cache
     let geometry = modelCache.get(modelPath);
     if (geometry) {
-      // Use cached geometry
       const material = new THREE.MeshStandardMaterial({
-        color: isDarkMode ? 0x8b5cf6 : 0x6d28d9,
+        color: 0x6d28d9,
         metalness: 0.7,
         roughness: 0.3
       });
       const mesh = new THREE.Mesh(geometry, material);
-      // Center and scale
       geometry.computeBoundingBox();
       const box = geometry.boundingBox;
       const center = new THREE.Vector3();
@@ -333,7 +424,6 @@ const CADModels = () => {
       mesh.receiveShadow = true;
       scene.add(mesh);
       setLoadingModel(false);
-      // Position camera
       const groupBox = new THREE.Box3().setFromObject(mesh);
       const groupSize = groupBox.getSize(new THREE.Vector3());
       const fov = camera.fov * (Math.PI / 180);
@@ -342,10 +432,9 @@ const CADModels = () => {
       controls.target.set(0, 0, 0);
       controls.update();
     } else {
-      // Load and cache
       const loader = new STLLoader();
       const material = new THREE.MeshStandardMaterial({
-        color: isDarkMode ? 0x8b5cf6 : 0x6d28d9,
+        color: 0x6d28d9,
         metalness: 0.7,
         roughness: 0.3
       });
@@ -402,7 +491,7 @@ const CADModels = () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
       if (rendererRef.current) rendererRef.current.dispose();
     };
-  }, [previewModel, autoRotate, isDarkMode]);
+  }, [previewModel, autoRotate]);
 
   useEffect(() => {
     const cleanup = init3DViewer();
@@ -415,25 +504,6 @@ const CADModels = () => {
       if (rendererRef.current) rendererRef.current.dispose();
     };
   }, []);
-
-  // Theme management
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("cadTheme");
-    if (savedTheme === "light") setIsDarkMode(false);
-    else if (savedTheme === "dark") setIsDarkMode(true);
-    else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setIsDarkMode(prefersDark);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("cadTheme", isDarkMode ? "dark" : "light");
-    // Apply theme to body or root element if needed
-    document.documentElement.classList.toggle("dark", isDarkMode);
-  }, [isDarkMode]);
-
-  const toggleTheme = () => setIsDarkMode(prev => !prev);
 
   const zoomIn = () => {
     if (cameraRef.current) cameraRef.current.position.multiplyScalar(0.8);
@@ -481,42 +551,24 @@ const CADModels = () => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
-  // Dynamic classes based on theme
-  const bgClass = isDarkMode ? "bg-gray-900" : "bg-gray-100";
-  const cardBgClass = isDarkMode ? "bg-gray-800/60" : "bg-white/80";
-  const textPrimary = isDarkMode ? "text-white" : "text-gray-900";
-  const textSecondary = isDarkMode ? "text-gray-300" : "text-gray-600";
-  const borderClass = isDarkMode ? "border-gray-700/50" : "border-gray-300/50";
-
   const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
   const itemVariants = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${bgClass} py-20`}>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-gray-950 py-20">
       <div className="container mx-auto px-6">
-        {/* Theme Toggle Button */}
-        <div className="fixed top-6 right-6 z-40">
-          <button
-            onClick={toggleTheme}
-            className="p-3 rounded-full bg-gray-800/50 backdrop-blur-md border border-gray-700/50 shadow-lg hover:scale-105 transition"
-            aria-label="Toggle theme"
-          >
-            {isDarkMode ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-purple-400" />}
-          </button>
-        </div>
-
         <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <div className={`inline-flex items-center gap-3 ${isDarkMode ? "bg-gray-800/50 border-gray-700/50" : "bg-white/50 border-gray-300/50"} border rounded-full px-6 py-3 mb-6`}>
+            <div className="inline-flex items-center gap-3 bg-gray-800/50 border border-gray-700/50 rounded-full px-6 py-3 mb-6">
               <Box className="w-5 h-5 text-purple-400" />
-              <span className={`text-sm font-medium ${textSecondary}`}>3D CAD Portfolio</span>
+              <span className="text-gray-300 text-sm font-medium">3D CAD Portfolio</span>
             </div>
-            <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 ${textPrimary}`}>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
               CAD Model{" "}
               <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Showcase</span>
             </h1>
-            <p className={`text-xl ${textSecondary} max-w-3xl mx-auto leading-relaxed`}>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Explore precision-engineered 3D models and mechanical designs created with professional CAD software.
             </p>
           </motion.div>
@@ -528,7 +580,7 @@ const CADModels = () => {
               return (
                 <motion.div
                   key={i}
-                  className={`${cardBgClass} backdrop-blur-md rounded-2xl p-8 text-center border ${borderClass} hover:border-purple-500/20 transition-all group`}
+                  className="bg-gray-800/40 backdrop-blur-md rounded-2xl p-8 text-center border border-gray-700/30 hover:border-purple-500/20 transition-all group"
                   whileHover={{ scale: 1.05, y: -5 }}
                 >
                   <div className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:from-purple-500/30">
@@ -537,7 +589,7 @@ const CADModels = () => {
                   <div className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-2">
                     {stat.value}
                   </div>
-                  <h3 className={`font-semibold ${textPrimary} text-lg`}>{stat.label}</h3>
+                  <h3 className="font-semibold text-white text-lg">{stat.label}</h3>
                 </motion.div>
               );
             })}
@@ -554,7 +606,7 @@ const CADModels = () => {
                     placeholder="Search models by name, description, or features..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className={`w-full pl-12 pr-4 py-4 ${isDarkMode ? "bg-gray-800/50 border-gray-700/50 text-white placeholder-gray-400" : "bg-white/50 border-gray-300/50 text-gray-900 placeholder-gray-500"} border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500`}
+                    className="w-full pl-12 pr-4 py-4 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </div>
               </div>
@@ -563,7 +615,7 @@ const CADModels = () => {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className={`pl-12 pr-8 py-4 ${isDarkMode ? "bg-gray-800/50 border-gray-700/50 text-white" : "bg-white/50 border-gray-300/50 text-gray-900"} border rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 appearance-none`}
+                  className="pl-12 pr-8 py-4 bg-gray-800/50 border border-gray-700/50 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500 appearance-none"
                 >
                   <option value="popularity">Most Popular</option>
                   <option value="downloads">Most Downloads</option>
@@ -580,7 +632,7 @@ const CADModels = () => {
                   className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
                     activeCategory === cat
                       ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
-                      : `${isDarkMode ? "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50" : "bg-white/50 text-gray-700 hover:bg-gray-200/50"}`
+                      : "bg-gray-800/50 text-gray-300 hover:bg-gray-700/50"
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -594,27 +646,27 @@ const CADModels = () => {
           {/* Models Grid */}
           <motion.div variants={itemVariants} className="mb-20">
             <div className="text-center mb-12">
-              <div className={`inline-flex items-center gap-3 ${isDarkMode ? "bg-gray-800/50 border-gray-700/50" : "bg-white/50 border-gray-300/50"} border rounded-full px-6 py-3 mb-6`}>
+              <div className="inline-flex items-center gap-3 bg-gray-800/50 border border-gray-700/50 rounded-full px-6 py-3 mb-6">
                 <Layers className="w-5 h-5 text-blue-400" />
-                <span className={`text-sm font-medium ${textSecondary}`}>Complete Collection</span>
+                <span className="text-gray-300 text-sm font-medium">Complete Collection</span>
               </div>
-              <h2 className={`text-3xl sm:text-4xl font-bold mb-6 ${textPrimary}`}>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
                 All <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">CAD Models</span>
               </h2>
-              <p className={`text-xl ${textSecondary} max-w-2xl mx-auto`}>Browse our comprehensive collection of mechanical designs and assemblies.</p>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto">Browse our comprehensive collection of mechanical designs and assemblies.</p>
             </div>
 
             {filteredModels.length === 0 ? (
               <div className="text-center py-20">
-                <Box className={`w-20 h-20 mx-auto mb-4 ${isDarkMode ? "text-gray-600" : "text-gray-400"}`} />
-                <p className={`text-lg ${textSecondary}`}>No models found matching your criteria.</p>
+                <Box className="w-20 h-20 text-gray-600 mx-auto mb-4" />
+                <p className="text-gray-400 text-lg">No models found matching your criteria.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                 {filteredModels.map((model) => (
                   <motion.div
                     key={model.id}
-                    className={`${cardBgClass} backdrop-blur-md rounded-2xl overflow-hidden border ${borderClass} shadow-xl flex flex-col h-full transition-all duration-200 hover:shadow-purple-500/10`}
+                    className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-md rounded-2xl overflow-hidden border border-gray-700/30 shadow-xl flex flex-col h-full transition-all duration-200 hover:shadow-purple-500/10"
                     whileHover={{ y: -5 }}
                   >
                     <div className="relative h-48 bg-gradient-to-br from-purple-500/5 to-blue-500/5 overflow-hidden">
@@ -622,33 +674,33 @@ const CADModels = () => {
                         src={model.image} 
                         alt={model.title} 
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                        loading="lazy" // Lazy loading
+                        loading="lazy"
                       />
                       <div className="absolute top-3 left-3 flex flex-col gap-2">
                         <span className="bg-black/80 backdrop-blur-sm px-2 py-1 rounded-lg text-xs text-white flex items-center gap-1"><Eye className="w-3 h-3" /> {model.views}</span>
                         <span className="bg-black/80 backdrop-blur-sm px-2 py-1 rounded-lg text-xs text-white flex items-center gap-1"><Download className="w-3 h-3" /> {model.downloads}</span>
                       </div>
                       <div className="absolute top-3 right-3">
-                        <span className={`px-2 py-1 rounded-lg text-xs font-semibold border-2 ${getComplexityColor(model.complexity, isDarkMode)}`}>{model.complexity}</span>
+                        <span className={`px-2 py-1 rounded-lg text-xs font-semibold border-2 ${getComplexityColor(model.complexity)}`}>{model.complexity}</span>
                       </div>
                       <div className="absolute bottom-3 left-3">
                         <span className="bg-purple-600/80 backdrop-blur-sm px-2 py-1 rounded text-xs text-white">{model.software}</span>
                       </div>
                     </div>
                     <div className="p-5 flex-1 flex flex-col">
-                      <h3 className={`text-xl font-bold ${textPrimary} mb-2 line-clamp-1`}>{model.title}</h3>
-                      <p className={`text-sm ${textSecondary} mb-4 line-clamp-2 flex-1`}>{model.description}</p>
+                      <h3 className="text-xl font-bold text-white mb-2 line-clamp-1">{model.title}</h3>
+                      <p className="text-gray-300 text-sm mb-4 line-clamp-2 flex-1">{model.description}</p>
                       <div className="grid grid-cols-2 gap-2 mb-4 text-sm">
-                        <div className={`flex items-center gap-1 ${textSecondary}`}><Layers className="w-3 h-3 text-purple-400" /> {model.category}</div>
-                        <div className={`flex items-center gap-1 ${textSecondary}`}><Box className="w-3 h-3 text-purple-400" /> {model.fileSize}</div>
-                        <div className={`flex items-center gap-1 ${textSecondary}`}><Calendar className="w-3 h-3 text-purple-400" /> {new Date(model.lastUpdated).toLocaleDateString()}</div>
-                        <div className={`flex items-center gap-1 ${textSecondary}`}><Download className="w-3 h-3 text-purple-400" /> {model.downloads}</div>
+                        <div className="flex items-center gap-1 text-gray-300"><Layers className="w-3 h-3 text-purple-400" /> {model.category}</div>
+                        <div className="flex items-center gap-1 text-gray-300"><Box className="w-3 h-3 text-purple-400" /> {model.fileSize}</div>
+                        <div className="flex items-center gap-1 text-gray-300"><Calendar className="w-3 h-3 text-purple-400" /> {new Date(model.lastUpdated).toLocaleDateString()}</div>
+                        <div className="flex items-center gap-1 text-gray-300"><Download className="w-3 h-3 text-purple-400" /> {model.downloads}</div>
                       </div>
                       <div className="flex flex-wrap gap-1 mb-4">
                         {model.features.slice(0, 3).map((f, i) => (
                           <span key={i} className="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded text-xs">{f}</span>
                         ))}
-                        {model.features.length > 3 && <span className={`${isDarkMode ? "bg-gray-700 text-gray-300" : "bg-gray-200 text-gray-600"} px-2 py-0.5 rounded text-xs`}>+{model.features.length-3}</span>}
+                        {model.features.length > 3 && <span className="bg-gray-700 text-gray-300 px-2 py-0.5 rounded text-xs">+{model.features.length-3}</span>}
                       </div>
                       <div className="flex gap-2 pt-3 border-t border-gray-700/50">
                         <button onClick={() => setPreviewModel(model)} className="flex-1 flex items-center justify-center gap-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-2 rounded-lg text-sm transition">3D View</button>
@@ -664,7 +716,7 @@ const CADModels = () => {
         </motion.div>
       </div>
 
-      {/* 3D Preview Modal (unchanged except theme awareness) */}
+      {/* 3D Preview Modal */}
       <AnimatePresence>
         {previewModel && (
           <motion.div
@@ -674,22 +726,22 @@ const CADModels = () => {
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-              className={`${isDarkMode ? "bg-gray-900" : "bg-white"} rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col`}
+              className="bg-gray-900 rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className={`flex justify-between items-center p-5 border-b ${isDarkMode ? "border-gray-700/50" : "border-gray-300/50"}`}>
+              <div className="flex justify-between items-center p-5 border-b border-gray-700/50">
                 <div>
-                  <h3 className={`text-xl font-bold ${textPrimary}`}>{previewModel.title}</h3>
-                  <p className={`text-sm ${textSecondary}`}>{previewModel.category} • {previewModel.software}</p>
+                  <h3 className="text-xl font-bold text-white">{previewModel.title}</h3>
+                  <p className="text-sm text-gray-400">{previewModel.category} • {previewModel.software}</p>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => setShowInfoPanel(!showInfoPanel)} className={`p-2 rounded-lg ${isDarkMode ? "bg-gray-800/50 text-gray-300" : "bg-gray-200/50 text-gray-700"}`}><Info className="w-5 h-5" /></button>
-                  <button onClick={copyShareLink} className={`p-2 rounded-lg ${isDarkMode ? "bg-gray-800/50 text-gray-300" : "bg-gray-200/50 text-gray-700"}`}><Share2 className="w-5 h-5" /></button>
-                  <button onClick={() => setPreviewModel(null)} className={`p-2 rounded-lg ${isDarkMode ? "bg-gray-800/50 text-gray-300" : "bg-gray-200/50 text-gray-700"}`}><X className="w-5 h-5" /></button>
+                  <button onClick={() => setShowInfoPanel(!showInfoPanel)} className="p-2 text-gray-300 hover:text-white bg-gray-800/50 rounded-lg"><Info className="w-5 h-5" /></button>
+                  <button onClick={copyShareLink} className="p-2 text-gray-300 hover:text-white bg-gray-800/50 rounded-lg"><Share2 className="w-5 h-5" /></button>
+                  <button onClick={() => setPreviewModel(null)} className="p-2 text-gray-300 hover:text-white bg-gray-800/50 rounded-lg"><X className="w-5 h-5" /></button>
                 </div>
               </div>
               <div className="flex flex-1 overflow-hidden">
-                <div className={`${showInfoPanel ? 'w-2/3' : 'w-full'} relative flex items-center justify-center ${isDarkMode ? "bg-gray-800/30" : "bg-gray-100/30"} min-h-[400px]`}>
+                <div className={`${showInfoPanel ? 'w-2/3' : 'w-full'} relative flex items-center justify-center bg-gray-800/30 min-h-[400px]`}>
                   {loadingModel && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
                       <div className="text-center"><div className="w-10 h-10 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div><span className="text-white">Loading 3D...</span></div>
@@ -697,9 +749,9 @@ const CADModels = () => {
                   )}
                   <div ref={mountRef} className="w-full max-w-[500px] aspect-square" />
                   <div className="absolute bottom-4 left-4 flex flex-col gap-2">
-                    <button onClick={zoomIn} className="p-2 bg-black/50 backdrop-blur rounded-lg"><ZoomIn className="w-5 h-5 text-white" /></button>
-                    <button onClick={zoomOut} className="p-2 bg-black/50 backdrop-blur rounded-lg"><ZoomOut className="w-5 h-5 text-white" /></button>
-                    <button onClick={toggleAutoRotate} className={`p-2 backdrop-blur rounded-lg ${autoRotate ? 'bg-green-600/70' : 'bg-black/50'} text-white`}>{autoRotate ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}</button>
+                    <button onClick={zoomIn} className="p-2 bg-black/50 backdrop-blur rounded-lg text-white"><ZoomIn className="w-5 h-5" /></button>
+                    <button onClick={zoomOut} className="p-2 bg-black/50 backdrop-blur rounded-lg text-white"><ZoomOut className="w-5 h-5" /></button>
+                    <button onClick={toggleAutoRotate} className={`p-2 backdrop-blur rounded-lg text-white ${autoRotate ? 'bg-green-600/70' : 'bg-black/50'}`}>{autoRotate ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}</button>
                   </div>
                   {filteredModels.length > 1 && (
                     <>
@@ -710,16 +762,16 @@ const CADModels = () => {
                   <div className="absolute bottom-2 right-2 text-xs text-gray-400 bg-black/50 px-2 py-1 rounded">← → | +/- | R | Esc</div>
                 </div>
                 {showInfoPanel && (
-                  <motion.div initial={{ x: 300 }} animate={{ x: 0 }} exit={{ x: 300 }} className={`w-1/3 border-l ${isDarkMode ? "border-gray-700/50 bg-gray-800/30" : "border-gray-300/50 bg-gray-100/50"} p-5 overflow-y-auto`}>
-                    <h4 className={`font-bold ${textPrimary} mb-3`}>Details</h4>
+                  <motion.div initial={{ x: 300 }} animate={{ x: 0 }} exit={{ x: 300 }} className="w-1/3 border-l border-gray-700/50 bg-gray-800/30 p-5 overflow-y-auto">
+                    <h4 className="font-bold text-white mb-3">Details</h4>
                     <div className="space-y-4 text-sm">
-                      <div><p className={textSecondary}>{previewModel.description}</p></div>
-                      <div><h5 className={`font-medium ${isDarkMode ? "text-gray-300" : "text-gray-700"}`}>Features</h5><div className="flex flex-wrap gap-1 mt-1">{previewModel.features.map(f => <span key={f} className="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded text-xs">{f}</span>)}</div></div>
+                      <div><p className="text-gray-300">{previewModel.description}</p></div>
+                      <div><h5 className="font-medium text-gray-300">Features</h5><div className="flex flex-wrap gap-1 mt-1">{previewModel.features.map(f => <span key={f} className="bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded text-xs">{f}</span>)}</div></div>
                       <div className="grid grid-cols-2 gap-2">
-                        <div><span className={textSecondary}>Complexity:</span><span className={`ml-2 px-2 py-0.5 rounded text-xs border-2 inline-block mt-1 ${getComplexityColor(previewModel.complexity, isDarkMode)}`}>{previewModel.complexity}</span></div>
-                        <div><span className={textSecondary}>File Size:</span><div className={textPrimary}>{previewModel.fileSize}</div></div>
-                        <div><span className={textSecondary}>Views:</span><div className={textPrimary}>{previewModel.views}</div></div>
-                        <div><span className={textSecondary}>Downloads:</span><div className={textPrimary}>{previewModel.downloads}</div></div>
+                        <div><span className="text-gray-400">Complexity:</span><span className={`ml-2 px-2 py-0.5 rounded text-xs border-2 inline-block mt-1 ${getComplexityColor(previewModel.complexity)}`}>{previewModel.complexity}</span></div>
+                        <div><span className="text-gray-400">File Size:</span><div className="text-white">{previewModel.fileSize}</div></div>
+                        <div><span className="text-gray-400">Views:</span><div className="text-white">{previewModel.views}</div></div>
+                        <div><span className="text-gray-400">Downloads:</span><div className="text-white">{previewModel.downloads}</div></div>
                       </div>
                       <button onClick={() => handleDownload(previewModel.downloadUrl, previewModel.title)} className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg">Download Model</button>
                     </div>
@@ -735,13 +787,13 @@ const CADModels = () => {
       <AnimatePresence>
         {previewImage && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setPreviewImage(null)}>
-            <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }} className={`${isDarkMode ? "bg-gray-900" : "bg-white"} rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-auto`} onClick={e => e.stopPropagation()}>
-              <div className={`flex justify-between items-center p-4 border-b ${isDarkMode ? "border-gray-700/50" : "border-gray-300/50"}`}>
-                <h3 className={`text-xl font-bold ${textPrimary}`}>{previewImage.title}</h3>
-                <button onClick={() => setPreviewImage(null)} className="p-1 rounded-full hover:bg-gray-800"><X className="w-6 h-6" /></button>
+            <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} exit={{ scale: 0.8 }} className="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-auto" onClick={e => e.stopPropagation()}>
+              <div className="flex justify-between items-center p-4 border-b border-gray-700/50">
+                <h3 className="text-xl font-bold text-white">{previewImage.title}</h3>
+                <button onClick={() => setPreviewImage(null)} className="p-1 rounded-full hover:bg-gray-800"><X className="w-6 h-6 text-white" /></button>
               </div>
               <div className="p-4"><img src={previewImage.image} alt={previewImage.title} className="w-full h-auto max-h-[60vh] object-contain rounded-lg bg-gray-800" loading="lazy" /></div>
-              <div className="p-4 pt-0"><p className={textSecondary}>{previewImage.description}</p><button onClick={() => handleDownload(previewImage.downloadUrl, previewImage.title)} className="mt-4 flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg">Download Model</button></div>
+              <div className="p-4 pt-0"><p className="text-gray-300">{previewImage.description}</p><button onClick={() => handleDownload(previewImage.downloadUrl, previewImage.title)} className="mt-4 flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg">Download Model</button></div>
             </motion.div>
           </motion.div>
         )}

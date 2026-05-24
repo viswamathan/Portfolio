@@ -68,7 +68,7 @@ const Achievements = () => {
       issuer: "Dassault Systèmes SolidWorks Corporation",
       date: "2026",
       description: "Certification validating expertise in additive manufacturing workflows, 3D printing technologies, and design for additive manufacturing using SOLIDWORKS tools. Demonstrates proficiency in preparing models for various AM processes.",
-      image: "/Certifications/SW_Additive_Associate.png", // Replace with actual image path
+      image: "/Certifications/SW_Additive_Associate.png",
       skills: ["Additive Manufacturing", "3D Printing", "Design for AM", "SOLIDWORKS", "SLA", "SLS", "FDM", "Material Jetting"],
       credentialId: "C-YZQNWC3M7U",
       category: "Professional Certification",
@@ -545,9 +545,9 @@ const Achievements = () => {
                         />
                       </div>
                       
-                      {/* Credly Badge - White background box */}
+                      {/* Credly Badge - White background box with enhanced visibility */}
                       <div className="flex justify-center mt-8">
-                        <div className="bg-white rounded-lg p-2 shadow-md">
+                        <div className="bg-white rounded-xl p-2 shadow-xl border border-gray-200">
                           <div 
                             data-iframe-width="150" 
                             data-iframe-height="270" 

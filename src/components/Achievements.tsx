@@ -70,7 +70,7 @@ const Achievements = () => {
       description: "Certification validating expertise in additive manufacturing workflows, 3D printing technologies, and design for additive manufacturing using SOLIDWORKS tools. Demonstrates proficiency in preparing models for various AM processes.",
       image: "/Certifications/SW_Additive_Associate.png", // Replace with actual image path
       skills: ["Additive Manufacturing", "3D Printing", "Design for AM", "SOLIDWORKS", "SLA", "SLS", "FDM", "Material Jetting"],
-      credentialId: "C-AM84B2F7K1",
+      credentialId: "C-YZQNWC3M7U",
       category: "Professional Certification",
       level: "Associate",
       validUntil: "Lifetime",

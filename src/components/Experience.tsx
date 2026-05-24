@@ -27,8 +27,8 @@ const Experience = () => {
     duration: "Apr 2026 – Present",
     type: "Full-time Professional",
     status: "Current",
-    logo: "/ShanthiGears.png", // Replace with actual logo
-    images: [], // Add gallery images later
+    logo: "/ShanthiGears.png",
+    images: [],
     description: "Working in Worm Gearbox Design team, contributing to mechanical product design, CAD development, engineering analysis, and manufacturing workflows. Driving product quality and manufacturing feasibility through cross-functional collaboration.",
     responsibilities: [
       "Assisted in worm gearbox product design and development including CAD modeling, assembly validation, and engineering drawing preparation.",
@@ -92,10 +92,11 @@ const Experience = () => {
   // Helper to render a single experience card (with optional buttons)
   const ExperienceCard = ({ exp, showButtons = true }) => (
     <motion.div
-      className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden shadow-2xl"
+      className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl overflow-hidden shadow-2xl will-change-transform"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
+      viewport={{ once: true, amount: 0.2 }}  // 🔥 play only once, when 20% visible
     >
       {/* Header Section */}
       <div className="bg-gradient-to-r from-gray-800/80 to-gray-900/80 p-8 border-b border-gray-700/50">
@@ -108,6 +109,7 @@ const Experience = () => {
                   src={exp.logo}
                   alt={`${exp.company} Logo`}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                   onError={(e) => {
                     e.currentTarget.src = 'https://via.placeholder.com/80?text=Logo';
                   }}
@@ -219,12 +221,14 @@ const Experience = () => {
                       key={idx}
                       className="relative group overflow-hidden rounded-xl border-2 border-purple-500/30 bg-black shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
                       whileHover={{ scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 300 }}
                     >
                       <div className="aspect-video bg-black flex items-center justify-center">
                         <img 
                           src={image}
                           alt={`${exp.company} Experience ${idx + 1}`}
                           className="w-full h-full object-contain rounded-lg cursor-pointer max-h-64"
+                          loading="lazy"
                           onClick={() => setSelectedImage(image)}
                         />
                       </div>
@@ -267,6 +271,7 @@ const Experience = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
       >
         <h2 className="text-4xl font-bold mb-4">
           Professional <span className="text-purple-500">Experience</span>
@@ -299,6 +304,7 @@ const Experience = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
       >
         <h3 className="text-2xl font-bold text-center text-purple-400 mb-8">Experience Summary</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">

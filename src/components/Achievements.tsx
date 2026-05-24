@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Award, Calendar, CheckCircle, ExternalLink, Download, Star, Trophy, Medal, X, ChevronLeft, ChevronRight, Book, Layers, Clock, Users, GraduationCap, Eye } from 'lucide-react';
 
@@ -7,6 +7,24 @@ const Achievements = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentCertIndex, setCurrentCertIndex] = useState(0);
   const [coursesModalOpen, setCoursesModalOpen] = useState(false);
+  const scriptLoaded = useRef(false);
+
+  // Load Credly embed script once
+  useEffect(() => {
+    if (!scriptLoaded.current && typeof window !== 'undefined') {
+      const existingScript = document.querySelector('script[src="//cdn.credly.com/assets/utilities/embed.js"]');
+      if (!existingScript) {
+        const script = document.createElement('script');
+        script.src = '//cdn.credly.com/assets/utilities/embed.js';
+        script.async = true;
+        script.type = 'text/javascript';
+        document.body.appendChild(script);
+        scriptLoaded.current = true;
+      } else {
+        scriptLoaded.current = true;
+      }
+    }
+  }, []);
 
   const certificates = [
     {
@@ -100,21 +118,21 @@ const Achievements = () => {
           id: 1,
           title: "Industrial Internet of Things (IIoT)",
           issuer: "University of Michigan",
-          image: "/Certifications/Digital Technologies and the future of manufacturing 1.png",
+          image: '/Certifications/Digital Technologies and the future of manufacturing 1.png',
           skills: ["IoT Sensors", "Data Analytics", "Connectivity", "Industrial Automation"]
         },
         {
           id: 2,
           title: "Digital Twins",
           issuer: "University of Michigan",
-          image: "/Certifications/Digital Technologies and the future of manufacturing 2.png",
+          image: '/Certifications/Digital Technologies and the future of manufacturing 2.png',
           skills: ["Virtual Modeling", "Simulation", "Real-time Monitoring", "Digital Replication"]
         },
         {
           id: 3,
           title: "Additive Manufacturing",
           issuer: "University of Michigan",
-          image: "/Certifications/Digital Technologies and the future of manufacturing 3.png",
+          image: '/Certifications/Digital Technologies and the future of manufacturing 3.png',
           skills: ["AM Integration", "Digital Workflow", "Quality Control", "Manufacturing Innovation"]
         }
       ]
@@ -137,21 +155,21 @@ const Achievements = () => {
           id: 1,
           title: "Engineering and Product Design Processes",
           issuer: "Arizona State University",
-          image: "/Certifications/Rapid Prototyping Using 3d Printing 1.png",
+          image: '/Certifications/Rapid Prototyping Using 3d Printing 1.png',
           skills: ["Design Thinking", "Product Development", "Iterative Design", "Engineering Methodology"]
         },
         {
           id: 2,
           title: "Prototyping",
           issuer: "Arizona State University",
-          image: "/Certifications/Rapid Prototyping Using 3d Printing 2.png",
+          image: '/Certifications/Rapid Prototyping Using 3d Printing 2.png',
           skills: ["Prototype Development", "Testing", "Validation", "Design Validation"]
         },
         {
           id: 3,
           title: "3D Printing Technology Deep Dive and Use Cases",
           issuer: "Arizona State University",
-          image: "/Certifications/Rapid Prototyping Using 3d Printing 3.png",
+          image: '/Certifications/Rapid Prototyping Using 3d Printing 3.png',
           skills: ["Technology Comparison", "Use Cases", "Best Practices", "Industry Applications"]
         }
       ]
@@ -174,21 +192,21 @@ const Achievements = () => {
           id: 1,
           title: "Using Rapid Prototyping in the Engineering Design Process",
           issuer: "Arizona State University",
-          image: "/Certifications/Rapid Prototyping and Tooling 1.png",
+          image: '/Certifications/Rapid Prototyping and Tooling 1.png',
           skills: ["Design Integration", "Workflow Optimization", "Efficiency", "Engineering Design"]
         },
         {
           id: 2,
           title: "Adding Electronics to Rapid Prototypes",
           issuer: "Arizona State University",
-          image: "/Certifications/Rapid Prototyping and Tooling 2.png",
+          image: '/Certifications/Rapid Prototyping and Tooling 2.png',
           skills: ["Embedded Systems", "Circuit Design", "Integration", "Electronics Prototyping"]
         },
         {
           id: 3,
           title: "Rapid Prototyping Materials and Tooling",
           issuer: "Arizona State University",
-          image: "/Certifications/Rapid Prototyping and Tooling 3.png",
+          image: '/Certifications/Rapid Prototyping and Tooling 3.png',
           skills: ["Material Selection", "Tooling Design", "Manufacturing", "Material Properties"]
         }
       ]
@@ -211,35 +229,35 @@ const Achievements = () => {
           id: 1,
           title: "Engineering of Structures: Tension",
           issuer: "Dartmouth College",
-          image: "/Certifications/The Engineering of Structures Around Us 1.png",
+          image: '/Certifications/The Engineering of Structures Around Us 1.png',
           skills: ["Tension Analysis", "Cable Structures", "Material Strength", "Structural Tension"]
         },
         {
           id: 2,
           title: "Engineering of Structures: Compression",
           issuer: "Dartmouth College",
-          image: "/Certifications/The Engineering of Structures Around Us 2.png",
+          image: '/Certifications/The Engineering of Structures Around Us 2.png',
           skills: ["Compression Members", "Column Design", "Buckling Analysis", "Structural Compression"]
         },
         {
           id: 3,
           title: "Engineering of Structures: Tension and Compression",
           issuer: "Dartmouth College",
-          image: "/Certifications/The Engineering of Structures Around Us 3.png",
+          image: '/Certifications/The Engineering of Structures Around Us 3.png',
           skills: ["Combined Loading", "Structural Elements", "Load Analysis", "Mixed Forces"]
         },
         {
           id: 4,
           title: "Engineering of Structures: Shear and Bending",
           issuer: "Dartmouth College",
-          image: "/Certifications/The Engineering of Structures Around Us 4.png",
+          image: '/Certifications/The Engineering of Structures Around Us 4.png',
           skills: ["Shear Stress", "Bending Moments", "Beam Design", "Structural Shear"]
         },
         {
           id: 5,
           title: "Engineering of Structures: Response of Structures",
           issuer: "Dartmouth College",
-          image: "/Certifications/The Engineering of Structures Around Us 5.png",
+          image: '/Certifications/The Engineering of Structures Around Us 5.png',
           skills: ["Structural Response", "Dynamic Analysis", "Performance Evaluation", "Structural Behavior"]
         }
       ]
@@ -262,63 +280,63 @@ const Achievements = () => {
           id: 1,
           title: "Digital Manufacturing & Design",
           issuer: "University at Buffalo",
-          image: "/Certifications/Digital Manufacturing & Design Technology 1.png",
+          image: '/Certifications/Digital Manufacturing & Design Technology 1.png',
           skills: ["Digital Transformation", "Smart Factory", "Industry 4.0", "Manufacturing Design"]
         },
         {
           id: 2,
           title: "Digital Thread: Components",
           issuer: "University at Buffalo",
-          image: "/Certifications/Digital Manufacturing & Design Technology 2.png",
+          image: '/Certifications/Digital Manufacturing & Design Technology 2.png',
           skills: ["Data Integration", "System Components", "Digital Infrastructure", "Thread Components"]
         },
         {
           id: 3,
           title: "Digital Thread: Implementation",
           issuer: "University at Buffalo",
-          image: "/Certifications/Digital Manufacturing & Design Technology 3.png",
+          image: '/Certifications/Digital Manufacturing & Design Technology 3.png',
           skills: ["Implementation Strategy", "Deployment", "System Integration", "Thread Implementation"]
         },
         {
           id: 4,
           title: "Advanced Manufacturing Process Analysis",
           issuer: "University at Buffalo",
-          image: "/Certifications/Digital Manufacturing & Design Technology 4.png",
+          image: '/Certifications/Digital Manufacturing & Design Technology 4.png',
           skills: ["Process Optimization", "Data Analytics", "Quality Control", "Manufacturing Analysis"]
         },
         {
           id: 5,
           title: "Intelligent Machining",
           issuer: "University at Buffalo",
-          image: "/Certifications/Digital Manufacturing & Design Technology 5.png",
+          image: '/Certifications/Digital Manufacturing & Design Technology 5.png',
           skills: ["Smart Machining", "AI in Manufacturing", "Predictive Maintenance", "Intelligent Systems"]
         },
         {
           id: 6,
           title: "Advanced Manufacturing Enterprise",
           issuer: "University at Buffalo",
-          image: "/Certifications/Digital Manufacturing & Design Technology 6.png",
+          image: '/Certifications/Digital Manufacturing & Design Technology 6.png',
           skills: ["Enterprise Systems", "Supply Chain", "Business Integration", "Manufacturing Enterprise"]
         },
         {
           id: 7,
           title: "Cyber Security in Manufacturing",
           issuer: "University at Buffalo",
-          image: "/Certifications/Digital Manufacturing & Design Technology 7.png",
+          image: '/Certifications/Digital Manufacturing & Design Technology 7.png',
           skills: ["Security Protocols", "Data Protection", "Risk Management", "Manufacturing Security"]
         },
         {
           id: 8,
           title: "MBSE: Model-Based Systems Engineering",
           issuer: "University at Buffalo",
-          image: "/Certifications/Digital Manufacturing & Design Technology 8.png",
+          image: '/Certifications/Digital Manufacturing & Design Technology 8.png',
           skills: ["Systems Modeling", "MBSE Methodology", "Digital Engineering", "Model-Based Systems"]
         },
         {
           id: 9,
           title: "Roadmap to Success in Digital Manufacturing & Design",
           issuer: "University at Buffalo",
-          image: "/Certifications/Digital Manufacturing & Design Technology 9.png",
+          image: '/Certifications/Digital Manufacturing & Design Technology 9.png',
           skills: ["Career Planning", "Industry Trends", "Professional Development", "Success Strategies"]
         }
       ]
@@ -476,8 +494,8 @@ const Achievements = () => {
                 whileHover="hover"
               >
                 <div className="grid xl:grid-cols-2 gap-0">
-                  {/* Certificate Image */}
-                  <div className="relative p-12 flex items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
+                  {/* Certificate Image and Badge */}
+                  <div className="relative p-12 flex flex-col items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
                     <div className="relative group cursor-pointer">
                       <motion.img
                         src={cert.image}
@@ -487,6 +505,16 @@ const Achievements = () => {
                         transition={{ duration: 0.4 }}
                         onError={handleImageError}
                       />
+                    </div>
+                    
+                    {/* Credly Badge - CSWA Certified SolidWorks Associate */}
+                    <div className="mt-8 flex justify-center">
+                      <div 
+                        data-iframe-width="150" 
+                        data-iframe-height="270" 
+                        data-share-badge-id="114960fc-c628-4096-bd5e-98ce7e0af975" 
+                        data-share-badge-host="https://www.credly.com"
+                      ></div>
                     </div>
                   </div>
 

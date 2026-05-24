@@ -85,7 +85,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900">
-      {/* 3D Background Only - No Particles */}
+      {/* 3D Background */}
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 5] }}>
           <Suspense fallback={null}>
@@ -122,7 +122,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
               transition={{ type: "spring", stiffness: 300 }}
             />
             
-            {/* Floating Mechanical Elements around Profile */}
+            {/* Floating Mechanical Elements */}
             <motion.div
               className="absolute -top-4 -right-4 w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center border border-purple-500/30"
               animate={{
@@ -167,7 +167,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
           </motion.h1>
         </motion.div>
 
-        {/* Animated Subtitle */}
+        {/* Animated Subtitle - UPDATED with new role */}
         <motion.div 
           variants={itemVariants}
           className="mb-8 h-12 sm:h-14 flex items-center justify-center"
@@ -175,15 +175,17 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
           <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-300 font-bold">
             <TypeAnimation
               sequence={[
+                'Graduate Engineer Trainee – Design',  // NEW ROLE (current)
+                2000,
+                'Worm Gearbox Design Engineer',
+                2000,
                 'Mechanical Design Engineer',
                 2000,
                 'FEA & CFD Specialist',
                 2000,
-                'CAE Automation Expert',
+                'CAD Automation Expert',
                 2000,
                 'Product Development Engineer',
-                2000,
-                'Innovation Enthusiast',
                 2000,
               ]}
               wrapper="span"
@@ -194,16 +196,16 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
           </div>
         </motion.div>
         
-        {/* Expertise Cards */}
+        {/* Expertise Cards - UPDATED to reflect current skills */}
         <motion.div
           variants={itemVariants}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto"
         >
           {[
-            { icon: Cog, title: 'Design', desc: 'SolidWorks, CATIA' },
-            { icon: Zap, title: 'Analysis', desc: 'ANSYS, FEA, CFD' },
-            { icon: Wrench, title: 'Automation', desc: 'Python, MATLAB' },
-            { icon: FileText, title: 'Innovation', desc: 'R&D, Optimization' }
+            { icon: Cog, title: 'CAD Design', desc: 'SolidWorks, NX, Creo' },
+            { icon: Zap, title: 'Engineering Analysis', desc: 'ANSYS, FEA, Simulation' },
+            { icon: Wrench, title: 'Gearbox Design', desc: 'Worm Gear, PLM, ERP' },  // Replaced Automation
+            { icon: FileText, title: 'Product Development', desc: 'R&D, Optimization' }
           ].map((item, index) => (
             <motion.div
               key={item.title}
@@ -227,9 +229,9 @@ const Hero: React.FC<HeroProps> = ({ scrollToContact, navigateToPage }) => {
           variants={itemVariants}
           className="text-gray-400 text-lg sm:text-xl max-w-3xl mx-auto mb-12 leading-relaxed font-semibold"
         >
-          Passionate mechanical engineer specializing in advanced CAD design, FEA/CFD analysis, 
-          and engineering automation. I bridge traditional mechanical engineering with cutting-edge 
-          technology to create innovative solutions.
+          Graduate Engineer Trainee at Shanthi Gears Limited (Murugappa Group), specializing in worm gearbox design,
+          CAD development, engineering analysis, and PLM systems. Passionate about innovative mechanical engineering
+          and manufacturing optimization.
         </motion.p>
 
         {/* Social Links */}

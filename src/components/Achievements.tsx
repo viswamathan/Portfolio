@@ -7,15 +7,13 @@ const Achievements = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentCertIndex, setCurrentCertIndex] = useState(0);
   const [coursesModalOpen, setCoursesModalOpen] = useState(false);
-  const badgeContainerRef = useRef(null);
   const scriptLoadedRef = useRef(false);
 
-  // Robust Credly badge loader
+  // Load Credly embed script once
   useEffect(() => {
     if (scriptLoadedRef.current) return;
 
     const loadCredlyBadge = () => {
-      // If script already exists, just try to render
       const existingScript = document.querySelector('script[src="//cdn.credly.com/assets/utilities/embed.js"]');
       if (existingScript) {
         if (window.Credly && window.Credly.renderBadges) {
@@ -25,7 +23,6 @@ const Achievements = () => {
         return;
       }
 
-      // Otherwise, create and load script
       const script = document.createElement('script');
       script.src = '//cdn.credly.com/assets/utilities/embed.js';
       script.async = true;
@@ -42,10 +39,6 @@ const Achievements = () => {
     };
 
     loadCredlyBadge();
-
-    return () => {
-      // Optional cleanup: do nothing, keep script in DOM
-    };
   }, []);
 
   const certificates = [
@@ -516,8 +509,9 @@ const Achievements = () => {
                 whileHover="hover"
               >
                 <div className="grid xl:grid-cols-2 gap-0">
-                  {/* Certificate Image and Badge Area - FIXED FOR CLEAR VISIBILITY */}
+                  {/* Certificate Image and Badge Area */}
                   <div className="relative p-12 flex flex-col items-center justify-center bg-gradient-to-br from-purple-500/5 to-blue-500/5">
+                    {/* Certificate Image */}
                     <div className="relative group cursor-pointer">
                       <motion.img
                         src={cert.image}
@@ -529,17 +523,13 @@ const Achievements = () => {
                       />
                     </div>
                     
-                    {/* Credly Badge - Clearly Visible Container */}
-                    <div 
-                      ref={badgeContainerRef}
-                      className="flex justify-center items-center mt-8 w-full min-h-[280px] min-w-[160px] bg-gray-800/30 backdrop-blur-sm rounded-xl p-4 border border-purple-500/20"
-                    >
+                    {/* Credly Badge - Directly under the image, white background, no extra tile */}
+                    <div className="flex justify-center mt-8">
                       <div 
                         data-iframe-width="150" 
                         data-iframe-height="270" 
                         data-share-badge-id="114960fc-c628-4096-bd5e-98ce7e0af975" 
                         data-share-badge-host="https://www.credly.com"
-                        style={{ minWidth: '150px', minHeight: '270px' }}
                       ></div>
                     </div>
                   </div>

@@ -85,7 +85,6 @@ const Achievements = () => {
   ];
 
   const specializations = [
-    // ... (unchanged, same as before)
     {
       id: 1,
       title: "Additive Manufacturing Specialization",
@@ -546,14 +545,16 @@ const Achievements = () => {
                         />
                       </div>
                       
-                      {/* Credly Badge - Directly under the image, white background, no extra tile */}
+                      {/* Credly Badge - White background box */}
                       <div className="flex justify-center mt-8">
-                        <div 
-                          data-iframe-width="150" 
-                          data-iframe-height="270" 
-                          data-share-badge-id={cert.badgeId}
-                          data-share-badge-host="https://www.credly.com"
-                        ></div>
+                        <div className="bg-white rounded-lg p-2 shadow-md">
+                          <div 
+                            data-iframe-width="150" 
+                            data-iframe-height="270" 
+                            data-share-badge-id={cert.badgeId}
+                            data-share-badge-host="https://www.credly.com"
+                          ></div>
+                        </div>
                       </div>
                     </div>
 
